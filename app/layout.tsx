@@ -5,6 +5,8 @@ import type { Metadata } from 'next'
 import '@/styles/globals.css'
 
 import AppLayout from '@/shared/global/AppLayout'
+import { YandexMetrika } from '@/shared/global/YandexMetrika/YandexMetrika'
+import { Suspense } from 'react'
 
 const manrope = Manrope({
     variable: '--font-manrope',
@@ -74,6 +76,9 @@ export default function RootLayout({
     return (
         <html lang="ru">
             <body className={`${manrope.variable} antialiased`}>
+                <Suspense>
+                    <YandexMetrika />
+                </Suspense>
                 <AppLayout>{children}</AppLayout>
             </body>
         </html>
