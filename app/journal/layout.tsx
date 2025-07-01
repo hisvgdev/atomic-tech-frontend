@@ -1,12 +1,10 @@
-import Banner from '@/components/journal/molecules/Banner'
-import { Tags } from '@/components/journal/molecules/Tags/Tags'
+import BannerWithTags from '@/shared/global/BannerWithTags'
 import React from 'react'
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <div className="flex flex-col gap-y-10">
-            <Banner />
-            <Tags />
+            <BannerWithTags />
             <hr />
             {children}
         </div>

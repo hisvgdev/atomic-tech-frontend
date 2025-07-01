@@ -1,1 +1,3 @@
-export interface BannerProps { }
+export interface BannerProps {
+  title?: string
+}

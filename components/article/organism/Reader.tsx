@@ -1,5 +1,4 @@
-import Banner from '@/components/journal/molecules/Banner'
-import { Tags } from '@/components/journal/molecules/Tags/Tags'
+import BannerWithTags from '@/shared/global/BannerWithTags'
 import { FC } from 'react'
 
 import ReaderHeading from '../molecules/ReaderHeading'
@@ -9,8 +8,7 @@ import ReaderGrid from './ReaderGrid'
 export const Reader: FC<ReaderProps> = () => {
     return (
         <div className="flex flex-col gap-y-8">
-            <Banner />
-            <Tags />
+            <BannerWithTags bannerTitle="Статьи" />
             <hr />
             <ReaderHeading />
             <hr />

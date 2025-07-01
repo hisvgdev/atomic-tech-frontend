@@ -3,12 +3,18 @@
 import { Button } from '@/components/ui/button'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { SlidersHorizontalIcon, XIcon } from '@phosphor-icons/react'
-import React, { useRef, useState } from 'react'
+import React, { FC, useRef, useState } from 'react'
 
 import CaseFilter from '../CaseFilter'
+import FilterGroup from '../CaseFilter/FilterGroup'
+import TechFilter from '../CaseFilter/TechFilter'
+import { CaseHeadingProps } from './CaseHeading.types'
 
-export const CaseHeading = () => {
+export const CaseHeading: FC<CaseHeadingProps> = (props) => {
+    const { servicesData, matchedTechnologies, categoriesData } = props
+
     const [isFilterOpen, setIsFilterOpen] = useState(false)
+
     const handleSwitchFilter = () => setIsFilterOpen(!isFilterOpen)
     const filterRef = useRef<HTMLDivElement>(null)
     const sectionRef = useRef<HTMLElement>(null)
@@ -46,7 +52,11 @@ export const CaseHeading = () => {
                     </Button>
                 )}
             </div>
-            <CaseFilter ref={filterRef} isFilterOpen={isFilterOpen} />
+            <CaseFilter ref={filterRef} isFilterOpen={isFilterOpen}>
+                <FilterGroup title="Услуга" items={servicesData} />
+                <FilterGroup title="Категория" items={categoriesData} />
+                <TechFilter title="Технология" matchedTechnologies={matchedTechnologies} />
+            </CaseFilter>
         </section>
     )
 }

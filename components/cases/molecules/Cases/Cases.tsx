@@ -4,7 +4,7 @@ import React, { FC } from 'react'
 
 import { CasesProps } from './Cases.types'
 
-export const Cases: FC<CasesProps> = (props) => {
+export const Cases: FC<CasesProps> = async (props) => {
     const {} = props
     return (
         <div className="min-w-sm grid grid-cols-1 items-center justify-center gap-4 xl:grid-cols-2">
