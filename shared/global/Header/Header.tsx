@@ -192,7 +192,7 @@ export const Header = () => {
                                     scaleY: isHover ? 1 : 0,
                                     opacity: isHover ? 1 : 0,
                                 }}
-                                transition={{ duration: 0.25, easing: 'ease-in-out' }}
+                                transition={{ duration: 0.25, ease: 'ease-in-out' }}
                                 className="absolute inset-0 origin-bottom z-10 pointer-events-none"
                                 style={{
                                     transformOrigin: 'bottom',
