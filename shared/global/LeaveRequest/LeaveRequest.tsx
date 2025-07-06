@@ -30,11 +30,11 @@ export const LeaveRequest: FC<LeaveRequestProps> = (props) => {
     return (
         <section
             data-dark="true"
-            className="w-full px-24 py-14 rounded-[3.125rem] bg-gradient-main"
+            className="w-full p-8 bg-gradient-main rounded-4xl lg:rounded-[3.125rem] lg:px-24 lg:py-14"
         >
             <div className="flex flex-col gap-y-4">
                 <div className="flex flex-col gap-y-3 max-w-xl">
-                    <h1 className="font-bold text-5xl text-white">
+                    <h1 className="font-bold text-3xl text-white lg:text-5xl">
                         Начните разработку проекта вместе с нами
                     </h1>
                     <p className="text-white text-lg font-normal">
@@ -48,7 +48,7 @@ export const LeaveRequest: FC<LeaveRequestProps> = (props) => {
                     }}
                 >
                     <div className="flex flex-col gap-y-4 max-w-6xl">
-                        <div className="flex items-center gap-x-2.5">
+                        <div className="flex flex-col items-center gap-2.5 lg:flex-row">
                             <form.Field
                                 name="email"
                                 children={({ state, handleBlur, handleChange }) => (

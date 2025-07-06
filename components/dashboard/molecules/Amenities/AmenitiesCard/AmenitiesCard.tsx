@@ -17,7 +17,7 @@ export const AmenitiesCard: FC<AmenitiesCardProps> = (props) => {
             </div>
 
             {/* Контент */}
-            <div className="relative z-10 flex flex-col items-center gap-10 xl:flex-row">
+            <div className="relative z-10 flex items-center gap-10 lg:flex-row">
                 <Image src={icon} alt={title} />
                 <div className="flex flex-col gap-4">
                     <h3 className="text-2xl text-white font-bold leading-7">{title}</h3>

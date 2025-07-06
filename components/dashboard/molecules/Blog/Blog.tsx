@@ -7,12 +7,12 @@ import BlogTechnology from './BlogTechnology'
 
 export const Blog: FC<BlogProps> = () => {
     return (
-        <section data-dark="false" className="flex flex-col gap-y-12">
-            <div className="flex items-center gap-x-8">
+        <section data-dark="false" className="flex flex-col gap-12">
+            <div className="flex flex-col-reverse items-start gap-8 lg:items-center lg:flex-row">
                 <ArticleCards />
                 <BlogHeading />
             </div>
-            <hr className="w-5xl bg-red-900" />
+            <hr className="" />
             <BlogTechnology />
         </section>
     )

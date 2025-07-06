@@ -12,8 +12,8 @@ import Showreel from '../molecules/Showreel'
 
 export const Grid = () => {
     return (
-        <div className="w-full h-full">
-            <div className="flex flex-col gap-16">
+        <div className="w-full h-full overflow-y-auto ">
+            <div className="flex flex-col gap-4 lg:gap-16">
                 <Hero />
                 <Benefits />
                 <LastProjects />

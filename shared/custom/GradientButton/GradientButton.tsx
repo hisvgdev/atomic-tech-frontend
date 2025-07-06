@@ -1,5 +1,6 @@
 'use client'
 
+import { useIsMobile } from '@/hooks/useMediaQuery'
 import { ArrowRightIcon } from '@phosphor-icons/react'
 import { motion } from 'motion/react'
 import { useRouter } from 'next/navigation'
@@ -24,6 +25,7 @@ export const GradientButton: FC<GradientButtonProps> = (props) => {
     } = props
     const [isHover, setIsHover] = useState(false)
     const router = useRouter()
+    const isMobile = useIsMobile()
 
     const handleRoute = () => {
         if (!hasIsRoute && !routePath) return
@@ -66,7 +68,7 @@ export const GradientButton: FC<GradientButtonProps> = (props) => {
             ) : (
                 <div className="flex items-center gap-4">
                     <span
-                        className={cn(`relative font-medium ${titleSize}`, {
+                        className={cn(`relative font-medium ${!isMobile ? titleSize : 'text-sm'}`, {
                             'text-black': !isHover,
                             'text-white': isHover || isWhite,
                         })}

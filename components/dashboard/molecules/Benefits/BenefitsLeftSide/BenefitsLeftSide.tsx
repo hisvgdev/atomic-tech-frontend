@@ -40,7 +40,7 @@ export const BenefitsLeftSide: FC<BenefitsLeftSideProps> = () => {
     const [hoveredIndex, setHoveredIndex] = useState<number>(0)
 
     return (
-        <div className="max-w-2xl grid grid-cols-2 gap-1.5">
+        <div className="grid grid-cols-2 gap-1.5 w-full lg:max-w-2xl">
             {mockMetrics.map((item, index) => {
                 const isHovered = hoveredIndex === index
                 const gradientAngle = gradientConfig[item.id] || 'to bottom'
@@ -58,7 +58,7 @@ export const BenefitsLeftSide: FC<BenefitsLeftSideProps> = () => {
                                 gap: isHovered ? '2rem' : '1.5rem',
                             }}
                             transition={{ duration: 0.3 }}
-                            className="w-full h-full p-12 rounded-[1.875rem]"
+                            className="w-full h-full border border-white/20 p-8 rounded-[1.875rem] lg:border-none lg:p-12"
                         >
                             <motion.div
                                 className="absolute inset-0 z-10 brightness-125 rounded-[1.875rem] pointer-events-none"
@@ -70,21 +70,26 @@ export const BenefitsLeftSide: FC<BenefitsLeftSideProps> = () => {
                             />
                             <div className="flex flex-col items-start gap-2 relative z-20">
                                 <div className="flex items-end">
-                                    <h4
-                                        className={`font-bold text-9xl ${!isHovered ? 'text-white/50' : 'text-white'}`}
+                                    <motion.h4
+                                        className={`font-bold text-6xl lg:text-9xl transition-colors duration-300 ${
+                                            isHovered
+                                                ? 'text-transparent bg-clip-text bg-gradient-to-b from-white via-[#BEBEBE] to-[#646464] [background-clip:text] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]'
+                                                : 'text-white/50'
+                                        }`}
                                     >
                                         {item.value}
-                                    </h4>
+                                    </motion.h4>
+
                                     {item.additionalValue && (
                                         <span
-                                            className={`font-bold pb-2 ${!isHovered ? 'text-white/50' : 'text-white'}`}
+                                            className={`font-bold ${!isHovered ? 'text-white/50' : 'text-white'} lg:pb-2`}
                                         >
                                             {item.additionalValue.toUpperCase()}
                                         </span>
                                     )}
                                 </div>
                                 <p
-                                    className={`font-normal text-lg whitespace-nowrap ${!isHovered ? 'text-white/30' : 'text-white'}`}
+                                    className={`font-normal text-base ${!isHovered ? 'text-white/30' : 'text-white'} lg:whitespace-nowrap lg:text-lg`}
                                 >
                                     {item.content}
                                 </p>

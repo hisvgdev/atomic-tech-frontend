@@ -138,3 +138,16 @@
         @apply bg-background text-foreground font-manrope;
     }
 }
+
+.swiper-pagination-bullet {
+    width: 40px;
+    height: 6px;
+    background-color: #d6d6d6;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    width: 50%;
+    background-color: #51535b;
+}

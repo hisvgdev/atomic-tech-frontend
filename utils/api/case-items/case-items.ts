@@ -20,8 +20,9 @@ export const getCaseItems = async (): Promise<CaseItemsResponse | undefined> => 
       throw new Error(`Failed fetch to case-items`);
     }
 
-    const getCaseItems = await res.json();
-    return getCaseItems;
+    const data = await res.json();
+
+    return data;
 
   } catch (error) {
     console.log(error);

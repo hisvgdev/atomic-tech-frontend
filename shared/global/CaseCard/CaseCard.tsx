@@ -18,7 +18,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
 
     return (
         <Card className="w-full h-full border-none shadow-none">
-            <CardContent className="flex flex-col gap-3 w-full h-full px-4">
+            <CardContent className="flex flex-col w-full h-full px-4">
                 {/* cover image */}
                 <div className="relative w-full h-full overflow-hidden rounded-[1.875rem] ring ring-primary-200">
                     <Image
@@ -31,7 +31,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                         {badgeContent.map((badge, indxBdg) => (
                             <div
                                 key={`${indxBdg}-${badge.title}`}
-                                className="bg-[#1C274C] min-w-80 rounded-full py-2.5 px-3"
+                                className="bg-[#1C274C] w-auto rounded-full py-2.5 px-3 lg:min-w-80"
                             >
                                 <div className="flex items-center gap-3">
                                     <div className="p-1 bg-white rounded-full flex items-center justify-center">
@@ -54,11 +54,11 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                 {/* content */}
                 <CardHeader className="p-0">
                     <div className="w-full flex items-start justify-between mt-4">
-                        <div className="flex flex-col gap-4 max-w-lg">
-                            <CardTitle className="text-3xl font-extrabold truncate">
+                        <div className="flex flex-col max-w-62 lg:max-w-lg lg:gap-4">
+                            <CardTitle className="text-lg font-extrabold truncate lg:text-3xl">
                                 {title}
                             </CardTitle>
-                            <CardDescription className="font-medium text-sm">
+                            <CardDescription className="font-medium text-black text-xs lg:text-sm">
                                 {description}
                             </CardDescription>
                         </div>
@@ -66,7 +66,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                             hasIsRoute
                             routePath={`/cases/${id}`}
                             title="Сайт"
-                            classNames="py-6 rounded-full"
+                            classNames="rounded-full lg:py-6"
                         />
                     </div>
                 </CardHeader>

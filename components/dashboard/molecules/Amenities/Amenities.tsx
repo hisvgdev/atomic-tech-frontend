@@ -63,18 +63,18 @@ export const Amenities: FC<AmenitiesProps> = () => {
     return (
         <section
             data-dark="true"
-            className="bg-gradient-to-r from-[#00636F] to-[#000809] w-full py-24 px-7 rounded-[3.125rem]"
+            className="bg-gradient-to-r from-[#00636F] to-[#000809] w-full p-6 rounded-3xl lg:rounded-[3.125rem] lg:py-24 lg:px-7"
         >
-            <div className="flex flex-col gap-20">
-                <div className="flex flex-col items-center gap-8 lg:justify-between xl:flex-row xl:gap-0">
-                    <div className="flex flex-col items-center gap-10 xl:flex-row">
-                        <h1 className="font-bold text-9xl text-white">Услуги</h1>
+            <div className="flex flex-col gap-10 lg:gap-20">
+                <div className="flex flex-col items-start gap-8 lg:items-center lg:justify-between xl:flex-row xl:gap-0">
+                    <div className="flex flex-col items-start gap-10 lg:items-center lg:flex-row">
+                        <h1 className="font-bold text-7xl text-white lg:text-9xl">Услуги</h1>
                         <p className="max-w-md text-white font-normal text-base">
                             Наш подход к работе лежит в плоскости аналитики, ярких дизайн решений и,
                             как итог, построении эффективной коммуникации
                         </p>
                     </div>
-                    <Chip number="3" title="Компетенции" maxW="max-w-64" isDark />
+                    <Chip number="3" title="Компетенции" maxW="w-full lg:max-w-64" isDark />
                 </div>
                 <div className="w-full grid grid-cols-1 items-center gap-6 lg:grid-cols-2 xl:grid-cols-3">
                     {mockAmenitiesData.map((amenties, indx) => {

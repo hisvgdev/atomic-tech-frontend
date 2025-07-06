@@ -1,3 +1,6 @@
+'use client'
+
+import { useIsMobile } from '@/hooks/useMediaQuery'
 import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
 import React, { FC } from 'react'
@@ -6,14 +9,15 @@ import { AllProjectsButtonProps } from './AllProjectsButton.types'
 
 export const AllProjectsButton: FC<AllProjectsButtonProps> = (props) => {
     const {} = props
+    const isMobile = useIsMobile()
     return (
         <section data-dark="false">
             <Link
                 href="#"
-                className="flex justify-center items-center gap-4 ring ring-black py-12 rounded-2xl"
+                className="flex justify-center items-center gap-10 border-2 py-9 rounded-4xl border-black lg:gap-4 lg:border lg:py-12 lg:rounded-2xl"
             >
-                <span className="text-5xl font-bold">Все проекты</span>
-                <ArrowRightIcon size={48} weight="bold" className="mt-3" />
+                <span className="font-bold text-2xl lg:text-5xl">Все проекты</span>
+                <ArrowRightIcon size={!isMobile ? 48 : 24} weight="bold" className="mt-1 lg:mt-2" />
             </Link>
         </section>
     )

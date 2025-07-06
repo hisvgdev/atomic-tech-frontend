@@ -19,11 +19,11 @@ export const BlogTechnology: FC<BlogTechnologyProps> = async () => {
         }
     })
     return (
-        <div className="flex items-start gap-x-16">
-            <h4 className="font-medium text-sm max-w-32 text-gray-600">
+        <div className="flex flex-col items-start gap-8 lg:gap-16 lg:flex-row">
+            <h4 className="font-medium text-sm max-w-64 text-gray-600 lg:max-w-32">
                 Технологии, применяемые в разработке
             </h4>
-            <div className="grid grid-cols-5 gap-x-16 gap-y-4">
+            <div className="grid grid-cols-3 gap-x-16 gap-y-4 lg:grid-cols-5">
                 {Array.isArray(matchedTechnologies)
                     ? matchedTechnologies.map((tech, idx) => (
                           <div
