@@ -1,6 +1,5 @@
-'use server';
-
-import { BaseResponseApiProps } from "@/types/Api.types";
+import { BaseQueryApiParamsProps, BaseResponseApiProps } from "@/types/Api.types";
+import { buildQueryString } from "@/utils/buildQueryString/buildQueryString";
 
 interface CategoriesResponse extends BaseResponseApiProps {
   data: CategoriesDataProps[]
@@ -14,9 +13,13 @@ export interface CategoriesDataProps {
   updated_at: string
 }
 
-export const getCategories = async (): Promise<CategoriesResponse | undefined> => {
+type CategoriesQueryParams = Pick<BaseQueryApiParamsProps, 'limit' | 'offset' | 'name' | 'sort_by' | 'sort_direction'>
+
+export const getCategories = async (query?: CategoriesQueryParams): Promise<CategoriesResponse | undefined> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories/`, {
+    const queryString = buildQueryString(query);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories${queryString}`, {
       method: "GET",
       next: {
         revalidate: 10,

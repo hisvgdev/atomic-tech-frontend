@@ -30,13 +30,15 @@ export const BlogTechnology: FC<BlogTechnologyProps> = async () => {
                               key={`${tech?.name}-${idx}`}
                               className="flex items-center gap-x-2 rounded-full border border-[#E6E6E6] p-3.5"
                           >
-                              <Image
-                                  src={tech?.icon || ''}
-                                  alt={`${tech?.name}-icon`}
-                                  width={20}
-                                  height={20}
-                                  className="w-5 h-5"
-                              />
+                              {tech?.icon && (
+                                  <Image
+                                      src={tech?.icon}
+                                      alt={`${tech?.name}-icon`}
+                                      width={20}
+                                      height={20}
+                                      className="w-5 h-5"
+                                  />
+                              )}
                               <span className="font-extrabold text-xs">{tech?.name}</span>
                           </div>
                       ))

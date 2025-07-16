@@ -1,6 +1,4 @@
-import { StaticImageData } from "next/image";
-
 export interface CaseTechButtonProps {
-  icon: StaticImageData;
+  icon: string | null;
   label: string
 }

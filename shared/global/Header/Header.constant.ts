@@ -10,23 +10,12 @@ export const NAV_MENU_LINKS = [
     href: '/cases',
   },
   {
-    id: 'articles',
-    title: "Статьи",
-    href: '/articles',
-  },
-  {
     id: 'journal',
     title: "Журнал",
     href: '/journal',
   },
   {
-    id: 'services',
-    title: "Услуги",
-    href: '/services',
-  },
-  {
     id: 'contacts',
     title: "Контакты",
-    href: '/contacts',
   },
 ]

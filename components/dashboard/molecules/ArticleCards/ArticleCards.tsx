@@ -12,6 +12,7 @@ import { ArticleCardsProps } from './ArticleCards.types'
 
 import 'swiper/css'
 
+import GradientButton from '@/shared/custom/GradientButton'
 import { Pagination } from 'swiper/modules'
 
 const mockDataCards = [
@@ -36,10 +37,10 @@ const mockDataCards = [
 ]
 
 export const ArticleCards: FC<ArticleCardsProps> = (props) => {
-    const {} = props
+    const { topRated } = props
     return (
         <>
-            <div className="flex w-full flex-col gap-y-4 lg:hidden">
+            <div className="flex w-full flex-col gap-8 lg:hidden">
                 <Swiper
                     spaceBetween={16}
                     slidesPerView={1.5}
@@ -61,6 +62,15 @@ export const ArticleCards: FC<ArticleCardsProps> = (props) => {
                     ))}
                 </Swiper>
                 <div className="custom-pagination  flex justify-center gap-x-2 mt-2" />
+                <div className="block lg:hidden">
+                    <GradientButton
+                        hasIsRoute
+                        routePath="/cases"
+                        title="Перейти в блог"
+                        classNames="py-8 rounded-full text-white w-full"
+                        secondClassnames="w-full lg:w-auto"
+                    />
+                </div>
             </div>
 
             <div className="hidden lg:flex lg:items-center lg:gap-4">

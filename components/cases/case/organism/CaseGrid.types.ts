@@ -1,17 +1,8 @@
-import { StaticImageData } from "next/image";
+
+import { CaseItemsData } from "@/utils/api/case-items/case-items"
+import { RelatedCaseItemResponse } from "@/utils/api/case-items/related-case-item"
 
 export interface CaseGridProps {
-  id: string;
-  title: string;
-  description: string;
-  coverImage: StaticImageData;
-  badgeContent: {
-    title: string;
-    description: string;
-  }[];
-  tags: {
-    id: string;
-    title: string;
-    icon: any;
-  }[];
+  findedCase: CaseItemsData
+  relatedCase: RelatedCaseItemResponse
 }

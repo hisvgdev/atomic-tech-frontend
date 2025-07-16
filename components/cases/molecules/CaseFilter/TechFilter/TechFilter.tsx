@@ -1,52 +1,72 @@
 import { technologies } from '@/constants/tech.constants'
 import Image from 'next/image'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { FC } from 'react'
 
 import { TechFilterProps } from './TechFilter.types'
 
 export const TechFilter: FC<TechFilterProps> = (props) => {
     const { matchedTechnologies, title } = props
+    const router = useRouter()
+    const searchParams = useSearchParams()
+
+    const handleTechClick = (techId: number) => {
+        const key = 'technology_id'
+        const newSearchParams = new URLSearchParams(searchParams.toString())
+
+        const currentValues = newSearchParams.get(key)?.split(',').filter(Boolean) || []
+        const techIdStr = String(techId)
+
+        const isActive = currentValues.includes(techIdStr)
+        const updatedValues = isActive
+            ? currentValues.filter((v) => v !== techIdStr)
+            : [...currentValues, techIdStr]
+
+        if (updatedValues.length > 0) {
+            newSearchParams.set(key, updatedValues.join(','))
+        } else {
+            newSearchParams.delete(key)
+        }
+
+        router.push(`?${newSearchParams.toString()}`)
+    }
+
+    const techList = Array.isArray(matchedTechnologies) ? matchedTechnologies : []
+
+    const activeValues = searchParams.get('technology_id')?.split(',').filter(Boolean) || []
+
     return (
         <div className="flex flex-col gap-y-2">
             <h4 className="font-bold text-base">{title}</h4>
             <div className="flex items-center flex-wrap gap-1.5">
-                {Array.isArray(matchedTechnologies)
-                    ? matchedTechnologies.map(({ name, icon }, idx) => (
-                          <button
-                              key={`${title}-${idx}`}
-                              className="rounded-full bg-white ring ring-[#E6E6E6] group transition-all cursor-pointer py-3 px-7 flex items-center gap-x-2 hover:bg-black hover:ring-black"
-                              type="button"
-                          >
-                              <Image
-                                  src={icon || ''}
-                                  alt={`${title}-icon`}
-                                  width={20}
-                                  height={20}
-                                  className="w-5 h-5 group-hover:fill-red-900"
-                              />
-                              <span className="font-bold text-xs text-black group-hover:text-white">
-                                  {name}
-                              </span>
-                          </button>
-                      ))
-                    : technologies.map(({ name, icon }, idx) => (
-                          <button
-                              key={`${title}-${idx}`}
-                              className="rounded-full bg-white ring ring-[#E6E6E6] group transition-all cursor-pointer py-3 px-7 flex items-center gap-x-2 hover:bg-black hover:ring-black"
-                              type="button"
-                          >
-                              <Image
-                                  src={icon || ''}
-                                  alt={`${title}-icon`}
-                                  width={20}
-                                  height={20}
-                                  className="w-5 h-5 group-hover:fill-red-900"
-                              />
-                              <span className="font-bold text-xs text-black group-hover:text-white">
-                                  {name}
-                              </span>
-                          </button>
-                      ))}
+                {techList.map(({ name, icon, id }, idx) => {
+                    const isActive = activeValues.includes(name)
+                    return (
+                        <button
+                            key={`${title}-${idx}`}
+                            className={`rounded-full px-7 py-3 text-xs font-bold transition-all flex items-center gap-x-2 cursor-pointer group
+                                ${
+                                    isActive
+                                        ? 'bg-black text-white ring-1 ring-black'
+                                        : 'bg-white text-black ring-1 ring-[#E6E6E6] hover:bg-black hover:text-white hover:ring-black'
+                                }
+                            `}
+                            type="button"
+                            onClick={() => handleTechClick(id)}
+                        >
+                            {icon && (
+                                <Image
+                                    src={icon}
+                                    alt={`${title}-icon`}
+                                    width={20}
+                                    height={20}
+                                    className="w-5 h-5"
+                                />
+                            )}
+                            <span className="group-hover:text-white">{name}</span>
+                        </button>
+                    )
+                })}
             </div>
         </div>
     )

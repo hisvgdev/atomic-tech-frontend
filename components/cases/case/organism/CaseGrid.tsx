@@ -1,11 +1,12 @@
 import CaseHistory from '@/components/cases/molecules/CaseHistory'
 import AllProjectsButton from '@/components/dashboard/molecules/AllProjectsButton'
 import { Button } from '@/components/ui/button'
-import { mockProjects } from '@/constants/project.constants'
 import CaseCard from '@/shared/global/CaseCard'
+import LeaveRequest from '@/shared/global/LeaveRequest'
 import { StarIcon } from '@phosphor-icons/react/dist/ssr'
 import { ArrowRight, Calendar, Globe } from 'lucide-react'
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
+import Link from 'next/link'
 import React, { FC } from 'react'
 
 import CaseCategorySection from '../molecules/CaseCategorySection'
@@ -14,36 +15,68 @@ import CaseTechnologySection from '../molecules/CaseTechnologySection'
 import { CaseGridProps } from './CaseGrid.types'
 
 export const CaseGrid: FC<CaseGridProps> = (props) => {
-    const { badgeContent, coverImage, description, title } = props
+    const { findedCase, relatedCase } = props
+    const {
+        categories,
+        destinations,
+        id,
+        photos,
+        subcategories,
+        technologies,
+        website_link,
+        description,
+        title,
+        updated_at,
+        project_history,
+    } = findedCase
+    const formatedWebsiteLink = website_link.split('/')[2]
+    const getYear = new Date(updated_at).getFullYear()
+
     return (
-        <main className="h-full w-full">
+        <main className="h-full w-full overflow-y-auto">
             <article className="flex flex-col gap-y-16">
-                <header className="flex items-center justify-between">
-                    <div className="flex items-center gap-x-10">
-                        <h1 className="text-7xl font-bold">ИННОВАТИКА</h1>
-                        <p className="text-2xl max-w-2xl text-primary-300">{description}</p>
+                <header className="flex flex-col items-start gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="flex flex-col items-start gap-4 max-w-72 lg:max-w-full lg:flex-row lg:items-center lg:gap-10">
+                        <h1 className="text-4xl font-bold lg:text-7xl">{title.toUpperCase()}</h1>
+                        <p className="text-base text-primary-300 lg:text-2xl lg:max-w-2xl">
+                            {description}
+                        </p>
                     </div>
                     <div className="flex items-center gap-x-2">
-                        <Button className="border border-black py-4 rounded-full bg-transparent cursor-pointer text-black hover:bg-transparent">
+                        <Button className="border border-black py-6 rounded-full bg-transparent cursor-pointer text-black hover:bg-transparent lg:py-4">
                             <Globe size={22} />
-                            <span className="font-medium text-base">innovatica.ru</span>
+                            <Link
+                                href={website_link}
+                                target="_blank"
+                                className="font-medium text-base"
+                            >
+                                {formatedWebsiteLink}
+                            </Link>
                             <ArrowRight />
                         </Button>
-                        <Button className="border border-black py-4 rounded-full bg-transparent cursor-pointer text-black hover:bg-transparent">
+                        <Button className="border border-black py-6 rounded-full bg-transparent cursor-pointer text-black hover:bg-transparent lg:py-4">
                             <Calendar size={22} />
-                            <span className="font-medium text-base">2025 год</span>
+                            <span className="font-medium text-base">{getYear} год</span>
                         </Button>
                     </div>
                 </header>
 
                 <figure>
-                    <Image src={coverImage as StaticImageData} alt={title} className="w-full" />
+                    {photos && (
+                        <Image
+                            src={photos[0]}
+                            alt={title}
+                            className="w-full"
+                            width={630}
+                            height={430}
+                        />
+                    )}
                 </figure>
 
-                <section className="flex justify-between items-start gap-x-4">
-                    <CaseTechnologySection />
-                    <CaseServiceSection />
-                    <CaseCategorySection />
+                <section className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-start">
+                    <CaseTechnologySection technologies={technologies} />
+                    <CaseServiceSection subcategories={subcategories} />
+                    <CaseCategorySection categories={categories} />
                 </section>
 
                 <section
@@ -51,13 +84,13 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                     aria-labelledby="benefits-heading"
                     className="flex flex-col gap-y-5"
                 >
-                    <h2 id="benefits-heading" className="font-bold text-7xl">
+                    <h2 id="benefits-heading" className="font-bold text-5xl lg:text-7xl">
                         Мы достигли
                     </h2>
                     <div className="flex flex-wrap gap-2.5">
-                        {badgeContent.map((badge, indx) => (
+                        {destinations.map(({ description, name }, indx) => (
                             <div
-                                key={`${indx}-${badge.title}`}
+                                key={`${indx}-${name}`}
                                 className="bg-[#F6F7FB] min-w-96 rounded-full py-2.5 px-3"
                             >
                                 <div className="flex items-center gap-3">
@@ -65,11 +98,9 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                         <StarIcon color="#F6F7FB" size={12} weight="fill" />
                                     </div>
                                     <div className="flex flex-col">
-                                        <h4 className="text-black text-sm font-bold">
-                                            {badge.title}:
-                                        </h4>
+                                        <h4 className="text-black text-sm font-bold">{name}:</h4>
                                         <p className="text-black text-sm font-normal max-w-80 truncate">
-                                            {badge.description}
+                                            {description}
                                         </p>
                                     </div>
                                 </div>
@@ -78,25 +109,25 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                     </div>
                 </section>
 
-                <CaseHistory />
+                <CaseHistory projectHistory={project_history} />
 
                 <section
                     data-dark="false"
                     aria-labelledby="more-cases-heading"
                     className="flex flex-col gap-y-6"
                 >
-                    <h2 id="more-cases-heading" className="font-bold text-7xl">
+                    <h2 id="more-cases-heading" className="font-bold text-5xl lg:text-7xl">
                         Больше кейсов
                     </h2>
                     <div className="flex items-center gap-x-4">
-                        {mockProjects.slice(0, 2).map((project, indx) => (
+                        {relatedCase.data.map((project, indx) => (
                             <CaseCard key={`${project.id}-${indx + 1}`} {...project} />
                         ))}
                     </div>
                 </section>
-
-                <div className="mb-1">
-                    <AllProjectsButton />
+                <AllProjectsButton title="Все проекты" />
+                <div className="block lg:hidden">
+                    <LeaveRequest />
                 </div>
             </article>
         </main>

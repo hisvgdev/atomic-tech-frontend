@@ -13,7 +13,7 @@ import SpecialProjectSection from '../molecules/SpecialProjectSection'
 
 export const Grid = () => {
     return (
-        <div className="flex flex-col gap-y-24">
+        <div className="flex flex-col gap-y-24 overflow-y-auto px-2 lg:px-0">
             <NewSection />
             <NeuralNetworksArticle />
             <OtherTags />
@@ -24,9 +24,7 @@ export const Grid = () => {
             <DesignSection />
             <SMMSection />
             <BusinessSection />
-            <div className="mb-1">
-                <AllProjectsButton />
-            </div>
+            <AllProjectsButton title="Все статьи" />
         </div>
     )
 }

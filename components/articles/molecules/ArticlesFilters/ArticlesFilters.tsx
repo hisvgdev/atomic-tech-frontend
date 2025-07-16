@@ -51,7 +51,7 @@ export const ArticlesFilters: FC<ArticlesFiltersProps> = (props) => {
                         <button
                             key={`${item}-${indx}`}
                             type="button"
-                            className="flex items-center gap-x-2.5 rounded-full py-2.5 px-5 border border-[#E6E6E6] cursor-pointer"
+                            className="flex items-center gap-x-2.5 rounded-full py-2.5 px-4 border border-[#E6E6E6] cursor-pointer lg:px-5"
                             onClick={() => handleOpenFilter(indx)}
                         >
                             <ArrowDownUp size={18} />

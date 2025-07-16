@@ -15,25 +15,25 @@ const mockSocietyData = [
     {
         id: uuidv4(),
         title: 'YouTube',
-        href: '/youtube',
+        href: 'https://youtube.com/@tech-lifuck',
         icon: youtubeIcon,
     },
     {
         id: uuidv4(),
         title: 'Telegram',
-        href: '/tg',
+        href: 'https://t.me/+ss6kxcGcuo41MDAy',
         icon: telegramIcon,
     },
     {
         id: uuidv4(),
         title: 'Telegram bot',
-        href: '/tg-bot',
+        href: 'https://t.me/TeIega_Ultra_Settings_bot',
         icon: tgBotIcon,
     },
     {
         id: uuidv4(),
         title: 'Instagram',
-        href: '/instagram',
+        href: 'https://www.instagram.com/atomic_technologies',
         icon: instagramIcon,
     },
 ]
@@ -49,7 +49,7 @@ export const Footer = () => {
 
     return (
         <footer className="mt-auto">
-            <div className="mt-16 bg-black py-6 px-8 min-w-md rounded-t-[3.125rem] lg:rounded-[3.125rem] lg:mb-6 lg:mx-4">
+            <div className="mt-4 bg-black py-6 px-8 w-full rounded-t-[3.125rem] lg:min-w-md lg:rounded-[3.125rem] lg:mb-6 lg:mx-4 lg:mt-16">
                 <div className="w-full flex flex-col lg:flex-row lg:justify-between">
                     <div className="flex flex-col gap-y-20">
                         <div className="grid grid-cols-2 gap-x-8 gap-y-6 pb-24 lg:pb-0">
@@ -68,6 +68,7 @@ export const Footer = () => {
                                         />
                                         <Link
                                             href={society.href}
+                                            target="_blank"
                                             className="text-white font-bold text-sm pl-2"
                                         >
                                             {society.title}
@@ -90,24 +91,26 @@ export const Footer = () => {
                     </div>
                     <div className="flex flex-col gap-y-12 max-w-lg">
                         <div className="flex items-start flex-col gap-y-12 lg:items-center lg:flex-row lg:gap-x-24">
-                            <div className="flex flex-col gap-y-2">
-                                <div className="flex items-center gap-x-1.5">
+                            <div className="flex flex-col w-full gap-2">
+                                <div className="flex items-center gap-1.5">
                                     <Image
                                         src={telegramIcon}
                                         color="#FFFFFF"
                                         alt="tg-icon"
                                         className="w-4 h-4"
                                     />
-                                    <h5 className="text-white font-bold text-lg">Telegram</h5>
+                                    <Link href="#" className="text-white font-bold text-lg">
+                                        Telegram Bot
+                                    </Link>
                                 </div>
-                                <p className="font-bold text-lg text-white underline">
+                                <Link href="#" className="font-bol text-lg text-white underline">
                                     Заполнить бриф
-                                </p>
+                                </Link>
                             </div>
                             <div className="flex items-center w-full justify-between">
                                 <GradientButton
                                     isWhite
-                                    title="Оставить заявку"
+                                    title="Связать с менеджером"
                                     classNames="rounded-full py-8"
                                 />
                                 <div className="flex items-center gap-x-2 lg:hidden">

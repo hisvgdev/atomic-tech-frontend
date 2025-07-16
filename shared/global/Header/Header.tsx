@@ -1,5 +1,6 @@
 'use client'
 
+import { useIsMobile } from '@/hooks/useMediaQuery'
 import logo from '@/public/assets/images/logo.svg'
 import { MotionButton } from '@/shared/custom/motion/MotionButton'
 import { XIcon } from '@phosphor-icons/react'
@@ -12,6 +13,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 
 import { NAV_MENU_LINKS } from './Header.constant'
+import { MobileHeaderItems } from './MobileHeaderItems/MobileHeaderItems'
 
 export const Header = () => {
     const [isOnDark, setIsOnDark] = useState(false)
@@ -20,6 +22,7 @@ export const Header = () => {
     const [isHover, setIsHover] = useState(false)
     const pathname = usePathname()
     const triggerRef = useRef<HTMLDivElement | null>(null)
+    const isMobile = useIsMobile()
 
     const handleMenuClick = () => {
         if (menuClick) {
@@ -28,6 +31,15 @@ export const Header = () => {
             setMenuClick(true)
             setTimeout(() => setShowMenuContent(true), 300)
         }
+    }
+
+    const handleBottomScroll = () => {
+        window.scrollTo({
+            top: 10000,
+            left: 0,
+            behavior: 'smooth',
+        })
+        setMenuClick(false)
     }
 
     useEffect(() => {
@@ -71,7 +83,7 @@ export const Header = () => {
         <>
             <div ref={triggerRef} className="h-8 w-full absolute top-0" />
 
-            <div className="w-full sticky top-0 z-50 flex justify-center items-center pt-5 pb-20">
+            <div className="w-full sticky top-0 z-50 flex justify-center items-center pt-5 pb-10 lg:pb-20">
                 <motion.div
                     className={cn(
                         'min-w-96 rounded-full backdrop-blur-lg p-3.5',
@@ -104,7 +116,7 @@ export const Header = () => {
                             {menuClick && showMenuContent && (
                                 <motion.nav
                                     key="menu-content"
-                                    className="max-w-3xl overflow-hidden"
+                                    className="hidden lg:block max-w-3xl overflow-hidden"
                                     initial={{ opacity: 0, scale: 0.95, width: 0 }}
                                     animate={{ opacity: 1, scale: 1, width: '100%' }}
                                     exit={{ opacity: 0, scale: 0.9, width: 0 }}
@@ -141,22 +153,50 @@ export const Header = () => {
                                                                 }}
                                                             />
                                                         )}
-                                                        <Link
-                                                            href={link.href}
-                                                            className={cn(
-                                                                'relative z-10 font-bold px-4 py-2 rounded-full transition-colors duration-300',
-                                                                {
-                                                                    'text-white':
-                                                                        (activeLink && !isOnDark) ||
-                                                                        (!activeLink && isOnDark),
-                                                                    'text-black':
-                                                                        (activeLink && isOnDark) ||
-                                                                        (!activeLink && !isOnDark),
-                                                                },
-                                                            )}
-                                                        >
-                                                            {link.title}
-                                                        </Link>
+                                                        {link.href ? (
+                                                            <Link
+                                                                href={link.href}
+                                                                className={cn(
+                                                                    'relative z-10 font-bold px-4 py-2 rounded-full transition-colors duration-300',
+                                                                    {
+                                                                        'text-white':
+                                                                            (activeLink &&
+                                                                                !isOnDark) ||
+                                                                            (!activeLink &&
+                                                                                isOnDark),
+                                                                        'text-black':
+                                                                            (activeLink &&
+                                                                                isOnDark) ||
+                                                                            (!activeLink &&
+                                                                                !isOnDark),
+                                                                    },
+                                                                )}
+                                                            >
+                                                                {link.title}
+                                                            </Link>
+                                                        ) : (
+                                                            <button
+                                                                type="button"
+                                                                onClick={handleBottomScroll}
+                                                                className={cn(
+                                                                    'relative z-10 font-bold rounded-full transition-colors duration-300 cursor-pointer',
+                                                                    {
+                                                                        'text-white':
+                                                                            (activeLink &&
+                                                                                !isOnDark) ||
+                                                                            (!activeLink &&
+                                                                                isOnDark),
+                                                                        'text-black':
+                                                                            (activeLink &&
+                                                                                isOnDark) ||
+                                                                            (!activeLink &&
+                                                                                !isOnDark),
+                                                                    },
+                                                                )}
+                                                            >
+                                                                {link.title}
+                                                            </button>
+                                                        )}
                                                     </li>
                                                 )
                                             })}
@@ -233,6 +273,9 @@ export const Header = () => {
                     </div>
                 </motion.div>
             </div>
+            {isMobile && menuClick && (
+                <MobileHeaderItems setMenuClick={setMenuClick} isOnDark={isOnDark} />
+            )}
         </>
     )
 }

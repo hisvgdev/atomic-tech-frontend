@@ -4,6 +4,21 @@ export interface BaseResponseApiProps {
   pagination: PaginationProps
 }
 
+export interface BaseQueryApiParamsProps {
+  limit?: number;
+  offset?: number;
+  category_id?: string;
+  subcategory_id?: string;
+  technology_id?: string;
+  usluga_id?: string;
+  year?: string;
+  rating?: string;
+  title?: string;
+  name?: string;
+  sort_by?: string;
+  sort_direction?: 'asc' | 'desc'
+}
+
 export interface BaseRequestApiProps {
   limit?: number;
   offset?: number;

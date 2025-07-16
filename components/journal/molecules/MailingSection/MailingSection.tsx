@@ -27,17 +27,20 @@ export const MailingSection: FC<MailingSectionProps> = (props) => {
         },
     })
     return (
-        <section data-dark="true" className="w-full p-16 rounded-[1.875rem] bg-gradient-main mt-14">
-            <div className="flex items-center justify-between">
-                <div className="max-w-3xl flex flex-col gap-y-9">
-                    <h1 className="font-bold text-5xl">
+        <section
+            data-dark="true"
+            className="w-full p-8 rounded-[1.875rem] bg-gradient-main mt-14 lg:p-16"
+        >
+            <div className="flex flex-col-reverse gap-8 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex flex-col gap-9 w-full lg:max-w-3xl">
+                    <h1 className="font-bold text-4xl lg:text-5xl">
                         <span className="text-white/80">«PRO</span>
                         <span className="text-white">GER»</span>
                         <span className="text-white">
                             — рассылка о том, что полезно и актуально
                         </span>
                     </h1>
-                    <p className="text-white/50 font-normal text-xl">
+                    <p className="text-white/50 font-normal text-lg lg:text-xl">
                         Искренние письма о работе и жизни, эксклюзивные кейсы и интервью с
                         экспертами диджитала.
                     </p>
@@ -48,7 +51,7 @@ export const MailingSection: FC<MailingSectionProps> = (props) => {
                         }}
                     >
                         <div className="flex flex-col gap-y-5">
-                            <div className="flex items-center gap-x-4">
+                            <div className="flex flex-col items-start gap-4 lg:flex-row lg:items-center">
                                 <form.Field
                                     name="email"
                                     children={({ state, handleBlur, handleChange }) => (
@@ -91,13 +94,16 @@ export const MailingSection: FC<MailingSectionProps> = (props) => {
                                                 }
                                             />
                                             <div className="flex flex-col">
-                                                <Label htmlFor="terms">
+                                                <Label
+                                                    htmlFor="terms"
+                                                    className="flex flex-col gap-0 lg:gap-2 lg:flex-row"
+                                                >
                                                     <span className="text-white/40 text-sm">
                                                         Оставляя свой email, вы принимаете
                                                     </span>
                                                     <Link
                                                         href="/policy"
-                                                        className="text-white underline text-base font-normal"
+                                                        className="text-white underline w-full text-sm font-normal lg:text-base lg:w-auto"
                                                     >
                                                         Политику конфиденциальности
                                                     </Link>
@@ -115,7 +121,7 @@ export const MailingSection: FC<MailingSectionProps> = (props) => {
                         </div>
                     </form>
                 </div>
-                <div className="bg-white w-1/4 h-80 rounded-3xl" />
+                <div className="bg-white w-full h-80 rounded-3xl lg:w-1/4" />
             </div>
         </section>
     )

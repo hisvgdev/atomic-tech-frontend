@@ -59,19 +59,19 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
         </div>
     ) : (
         <div className="flex flex-col gap-12">
-            <div className="flex items-start gap-14">
+            <div className="flex flex-col gap-3.5">
                 <Chip number="2" title="Отзывы" maxW="max-w-44" />
                 <h4 className="leading-tight max-w-6xl">
-                    <span className="block font-bold text-2xl text-black lg:text-7xl">
+                    <span className="block font-bold text-5xl text-black">
                         Мы накопили большой опыт в разработке
                     </span>
-                    <span className="block font-bold text-2xl text-primary-200 lg:text-7xl">
+                    <span className="block font-bold text-5xl text-primary-200">
                         кастомных решений.
                     </span>
                 </h4>
             </div>
-            <div className="flex flex-col items-end gap-24">
-                <div className="grid grid-cols-2 gap-10 text-gray-600 font-medium odd:text-right">
+            <div className="flex flex-col items-end gap-20">
+                <div className="grid grid-cols-2 gap-10 text-gray-600 font-medium">
                     <span>
                         Индивидуальные решения <sup>11</sup>
                     </span>

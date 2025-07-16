@@ -1,6 +1,5 @@
-'use server';
-
-import { BaseResponseApiProps } from "@/types/Api.types";
+import { BaseQueryApiParamsProps, BaseResponseApiProps } from "@/types/Api.types";
+import { buildQueryString } from "@/utils/buildQueryString/buildQueryString";
 
 interface TechnologiesResponse extends BaseResponseApiProps {
   data: TechnologiesDataProps[]
@@ -14,9 +13,13 @@ export interface TechnologiesDataProps {
   updated_at: string;
 }
 
-export const getTechnologies = async (): Promise<TechnologiesResponse | undefined> => {
+type TechnologiesQueryParams = Pick<BaseQueryApiParamsProps, 'limit' | 'offset'>
+
+export const getTechnologies = async (query?: TechnologiesQueryParams): Promise<TechnologiesResponse | undefined> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/technologies/`, {
+    const queryString = buildQueryString(query);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/technologies${queryString}`, {
       method: "GET",
       next: {
         revalidate: 10,

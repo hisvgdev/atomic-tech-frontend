@@ -1,4 +1,4 @@
 export interface CaseIconButtonProps {
-  icon: React.ReactNode;
+  icon?: string;
   label: string
 }

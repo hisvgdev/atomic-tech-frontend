@@ -4,4 +4,5 @@ import { ServicesDataProps } from "@/utils/api/services/services"
 export interface FilterGroupProps {
   title: string
   items: ServicesDataProps[] | CategoriesDataProps[]
+  type: 'usluga' | 'category',
 }

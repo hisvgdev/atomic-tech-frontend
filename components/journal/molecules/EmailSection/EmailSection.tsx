@@ -1,6 +1,10 @@
+'use client'
+
 import firstBlog from '@/public/assets/images/blog/firstBlog.png'
 import ArticleCard from '@/shared/global/ArticleCard'
+import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
+import { SwiperSlide } from 'swiper/react'
 
 import Heading from '../Heading'
 import { EmailSectionProps } from './EmailSection.types'
@@ -15,7 +19,7 @@ export const EmailSection: FC<EmailSectionProps> = (props) => {
                     desc="Учимся писать письма, работать с базой, зарабатывать на email-маркетинге"
                     path="/"
                 />
-                <div className="flex items-center gap-x-5">
+                <div className="hidden lg:flex items-center gap-x-5">
                     <div className="flex-1 h-[44rem]">
                         <ArticleCard
                             title="Как создать уникальное приложение всего за 4 месяца ?"
@@ -61,6 +65,22 @@ export const EmailSection: FC<EmailSectionProps> = (props) => {
                             classNames="w-full lg:max-w-md"
                         />
                     </div>
+                </div>
+                <div className="flex flex-col gap-8 lg:hidden">
+                    <SwiperRowLayout>
+                        {Array.from({ length: 12 }).map((_, indx) => {
+                            return (
+                                <SwiperSlide key={indx}>
+                                    <ArticleCard
+                                        title="Как понять что вы именно тот клиент с которым не хотят работать? "
+                                        date="29.04.2025"
+                                        imgCover={firstBlog}
+                                        classNames="w-full lg:max-w-sm"
+                                    />
+                                </SwiperSlide>
+                            )
+                        })}
+                    </SwiperRowLayout>
                 </div>
             </div>
         </section>

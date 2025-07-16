@@ -6,10 +6,10 @@ import { OtherTagsProps } from './OtherTags.types'
 export const OtherTags: FC<OtherTagsProps> = (props) => {
     const {} = props
     return (
-        <section data-dark="true" className="w-full bg-[#000809] py-32">
-            <div className="flex justify-center items-center">
-                <div className="flex flex-col gap-y-16">
-                    <div className="flex items-center gap-x-[7.5rem]">
+        <section data-dark="true" className="w-full bg-[#000809] py-20 lg:py-32">
+            <div className="flex flex-col lg:flex-row lg:justify-center lg:items-center">
+                <div className="flex flex-col gap-16">
+                    <div className="flex lg:items-center lg:gap-x-[7.5rem]">
                         <button type="button" className="cursor-pointer">
                             <div className="flex items-center gap-x-2">
                                 <h4 className="text-white font-bold text-2xl">
@@ -38,7 +38,7 @@ export const OtherTags: FC<OtherTagsProps> = (props) => {
                             </div>
                         </button>
                     </div>
-                    <div className="flex justify-center items-center gap-x-[7.5rem]">
+                    <div className="flex lg:justify-center lg:items-center lg:gap-x-[7.5rem]">
                         <button type="button" className="cursor-pointer">
                             <div className="flex items-center gap-x-2">
                                 <h4 className="text-white font-bold text-2xl">

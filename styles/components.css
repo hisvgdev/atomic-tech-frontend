@@ -27,4 +27,7 @@
     .bg-gradient-main {
         background: linear-gradient(104.62deg, #00636f 0%, #000809 47.79%);
     }
+    .bg-gradient-amenties {
+        background: linear-gradient(158.77deg, #00636f 0%, #000809 51.26%);
+    }
 }

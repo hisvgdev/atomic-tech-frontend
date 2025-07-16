@@ -1,9 +1,12 @@
+'use client'
+
+import AllProjectsButton from '@/components/dashboard/molecules/AllProjectsButton'
 import coverImage from '@/public/assets/images/projects/secondProject.png'
 import ArticleCard from '@/shared/global/ArticleCard'
 import LeaveRequest from '@/shared/global/LeaveRequest'
-import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
-import Link from 'next/link'
+import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
+import { SwiperSlide } from 'swiper/react'
 
 import ReaderContent from '../../molecules/ReaderContent'
 import { ReaderGridProps } from './ReaderGrid.types'
@@ -11,32 +14,40 @@ import { ReaderGridProps } from './ReaderGrid.types'
 export const ReaderGrid: FC<ReaderGridProps> = (props) => {
     const {} = props
     return (
-        <div className="flex flex-col gap-y-20">
-            <ReaderContent />
-            <div className="flex flex-col gap-y-8">
-                <h2 className="text-5xl font-bold">Следующие темы</h2>
-                <div className="w-full flex items-center gap-x-3">
-                    {Array.from({ length: 4 }).map((_, indx) => (
-                        <ArticleCard
-                            key={indx}
-                            imgCover={coverImage}
-                            title="Как создать уникальное приложение всего за 4 месяца ?"
-                            withTag
-                            tag="Бизнес"
-                        />
-                    ))}
-                </div>
-                <Link
-                    href="/articles"
-                    className="w-full rounded-2xl border-2 border-black py-10 flex items-center justify-center"
-                >
-                    <div className="flex items-center gap-x-10">
-                        <span className="font-bold text-5xl">Все статьи</span>
-                        <ArrowRightIcon size={28} />
+        <>
+            <div className="flex flex-col gap-20 px-3 lg:px-0">
+                <ReaderContent />
+                <div className="flex flex-col gap-y-8">
+                    <h2 className="text-4xl font-bold lg:text-5xl">Следующие темы</h2>
+                    <div className="hidden lg:flex w-full items-center gap-x-3">
+                        {Array.from({ length: 4 }).map((_, indx) => (
+                            <ArticleCard
+                                key={indx}
+                                imgCover={coverImage}
+                                title="Как создать уникальное приложение всего за 4 месяца ?"
+                                withTag
+                                tag="Бизнес"
+                            />
+                        ))}
                     </div>
-                </Link>
+                    <div className="flex flex-col gap-8 lg:hidden">
+                        <SwiperRowLayout>
+                            {Array.from({ length: 4 }).map((_, indx) => (
+                                <SwiperSlide key={indx}>
+                                    <ArticleCard
+                                        imgCover={coverImage}
+                                        title="Как создать уникальное приложение всего за 4 месяца ?"
+                                        withTag
+                                        tag="Бизнес"
+                                    />
+                                </SwiperSlide>
+                            ))}
+                        </SwiperRowLayout>
+                    </div>
+                    <AllProjectsButton title="Все статьи" />
+                </div>
             </div>
             <LeaveRequest />
-        </div>
+        </>
     )
 }

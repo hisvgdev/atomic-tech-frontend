@@ -7,7 +7,7 @@ import ReaderGrid from './ReaderGrid'
 
 export const Reader: FC<ReaderProps> = () => {
     return (
-        <div className="flex flex-col gap-y-8">
+        <div className="flex flex-col gap-y-8 overflow-y-auto">
             <BannerWithTags bannerTitle="Статьи" />
             <hr />
             <ReaderHeading />

@@ -1,7 +1,11 @@
+'use client'
+
 import firstBlog from '@/public/assets/images/blog/firstBlog.png'
 import lastBlog from '@/public/assets/images/blog/lastBlog.png'
 import ArticleCard from '@/shared/global/ArticleCard'
+import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
+import { SwiperSlide } from 'swiper/react'
 
 import Heading from '../Heading'
 import { DesignSectionProps } from './Design.types'
@@ -15,7 +19,7 @@ export const DesignSection: FC<DesignSectionProps> = (props) => {
                 desc="Руководства и сервисы, в том числе для недизайнеров"
                 path="/"
             />
-            <div className="flex flex-col justify-center items-center gap-y-2.5">
+            <div className="hidden lg:flex flex-col justify-center items-center gap-y-2.5">
                 <div className="flex items-center gap-x-3 w-full">
                     <ArticleCard
                         title="Как создать уникальное приложение всего за 4 месяца ?"
@@ -41,6 +45,22 @@ export const DesignSection: FC<DesignSectionProps> = (props) => {
                         />
                     ))}
                 </div>
+            </div>
+            <div className="flex flex-col gap-8 lg:hidden">
+                <SwiperRowLayout>
+                    {Array.from({ length: 6 }).map((_, indx) => {
+                        return (
+                            <SwiperSlide key={indx}>
+                                <ArticleCard
+                                    title="Как создать уникальное приложение всего за 4 месяца ?"
+                                    date="29.04.2025"
+                                    imgCover={firstBlog}
+                                    classNames="w-full lg:max-w-md"
+                                />
+                            </SwiperSlide>
+                        )
+                    })}
+                </SwiperRowLayout>
             </div>
         </section>
     )

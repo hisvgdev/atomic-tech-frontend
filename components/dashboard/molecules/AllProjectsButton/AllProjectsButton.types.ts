@@ -1,1 +1,3 @@
-export interface AllProjectsButtonProps { }
+export interface AllProjectsButtonProps {
+  title?: string
+}

@@ -1,1 +1,3 @@
-export interface CaseHistoryProps { }
+export interface CaseHistoryProps {
+  projectHistory: string;
+}

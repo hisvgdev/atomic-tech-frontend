@@ -11,6 +11,14 @@ export const BenefitsRightSide: FC<BenefitsRightSideProps> = (props) => {
     const {} = props
     const [isHover, setIsHover] = useState(false)
 
+    const scrollToDown = () => {
+        window.scrollTo({
+            top: 10000,
+            left: 0,
+            behavior: 'smooth',
+        })
+    }
+
     return (
         <div className="flex flex-col items-center justify-center gap-14 max-w-xl w-full">
             <div className="flex flex-col gap-8">
@@ -35,6 +43,7 @@ export const BenefitsRightSide: FC<BenefitsRightSideProps> = (props) => {
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
                 transition={{ duration: 0.3 }}
+                onClick={scrollToDown}
             >
                 <motion.div
                     className="absolute inset-0 rounded-full pointer-events-none"

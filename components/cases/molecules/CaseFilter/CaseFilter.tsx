@@ -8,11 +8,11 @@ import { CaseFilterProps } from './CaseFilter.types'
 export const CaseFilter = forwardRef<HTMLDivElement, CaseFilterProps>((props, ref) => {
     const { isFilterOpen, children } = props
     return (
-        <div className="absolute top-0 right-1 z-20" ref={ref}>
+        <div className="absolute top-0 right-1 z-20 lg:top-0" ref={ref}>
             <AnimatePresence>
                 {isFilterOpen && (
                     <motion.div
-                        className="max-w-2xl h-full ring ring-[#E6E6E6]/50 rounded-3xl p-6"
+                        className="max-w-2xl h-full ring ring-[#E6E6E6]/50 rounded-3xl p-3 lg:p-6"
                         style={{
                             backdropFilter: 'blur(20px)',
                             backgroundColor: 'rgba(255, 255, 255, 0.7)',

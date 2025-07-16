@@ -1,5 +1,3 @@
-'use server';
-
 import { BaseResponseApiProps } from "@/types/Api.types";
 
 interface SubCategoriesResponse extends BaseResponseApiProps {

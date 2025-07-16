@@ -1,1 +1,3 @@
-export interface CaseCategorySectionProps { }
+export interface CaseCategorySectionProps {
+  categories: string[]
+}

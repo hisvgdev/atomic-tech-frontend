@@ -1,9 +1,8 @@
-'use server';
-
 import { BaseResponseApiProps } from "@/types/Api.types";
+import { CaseItemsData } from "./case-items";
 
-interface CaseItemResponse extends BaseResponseApiProps {
-  data: any[]
+export interface CaseItemResponse extends BaseResponseApiProps {
+  data: CaseItemsData
 }
 
 export const getCaseItem = async (id: number): Promise<CaseItemResponse | undefined> => {

@@ -1,1 +1,3 @@
-export interface CaseServiceSectionProps { }
+export interface CaseServiceSectionProps {
+  subcategories: string[]
+}

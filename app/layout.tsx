@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import '@/styles/globals.css'
 
 import AppLayout from '@/shared/global/AppLayout'
+import { TanstackQueryProvider } from '@/shared/global/TanstackQueryProvider/TanstackQueryProvider'
 import { YandexMetrika } from '@/shared/global/YandexMetrika/YandexMetrika'
 import { Suspense } from 'react'
 
@@ -79,7 +80,9 @@ export default function RootLayout({
                 <Suspense>
                     <YandexMetrika />
                 </Suspense>
-                <AppLayout>{children}</AppLayout>
+                <TanstackQueryProvider>
+                    <AppLayout>{children}</AppLayout>
+                </TanstackQueryProvider>
             </body>
         </html>
     )

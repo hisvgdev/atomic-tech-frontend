@@ -10,7 +10,7 @@ export const NewSection: FC<NewSectionProps> = (props) => {
     return (
         <section data-dark="false" className="flex flex-col gap-y-4">
             <Heading title="Новое" desc="Самые свежие статьи в Proger" path="/" />
-            <div className="flex items-center justify-center gap-x-5 w-full min-h-full">
+            <div className="flex flex-col gap-5 w-full min-h-full lg:flex-row lg:items-center lg:justify-center">
                 <div className="flex flex-col grow gap-y-2.5">
                     <ArticleCard
                         title="Как создать уникальное приложение всего за 4 месяца?"

@@ -9,8 +9,8 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
     const {} = props
     return (
         <div className="flex justify-center w-full">
-            <div className="flex justify-between w-full px-4 gap-x-6">
-                <div className="w-1/5 flex flex-col gap-y-4">
+            <div className="flex flex-col w-full gap-6 lg:px-4 lg:flex-row lg:justify-between">
+                <div className="w-full flex flex-col gap-y-4 lg:w-1/5">
                     <h4 className="font-semibold text-base">Содержание:</h4>
                     {[
                         'Как устроена Tilda и что здесь можно сделать',
@@ -25,7 +25,7 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                     ))}
                 </div>
 
-                <div className="w-3/6 flex flex-col gap-y-4 items-center">
+                <div className="w-full flex flex-col gap-y-4 items-center lg:w-3/6">
                     <Image
                         src={coverImage}
                         alt="cover-image"
@@ -42,7 +42,7 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                     <ReaderRating />
                 </div>
 
-                <div className="max-w-1/6 flex flex-col gap-y-2">
+                <div className="hidden lg:flex max-w-1/6 flex-col gap-y-2 ">
                     <h4 className="font-semibold text-base">Также по теме:</h4>
                     <ul className="text-base text-[#737373] list-none pl-0.5 flex flex-col gap-y-4">
                         {[

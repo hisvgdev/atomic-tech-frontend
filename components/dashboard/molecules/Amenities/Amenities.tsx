@@ -1,3 +1,5 @@
+'use client'
+
 import code from '@/public/assets/icons/code.svg'
 import colorPallete from '@/public/assets/icons/colorPallete.svg'
 import global from '@/public/assets/icons/global.svg'
@@ -6,7 +8,9 @@ import playbackSpeed from '@/public/assets/icons/playbackSpeed.svg'
 import smartphone from '@/public/assets/icons/smartphone.svg'
 import threeSquares from '@/public/assets/icons/threeSquares.svg'
 import Chip from '@/shared/global/Chip'
+import SwiperGridLayout from '@/shared/global/SwiperGridLayout'
 import React, { FC } from 'react'
+import { SwiperSlide } from 'swiper/react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { AmenitiesProps } from './Amenities.types'
@@ -63,7 +67,7 @@ export const Amenities: FC<AmenitiesProps> = () => {
     return (
         <section
             data-dark="true"
-            className="bg-gradient-to-r from-[#00636F] to-[#000809] w-full p-6 rounded-3xl lg:rounded-[3.125rem] lg:py-24 lg:px-7"
+            className="bg-gradient-amenties w-full p-6 rounded-3xl lg:rounded-[3.125rem] lg:py-24 lg:px-7"
         >
             <div className="flex flex-col gap-10 lg:gap-20">
                 <div className="flex flex-col items-start gap-8 lg:items-center lg:justify-between xl:flex-row xl:gap-0">
@@ -76,10 +80,20 @@ export const Amenities: FC<AmenitiesProps> = () => {
                     </div>
                     <Chip number="3" title="Компетенции" maxW="w-full lg:max-w-64" isDark />
                 </div>
-                <div className="w-full grid grid-cols-1 items-center gap-6 lg:grid-cols-2 xl:grid-cols-3">
+                <div className="hidden lg:grid w-full grid-cols-3 items-center gap-6">
                     {mockAmenitiesData.map((amenties, indx) => {
                         return <AmenitiesCard key={`${indx}-${amenties.id}`} {...amenties} />
                     })}
+                </div>
+                <div className="flex flex-col gap-8 lg:hidden">
+                    <SwiperGridLayout>
+                        {mockAmenitiesData.map((amenties, indx) => (
+                            <SwiperSlide key={`${indx}-${amenties.id}`} className="!h-auto min-h-0">
+                                <AmenitiesCard {...amenties} />
+                            </SwiperSlide>
+                        ))}
+                    </SwiperGridLayout>
+                    <div className="custom-pagination-amenties flex justify-center gap-x-2 mt-2" />
                 </div>
             </div>
         </section>

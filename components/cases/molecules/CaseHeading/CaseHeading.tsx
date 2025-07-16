@@ -11,7 +11,7 @@ import TechFilter from '../CaseFilter/TechFilter'
 import { CaseHeadingProps } from './CaseHeading.types'
 
 export const CaseHeading: FC<CaseHeadingProps> = (props) => {
-    const { servicesData, matchedTechnologies, categoriesData } = props
+    const { servicesData, matchedTechnologies, categoriesData, lengthOfCases } = props
 
     const [isFilterOpen, setIsFilterOpen] = useState(false)
 
@@ -23,9 +23,14 @@ export const CaseHeading: FC<CaseHeadingProps> = (props) => {
     useOutsideClick([sectionRef, filterRef], () => setIsFilterOpen(false))
 
     return (
-        <section data-dark="false" className="w-full relative" ref={sectionRef}>
-            <div className="flex items-center justify-between">
-                <h1 className="font-bold text-7xl">Все проекты</h1>
+        <section
+            data-dark="false"
+            className={`w-full relative ${lengthOfCases > 0 ? '' : 'h-dvh'}`}
+            ref={sectionRef}
+        >
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+                <h1 className="hidden lg:block font-bold text-7xl">Все проекты</h1>
+                <h1 className="block font-bold text-5xl lg:hidden">Последние проекты</h1>
                 {!isFilterOpen ? (
                     <Button
                         variant="outline"
@@ -53,8 +58,8 @@ export const CaseHeading: FC<CaseHeadingProps> = (props) => {
                 )}
             </div>
             <CaseFilter ref={filterRef} isFilterOpen={isFilterOpen}>
-                <FilterGroup title="Услуга" items={servicesData} />
-                <FilterGroup title="Категория" items={categoriesData} />
+                <FilterGroup title="Услуга" items={servicesData} type="usluga" />
+                <FilterGroup title="Категория" items={categoriesData} type="category" />
                 <TechFilter title="Технология" matchedTechnologies={matchedTechnologies} />
             </CaseFilter>
         </section>

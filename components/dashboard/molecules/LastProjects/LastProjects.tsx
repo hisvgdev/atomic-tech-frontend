@@ -1,12 +1,17 @@
-import { mockProjects } from '@/constants/project.constants'
 import CaseCard from '@/shared/global/CaseCard'
 import Chip from '@/shared/global/Chip'
+import { getCaseItems } from '@/utils/api/case-items/case-items'
 import React, { FC } from 'react'
 
 import { LastProjectsProps } from './LastProjects.types'
 
-export const LastProjects: FC<LastProjectsProps> = (props) => {
+export const LastProjects: FC<LastProjectsProps> = async (props) => {
     const {} = props
+    const lastProject = await getCaseItems({ limit: 4, offset: 0 })
+
+    if (!lastProject?.data) return null
+
+    const { data } = lastProject
     return (
         <section data-dark="false">
             <div className="flex flex-col gap-6">
@@ -17,7 +22,7 @@ export const LastProjects: FC<LastProjectsProps> = (props) => {
                     <Chip number="1" title="Кейсы" />
                 </div>
                 <div className="w-full grid grid-cols-1 items-center justify-center gap-4 lg:min-w-sm lg:grid-cols-2">
-                    {mockProjects.map((project, indx) => {
+                    {data.map((project, indx) => {
                         return <CaseCard key={`${project.id}-${indx + 1}`} {...project} />
                     })}
                 </div>

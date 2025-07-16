@@ -11,13 +11,15 @@ export const BlogHeading: FC<BlogHeadingProps> = (props) => {
                 <h1 className="font-bold text-6xl lg:text-7xl">Все об IT</h1>
                 <span className="font-normal text-2xl">Уже в нашем блоге</span>
             </div>
-            <GradientButton
-                hasIsRoute
-                routePath="/cases"
-                title="Перейти в блог"
-                classNames="py-8 rounded-full text-white w-full"
-                secondClassnames="w-full lg:w-auto"
-            />
+            <div className="hidden lg:block">
+                <GradientButton
+                    hasIsRoute
+                    routePath="/cases"
+                    title="Перейти в блог"
+                    classNames="py-8 rounded-full text-white w-full"
+                    secondClassnames="w-full lg:w-auto"
+                />
+            </div>
         </div>
     )
 }

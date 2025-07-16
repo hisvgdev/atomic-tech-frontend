@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
     config.resolve.alias['@'] = path.resolve(__dirname);
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'back.atomic-tech.ru',
+        pathname: '/storage/**',
+      },
+    ],
+  },
+
   reactStrictMode: true,
   skipTrailingSlashRedirect: true,
   trailingSlash: true

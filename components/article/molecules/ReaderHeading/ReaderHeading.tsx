@@ -7,7 +7,7 @@ import { ReaderHeadingProps } from './ReaderHeading.types'
 export const ReaderHeading: FC<ReaderHeadingProps> = (props) => {
     const {} = props
     return (
-        <div className="flex flex-col gap-y-2.5">
+        <div className="flex flex-col gap-y-2.5 px-3 lg:px-0">
             {/* Back button */}
             <Link
                 href="/articles"
@@ -30,9 +30,11 @@ export const ReaderHeading: FC<ReaderHeadingProps> = (props) => {
                 </div>
             </div>
             {/* Header */}
-            <div className="flex flex-col gap-y-2.5 max-w-4xl">
-                <h1 className="font-bold text-5xl">Как создать сайт на Tilda: гайд для новичков</h1>
-                <p className="font-nornal text-xl">
+            <div className="flex flex-col gap-y-2.5 max-w-xs lg:max-w-4xl">
+                <h1 className="font-bold text-4xl lg:text-5xl">
+                    Как создать сайт на Tilda: гайд для новичков
+                </h1>
+                <p className="font-nornal text-base lg:text-xl">
                     И тестируем другие возможности конструктора сайта
                 </p>
             </div>

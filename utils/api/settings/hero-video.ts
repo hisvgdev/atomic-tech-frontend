@@ -1,5 +1,3 @@
-'use server';
-
 type HeroVideoResponse = {
   hero_video: string;
 } | undefined

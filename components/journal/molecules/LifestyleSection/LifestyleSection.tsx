@@ -1,7 +1,11 @@
+'use client'
+
 import firstBlog from '@/public/assets/images/blog/firstBlog.png'
 import lastBlog from '@/public/assets/images/blog/lastBlog.png'
 import ArticleCard from '@/shared/global/ArticleCard'
+import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
+import { SwiperSlide } from 'swiper/react'
 
 import Heading from '../Heading'
 import { LifestyleSectionProps } from './LifestyleSection.types'
@@ -15,7 +19,7 @@ export const LifestyleSection: FC<LifestyleSectionProps> = (props) => {
                 desc="Подборки инструментов, разборы и гайды по ИИ в маркетинге и бизнесе"
                 path="/"
             />
-            <div className="flex flex-col items-stretch justify-center gap-y-3 lg:gap-x-3 lg:flex-row">
+            <div className="hidden lg:flex items-stretch justify-center gap-3">
                 <ArticleCard
                     title="Как создать уникальное приложение всего за 4 месяца ?"
                     date="29.04.2025"
@@ -48,6 +52,22 @@ export const LifestyleSection: FC<LifestyleSectionProps> = (props) => {
                         />
                     ))}
                 </div>
+            </div>
+            <div className="flex flex-col gap-8 lg:hidden">
+                <SwiperRowLayout>
+                    {Array.from({ length: 6 }).map((_, indx) => {
+                        return (
+                            <SwiperSlide key={indx}>
+                                <ArticleCard
+                                    title="Как создать уникальное приложение всего за 4 месяца ?"
+                                    date="29.04.2025"
+                                    imgCover={lastBlog}
+                                    classNames="w-full lg:max-w-md"
+                                />
+                            </SwiperSlide>
+                        )
+                    })}
+                </SwiperRowLayout>
             </div>
         </section>
     )

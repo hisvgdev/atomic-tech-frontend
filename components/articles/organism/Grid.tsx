@@ -4,7 +4,7 @@ import ArticlesCards from '../molecules/ArticlesCards'
 
 export const Grid = () => {
     return (
-        <div className="flex flex-col gap-y-10">
+        <div className="flex flex-col gap-10">
             <BannerWithTags bannerTitle="Статьи" />
             <hr />
             <ArticlesCards />

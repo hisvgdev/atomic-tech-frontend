@@ -1,17 +1,18 @@
-import { StaticImageData } from "next/image";
 
 export interface CaseCardProps {
-  id: string;
+  id: string | number;
   title: string;
   description: string;
-  coverImage: StaticImageData;
-  badgeContent: {
-    title: string;
+  photos: string[];
+  website_link: string;
+  destinations: {
+    name: string;
     description: string;
-  }[];
-  tags: {
-    id: string;
-    title: string;
-    icon: string;
-  }[];
+  }[]
+  categories: string[];
+  subcategories: string[];
+  technologies: {
+    name: string;
+    image: string | null;
+  }[]
 }
