@@ -1,13 +1,12 @@
 import Reader from '@/components/article/organism'
 
-interface ArticlePageProps {
-    params: {
+type Props = {
+    params: Promise<{
         articleId: string
-    }
+    }>
 }
 
-export default function Article({ params }: ArticlePageProps) {
-    const { articleId } = params
-    console.log(articleId)
+export default async function Article({ params }: Props) {
+    const { articleId } = await params
     return <Reader />
 }

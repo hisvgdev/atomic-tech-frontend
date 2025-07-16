@@ -1,5 +1,6 @@
 import Grid from '@/components/cases/organism'
 import { Metadata } from 'next'
+import { Suspense } from 'react'
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -40,5 +41,9 @@ export const metadata: Metadata = {
 }
 
 export default function Cases() {
-    return <Grid />
+    return (
+        <Suspense>
+            <Grid />
+        </Suspense>
+    )
 }
