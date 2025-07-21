@@ -1,103 +1,162 @@
 'use client'
 
 import { ArrowDownUp } from 'lucide-react'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 
 import { ArticlesFiltersProps } from './ArticlesFilters.types'
 
-export const ArticlesFilters: FC<ArticlesFiltersProps> = (props) => {
-    const {} = props
-    const [openFilter, setOpenFilter] = useState({
-        watches: false,
-        rating: false,
-        withDate: false,
-    })
-    const handleOpenFilter = (id: number) => {
-        switch (id) {
-            case 0:
-                setOpenFilter({
-                    watches: true,
-                    rating: false,
-                    withDate: false,
-                })
-                break
-            case 1:
-                setOpenFilter({
-                    watches: false,
-                    rating: true,
-                    withDate: false,
-                })
-                break
-            case 2:
-                setOpenFilter({
-                    watches: false,
-                    rating: false,
-                    withDate: true,
-                })
-            default:
-            case 0:
-                setOpenFilter({
-                    watches: false,
-                    rating: false,
-                    withDate: false,
-                })
-        }
+export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating }) => {
+    const [openFilter, setOpenFilter] = useState<null | 'watches' | 'rating' | 'withDate'>(null)
+    const [activeSort, setActiveSort] = useState<null | {
+        type: 'watches' | 'rating' | 'withDate'
+        direction: 'asc' | 'desc'
+    }>(null)
+
+    const dropdownRef = useRef<HTMLDivElement | null>(null)
+
+    const handleOpenFilter = (type: 'watches' | 'rating' | 'withDate') => {
+        setOpenFilter((prev) => (prev === type ? null : type))
     }
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setOpenFilter(null)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
+
+    const filters = ['Просмотры', 'По оценке', 'По дате']
+    const filterKeys: ('watches' | 'rating' | 'withDate')[] = ['watches', 'rating', 'withDate']
+
+    const isActiveButton = (type: 'watches' | 'rating' | 'withDate') => activeSort?.type === type
+
+    const isActiveOption = (type: 'watches' | 'rating' | 'withDate', direction: 'asc' | 'desc') =>
+        activeSort?.type === type && activeSort?.direction === direction
+
     return (
-        <div className="relative">
+        <div className="relative" ref={dropdownRef}>
             <div className="flex items-center gap-x-1.5">
-                {['Просмотры', 'По оценке', 'По дате'].map((item, indx) => {
+                {filters.map((label, indx) => {
+                    const type = filterKeys[indx]
+                    const isActive = isActiveButton(type)
                     return (
                         <button
-                            key={`${item}-${indx}`}
+                            key={type}
                             type="button"
-                            className="flex items-center gap-x-2.5 rounded-full py-2.5 px-4 border border-[#E6E6E6] cursor-pointer lg:px-5"
-                            onClick={() => handleOpenFilter(indx)}
+                            className={`flex items-center gap-x-2.5 rounded-full py-2.5 px-4 border border-[#E6E6E6] cursor-pointer lg:px-5 transition-colors ${
+                                isActive ? 'bg-black text-white' : 'bg-white text-black'
+                            }`}
+                            onClick={() => handleOpenFilter(type)}
                         >
                             <ArrowDownUp size={18} />
-                            <span className="font-medium text-sm">{item}</span>
+                            <span className="font-medium text-sm">{label}</span>
                         </button>
                     )
                 })}
             </div>
-            {openFilter.watches && (
-                <div className="absolute top-12">
-                    <div className="max-w-80 border border-[#E6E6E6] rounded-2xl backdrop-blur-2xl p-2">
+
+            {/* Просмотры */}
+            {openFilter === 'watches' && (
+                <div className="absolute top-12 z-10">
+                    <div className="max-w-80 border border-[#E6E6E6] rounded-2xl backdrop-blur-2xl p-2 bg-white shadow-lg">
                         <div className="flex flex-col gap-y-1.5">
-                            <button
-                                type="button"
-                                className="w-full p-4 rounded-2xl text-xs font-medium hover:bg-black hover:text-white transition-all cursor-pointer"
-                            >
-                                Меньше просмотров
-                            </button>
-                            <div className="w-20 bg-gray-200 mx-auto h-px" />
-                            <button
-                                type="button"
-                                className="w-full p-4 rounded-2xl text-xs font-medium hover:bg-black hover:text-white transition-all cursor-pointer"
-                            >
-                                Больше просмотров
-                            </button>
+                            {[
+                                { label: 'Меньше просмотров', dir: 'asc' },
+                                { label: 'Больше просмотров', dir: 'desc' },
+                            ].map(({ label, dir }) => (
+                                <button
+                                    key={label}
+                                    type="button"
+                                    className={`w-full p-4 rounded-2xl text-xs font-medium transition-all cursor-pointer hover:bg-black hover:text-white ${
+                                        isActiveOption('watches', dir as 'asc' | 'desc')
+                                            ? 'bg-black text-white'
+                                            : ''
+                                    }`}
+                                    onClick={() => {
+                                        setActiveSort({
+                                            type: 'watches',
+                                            direction: dir as 'asc' | 'desc',
+                                        })
+                                        setOpenFilter(null)
+                                    }}
+                                >
+                                    {label}
+                                </button>
+                            ))}
                         </div>
                     </div>
                 </div>
             )}
-            {openFilter.rating && (
-                <div className="absolute top-12 left-38">
-                    <div className="max-w-80 border border-[#E6E6E6] rounded-2xl backdrop-blur-2xl p-2">
+
+            {/* Оценки */}
+            {openFilter === 'rating' && (
+                <div className="absolute top-12 left-38 z-10">
+                    <div className="max-w-80 border border-[#E6E6E6] rounded-2xl backdrop-blur-2xl p-2 bg-white shadow-lg">
                         <div className="flex flex-col gap-y-1.5">
-                            <button
-                                type="button"
-                                className="w-full p-4 rounded-2xl text-xs font-medium hover:bg-black hover:text-white transition-all cursor-pointer"
-                            >
-                                Меньше оценок
-                            </button>
-                            <div className="w-20 bg-gray-200 mx-auto h-px" />
-                            <button
-                                type="button"
-                                className="w-full p-4 rounded-2xl text-xs font-medium hover:bg-black hover:text-white transition-all cursor-pointer"
-                            >
-                                Больше оценок
-                            </button>
+                            {[
+                                { label: 'Меньше оценок', dir: 'asc' },
+                                { label: 'Больше оценок', dir: 'desc' },
+                            ].map(({ label, dir }) => (
+                                <button
+                                    key={label}
+                                    type="button"
+                                    className={`w-full p-4 rounded-2xl text-xs font-medium transition-all cursor-pointer hover:bg-black hover:text-white ${
+                                        isActiveOption('rating', dir as 'asc' | 'desc')
+                                            ? 'bg-black text-white'
+                                            : ''
+                                    }`}
+                                    onClick={() => {
+                                        setActiveSort({
+                                            type: 'rating',
+                                            direction: dir as 'asc' | 'desc',
+                                        })
+                                        setSortByRating(dir as 'asc' | 'desc')
+                                        setOpenFilter(null)
+                                    }}
+                                >
+                                    {label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* По дате */}
+            {openFilter === 'withDate' && (
+                <div className="absolute top-12 left-72 z-10">
+                    <div className="max-w-80 border border-[#E6E6E6] rounded-2xl backdrop-blur-2xl p-2 bg-white shadow-lg">
+                        <div className="flex flex-col gap-y-1.5">
+                            {[
+                                { label: 'Сначала старые', dir: 'asc' },
+                                { label: 'Сначала новые', dir: 'desc' },
+                            ].map(({ label, dir }) => (
+                                <button
+                                    key={label}
+                                    type="button"
+                                    className={`w-full p-4 rounded-2xl text-xs font-medium transition-all cursor-pointer hover:bg-black hover:text-white ${
+                                        isActiveOption('withDate', dir as 'asc' | 'desc')
+                                            ? 'bg-black text-white'
+                                            : ''
+                                    }`}
+                                    onClick={() => {
+                                        setActiveSort({
+                                            type: 'withDate',
+                                            direction: dir as 'asc' | 'desc',
+                                        })
+                                        // Implement `setSortByDate(dir)` if necessary
+                                        setOpenFilter(null)
+                                    }}
+                                >
+                                    {label}
+                                </button>
+                            ))}
                         </div>
                     </div>
                 </div>

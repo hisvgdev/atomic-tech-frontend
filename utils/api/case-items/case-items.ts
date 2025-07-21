@@ -44,7 +44,7 @@ export const getCaseItems = async (query?: BaseQueryApiParamsProps): Promise<Cas
         revalidate: 10,
       }
     });
-    console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/case-items${query}`)
+
     if (!res.ok) {
       throw new Error(`Failed fetch to case-items`);
     }

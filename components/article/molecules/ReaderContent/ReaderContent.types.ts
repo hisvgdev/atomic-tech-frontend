@@ -1,1 +1,5 @@
-export interface ReaderContentProps { }
+export interface ReaderContentProps {
+  caseItems?: any[];
+  content?: string;
+  image?: string;
+}

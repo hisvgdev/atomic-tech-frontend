@@ -15,7 +15,7 @@ import { getCategories } from '@/utils/api/categories/categories'
 import { getServices } from '@/utils/api/services/services'
 import { getTechnologies } from '@/utils/api/technologies/technologies'
 import { useQuery } from '@tanstack/react-query'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import React, { useState } from 'react'
 
 import { CaseHeading } from '../molecules/CaseHeading/CaseHeading'
@@ -25,7 +25,6 @@ export const CASE_LIMITS = 4
 
 export const Grid = () => {
     const searchParams = useSearchParams()
-    const pathname = usePathname()
     const usluga = searchParams.get('usluga_id') || ''
     const category = searchParams.get('category_id') || ''
     const technology = searchParams.get('technology_id') || ''
@@ -41,27 +40,23 @@ export const Grid = () => {
                 limit: 2,
                 offset: (currentPage - 1) * 2,
             }),
-        enabled: pathname.includes('/cases'),
     })
 
     const { data: servicesData, isPending: isServicesPending } = useQuery({
         queryKey: ['services'],
         queryFn: getServices,
-        enabled: pathname.includes('/cases'),
         staleTime: Infinity,
     })
 
     const { data: technologiesData, isPending: isTechnologiesPending } = useQuery({
         queryKey: ['technologies'],
         queryFn: async () => getTechnologies(),
-        enabled: pathname.includes('/cases'),
         staleTime: Infinity,
     })
 
     const { data: categoriesData, isPending: isCategoriesPending } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => getCategories(),
-        enabled: pathname.includes('/cases'),
         staleTime: Infinity,
     })
 

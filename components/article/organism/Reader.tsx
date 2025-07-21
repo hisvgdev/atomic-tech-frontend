@@ -5,14 +5,16 @@ import ReaderHeading from '../molecules/ReaderHeading'
 import { ReaderProps } from './Reader.types'
 import ReaderGrid from './ReaderGrid'
 
-export const Reader: FC<ReaderProps> = () => {
+export const Reader: FC<ReaderProps> = (props) => {
+    const { blog } = props
+    const { title, case_items, content, description, image, updated_at, created_at } = blog.data
     return (
         <div className="flex flex-col gap-y-8 overflow-y-auto">
             <BannerWithTags bannerTitle="Статьи" />
             <hr />
-            <ReaderHeading />
+            <ReaderHeading title={title} description={description} updatedAt={updated_at} />
             <hr />
-            <ReaderGrid />
+            <ReaderGrid caseItems={case_items} content={content} image={image} />
         </div>
     )
 }

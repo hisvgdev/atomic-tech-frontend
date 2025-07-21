@@ -3,11 +3,11 @@
 import { BaseResponseApiProps } from "@/types/Api.types";
 import { BlogsDataProps } from "./blogs";
 
-interface BlogResponse extends BaseResponseApiProps {
+export interface BlogResponse extends BaseResponseApiProps {
   data: BlogsDataProps
 }
 
-export const getBlog = async (id: number): Promise<BlogResponse | undefined> => {
+export const getBlog = async (id: string): Promise<BlogResponse | undefined> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/blogs/${id}`, {
       method: "GET",

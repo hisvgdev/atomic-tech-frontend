@@ -18,4 +18,7 @@ export interface ArticleCardProps {
   hasRating?: boolean
   rating?: number
   ratingPosition?: RatingPosition
+
+  // link
+  href?: string;
 }

@@ -12,23 +12,34 @@ import ReaderContent from '../../molecules/ReaderContent'
 import { ReaderGridProps } from './ReaderGrid.types'
 
 export const ReaderGrid: FC<ReaderGridProps> = (props) => {
-    const {} = props
+    const { caseItems, content, image } = props
+    console.log(caseItems)
     return (
         <>
             <div className="flex flex-col gap-20 px-3 lg:px-0">
-                <ReaderContent />
+                <ReaderContent caseItems={caseItems} content={content} image={image} />
                 <div className="flex flex-col gap-y-8">
                     <h2 className="text-4xl font-bold lg:text-5xl">Следующие темы</h2>
                     <div className="hidden lg:flex w-full items-center gap-x-3">
-                        {Array.from({ length: 4 }).map((_, indx) => (
-                            <ArticleCard
-                                key={indx}
-                                imgCover={coverImage}
-                                title="Как создать уникальное приложение всего за 4 месяца ?"
-                                withTag
-                                tag="Бизнес"
-                            />
-                        ))}
+                        {Array.isArray(caseItems) && caseItems.length > 0
+                            ? caseItems.map((item, indx) => (
+                                  <ArticleCard
+                                      key={indx}
+                                      imgCover={coverImage}
+                                      title={item.title}
+                                      withTag
+                                      tag="Бизнес"
+                                  />
+                              ))
+                            : Array.from({ length: 4 }).map((_, indx) => (
+                                  <ArticleCard
+                                      key={indx}
+                                      imgCover={coverImage}
+                                      title="Как создать уникальное приложение всего за 4 месяца ?"
+                                      withTag
+                                      tag="Бизнес"
+                                  />
+                              ))}
                     </div>
                     <div className="flex flex-col gap-8 lg:hidden">
                         <SwiperRowLayout>

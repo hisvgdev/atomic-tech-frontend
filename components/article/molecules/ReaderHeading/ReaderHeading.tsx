@@ -5,7 +5,7 @@ import React, { FC } from 'react'
 import { ReaderHeadingProps } from './ReaderHeading.types'
 
 export const ReaderHeading: FC<ReaderHeadingProps> = (props) => {
-    const {} = props
+    const { title, description, updatedAt } = props
     return (
         <div className="flex flex-col gap-y-2.5 px-3 lg:px-0">
             {/* Back button */}
@@ -20,7 +20,9 @@ export const ReaderHeading: FC<ReaderHeadingProps> = (props) => {
             </Link>
             {/* Additional info */}
             <div className="flex items-center gap-x-5">
-                <span className="font-normal text-[#737373] leading-5">Обновлено: 05.06.2025</span>
+                <span className="font-normal text-[#737373] leading-5">
+                    Обновлено: {updatedAt || '05.06.2025'}
+                </span>
                 <div className="flex items-center">
                     <EyeIcon color="#737373" />
                     <span className="text-[#737373] font-normal text-base">16K</span>
@@ -30,12 +32,12 @@ export const ReaderHeading: FC<ReaderHeadingProps> = (props) => {
                 </div>
             </div>
             {/* Header */}
-            <div className="flex flex-col gap-y-2.5 max-w-xs lg:max-w-4xl">
+            <div className="flex flex-col gap-y-2.5 max-w-xs lg:max-w-5xl">
                 <h1 className="font-bold text-4xl lg:text-5xl">
-                    Как создать сайт на Tilda: гайд для новичков
+                    {title || 'Как создать сайт на Tilda: гайд для новичков'}
                 </h1>
                 <p className="font-nornal text-base lg:text-xl">
-                    И тестируем другие возможности конструктора сайта
+                    {description || 'И тестируем другие возможности конструктора сайта'}
                 </p>
             </div>
         </div>

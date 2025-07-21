@@ -1,3 +1,5 @@
+'use client'
+
 import AllProjectsButton from '@/components/dashboard/molecules/AllProjectsButton'
 
 import BusinessSection from '../molecules/BusinessSection'

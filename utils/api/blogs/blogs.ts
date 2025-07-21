@@ -1,6 +1,7 @@
 'use server';
 
-import type { BaseResponseApiProps } from "@/types/Api.types";
+import type { BaseQueryApiParamsProps, BaseResponseApiProps } from "@/types/Api.types";
+import { buildQueryString } from "@/utils/buildQueryString/buildQueryString";
 
 interface BlogsResponse extends BaseResponseApiProps {
   data: BlogsDataProps[]
@@ -17,9 +18,11 @@ export interface BlogsDataProps {
   updated_at: string
 }
 
-export const getBlogs = async (): Promise<BlogsResponse | undefined> => {
+export const getBlogs = async (query?: BaseQueryApiParamsProps): Promise<BlogsResponse | undefined> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/blogs`, {
+    const queryString = buildQueryString(query);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/blogs${queryString}`, {
       method: "GET",
       next: {
         revalidate: 10,

@@ -6,7 +6,8 @@ import ReaderRating from '../ReaderRating'
 import { ReaderContentProps } from './ReaderContent.types'
 
 export const ReaderContent: FC<ReaderContentProps> = (props) => {
-    const {} = props
+    const { caseItems, content, image } = props
+
     return (
         <div className="flex justify-center w-full">
             <div className="flex flex-col w-full gap-6 lg:px-4 lg:flex-row lg:justify-between">
@@ -27,18 +28,16 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
 
                 <div className="w-full flex flex-col gap-y-4 items-center lg:w-3/6">
                     <Image
-                        src={coverImage}
+                        src={image || coverImage}
                         alt="cover-image"
+                        width={480}
+                        height={480}
                         className="w-full rounded-[1.875rem] object-cover"
                     />
-                    <span className="font-medium text-base text-start">
-                        Положение о сборе, хранении, обработке и защите персональных данных
-                        пользователей приложения KISY: Настоящая Политика конфиденциальности
-                        персональных данных (далее — «Политика конфиденциальности», «Положение»)
-                        действует в отношении всей информации, которую Интернет-магазин «KISY»,
-                        может получить о Пользователе во время использования приложения
-                        Интернет-магазина, программ и продуктов Интернет-магазина.
-                    </span>
+                    <span
+                        className="font-medium text-base text-start"
+                        dangerouslySetInnerHTML={{ __html: content as string }}
+                    />
                     <ReaderRating />
                 </div>
 

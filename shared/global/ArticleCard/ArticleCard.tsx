@@ -3,6 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { EyeIcon, StarIcon } from '@phosphor-icons/react/dist/ssr'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { FC } from 'react'
 
 import { articleCardVariants } from '@/lib/cva/article-card-variants'
@@ -29,6 +30,7 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
         rating,
         tag,
         withTag = false,
+        href,
     } = props
     const showTopRating = hasRating && ratingPosition === 'top'
     const showBottomRating = hasRating && ratingPosition === 'bottom'
@@ -67,7 +69,16 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
             </CardHeader>
 
             <CardContent className="flex flex-col gap-y-3 flex-1">
-                <h4 className="font-semibold text-black text-lg">{title}</h4>
+                {href ? (
+                    <Link
+                        href={href}
+                        className="font-semibold text-black text-lg hover:underline transition-all"
+                    >
+                        {title}
+                    </Link>
+                ) : (
+                    <h4 className="font-semibold text-black text-lg">{title}</h4>
+                )}
 
                 {showBottomRating && <RatingStars value={rating} />}
             </CardContent>

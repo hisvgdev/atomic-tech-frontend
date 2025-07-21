@@ -1,4 +1,5 @@
 import Reader from '@/components/article/organism'
+import { getBlog } from '@/utils/api/blogs/blog'
 
 type Props = {
     params: Promise<{
@@ -8,5 +9,7 @@ type Props = {
 
 export default async function Article({ params }: Props) {
     const { articleId } = await params
-    return <Reader />
+    const blog = await getBlog(articleId)
+    if (!blog) return null
+    return <Reader blog={blog} />
 }
