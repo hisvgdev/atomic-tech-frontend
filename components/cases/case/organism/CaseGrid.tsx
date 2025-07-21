@@ -1,3 +1,5 @@
+'use client'
+
 import CaseHistory from '@/components/cases/molecules/CaseHistory'
 import AllProjectsButton from '@/components/dashboard/molecules/AllProjectsButton'
 import { Button } from '@/components/ui/button'
@@ -8,11 +10,17 @@ import { ArrowRight, Calendar, Globe } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 import CaseCategorySection from '../molecules/CaseCategorySection'
 import CaseServiceSection from '../molecules/CaseServiceSection'
 import CaseTechnologySection from '../molecules/CaseTechnologySection'
 import { CaseGridProps } from './CaseGrid.types'
+
+import 'swiper/css'
+
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react'
+import { A11y, Navigation, Pagination } from 'swiper/modules'
 
 export const CaseGrid: FC<CaseGridProps> = (props) => {
     const { findedCase, relatedCase } = props
@@ -29,8 +37,10 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
         updated_at,
         project_history,
     } = findedCase
+
     const formatedWebsiteLink = website_link.split('/')[2]
     const getYear = new Date(updated_at).getFullYear()
+
     return (
         <main className="h-full w-full overflow-y-auto">
             <article className="flex flex-col gap-y-16">
@@ -57,13 +67,13 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                         </Button>
                         <Button className="border border-black py-6 rounded-full bg-transparent cursor-pointer text-black hover:bg-transparent lg:py-4">
                             <Calendar size={22} />
-                            <span className="font-medium text-base">{getYear} год</span>
+                            <span className="font-medium text-base"> {getYear} год</span>
                         </Button>
                     </div>
                 </header>
 
                 <figure>
-                    {photos && (
+                    {photos.length < 1 ? (
                         <Image
                             src={photos[0]}
                             alt={title}
@@ -71,6 +81,47 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                             width={630}
                             height={430}
                         />
+                    ) : (
+                        <figure className="relative">
+                            <>
+                                <Swiper
+                                    modules={[Pagination, Navigation, A11y]}
+                                    spaceBetween={50}
+                                    slidesPerView={1}
+                                    navigation={{
+                                        nextEl: '.swiper-button-next',
+                                        prevEl: '.swiper-button-prev',
+                                    }}
+                                    pagination={{
+                                        el: '.custom-pagination',
+                                        clickable: true,
+                                    }}
+                                    scrollbar={{ draggable: true }}
+                                >
+                                    {photos.map((p, i) => (
+                                        <SwiperSlide key={i}>
+                                            <Image
+                                                src={p}
+                                                alt={title}
+                                                className="w-full"
+                                                width={630}
+                                                height={430}
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+
+                                {/* Стрелки по центру */}
+                                <div className="swiper-button-prev bg-white p-2 border border-[#EAEAEA] rounded-full absolute top-1/2 left-4 z-10 -translate-y-1/2 cursor-pointer">
+                                    <CaretLeftIcon size={18} weight="bold" />
+                                </div>
+                                <div className="swiper-button-next absolute p-2 bg-white border border-[#EAEAEA] rounded-full top-1/2 right-4 z-10 -translate-y-1/2 cursor-pointer text-black hover:text-gray-600">
+                                    <CaretRightIcon size={18} weight="bold" />
+                                </div>
+
+                                <div className="custom-pagination flex justify-center gap-x-2 mt-2" />
+                            </>
+                        </figure>
                     )}
                 </figure>
 
