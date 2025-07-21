@@ -72,7 +72,9 @@ export const Amenities: FC<AmenitiesProps> = () => {
             <div className="flex flex-col gap-10 lg:gap-20">
                 <div className="flex flex-col items-start gap-8 lg:items-center lg:justify-between xl:flex-row xl:gap-0">
                     <div className="flex flex-col items-start gap-10 lg:items-center lg:flex-row">
-                        <h1 className="font-bold text-7xl text-white lg:text-9xl">Услуги</h1>
+                        <h1 className="font-bold text-7xl text-white -tracking-[0.375rem] lg:text-9xl">
+                            Услуги
+                        </h1>
                         <p className="max-w-md text-white font-normal text-base">
                             Наш подход к работе лежит в плоскости аналитики, ярких дизайн решений и,
                             как итог, построении эффективной коммуникации

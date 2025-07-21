@@ -31,7 +31,9 @@ export default function Policy() {
     return (
         <div className="flex flex-col gap-8 overflow-y-auto lg:gap-16">
             <div className="flex flex-col gap-6 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
-                <h1 className="font-bold text-4xl lg:text-5xl">Политика конфиденциальности</h1>
+                <h1 className="font-bold text-4xl -tracking-[0.23rem] lg:text-5xl">
+                    Политика конфиденциальности
+                </h1>
                 <Link
                     href="/"
                     className="flex items-center justify-center gap-x-2.5 rounded-full border border-[#E6E6E6] p-4  max-w-60 lg:py-4 lg:px-20"

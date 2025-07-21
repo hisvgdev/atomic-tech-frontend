@@ -31,13 +31,14 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
     } = findedCase
     const formatedWebsiteLink = website_link.split('/')[2]
     const getYear = new Date(updated_at).getFullYear()
-
     return (
         <main className="h-full w-full overflow-y-auto">
             <article className="flex flex-col gap-y-16">
                 <header className="flex flex-col items-start gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex flex-col items-start gap-4 max-w-72 lg:max-w-full lg:flex-row lg:items-center lg:gap-10">
-                        <h1 className="text-4xl font-bold lg:text-7xl">{title.toUpperCase()}</h1>
+                        <h1 className="text-4xl font-bold -tracking-[0.23rem] lg:text-7xl">
+                            {title.toUpperCase()}
+                        </h1>
                         <p className="text-base text-primary-300 lg:text-2xl lg:max-w-2xl">
                             {description}
                         </p>
@@ -84,7 +85,10 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                     aria-labelledby="benefits-heading"
                     className="flex flex-col gap-y-5"
                 >
-                    <h2 id="benefits-heading" className="font-bold text-5xl lg:text-7xl">
+                    <h2
+                        id="benefits-heading"
+                        className="font-bold text-5xl -tracking-[0.23rem] lg:text-7xl"
+                    >
                         Мы достигли
                     </h2>
                     <div className="flex flex-wrap gap-2.5">
@@ -116,7 +120,10 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                     aria-labelledby="more-cases-heading"
                     className="flex flex-col gap-y-6"
                 >
-                    <h2 id="more-cases-heading" className="font-bold text-5xl lg:text-7xl">
+                    <h2
+                        id="more-cases-heading"
+                        className="font-bold text-5xl -tracking-[0.23rem] lg:text-7xl"
+                    >
                         Больше кейсов
                     </h2>
                     <div className="flex items-center gap-x-4">

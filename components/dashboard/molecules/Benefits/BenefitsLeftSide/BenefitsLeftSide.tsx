@@ -9,7 +9,7 @@ const mockMetrics = [
     {
         id: 'project',
         value: '70',
-        content: 'реализованных проектов',
+        content: 'Реализованных проектов',
     },
     {
         id: 'summary',
@@ -71,9 +71,9 @@ export const BenefitsLeftSide: FC<BenefitsLeftSideProps> = () => {
                             <div className="flex flex-col items-start gap-2 relative z-20">
                                 <div className="flex items-end">
                                     <motion.h4
-                                        className={`font-bold text-6xl lg:text-9xl transition-colors duration-300 ${
+                                        className={`font-bold text-6xl -tracking-[0.3rem] transition-colors duration-300 lg:text-9xl ${
                                             isHovered
-                                                ? 'text-transparent bg-clip-text bg-gradient-to-b from-white via-[#BEBEBE] to-[#646464] [background-clip:text] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]'
+                                                ? 'text-transparent bg-clip-text bg-gradient-to-b from-white via-[#BEBEBE] to-[#646464] bg-clip-text [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]'
                                                 : 'text-white/50'
                                         }`}
                                     >

@@ -22,7 +22,7 @@ export const BenefitsRightSide: FC<BenefitsRightSideProps> = (props) => {
     return (
         <div className="flex flex-col items-center justify-center gap-14 max-w-xl w-full">
             <div className="flex flex-col gap-8">
-                <h3 className="text-white font-bold text-3xl lg:text-5xl lg:leading-14">
+                <h3 className="text-white font-bold text-3xl -tracking-[0.2rem] lg:text-5xl">
                     Создайте свой уникальный цифровой продукт уже сейчас
                 </h3>
                 <p className="text-white/70 text-base lg:text-2xl">

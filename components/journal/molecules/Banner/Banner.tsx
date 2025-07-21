@@ -10,7 +10,7 @@ export const Banner: FC<BannerProps> = (props) => {
                 <div className="w-full rounded-4xl py-8 bg-gradient-main">
                     <div className="flex items-center justify-center">
                         <div className="flex items-center gap-x-10">
-                            <h1 className="font-bold text-6xl">
+                            <h1 className="font-bold text-6xl -tracking-[0.23rem]">
                                 <span className="text-white/80">PRO</span>
                                 <span className="text-white">GER</span>
                             </h1>
@@ -25,7 +25,7 @@ export const Banner: FC<BannerProps> = (props) => {
                 <div className="w-full pt-28 pb-8 bg-gradient-main">
                     <div className="flex items-center justify-center">
                         <div className="flex items-center gap-x-10">
-                            <h1 className="font-bold text-4xl">
+                            <h1 className="font-bold text-4xl -tracking-[0.23rem]">
                                 <span className="text-white/80">PRO</span>
                                 <span className="text-white">GER</span>
                             </h1>

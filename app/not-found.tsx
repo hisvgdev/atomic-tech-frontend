@@ -10,7 +10,7 @@ export default function Error() {
         <main className="grid  place-items-center bg-white px-6 py-12 sm:py-32 lg:px-8">
             <div className="flex flex-col items-center justify-center gap-8 lg:gap-20">
                 <div className="flex flex-col gap-8">
-                    <h1 className="mt-4 text-xl text-center font-bold tracking-tight text-gray-900 sm:text-3xl">
+                    <h1 className="mt-4 text-xl text-center font-bold -tracking-[0.075rem] text-gray-900 sm:text-3xl">
                         Страница не найдена
                     </h1>
                     <div className="flex items-center justify-center">

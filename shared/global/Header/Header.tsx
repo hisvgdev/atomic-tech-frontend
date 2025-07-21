@@ -229,11 +229,11 @@ export const Header = () => {
                             {/* Градиент */}
                             <motion.div
                                 animate={{
-                                    scaleY: isHover ? 1 : 0,
+                                    scaleY: isHover ? 1.5 : 0,
                                     opacity: isHover ? 1 : 0,
                                 }}
-                                transition={{ duration: 0.25, ease: 'easeInOut' }}
-                                className="absolute inset-0 origin-bottom z-10 pointer-events-none"
+                                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                                className="absolute inset-0 z-10 pointer-events-none"
                                 style={{
                                     transformOrigin: 'bottom',
                                     background:

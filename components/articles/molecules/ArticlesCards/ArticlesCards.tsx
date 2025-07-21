@@ -64,8 +64,13 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
         <div className="flex flex-col gap-y-16">
             <div className="w-full flex flex-col gap-6 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex flex-col lg:gap-3.5 lg:flex-row lg:items-center">
-                    <h1 className="font-bold text-5xl">Все статьи</h1>
-                    <p className="text-5xl font-bold text-[#C4C4C4]">239 статей</p>
+                    <h1 className="font-bold text-5xl -tracking-[0.075rem]">Все статьи</h1>
+                    <p className="text-5xl font-bold text-[#C4C4C4]">
+                        {Array.isArray(blogsData?.data) ? blogsData.data.length : 0}{' '}
+                        {Array.isArray(blogsData?.data) && blogsData.data.length < 2
+                            ? 'статья'
+                            : 'статей'}
+                    </p>
                 </div>
                 <ArticlesFilters setSortByRating={setSortByRating} />
             </div>

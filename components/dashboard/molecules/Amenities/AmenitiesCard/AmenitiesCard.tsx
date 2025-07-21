@@ -20,7 +20,7 @@ export const AmenitiesCard: FC<AmenitiesCardProps> = (props) => {
             <div className="relative z-10 flex items-center gap-6">
                 <Image src={icon} alt={title} className="w-20 h-20 object-contain" />
                 <div className="flex flex-col gap-2">
-                    <h3 className="text-lg text-white font-bold leading-snug lg:text-xl">
+                    <h3 className="text-lg text-white font-bold -tracking-[0.075rem] leading-snug lg:text-xl">
                         {title}
                     </h3>
                     <p className="font-normal text-xs text-white/50 lg:text-sm">{description}</p>

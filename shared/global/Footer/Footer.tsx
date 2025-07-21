@@ -127,7 +127,7 @@ export const Footer = () => {
                         </div>
                         <hr className="bg-white/70 w-full" />
                         <div className="flex items-start flex-col gap-y-4 lg:gap-y-0 lg:items-center lg:flex-row lg:justify-between">
-                            <span className="text-white text-xs font-normal max-w-80">
+                            <span className="text-white text-xs font-normal -tracking-[0.01rem] max-w-80">
                                 * Социальные сети Instagram и Facebook запрещены в РФ. Решением суда
                                 от 21.03.2022
                             </span>

@@ -11,7 +11,9 @@ export const CaseHistory: FC<CaseHistoryProps> = (props) => {
         <section data-dark="true" className="w-full h-full bg-black rounded-[3.125rem] p-10">
             <div className="flex flex-col gap-24 lg:flex-row lg:items-start lg:justify-between">
                 <div className="flex flex-col gap-y-9 max-w-4xl">
-                    <h2 className="text-white font-bold text-5xl">История проекта</h2>
+                    <h2 className="text-white font-bold -tracking-[0.23rem] text-5xl">
+                        История проекта
+                    </h2>
                     <div className="flex flex-col gap-y-12 text-white/50 font-medium text-base">
                         <p dangerouslySetInnerHTML={{ __html: projectHistory }} />
                     </div>

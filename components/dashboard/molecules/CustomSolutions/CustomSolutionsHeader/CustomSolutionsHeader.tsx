@@ -20,7 +20,7 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                 <div className="flex justify-center items-end flex-col gap-14">
                     {/* Текст */}
                     <div className="flex items-center justify-center">
-                        <h4 className="leading-tight max-w-4xl">
+                        <h4 className="leading-tight -tracking-[0.2rem] max-w-4xl">
                             <span className="block font-bold text-7xl text-black">
                                 Мы накопили большой опыт в разработке
                             </span>
@@ -30,7 +30,7 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                         </h4>
                     </div>
                     {/* Категории, как на скриншоте */}
-                    <div className="grid grid-cols-3 whitespace-nowrap gap-x-10 gap-y-4 mt-12 text-xl text-gray-600 font-medium">
+                    <div className="grid grid-cols-3 whitespace-nowrap gap-x-10 gap-y-4 mt-12 text-xl -tracking-[0.3rem] text-gray-600 font-medium">
                         <span>
                             Индивидуальные решения <sup>11</sup>
                         </span>

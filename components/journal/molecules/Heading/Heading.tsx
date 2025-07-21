@@ -12,7 +12,7 @@ export const Heading: FC<HeadingProps> = (props) => {
                 <h1 className="font-bold text-5xl">{title}</h1>
             ) : (
                 <div className="flex items-center gap-x-4 cursor-pointer">
-                    <Link href={path} className="font-bold text-5xl">
+                    <Link href={path} className="font-bold text-5xl -tracking-[0.075rem]">
                         {title}
                     </Link>
                     <ArrowRight className="mt-2" />

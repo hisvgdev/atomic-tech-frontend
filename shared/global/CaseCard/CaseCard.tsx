@@ -70,7 +70,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                 <CardHeader className="p-0">
                     <div className="w-full flex items-start justify-between mt-4">
                         <div className="flex flex-col max-w-62 lg:max-w-lg lg:gap-4">
-                            <CardTitle className="text-lg font-extrabold truncate lg:text-3xl">
+                            <CardTitle className="text-lg font-extrabold truncate -tracking-[0.075rem] lg:text-3xl">
                                 {title}
                             </CardTitle>
                             <CardDescription className="font-medium text-black text-xs max-w-full truncate lg:text-sm">

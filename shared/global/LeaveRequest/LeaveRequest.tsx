@@ -34,7 +34,7 @@ export const LeaveRequest: FC<LeaveRequestProps> = (props) => {
         >
             <div className="flex flex-col gap-y-4">
                 <div className="flex flex-col gap-y-3 max-w-xl">
-                    <h1 className="font-bold text-3xl text-white lg:text-5xl">
+                    <h1 className="font-bold text-3xl -tracking-[0.2rem] text-white lg:text-5xl">
                         Начните разработку проекта вместе с нами
                     </h1>
                     <p className="text-white text-lg font-normal">
