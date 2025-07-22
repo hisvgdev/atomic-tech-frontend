@@ -25,17 +25,19 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [sortByRating, setSortByRating] = useState<'asc' | 'desc'>('desc')
+    const [sortWithDate, setSortWithDate] = useState<'created_at' | 'updated_at'>('created_at')
 
     const {
         data: blogsData,
         isLoading: isBlogsLoading,
         isError: isBlogsError,
     } = useQuery({
-        queryKey: ['blogs', sortByRating, currentPage],
+        queryKey: ['blogs', sortByRating, sortWithDate, currentPage],
         queryFn: async () =>
             await getBlogs({
                 limit: BLOGS_LIMITS,
                 offset: (currentPage - 1) * BLOGS_LIMITS,
+                sort_by: sortWithDate,
                 sort_direction: sortByRating,
             }),
     })
@@ -72,7 +74,10 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
                             : 'статей'}
                     </p>
                 </div>
-                <ArticlesFilters setSortByRating={setSortByRating} />
+                <ArticlesFilters
+                    setSortByRating={setSortByRating}
+                    setSortWithDate={setSortWithDate}
+                />
             </div>
             <div className="grid grid-cols-1 w-full gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {Array.isArray(blogsData?.data) &&

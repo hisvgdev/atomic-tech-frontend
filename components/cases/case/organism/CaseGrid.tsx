@@ -183,7 +183,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                         ))}
                     </div>
                 </section>
-                <AllProjectsButton title="Все проекты" />
+                <AllProjectsButton link="/cases" title="Все проекты" />
                 <div className="block lg:hidden">
                     <LeaveRequest />
                 </div>

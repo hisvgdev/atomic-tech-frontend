@@ -5,11 +5,11 @@ import React, { FC, useEffect, useRef, useState } from 'react'
 
 import { ArticlesFiltersProps } from './ArticlesFilters.types'
 
-export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating }) => {
+export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, setSortWithDate }) => {
     const [openFilter, setOpenFilter] = useState<null | 'watches' | 'rating' | 'withDate'>(null)
     const [activeSort, setActiveSort] = useState<null | {
         type: 'watches' | 'rating' | 'withDate'
-        direction: 'asc' | 'desc'
+        direction: 'asc' | 'desc' | 'created_at' | 'updated_at'
     }>(null)
 
     const dropdownRef = useRef<HTMLDivElement | null>(null)
@@ -36,8 +36,10 @@ export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating }) =
 
     const isActiveButton = (type: 'watches' | 'rating' | 'withDate') => activeSort?.type === type
 
-    const isActiveOption = (type: 'watches' | 'rating' | 'withDate', direction: 'asc' | 'desc') =>
-        activeSort?.type === type && activeSort?.direction === direction
+    const isActiveOption = (
+        type: 'watches' | 'rating' | 'withDate',
+        direction: 'asc' | 'desc' | 'created_at' | 'updated_at',
+    ) => activeSort?.type === type && activeSort?.direction === direction
 
     return (
         <div className="relative" ref={dropdownRef}>
@@ -134,23 +136,26 @@ export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating }) =
                     <div className="max-w-80 border border-[#E6E6E6] rounded-2xl backdrop-blur-2xl p-2 bg-white shadow-lg">
                         <div className="flex flex-col gap-y-1.5">
                             {[
-                                { label: 'Сначала старые', dir: 'asc' },
-                                { label: 'Сначала новые', dir: 'desc' },
+                                { label: 'Сначала старые', dir: 'created_at' },
+                                { label: 'Сначала новые', dir: 'updated_at' },
                             ].map(({ label, dir }) => (
                                 <button
                                     key={label}
                                     type="button"
-                                    className={`w-full p-4 rounded-2xl text-xs font-medium transition-all cursor-pointer hover:bg-black hover:text-white ${
-                                        isActiveOption('withDate', dir as 'asc' | 'desc')
+                                    className={`w-full p-4 rounded-2xl text-xs whitespace-nowrap font-medium transition-all cursor-pointer hover:bg-black hover:text-white ${
+                                        isActiveOption(
+                                            'withDate',
+                                            dir as 'created_at' | 'updated_at',
+                                        )
                                             ? 'bg-black text-white'
                                             : ''
                                     }`}
                                     onClick={() => {
                                         setActiveSort({
                                             type: 'withDate',
-                                            direction: dir as 'asc' | 'desc',
+                                            direction: dir as 'created_at' | 'updated_at',
                                         })
-                                        // Implement `setSortByDate(dir)` if necessary
+                                        setSortWithDate(dir as 'created_at' | 'updated_at')
                                         setOpenFilter(null)
                                     }}
                                 >

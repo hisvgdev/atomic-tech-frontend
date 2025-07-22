@@ -13,50 +13,42 @@ import { ReaderGridProps } from './ReaderGrid.types'
 
 export const ReaderGrid: FC<ReaderGridProps> = (props) => {
     const { caseItems, content, image } = props
-    console.log(caseItems)
+
     return (
         <>
             <div className="flex flex-col gap-20 px-3 lg:px-0">
                 <ReaderContent caseItems={caseItems} content={content} image={image} />
-                <div className="flex flex-col gap-y-8">
-                    <h2 className="text-4xl font-bold lg:text-5xl">Следующие темы</h2>
-                    <div className="hidden lg:flex w-full items-center gap-x-3">
-                        {Array.isArray(caseItems) && caseItems.length > 0
-                            ? caseItems.map((item, indx) => (
-                                  <ArticleCard
-                                      key={indx}
-                                      imgCover={coverImage}
-                                      title={item.title}
-                                      withTag
-                                      tag="Бизнес"
-                                  />
-                              ))
-                            : Array.from({ length: 4 }).map((_, indx) => (
-                                  <ArticleCard
-                                      key={indx}
-                                      imgCover={coverImage}
-                                      title="Как создать уникальное приложение всего за 4 месяца ?"
-                                      withTag
-                                      tag="Бизнес"
-                                  />
-                              ))}
-                    </div>
-                    <div className="flex flex-col gap-8 lg:hidden">
-                        <SwiperRowLayout>
-                            {Array.from({ length: 4 }).map((_, indx) => (
-                                <SwiperSlide key={indx}>
-                                    <ArticleCard
-                                        imgCover={coverImage}
-                                        title="Как создать уникальное приложение всего за 4 месяца ?"
-                                        withTag
-                                        tag="Бизнес"
-                                    />
-                                </SwiperSlide>
+                {Array.isArray(caseItems) && caseItems.length > 0 ? (
+                    <div className="flex flex-col gap-y-8">
+                        <h2 className="text-4xl font-bold lg:text-5xl">Следующие темы</h2>
+                        <div className="hidden lg:flex w-full items-center gap-x-3">
+                            {caseItems.map((c, i) => (
+                                <ArticleCard
+                                    key={i}
+                                    imgCover={coverImage}
+                                    title={c.title}
+                                    withTag
+                                    tag="Бизнес"
+                                />
                             ))}
-                        </SwiperRowLayout>
+                        </div>
+                        <div className="flex flex-col gap-8 lg:hidden">
+                            <SwiperRowLayout>
+                                {Array.from({ length: 4 }).map((_, indx) => (
+                                    <SwiperSlide key={indx}>
+                                        <ArticleCard
+                                            imgCover={coverImage}
+                                            title="Как создать уникальное приложение всего за 4 месяца ?"
+                                            withTag
+                                            tag="Бизнес"
+                                        />
+                                    </SwiperSlide>
+                                ))}
+                            </SwiperRowLayout>
+                        </div>
+                        <AllProjectsButton link="/articles" title="Все статьи" />
                     </div>
-                    <AllProjectsButton title="Все статьи" />
-                </div>
+                ) : null}
             </div>
             <LeaveRequest />
         </>
