@@ -17,7 +17,7 @@ export const Grid = () => {
                 <Hero />
                 <Benefits />
                 <LastProjects />
-                <AllProjectsButton />
+                <AllProjectsButton link="/cases" />
                 <Showreel />
                 <CustomSolutions />
                 <Amenities />
