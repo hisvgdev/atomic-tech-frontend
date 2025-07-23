@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, Suspense } from 'react'
 
 import { CustomSolutionsProps } from './CustomSolutions.types'
 import { CustomSolutionsFeedback } from './CustomSolutionsFeedback/CustomSolutionsFeedback'
@@ -9,7 +9,9 @@ export const CustomSolutions: FC<CustomSolutionsProps> = (props) => {
 
     return (
         <section data-dark="false" className="flex flex-col gap-16">
-            <CustomSolutionsHeader />
+            <Suspense>
+                <CustomSolutionsHeader />
+            </Suspense>
             <CustomSolutionsFeedback />
         </section>
     )
