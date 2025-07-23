@@ -26,7 +26,7 @@ export const Grid = () => {
             <DesignSection />
             <SMMSection />
             <BusinessSection />
-            <AllProjectsButton title="Все статьи" />
+            <AllProjectsButton link="/articles" title="Все статьи" />
         </div>
     )
 }

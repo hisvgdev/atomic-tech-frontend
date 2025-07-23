@@ -58,8 +58,8 @@ export const CaseHeading: FC<CaseHeadingProps> = (props) => {
                 )}
             </div>
             <CaseFilter ref={filterRef} isFilterOpen={isFilterOpen}>
-                <FilterGroup title="Услуга" items={servicesData} type="usluga" />
                 <FilterGroup title="Категория" items={categoriesData} type="category" />
+                <FilterGroup title="Услуга" items={servicesData} type="usluga" />
                 <TechFilter title="Технология" matchedTechnologies={matchedTechnologies} />
             </CaseFilter>
         </section>
