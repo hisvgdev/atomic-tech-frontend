@@ -12,6 +12,7 @@ export const LastProjects: FC<LastProjectsProps> = async (props) => {
     if (!lastProject?.data) return null
 
     const { data } = lastProject
+
     return (
         <section data-dark="false">
             <div className="flex flex-col gap-6">

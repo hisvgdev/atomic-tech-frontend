@@ -54,7 +54,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                                         </div>
                                         <div className="flex flex-col">
                                             <h4 className="text-white text-xs font-bold">
-                                                {title}:
+                                                {name}:
                                             </h4>
                                             <p className="text-white text-xs font-normal max-w-80 truncate">
                                                 {description}
@@ -73,7 +73,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                             <CardTitle className="text-lg font-extrabold truncate -tracking-[0.075rem] lg:text-3xl">
                                 {title}
                             </CardTitle>
-                            <CardDescription className="font-medium text-black text-xs max-w-full truncate lg:text-sm">
+                            <CardDescription className="font-medium text-black text-xs line-clamp-2 lg:text-sm">
                                 {description}
                             </CardDescription>
                         </div>
