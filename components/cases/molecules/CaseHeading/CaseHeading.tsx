@@ -39,6 +39,7 @@ export const CaseHeading: FC<CaseHeadingProps> = (props) => {
                             e.stopPropagation()
                             handleSwitchFilter()
                         }}
+                        disabled={lengthOfCases <= 0}
                     >
                         <span className="font-bold text-sm">Настроить фильтры</span>
                         <SlidersHorizontalIcon size={20} color="#1C274C" weight="duotone" />
@@ -57,11 +58,13 @@ export const CaseHeading: FC<CaseHeadingProps> = (props) => {
                     </Button>
                 )}
             </div>
-            <CaseFilter ref={filterRef} isFilterOpen={isFilterOpen}>
-                <FilterGroup title="Категория" items={categoriesData} type="category" />
-                <FilterGroup title="Услуга" items={servicesData} type="usluga" />
-                <TechFilter title="Технология" matchedTechnologies={matchedTechnologies} />
-            </CaseFilter>
+            {lengthOfCases > 0 ? (
+                <CaseFilter ref={filterRef} isFilterOpen={isFilterOpen}>
+                    <FilterGroup title="Категория" items={categoriesData} type="category" />
+                    <FilterGroup title="Услуга" items={servicesData} type="usluga" />
+                    <TechFilter title="Технология" matchedTechnologies={matchedTechnologies} />
+                </CaseFilter>
+            ) : null}
         </section>
     )
 }
