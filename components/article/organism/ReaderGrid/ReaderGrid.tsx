@@ -12,12 +12,12 @@ import ReaderContent from '../../molecules/ReaderContent'
 import { ReaderGridProps } from './ReaderGrid.types'
 
 export const ReaderGrid: FC<ReaderGridProps> = (props) => {
-    const { caseItems, content, image } = props
+    const { caseItems, content, image, id } = props
 
     return (
         <>
             <div className="flex flex-col gap-20 px-3 lg:px-0">
-                <ReaderContent caseItems={caseItems} content={content} image={image} />
+                <ReaderContent caseItems={caseItems} content={content} image={image} id={id} />
                 {Array.isArray(caseItems) && caseItems.length > 0 ? (
                     <div className="flex flex-col gap-y-8">
                         <h2 className="text-4xl font-bold lg:text-5xl">Следующие темы</h2>
@@ -29,6 +29,7 @@ export const ReaderGrid: FC<ReaderGridProps> = (props) => {
                                     title={c.title}
                                     withTag
                                     tag="Бизнес"
+                                    classNames="w-full"
                                 />
                             ))}
                         </div>

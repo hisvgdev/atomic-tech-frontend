@@ -22,6 +22,8 @@ import 'swiper/css'
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react'
 import { A11y, Navigation, Pagination } from 'swiper/modules'
 
+import { cn } from '@/lib/utils'
+
 export const CaseGrid: FC<CaseGridProps> = (props) => {
     const { findedCase, relatedCase } = props
     const {
@@ -125,10 +127,24 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                     )}
                 </figure>
 
-                <section className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-start">
-                    <CaseTechnologySection technologies={technologies} />
-                    <CaseServiceSection subcategories={subcategories} />
-                    <CaseCategorySection categories={categories} />
+                <section
+                    className={cn(
+                        'flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-start',
+                        {
+                            'lg:justify-start':
+                                technologies.length < 1 ||
+                                subcategories.length < 1 ||
+                                categories.length < 1,
+                        },
+                    )}
+                >
+                    {technologies.length > 0 && (
+                        <CaseTechnologySection technologies={technologies} />
+                    )}
+                    {subcategories.length > 0 && (
+                        <CaseServiceSection subcategories={subcategories} />
+                    )}
+                    {categories.length > 0 && <CaseCategorySection categories={categories} />}
                 </section>
 
                 <section

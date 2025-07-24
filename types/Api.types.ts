@@ -16,6 +16,8 @@ export interface BaseQueryApiParamsProps {
   title?: string;
   name?: string;
   sort_by?: string;
+  search?: string;
+  page?: string;
   sort_direction?: 'asc' | 'desc'
 }
 

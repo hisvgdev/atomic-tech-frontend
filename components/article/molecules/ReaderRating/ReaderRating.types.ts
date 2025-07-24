@@ -1,1 +1,3 @@
-export interface ReaderRatingProps { }
+export interface ReaderRatingProps {
+  id: number;
+}

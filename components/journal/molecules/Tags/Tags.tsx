@@ -1,4 +1,4 @@
-import { getCategories } from '@/utils/api/categories/categories'
+import { getBlogCategories } from '@/utils/api/blogs/blog-categories/blog-categories'
 import React, { FC } from 'react'
 
 import { TAGS_DATA } from './Tags.constants'
@@ -6,7 +6,7 @@ import { TagsProps } from './Tags.types'
 
 export const Tags: FC<TagsProps> = async (props) => {
     const {} = props
-    const categories = await getCategories()
+    const categories = await getBlogCategories()
 
     if (!categories) return null
 
