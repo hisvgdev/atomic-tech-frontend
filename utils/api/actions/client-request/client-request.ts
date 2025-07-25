@@ -1,14 +1,12 @@
-'use server'
-
 export async function clientRequest(data: FormData): Promise<any> {
   try {
     const request = {
       email: data.get("email"),
-      tel: data.get("phone"),
+      tel: data.get("tel"),
       nickname: data.get("nickname")
     }
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/services`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/client-requests`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

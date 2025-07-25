@@ -27,9 +27,11 @@ export const LeaveRequest: FC<LeaveRequestProps> = (props) => {
         } as LeaveRequestPayload,
         onSubmit: async (data) => {
             const { email, phone, nickname } = data.value
+            const cleanedPhone = phone.replace(/[^\d+]/g, '')
+
             const formData = new FormData()
             formData.set('email', email)
-            formData.set('tel', phone)
+            formData.set('tel', cleanedPhone)
             formData.set('nickname', nickname as string)
 
             const promise = clientRequest(formData)
