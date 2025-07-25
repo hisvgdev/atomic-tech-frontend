@@ -1,5 +1,6 @@
 import { Grid } from '@/components/journal/organism/Grid'
 import { Metadata } from 'next'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
     title: 'Статьи',
@@ -36,5 +37,9 @@ export const metadata: Metadata = {
 }
 
 export default function Articles() {
-    return <Grid />
+    return (
+        <Suspense>
+            <Grid />
+        </Suspense>
+    )
 }

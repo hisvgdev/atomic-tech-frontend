@@ -1,7 +1,7 @@
 import type { BaseQueryApiParamsProps, BaseResponseApiProps } from "@/types/Api.types";
 import { buildQueryString } from "@/utils/buildQueryString/buildQueryString";
 
-interface BlogsResponse extends BaseResponseApiProps {
+interface JournalBlogsResponse extends BaseResponseApiProps {
   data: BlogsDataProps[]
 }
 
@@ -16,21 +16,21 @@ export interface BlogsDataProps {
   updated_at: string
 }
 
-export const getBlogs = async (query?: BaseQueryApiParamsProps): Promise<BlogsResponse | undefined> => {
+export const getJournalBlogs = async (query?: BaseQueryApiParamsProps): Promise<JournalBlogsResponse | undefined> => {
   try {
     const queryString = buildQueryString(query);
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/blogs${queryString}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/journal-blogs${queryString}`, {
       method: "GET",
       next: {
         revalidate: 10,
       }
     });
     if (!res.ok) {
-      throw new Error("Failed fetch to blogs");
+      throw new Error("Failed fetch to journal blogs");
     }
-    const blogs = await res.json();
-    return blogs;
+    const journalBlogs = await res.json();
+    return journalBlogs;
   } catch (error) {
     console.log(error);
   }
