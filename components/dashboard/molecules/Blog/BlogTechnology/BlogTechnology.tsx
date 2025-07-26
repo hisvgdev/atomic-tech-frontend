@@ -18,6 +18,9 @@ export const BlogTechnology: FC<BlogTechnologyProps> = async () => {
             icon: matchedTech?.icon,
         }
     })
+
+    if (matchedTechnologies.length <= 0) return null
+
     return (
         <div className="flex flex-col items-start gap-8 lg:gap-16 lg:flex-row">
             <h4 className="font-medium text-sm max-w-64 text-gray-600 lg:max-w-32">

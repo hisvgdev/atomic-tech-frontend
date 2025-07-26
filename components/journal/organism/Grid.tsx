@@ -25,6 +25,7 @@ export const Grid = () => {
         queryKey: ['journal-blogs'],
         queryFn: async () => await getJournalBlogs(),
     })
+
     if (isJournalDataLoading) {
         return (
             <div className="flex gap-8 flex-wrap items-center w-full">
