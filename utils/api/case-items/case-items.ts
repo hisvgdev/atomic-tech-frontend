@@ -11,7 +11,7 @@ export interface CaseItemsData {
   description: string
   year: number
   website_link: string
-  project_history: string
+  project_history: ProjectHistoryData
   categories: string[]
   subcategories: string[]
   technologies: TechnologyData[]
@@ -22,7 +22,10 @@ export interface CaseItemsData {
   updated_at: string
 }
 
-
+export interface ProjectHistoryData {
+  content: string[];
+  related_project_history_items: any[];
+}
 export interface TechnologyData {
   name: string;
   image: string;

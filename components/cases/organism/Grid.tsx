@@ -40,6 +40,7 @@ export const Grid = () => {
                 limit: 2,
                 offset: (currentPage - 1) * 2,
             }),
+        staleTime: 10000,
     })
 
     const { data: servicesData, isPending: isServicesPending } = useQuery({

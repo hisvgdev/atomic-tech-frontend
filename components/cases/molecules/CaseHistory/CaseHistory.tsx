@@ -15,7 +15,7 @@ export const CaseHistory: FC<CaseHistoryProps> = (props) => {
                         История проекта
                     </h2>
                     <div className="flex flex-col gap-y-12 text-white/50 font-medium text-base">
-                        <p dangerouslySetInnerHTML={{ __html: projectHistory }} />
+                        <p dangerouslySetInnerHTML={{ __html: projectHistory.content }} />
                     </div>
                 </div>
 
