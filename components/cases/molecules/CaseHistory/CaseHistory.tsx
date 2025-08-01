@@ -7,6 +7,7 @@ import { CaseHistoryProps } from './CaseHistory.types'
 
 export const CaseHistory: FC<CaseHistoryProps> = (props) => {
     const { projectHistory } = props
+    console.log(projectHistory)
     return (
         <section data-dark="true" className="w-full h-full bg-black rounded-[3.125rem] p-10">
             <div className="flex flex-col gap-24 lg:flex-row lg:items-start lg:justify-between">

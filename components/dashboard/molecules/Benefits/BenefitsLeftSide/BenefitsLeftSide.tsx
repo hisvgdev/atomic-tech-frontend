@@ -8,7 +8,7 @@ import { BenefitsLeftSideProps } from './BenefitsLeftSide.types'
 const mockMetrics = [
     {
         id: 'project',
-        value: '70',
+        value: '>70',
         content: 'Реализованных проектов',
     },
     {
@@ -30,10 +30,10 @@ const mockMetrics = [
 ]
 
 const gradientConfig: { [key: string]: string } = {
-    project: 'to bottom',
-    summary: 'to left',
-    client: 'to top',
-    experience: 'to bottom right',
+    project: '210.77% 210.77% at 49.9% 200%',
+    summary: '210.77% 210.77% at 49.9% 200%',
+    client: '210.77% 210.77% at 49.9% -110.77%',
+    experience: '210.77% 210.77% at 49.9% -110.77%',
 }
 
 export const BenefitsLeftSide: FC<BenefitsLeftSideProps> = () => {
@@ -50,30 +50,29 @@ export const BenefitsLeftSide: FC<BenefitsLeftSideProps> = () => {
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(index)}
                             style={{
-                                transition: 'border-color 0.3s ease',
                                 backgroundColor: '#090F10',
                             }}
                             animate={{
                                 boxShadow: isHovered ? '0 0 0 1px #676767' : 'none',
-                                gap: isHovered ? '2rem' : '1.5rem',
                             }}
                             transition={{ duration: 0.3 }}
-                            className="w-full h-full border border-white/20 p-8 rounded-[1.875rem] lg:border-none lg:p-12"
+                            className="relative w-full h-full p-8 rounded-[1.875rem] lg:p-12 overflow-hidden"
                         >
                             <motion.div
                                 className="absolute inset-0 z-10 brightness-125 rounded-[1.875rem] pointer-events-none"
                                 animate={{ opacity: isHovered ? 1 : 0 }}
                                 transition={{ duration: 0.3 }}
                                 style={{
-                                    background: `linear-gradient(${gradientAngle}, #00636F, #000809)`,
+                                    background: `radial-gradient(${gradientAngle}, #00080A 74.04%, #0085A6 89.42%, #A4EDFF 100%)`,
                                 }}
                             />
-                            <div className="flex flex-col items-start gap-2 relative z-20">
+
+                            <div className="flex flex-col items-start gap-2 relative z-30">
                                 <div className="flex items-end">
                                     <motion.h4
                                         className={`font-bold text-6xl -tracking-[0.3rem] transition-colors duration-300 lg:text-9xl ${
                                             isHovered
-                                                ? 'text-transparent bg-clip-text bg-gradient-to-b from-white via-[#BEBEBE] to-[#646464] bg-clip-text [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]'
+                                                ? 'text-transparent bg-clip-text bg-gradient-to-b from-white via-[#BEBEBE] to-[#646464] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]'
                                                 : 'text-white/50'
                                         }`}
                                     >

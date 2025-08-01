@@ -8,6 +8,7 @@ import BlogTechnology from './BlogTechnology'
 
 export const Blog: FC<BlogProps> = async () => {
     const topRated = await getTopRatedCasesItem()
+    console.log(topRated)
     if (!topRated) return null
     return (
         <section data-dark="false" className="flex flex-col gap-12">
