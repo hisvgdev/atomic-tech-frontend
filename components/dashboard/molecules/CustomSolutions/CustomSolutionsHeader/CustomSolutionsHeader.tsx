@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -17,13 +16,39 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useIsMobile } from '@/hooks/useMediaQuery'
 import Chip from '@/shared/global/Chip'
+import { addingReviews } from '@/utils/actions/reviews.action'
 import { getCategories } from '@/utils/api/categories/categories'
+import { useForm } from '@tanstack/react-form'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { FC, useCallback } from 'react'
+import toast from 'react-hot-toast'
 
+import { customSolutionReview, CustomSolutionReviewValidate } from './CustomSolutions.validate'
 import { CustomSolutionsHeaderProps } from './CustomSolutionsHeader.types'
+
+export interface CreateReviewInput {
+    name: string
+    company: string
+    rating: number
+    review_text: string
+    agreement_accepted: boolean
+}
+
+const handleSubmitReview = (requestBody: CreateReviewInput) => {
+    try {
+        const promise = addingReviews(requestBody)
+        toast.promise(promise, {
+            success: 'Вы успешно отправили свой отзыв!',
+            loading: 'Подождите минутку мы отправляем ваш отзыв!',
+            error: 'Произошла ошибка при отправке вашего отзыва, попробуй еще раз или обратитесь в тех.поддержку',
+        })
+        return promise
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => {
     const {} = props
@@ -45,6 +70,22 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
         },
         [searchParams],
     )
+
+    const form = useForm({
+        validators: {
+            onChange: customSolutionReview,
+        },
+        defaultValues: {
+            name: 'Константин Зубровски',
+            company: 'Солвит',
+            rating: 5,
+            review_text: 'Отличный сервис! Все было сделано качественно и в срок.',
+            agreement_accepted: true,
+        } as CustomSolutionReviewValidate,
+        onSubmit: (data) => {
+            handleSubmitReview(data.value)
+        },
+    })
 
     return !isMobile ? (
         <>
@@ -80,13 +121,18 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                             </div>
                         </div>
                         <Dialog>
-                            <form>
-                                <DialogTrigger asChild>
-                                    <Button className="border bg-transparent rounded-full py-6 px-8 text-lg font-medium flex items-center gap-2 cursor-pointer text-black hover:bg-transparent">
-                                        Добавить отзыв <span className="text-xl">+</span>
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent className="sm:max-w-md">
+                            <DialogTrigger asChild>
+                                <Button className="border bg-transparent rounded-full py-6 px-8 text-lg font-medium flex items-center gap-2 cursor-pointer text-black hover:bg-transparent">
+                                    Добавить отзыв <span className="text-xl">+</span>
+                                </Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-md">
+                                <form
+                                    onSubmit={(e) => {
+                                        e.preventDefault()
+                                        form.handleSubmit()
+                                    }}
+                                >
                                     <DialogHeader>
                                         <DialogTitle>Добавить свой отзыв</DialogTitle>
                                         <DialogDescription>
@@ -99,59 +145,160 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                                     <div className="grid gap-4">
                                         <div className="grid gap-3">
                                             <Label htmlFor="name">Имя</Label>
-                                            <Input
-                                                id="name"
-                                                name="name"
-                                                defaultValue="Константин Зубровский"
-                                            />
+                                            <form.Field name="name">
+                                                {(field) => (
+                                                    <>
+                                                        <Input
+                                                            id="name"
+                                                            name={field.name}
+                                                            value={field.state.value}
+                                                            onChange={(e) =>
+                                                                field.handleChange(e.target.value)
+                                                            }
+                                                        />
+                                                        {field.state.meta.errors && (
+                                                            <span className="text-red-500 text-xs">
+                                                                {
+                                                                    field.state.meta.errors[0]
+                                                                        ?.message
+                                                                }
+                                                            </span>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </form.Field>
                                         </div>
                                         <div className="grid gap-3">
                                             <Label htmlFor="company">Компания</Label>
-                                            <Input
-                                                id="company"
-                                                name="company"
-                                                defaultValue="Солвит"
-                                            />
+                                            <form.Field name="company">
+                                                {(field) => (
+                                                    <>
+                                                        <Input
+                                                            id="company"
+                                                            name={field.name}
+                                                            value={field.state.value}
+                                                            onChange={(e) =>
+                                                                field.handleChange(e.target.value)
+                                                            }
+                                                        />
+                                                        {field.state.meta.errors && (
+                                                            <span className="text-red-500 text-xs">
+                                                                {
+                                                                    field.state.meta.errors[0]
+                                                                        ?.message
+                                                                }
+                                                            </span>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </form.Field>
                                         </div>
                                         <div className="grid gap-3">
                                             <Label htmlFor="rating">Оценка</Label>
-                                            <Input
-                                                type="number"
-                                                min={1}
-                                                max={5}
-                                                id="rating"
-                                                name="rating"
-                                                defaultValue="5"
-                                            />
+                                            <form.Field name="rating">
+                                                {(field) => (
+                                                    <>
+                                                        <Input
+                                                            type="number"
+                                                            min={1}
+                                                            max={5}
+                                                            id="rating"
+                                                            name={field.name}
+                                                            defaultValue="5"
+                                                            onChange={(e) =>
+                                                                field.handleChange(
+                                                                    e.target.valueAsNumber,
+                                                                )
+                                                            }
+                                                        />
+                                                        {field.state.meta.errors && (
+                                                            <span className="text-red-500 text-xs">
+                                                                {
+                                                                    field.state.meta.errors[0]
+                                                                        ?.message
+                                                                }
+                                                            </span>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </form.Field>
                                         </div>
                                         <div className="grid gap-3">
-                                            <Label htmlFor="feedback">Ваш отзыв</Label>
-                                            <Textarea
-                                                maxLength={500}
-                                                minLength={20}
-                                                id="feedback"
-                                                name="feedback"
-                                            />
+                                            <Label htmlFor="review_text">Ваш отзыв</Label>
+                                            <form.Field name="review_text">
+                                                {(field) => (
+                                                    <>
+                                                        <Textarea
+                                                            id="review_text"
+                                                            maxLength={500}
+                                                            minLength={20}
+                                                            value={field.state.value}
+                                                            name={field.name}
+                                                            onChange={(e) =>
+                                                                field.handleChange(e.target.value)
+                                                            }
+                                                        />
+                                                        {field.state.meta.errors && (
+                                                            <span className="text-red-500 text-xs">
+                                                                {
+                                                                    field.state.meta.errors[0]
+                                                                        ?.message
+                                                                }
+                                                            </span>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </form.Field>
                                         </div>
-                                        <div className="flex items-center gap-3">
-                                            <Checkbox
-                                                id="checkbox"
-                                                name="checkbox"
-                                                defaultChecked
-                                            />
-                                            <p className="text-xs">
-                                                Даю согласие на публикацию своего отзыва
-                                            </p>
-                                        </div>
+                                        <form.Field name="agreement_accepted">
+                                            {(field) => (
+                                                <div className="flex flex-col gap-2">
+                                                    <div className="flex items-center gap-3">
+                                                        <Checkbox
+                                                            id="checkbox"
+                                                            checked={field.state.value}
+                                                            onCheckedChange={(checked) =>
+                                                                field.handleChange(Boolean(checked))
+                                                            }
+                                                        />
+                                                        <Label
+                                                            htmlFor="checkbox"
+                                                            className="text-xs cursor-pointer"
+                                                        >
+                                                            Даю согласие на публикацию своего отзыва
+                                                        </Label>
+                                                    </div>
+                                                    {field.state.meta.errors && (
+                                                        <span className="text-red-500 text-xs">
+                                                            {field.state.meta.errors[0]?.message}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </form.Field>
                                     </div>
                                     <DialogFooter>
-                                        <DialogClose asChild>
-                                            <Button variant="outline">Отменить</Button>
-                                        </DialogClose>
-                                        <Button type="submit">Сохранить изменения</Button>
+                                        <form.Subscribe
+                                            selector={(state) => [
+                                                state.canSubmit,
+                                                state.isSubmitting,
+                                            ]}
+                                        >
+                                            {([canSubmit, isSubmitting]) => (
+                                                <Button
+                                                    type="submit"
+                                                    disabled={!canSubmit}
+                                                    className="cursor-pointer p-6 rounded-full mt-4 w-full"
+                                                >
+                                                    {isSubmitting
+                                                        ? 'Отправляем ваш отзыв...'
+                                                        : 'Отправить отзыв'}
+                                                </Button>
+                                            )}
+                                        </form.Subscribe>
                                     </DialogFooter>
-                                </DialogContent>
-                            </form>
+                                </form>
+                            </DialogContent>
                         </Dialog>
                     </div>
                 </div>
@@ -186,13 +333,18 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                 </div>
                 <div className="h-full">
                     <Dialog>
-                        <form>
-                            <DialogTrigger asChild>
-                                <Button className="border bg-transparent rounded-full py-6 px-8 text-lg font-medium flex items-center gap-2 cursor-pointer text-black hover:bg-transparent">
-                                    Добавить отзыв <span className="text-xl">+</span>
-                                </Button>
-                            </DialogTrigger>
-                            <DialogContent className="sm:max-w-md">
+                        <DialogTrigger asChild>
+                            <Button className="border bg-transparent rounded-full py-6 px-8 text-lg font-medium flex items-center gap-2 cursor-pointer text-black hover:bg-transparent">
+                                Добавить отзыв <span className="text-xl">+</span>
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-md">
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault()
+                                    form.handleSubmit()
+                                }}
+                            >
                                 <DialogHeader>
                                     <DialogTitle>Добавить свой отзыв</DialogTitle>
                                     <DialogDescription>
@@ -204,51 +356,145 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                                 <div className="grid gap-4">
                                     <div className="grid gap-3">
                                         <Label htmlFor="name">Имя</Label>
-                                        <Input
-                                            id="name"
-                                            name="name"
-                                            defaultValue="Константин Зубровский"
-                                        />
+                                        <form.Field name="name">
+                                            {(field) => (
+                                                <>
+                                                    <Input
+                                                        id="name"
+                                                        name={field.name}
+                                                        value={field.state.value}
+                                                        onChange={(e) =>
+                                                            field.handleChange(e.target.value)
+                                                        }
+                                                    />
+                                                    {field.state.meta.errors && (
+                                                        <span className="text-red-500 text-xs">
+                                                            {field.state.meta.errors[0]?.message}
+                                                        </span>
+                                                    )}
+                                                </>
+                                            )}
+                                        </form.Field>
                                     </div>
                                     <div className="grid gap-3">
                                         <Label htmlFor="company">Компания</Label>
-                                        <Input id="company" name="company" defaultValue="Солвит" />
+                                        <form.Field name="company">
+                                            {(field) => (
+                                                <>
+                                                    <Input
+                                                        id="company"
+                                                        name={field.name}
+                                                        value={field.state.value}
+                                                        onChange={(e) =>
+                                                            field.handleChange(e.target.value)
+                                                        }
+                                                    />
+                                                    {field.state.meta.errors && (
+                                                        <span className="text-red-500 text-xs">
+                                                            {field.state.meta.errors[0]?.message}
+                                                        </span>
+                                                    )}
+                                                </>
+                                            )}
+                                        </form.Field>
                                     </div>
                                     <div className="grid gap-3">
                                         <Label htmlFor="rating">Оценка</Label>
-                                        <Input
-                                            type="number"
-                                            min={1}
-                                            max={5}
-                                            id="rating"
-                                            name="rating"
-                                            defaultValue="5"
-                                        />
+                                        <form.Field name="rating">
+                                            {(field) => (
+                                                <>
+                                                    <Input
+                                                        type="number"
+                                                        min={1}
+                                                        max={5}
+                                                        id="rating"
+                                                        name={field.name}
+                                                        defaultValue="5"
+                                                        onChange={(e) =>
+                                                            field.handleChange(
+                                                                e.target.valueAsNumber,
+                                                            )
+                                                        }
+                                                    />
+                                                    {field.state.meta.errors && (
+                                                        <span className="text-red-500 text-xs">
+                                                            {field.state.meta.errors[0]?.message}
+                                                        </span>
+                                                    )}
+                                                </>
+                                            )}
+                                        </form.Field>
                                     </div>
                                     <div className="grid gap-3">
-                                        <Label htmlFor="feedback">Ваш отзыв</Label>
-                                        <Textarea
-                                            maxLength={500}
-                                            minLength={20}
-                                            id="feedback"
-                                            name="feedback"
-                                        />
+                                        <Label htmlFor="review_text">Ваш отзыв</Label>
+                                        <form.Field name="review_text">
+                                            {(field) => (
+                                                <>
+                                                    <Textarea
+                                                        id="review_text"
+                                                        maxLength={500}
+                                                        minLength={20}
+                                                        value={field.state.value}
+                                                        name={field.name}
+                                                        onChange={(e) =>
+                                                            field.handleChange(e.target.value)
+                                                        }
+                                                    />
+                                                    {field.state.meta.errors && (
+                                                        <span className="text-red-500 text-xs">
+                                                            {field.state.meta.errors[0]?.message}
+                                                        </span>
+                                                    )}
+                                                </>
+                                            )}
+                                        </form.Field>
                                     </div>
-                                    <div className="flex items-center gap-3">
-                                        <Checkbox id="checkbox" name="checkbox" defaultChecked />
-                                        <p className="text-xs">
-                                            Даю согласие на публикацию своего отзыва
-                                        </p>
-                                    </div>
+                                    <form.Field name="agreement_accepted">
+                                        {(field) => (
+                                            <div className="flex flex-col gap-2">
+                                                <div className="flex items-center gap-3">
+                                                    <Checkbox
+                                                        id="checkbox"
+                                                        checked={field.state.value}
+                                                        onCheckedChange={(checked) =>
+                                                            field.handleChange(Boolean(checked))
+                                                        }
+                                                    />
+                                                    <Label
+                                                        htmlFor="checkbox"
+                                                        className="text-xs cursor-pointer"
+                                                    >
+                                                        Даю согласие на публикацию своего отзыва
+                                                    </Label>
+                                                </div>
+                                                {field.state.meta.errors && (
+                                                    <span className="text-red-500 text-xs">
+                                                        {field.state.meta.errors[0]?.message}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        )}
+                                    </form.Field>
                                 </div>
                                 <DialogFooter>
-                                    <DialogClose asChild>
-                                        <Button variant="outline">Отменить</Button>
-                                    </DialogClose>
-                                    <Button type="submit">Сохранить изменения</Button>
+                                    <form.Subscribe
+                                        selector={(state) => [state.canSubmit, state.isSubmitting]}
+                                    >
+                                        {([canSubmit, isSubmitting]) => (
+                                            <Button
+                                                type="submit"
+                                                disabled={!canSubmit}
+                                                className="cursor-pointer mt-4 w-full"
+                                            >
+                                                {isSubmitting
+                                                    ? 'Отправляем ваш отзыв...'
+                                                    : 'Отправить отзыв'}
+                                            </Button>
+                                        )}
+                                    </form.Subscribe>
                                 </DialogFooter>
-                            </DialogContent>
-                        </form>
+                            </form>
+                        </DialogContent>
                     </Dialog>
                 </div>
             </div>
