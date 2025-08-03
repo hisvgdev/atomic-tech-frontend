@@ -81,7 +81,7 @@ export const BenefitsLeftSide: FC<BenefitsLeftSideProps> = () => {
 
                                     {item.additionalValue && (
                                         <span
-                                            className={`font-bold ${!isHovered ? 'text-white/50' : 'text-white'} lg:pb-2 ${
+                                            className={`font-bold ${!isHovered ? 'text-white/50' : 'text-white'} lg:pb-2 lg:text-2xl ${
                                                 isHovered
                                                     ? 'text-transparent bg-clip-text bg-gradient-to-b from-white via-[#BEBEBE] to-[#646464] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]'
                                                     : 'text-white/50'

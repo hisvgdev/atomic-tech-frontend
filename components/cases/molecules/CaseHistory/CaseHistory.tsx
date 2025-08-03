@@ -1,13 +1,17 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { BookOpenIcon } from '@phosphor-icons/react/dist/ssr'
 import { ArrowRight } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 import React, { FC } from 'react'
 
 import { CaseHistoryProps } from './CaseHistory.types'
 
 export const CaseHistory: FC<CaseHistoryProps> = (props) => {
     const { projectHistory } = props
-    console.log(projectHistory)
+    const randomizeRelatedCaseItems = [...projectHistory.related_project_history_items].sort(
+        () => 0.5 - Math.random(),
+    )
     return (
         <section data-dark="true" className="w-full h-full bg-black rounded-[3.125rem] p-10">
             <div className="flex flex-col gap-24 lg:flex-row lg:items-start lg:justify-between">
@@ -32,24 +36,37 @@ export const CaseHistory: FC<CaseHistoryProps> = (props) => {
                         <ArrowRight />
                     </button>
 
-                    {[1, 2].map((_, i) => (
+                    {randomizeRelatedCaseItems.slice(0, 2).map((c, i) => (
                         <Card
                             key={i}
                             className="border-none shadow-none h-96 bg-[#1D1D1D] rounded-4xl flex flex-col justify-between"
                         >
                             <CardHeader>
                                 <CardTitle>
-                                    <div className="bg-black w-full rounded-2xl h-48" />
+                                    {c.photos.length > 0 ? (
+                                        <Image
+                                            src={c.photos[0]}
+                                            alt={`${c.title}-image`}
+                                            className="w-full rounded-2xl h-48 object-cover"
+                                            width={320}
+                                            height={180}
+                                        />
+                                    ) : (
+                                        <div className="bg-black w-full rounded-2xl h-48" />
+                                    )}
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <h4 className="font-semibold text-white">
-                                    Wordpress — это быстро? Но что если мы расскажем вам о новых.
-                                </h4>
+                                <Link
+                                    href={`/cases/${c.id}`}
+                                    className="font-semibold text-white line-clamp-2 hover:underline"
+                                >
+                                    {c.description}
+                                </Link>
                             </CardContent>
                             <CardFooter>
                                 <time className="text-gray-300 font-light text-sm leading-6">
-                                    2025-06-08
+                                    {String(c.year)}
                                 </time>
                             </CardFooter>
                         </Card>

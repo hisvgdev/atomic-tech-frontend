@@ -10,7 +10,7 @@ export const Benefits = () => {
                 Масштабируем бизнес через IT
             </h1>
             <div className="w-full bg-black p-4 rounded-[3.125rem] lg:py-[7.75rem] lg:px-[5.18rem]">
-                <div className="grid grid-cols-1 gap-14 lg:flex lg:justify-between lg:items-center">
+                <div className="grid grid-cols-1 gap-14 lg:flex lg:justify-evenly lg:items-center">
                     <BenefitsLeftSide />
                     <BenefitsRightSide />
                 </div>
