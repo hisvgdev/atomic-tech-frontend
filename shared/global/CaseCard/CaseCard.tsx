@@ -46,7 +46,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                             destinations.map(({ name, description }, indxBdg) => (
                                 <div
                                     key={`${indxBdg}-${name}`}
-                                    className="bg-[#1C274C] w-auto rounded-full py-2.5 px-3 lg:min-w-80"
+                                    className="bg-[#1C274C] w-auto rounded-full py-2.5 px-3"
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className="p-1 bg-white rounded-full flex items-center justify-center">
