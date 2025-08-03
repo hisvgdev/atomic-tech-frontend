@@ -42,15 +42,16 @@ export const ReaderGrid: FC<ReaderGridProps> = (props) => {
                         </div>
                         <div className="flex flex-col gap-8 lg:hidden">
                             <SwiperRowLayout>
-                                {Array.from({ length: 4 }).map((_, indx) => (
-                                    <SwiperSlide key={indx}>
-                                        <ArticleCard
-                                            imgCover={coverImage}
-                                            title="Как создать уникальное приложение всего за 4 месяца ?"
-                                            withTag
-                                            tag="Бизнес"
-                                        />
-                                    </SwiperSlide>
+                                {caseItems.map((c, i) => (
+                                    <ArticleCard
+                                        key={i}
+                                        imgCover={coverImage}
+                                        title={c.title}
+                                        href={`/cases/${c.id}`}
+                                        withTag
+                                        tag="Бизнес"
+                                        classNames="w-full"
+                                    />
                                 ))}
                             </SwiperRowLayout>
                         </div>
