@@ -49,7 +49,7 @@ export const Footer = () => {
 
     return (
         <footer className="mt-auto">
-            <div className="mt-4 bg-black py-6 px-8 w-full rounded-t-[3.125rem]  lg:rounded-[3.125rem] lg:mb-6 lg:mx-4 lg:mt-16">
+            <div className="mt-4 bg-black py-6 px-8 max-w-8xl rounded-t-[3.125rem]  lg:rounded-[3.125rem] lg:mb-6 lg:mx-4 lg:mt-16">
                 <div className="w-full flex flex-col lg:flex-row lg:justify-between">
                     <div className="flex flex-col gap-y-20">
                         <div className="grid grid-cols-2 gap-x-8 gap-y-6 pb-24 lg:pb-0">
