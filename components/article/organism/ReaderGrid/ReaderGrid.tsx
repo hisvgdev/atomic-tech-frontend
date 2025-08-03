@@ -12,7 +12,7 @@ import ReaderContent from '../../molecules/ReaderContent'
 import { ReaderGridProps } from './ReaderGrid.types'
 
 export const ReaderGrid: FC<ReaderGridProps> = (props) => {
-    const { caseItems, content, image, id, ratingsCount } = props
+    const { caseItems, content, image, id, ratingsCount, relatedBlogs } = props
 
     return (
         <>
@@ -23,6 +23,7 @@ export const ReaderGrid: FC<ReaderGridProps> = (props) => {
                     ratingsCount={ratingsCount}
                     image={image}
                     id={id}
+                    relatedBlogs={relatedBlogs}
                 />
                 {Array.isArray(caseItems) && caseItems.length > 0 ? (
                     <div className="flex flex-col gap-y-8">

@@ -45,7 +45,7 @@ export const Grid = () => {
     if (isJournalDataError) {
         return <div>Error of the get journal data. Check the devtools</div>
     }
-
+    console.log(journalData)
     return (
         <div className="flex flex-col gap-y-24 overflow-y-auto px-2 lg:px-0">
             <NewSection />

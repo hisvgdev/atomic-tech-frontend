@@ -10,6 +10,7 @@ type Props = {
 export default async function Article({ params }: Props) {
     const { articleId } = await params
     const blog = await getBlog(articleId)
+
     if (!blog) return null
     return <Reader blog={blog} />
 }

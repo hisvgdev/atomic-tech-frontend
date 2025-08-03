@@ -19,6 +19,7 @@ export const Reader: FC<ReaderProps> = (props) => {
         views,
         average_rating,
         ratings_count,
+        related_blogs,
     } = blog.data
 
     return (
@@ -35,6 +36,7 @@ export const Reader: FC<ReaderProps> = (props) => {
                 content={content}
                 ratingsCount={average_rating - 1}
                 image={image}
+                relatedBlogs={related_blogs}
                 id={id}
             />
         </div>

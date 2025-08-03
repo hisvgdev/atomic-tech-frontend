@@ -17,6 +17,10 @@ export interface BlogsDataProps {
   case_items: string[]
   created_at: string
   updated_at: string
+  related_blogs: {
+    id: number;
+    title: string;
+  }[]
 }
 
 export const getBlogs = async (query?: BaseQueryApiParamsProps): Promise<BlogsResponse | undefined> => {

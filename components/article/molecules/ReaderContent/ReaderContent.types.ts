@@ -4,4 +4,8 @@ export interface ReaderContentProps {
   image?: string;
   ratingsCount?: number;
   id: number;
+  relatedBlogs: {
+    id: number;
+    title: string;
+  }[]
 }

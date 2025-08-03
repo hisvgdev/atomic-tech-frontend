@@ -1,12 +1,13 @@
 import coverImage from '@/public/assets/images/projects/secondProject.png'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { FC } from 'react'
 
 import ReaderRating from '../ReaderRating'
 import { ReaderContentProps } from './ReaderContent.types'
 
 export const ReaderContent: FC<ReaderContentProps> = (props) => {
-    const { caseItems, content, image, id, ratingsCount } = props
+    const { caseItems, content, image, id, ratingsCount, relatedBlogs } = props
 
     return (
         <div className="flex justify-center w-full">
@@ -20,7 +21,10 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                         'Что ещё умеет Tilda',
                         'Коротко о главном',
                     ].map((item, indx) => (
-                        <span key={`${indx}-${item}`} className="font-normal text-[#737373]">
+                        <span
+                            key={`${indx}-${item}`}
+                            className="font-normal text-[#737373] cursor-pointer hover:underline transition-all"
+                        >
                             {item}
                         </span>
                     ))}
@@ -40,26 +44,24 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                     />
                     <ReaderRating id={id} ratingsCount={ratingsCount || 0} />
                 </div>
-
-                <div className="hidden lg:flex max-w-1/6 flex-col gap-y-2 ">
-                    <h4 className="font-semibold text-base">Также по теме:</h4>
-                    <ul className="text-base text-[#737373] list-none pl-0.5 flex flex-col gap-y-4">
-                        {[
-                            '5 лучших конструкторов сайтов для быстрого старта',
-                            'Просто текст заголовка',
-                            'А это непросто текст заголовка',
-                        ].map((itemList, indx) => {
-                            return (
-                                <li
-                                    key={`${indx}-${itemList}`}
-                                    className="text-[#737373] underline"
-                                >
-                                    {itemList}
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
+                {relatedBlogs.length > 0 ? (
+                    <div className="hidden lg:flex max-w-1/6 flex-col gap-y-2 ">
+                        <h4 className="font-semibold text-base">Также по теме:</h4>
+                        <ul className="text-base text-[#737373] list-none pl-0.5 flex flex-col gap-y-4">
+                            {relatedBlogs.map((itemBlogs, idx) => {
+                                return (
+                                    <Link
+                                        key={`${idx}-${itemBlogs}`}
+                                        className="text-[#737373] hover:underline transition-all"
+                                        href={`/articles/${itemBlogs.id}`}
+                                    >
+                                        {itemBlogs.title}
+                                    </Link>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                ) : null}
             </div>
         </div>
     )
