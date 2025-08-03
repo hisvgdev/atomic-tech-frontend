@@ -1,4 +1,3 @@
-import BannerWithTags from '@/shared/global/BannerWithTags'
 import { FC } from 'react'
 
 import ReaderHeading from '../molecules/ReaderHeading'
@@ -7,12 +6,35 @@ import ReaderGrid from './ReaderGrid'
 
 export const Reader: FC<ReaderProps> = (props) => {
     const { blog } = props
-    const { title, case_items, content, description, image, updated_at, created_at, id } = blog.data
+    const {
+        title,
+        case_items,
+        content,
+        description,
+        image,
+        updated_at,
+        created_at,
+        id,
+        views,
+        average_rating,
+        ratings_count,
+    } = blog.data
     return (
         <div className="flex flex-col gap-y-8 overflow-y-auto">
-            <ReaderHeading title={title} description={description} updatedAt={updated_at} />
+            <ReaderHeading
+                title={title}
+                views={views}
+                description={description}
+                updatedAt={updated_at}
+            />
             <hr />
-            <ReaderGrid caseItems={case_items} content={content} image={image} id={id} />
+            <ReaderGrid
+                caseItems={case_items}
+                content={content}
+                ratingsCount={ratings_count}
+                image={image}
+                id={id}
+            />
         </div>
     )
 }

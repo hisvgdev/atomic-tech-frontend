@@ -2,5 +2,6 @@ export interface ReaderContentProps {
   caseItems?: any[];
   content?: string;
   image?: string;
+  ratingsCount?: number;
   id: number;
 }

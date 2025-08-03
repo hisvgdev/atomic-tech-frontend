@@ -3,4 +3,5 @@ export interface ReaderGridProps {
   content?: string;
   image?: string;
   id: number;
+  ratingsCount?: number;
 }

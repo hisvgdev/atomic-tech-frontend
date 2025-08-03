@@ -6,7 +6,7 @@ import ReaderRating from '../ReaderRating'
 import { ReaderContentProps } from './ReaderContent.types'
 
 export const ReaderContent: FC<ReaderContentProps> = (props) => {
-    const { caseItems, content, image, id } = props
+    const { caseItems, content, image, id, ratingsCount } = props
 
     return (
         <div className="flex justify-center w-full">
@@ -38,7 +38,7 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                         className="font-medium text-base text-start"
                         dangerouslySetInnerHTML={{ __html: content as string }}
                     />
-                    <ReaderRating id={id} />
+                    <ReaderRating id={id} ratingsCount={ratingsCount || 0} />
                 </div>
 
                 <div className="hidden lg:flex max-w-1/6 flex-col gap-y-2 ">

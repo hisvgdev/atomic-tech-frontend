@@ -23,10 +23,10 @@ const handleRating = async (blog_id: number, rating: number) => {
 }
 
 export const ReaderRating: FC<ReaderRatingProps> = (props) => {
-    const { id } = props
+    const { id, ratingsCount } = props
 
     const [hoverIndex, setHoverIndex] = useState<number | null>(null)
-    const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(ratingsCount || null)
 
     const handleClick = async (index: number) => {
         setSelectedIndex(index)

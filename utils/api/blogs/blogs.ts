@@ -11,6 +11,9 @@ export interface BlogsDataProps {
   description: string
   content: string
   image: string;
+  views: number;
+  average_rating: number;
+  ratings_count: number;
   case_items: string[]
   created_at: string
   updated_at: string

@@ -5,7 +5,7 @@ import React, { FC } from 'react'
 import { ReaderHeadingProps } from './ReaderHeading.types'
 
 export const ReaderHeading: FC<ReaderHeadingProps> = (props) => {
-    const { title, description, updatedAt } = props
+    const { title, description, updatedAt, views } = props
     return (
         <div className="flex flex-col gap-y-2.5 px-3 lg:px-0">
             {/* Back button */}
@@ -25,7 +25,7 @@ export const ReaderHeading: FC<ReaderHeadingProps> = (props) => {
                 </span>
                 <div className="flex items-center">
                     <EyeIcon color="#737373" />
-                    <span className="text-[#737373] font-normal text-base">16K</span>
+                    <span className="text-[#737373] font-normal text-base">{views || 0}</span>
                 </div>
                 <div className="rounded-full border border-[#E6E6E6] text-black py-2 px-5">
                     <span className="text-sm font-medium">Гайды</span>
