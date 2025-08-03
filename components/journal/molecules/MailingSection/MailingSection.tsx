@@ -31,7 +31,7 @@ export const MailingSection: FC<MailingSectionProps> = (props) => {
             data-dark="true"
             className="w-full p-8 rounded-[1.875rem] bg-gradient-main mt-14 lg:p-16"
         >
-            <div className="flex flex-col-reverse gap-8 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center gap-8 lg:gap-0 lg:flex-row lg:items-center lg:justify-center">
                 <div className="flex flex-col gap-9 w-full lg:max-w-3xl">
                     <h1 className="font-bold text-4xl lg:text-5xl">
                         <span className="text-white/80">«PRO</span>
@@ -121,7 +121,7 @@ export const MailingSection: FC<MailingSectionProps> = (props) => {
                         </div>
                     </form>
                 </div>
-                <div className="bg-white w-full h-80 rounded-3xl lg:w-1/4" />
+                {/* <div className="bg-white w-full h-80 rounded-3xl lg:w-1/4" /> */}
             </div>
         </section>
     )
