@@ -88,7 +88,7 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
                             key={indx}
                             title={item.title}
                             date={item.created_at}
-                            rating={3}
+                            rating={item.ratings_count}
                             href={`/articles/${String(item.id)}`}
                             tag="SEO"
                             ratingPosition="bottom"

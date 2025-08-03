@@ -1,5 +1,3 @@
-import BannerWithTags from '@/shared/global/BannerWithTags'
-
 import ArticlesCards from '../molecules/ArticlesCards'
 
 export const Grid = () => {

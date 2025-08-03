@@ -15,5 +15,6 @@ export const blogRating = async (data: { blog_id: number, rating: number; }): Pr
     return result;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 }

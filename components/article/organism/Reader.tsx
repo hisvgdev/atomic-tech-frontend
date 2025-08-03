@@ -6,6 +6,7 @@ import ReaderGrid from './ReaderGrid'
 
 export const Reader: FC<ReaderProps> = (props) => {
     const { blog } = props
+
     const {
         title,
         case_items,
@@ -19,6 +20,7 @@ export const Reader: FC<ReaderProps> = (props) => {
         average_rating,
         ratings_count,
     } = blog.data
+
     return (
         <div className="flex flex-col gap-y-8 overflow-y-auto">
             <ReaderHeading
@@ -31,7 +33,7 @@ export const Reader: FC<ReaderProps> = (props) => {
             <ReaderGrid
                 caseItems={case_items}
                 content={content}
-                ratingsCount={ratings_count}
+                ratingsCount={average_rating - 1}
                 image={image}
                 id={id}
             />
