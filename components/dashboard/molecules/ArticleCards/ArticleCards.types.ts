@@ -1,5 +1,5 @@
-import { TopRatedCasesItemResponse } from "@/utils/api/top-rated-cases/top-rated-cases.api";
+import { BlogsDataProps } from "@/utils/api/blogs/blogs";
 
 export interface ArticleCardsProps {
-  topRated: TopRatedCasesItemResponse
+  journalData: BlogsDataProps[]
 }

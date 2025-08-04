@@ -15,7 +15,7 @@ export const Banner: FC<BannerProps> = (props) => {
                                 <span className="text-white">GER</span>
                             </h1>
                             <p className="font-semibold text-base text-white">
-                                IT {title} <br /> от Atomic Code
+                                IT {title} <br /> от Atomic Tech
                             </p>
                         </div>
                     </div>
@@ -30,7 +30,7 @@ export const Banner: FC<BannerProps> = (props) => {
                                 <span className="text-white">GER</span>
                             </h1>
                             <p className="font-semibold  text-sm text-white lg:text-base">
-                                IT {title} <br /> от Atomic Code
+                                IT {title} <br /> от Atomic Tech
                             </p>
                         </div>
                     </div>

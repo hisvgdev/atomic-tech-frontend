@@ -37,7 +37,7 @@ const mockDataCards = [
 ]
 
 export const ArticleCards: FC<ArticleCardsProps> = (props) => {
-    const { topRated } = props
+    const { journalData } = props
     return (
         <>
             <div className="flex w-full flex-col gap-8 lg:hidden">
