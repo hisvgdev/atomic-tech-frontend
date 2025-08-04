@@ -12,7 +12,10 @@ import { ArticleCardsProps } from './ArticleCards.types'
 
 import 'swiper/css'
 
+import { Skeleton } from '@/components/ui/skeleton'
 import GradientButton from '@/shared/custom/GradientButton'
+import { getTopRatedCasesItem } from '@/utils/api/top-rated-cases/top-rated-cases.api'
+import { useQuery } from '@tanstack/react-query'
 import { Pagination } from 'swiper/modules'
 
 const mockDataCards = [
@@ -37,7 +40,43 @@ const mockDataCards = [
 ]
 
 export const ArticleCards: FC<ArticleCardsProps> = (props) => {
-    const { journalData } = props
+    const {} = props
+
+    const {
+        data: topRelatedData,
+        isLoading: isTopRelatedDataLoading,
+        isError: isTopRelatedDataError,
+    } = useQuery({
+        queryKey: ['top-related-case'],
+        queryFn: async () => {
+            const randomOffset = Math.floor(Math.random() * 7)
+            return await getTopRatedCasesItem({
+                limit: 3,
+                offset: randomOffset,
+            })
+        },
+    })
+
+    if (isTopRelatedDataLoading) {
+        return (
+            <div className="flex gap-8 flex-wrap items-center w-auto">
+                {Array.from({ length: 3 }).map((_, idx) => (
+                    <div key={idx} className="flex flex-col space-y-3">
+                        <Skeleton className="h-72 w-xs rounded-xl" />
+                        <div className="space-y-2">
+                            <Skeleton className="h-4 w-56" />
+                            <Skeleton className="h-4 w-48" />
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
+    if (isTopRelatedDataError) {
+        return <div>Error of the get journal data. Check the devtools</div>
+    }
+    console.log(topRelatedData)
     return (
         <>
             <div className="flex w-full flex-col gap-8 lg:hidden">
