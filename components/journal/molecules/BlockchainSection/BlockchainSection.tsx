@@ -7,16 +7,16 @@ import React, { FC } from 'react'
 import { SwiperSlide } from 'swiper/react'
 
 import Heading from '../Heading'
-import { EmailSectionProps } from './EmailSection.types'
+import { BlockchainSectionProps } from './BlockchainSection.types'
 
-export const EmailSection: FC<EmailSectionProps> = (props) => {
+export const BlockchainSection: FC<BlockchainSectionProps> = (props) => {
     const {} = props
     return (
         <section data-dark="false">
             <div className="flex flex-col gap-y-4">
                 <Heading
-                    title="E-mail"
-                    desc="Учимся писать письма, работать с базой, зарабатывать на email-маркетинге"
+                    title="Blockchain"
+                    desc="Изучаем с нуля: как работает блокчейн, зачем он нужен и как на нём можно заработать."
                     path="/"
                 />
                 <div className="hidden lg:flex items-center gap-x-5">

@@ -5,9 +5,10 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { getJournalBlogs } from '@/utils/api/journal-blogs/journal-blogs'
 import { useQuery } from '@tanstack/react-query'
 
+import EmailSection from '../molecules/BlockchainSection'
+import BlockchainSection from '../molecules/BlockchainSection'
 import BusinessSection from '../molecules/BusinessSection'
 import DesignSection from '../molecules/DesignSection'
-import EmailSection from '../molecules/EmailSection'
 import LifestyleSection from '../molecules/LifestyleSection'
 import MailingSection from '../molecules/MailingSection'
 import NeuralNetworksArticle from '../molecules/NeuralNetworksArticle'
@@ -42,16 +43,16 @@ export const Grid = () => {
         )
     }
 
-    if (isJournalDataError) {
-        return <div>Error of the get journal data. Check the devtools</div>
-    }
+    // if (isJournalDataError) {
+    //     return <div>Error of the get journal data. Check the devtools</div>
+    // }
     console.log(journalData)
     return (
         <div className="flex flex-col gap-y-24 overflow-y-auto px-2 lg:px-0">
             <NewSection />
             <NeuralNetworksArticle />
             <OtherTags />
-            <EmailSection />
+            <BlockchainSection />
             <MailingSection />
             <LifestyleSection />
             <SpecialProjectSection />
