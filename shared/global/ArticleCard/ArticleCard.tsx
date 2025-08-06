@@ -30,6 +30,7 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
         rating,
         tag,
         withTag = false,
+        views,
         href,
     } = props
     const showTopRating = hasRating && ratingPosition === 'top'
@@ -44,6 +45,8 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
                             src={imgCover}
                             alt={title}
                             className="object-cover w-full rounded-3xl aspect-[16/9]"
+                            width={320}
+                            height={240}
                         />
                     </CardTitle>
                 )}
@@ -60,7 +63,7 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
 
                         <div className="flex items-center">
                             <EyeIcon size={18} color="#7D7D7D" />
-                            <span className="text-sm text-[#737373]">16K</span>
+                            <span className="text-sm text-[#737373]">{views}</span>
                         </div>
 
                         {!withTag && showTopRating && <RatingStars value={rating} />}

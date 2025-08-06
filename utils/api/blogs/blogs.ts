@@ -21,6 +21,10 @@ export interface BlogsDataProps {
     id: number;
     title: string;
   }[]
+  category: {
+    id: number;
+    name: string;
+  }
 }
 
 export const getBlogs = async (query?: BaseQueryApiParamsProps): Promise<BlogsResponse | undefined> => {

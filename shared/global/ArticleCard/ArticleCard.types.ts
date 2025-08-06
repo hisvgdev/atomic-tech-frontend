@@ -4,10 +4,10 @@ export type RatingPosition = 'top' | 'bottom'
 
 export interface ArticleCardProps {
   title: string
-
+  views?: number;
   // Optional media & meta
   date?: string
-  imgCover?: StaticImageData
+  imgCover?: StaticImageData | string;
 
   // Appearance
   classNames?: string

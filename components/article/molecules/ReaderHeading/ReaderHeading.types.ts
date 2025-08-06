@@ -3,4 +3,5 @@ export interface ReaderHeadingProps {
   description?: string;
   updatedAt?: string;
   views?: number;
+  category: string;
 }

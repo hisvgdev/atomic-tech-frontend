@@ -94,7 +94,7 @@ export const Grid = () => {
     const allCases = caseItems?.data.flatMap((page) => page ?? []) || []
 
     return (
-        <div className="flex flex-col lg:gap-y-20 lg:py-20">
+        <div className="flex flex-col px-4 lg:gap-y-20 lg:px-6 lg:py-20">
             <CaseHeading
                 matchedTechnologies={matchedTechnologies}
                 categoriesData={categoriesData.data}

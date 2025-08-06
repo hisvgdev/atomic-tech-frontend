@@ -15,7 +15,7 @@ export const SpecialProjectSection: FC<SpecialProjectSectionProps> = (props) => 
     return (
         <section
             data-dark="false"
-            className="w-full border border-black border-dashed rounded-3xl p-8 lg:p-24"
+            className="w-full border border-black border-dashed rounded-3xl p-8 lg:p-16"
         >
             <div className="flex flex-col gap-9">
                 <Heading

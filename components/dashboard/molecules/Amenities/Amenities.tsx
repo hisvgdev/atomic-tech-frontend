@@ -65,10 +65,7 @@ const mockAmenitiesData = [
 
 export const Amenities: FC<AmenitiesProps> = () => {
     return (
-        <section
-            data-dark="true"
-            className="bg-gradient-amenties w-full p-6 rounded-3xl lg:rounded-[3.125rem] lg:py-24 lg:px-7"
-        >
+        <section data-dark="true" className="bg-gradient-amenties w-full p-6 lg:py-24 lg:px-7">
             <div className="flex flex-col gap-10 lg:gap-20">
                 <div className="flex flex-col items-start gap-8 lg:items-center lg:justify-between xl:flex-row xl:gap-0">
                     <div className="flex flex-col items-start gap-10 lg:items-center lg:flex-row">

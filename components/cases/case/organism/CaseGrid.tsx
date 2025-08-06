@@ -44,7 +44,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
     const getYear = new Date(updated_at).getFullYear()
 
     return (
-        <main className="h-full w-full overflow-y-auto">
+        <main className="h-full w-full overflow-y-auto px-3.5 lg:px-6">
             <article className="flex flex-col gap-y-16">
                 <header className="flex flex-col items-start gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex flex-col items-start gap-4 max-w-72 lg:max-w-full lg:flex-row lg:items-center lg:gap-10">

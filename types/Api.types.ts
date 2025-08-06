@@ -7,6 +7,7 @@ export interface BaseResponseApiProps {
 export interface BaseQueryApiParamsProps {
   limit?: number;
   offset?: number;
+  blog_category_id?: string;
   category_id?: string;
   subcategory_id?: string;
   technology_id?: string;

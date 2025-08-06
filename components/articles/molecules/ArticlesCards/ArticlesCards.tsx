@@ -10,8 +10,10 @@ import {
 } from '@/components/ui/pagination'
 import { Skeleton } from '@/components/ui/skeleton'
 import ArticleCard from '@/shared/global/ArticleCard'
+import { getBlogCategories } from '@/utils/api/blogs/blog-categories/blog-categories'
 import { getBlogs } from '@/utils/api/blogs/blogs'
 import { useQuery } from '@tanstack/react-query'
+import { useSearchParams } from 'next/navigation'
 import React, { FC, useState } from 'react'
 
 import ArticlesFilters from '../ArticlesFilters'
@@ -27,22 +29,43 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
     const [sortByRating, setSortByRating] = useState<'asc' | 'desc'>('desc')
     const [sortWithDate, setSortWithDate] = useState<'created_at' | 'updated_at'>('created_at')
 
+    const searchParams = useSearchParams()
+    const blogCategoryId = searchParams.get('blog_category_id') ?? ''
+
+    const { data: blogCategoriesData, isLoading: isBlogCategoriesDataLoading } = useQuery({
+        queryKey: ['blog-categories', blogCategoryId],
+        queryFn: async () =>
+            await getBlogCategories({
+                search: blogCategoryId,
+            }),
+        staleTime: 3000,
+    })
+
     const {
         data: blogsData,
         isLoading: isBlogsLoading,
         isError: isBlogsError,
     } = useQuery({
-        queryKey: ['blogs', sortByRating, sortWithDate, currentPage],
-        queryFn: async () =>
-            await getBlogs({
+        queryKey: ['blogs', sortByRating, blogCategoryId, sortWithDate, currentPage],
+        enabled: !blogCategoryId || !!blogCategoriesData,
+        queryFn: async () => {
+            const params: Record<string, any> = {
                 limit: BLOGS_LIMITS,
                 offset: (currentPage - 1) * BLOGS_LIMITS,
                 sort_by: sortWithDate,
                 sort_direction: sortByRating,
-            }),
+            }
+
+            if (blogCategoryId && blogCategoriesData?.data[0]?.id) {
+                params.blog_category_id = String(blogCategoriesData.data[0].id)
+            }
+
+            return await getBlogs(params)
+        },
+        staleTime: 3000,
     })
 
-    if (isBlogsLoading)
+    if (isBlogsLoading || isBlogCategoriesDataLoading)
         return (
             <div className="grid grid-cols-3 gap-9 items-center justify-center w-full">
                 {Array.from({ length: BLOGS_LIMITS }).map((_, idx) => (
@@ -66,7 +89,9 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
         <div className="flex flex-col gap-y-16">
             <div className="w-full flex flex-col gap-6 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex flex-col lg:gap-3.5 lg:flex-row lg:items-center">
-                    <h1 className="font-bold text-5xl -tracking-[0.075rem]">Все статьи</h1>
+                    <h1 className="font-bold text-5xl -tracking-[0.075rem]">
+                        {blogCategoryId ? blogCategoryId : 'Все статьи'}
+                    </h1>
                     <p className="text-5xl font-bold text-[#C4C4C4]">
                         {Array.isArray(blogsData?.data) ? blogsData.data.length : 0}{' '}
                         {Array.isArray(blogsData?.data) && blogsData.data.length < 2
@@ -88,9 +113,9 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
                             key={indx}
                             title={item.title}
                             date={item.created_at}
-                            rating={item.ratings_count}
+                            rating={item.average_rating}
                             href={`/articles/${String(item.id)}`}
-                            tag="SEO"
+                            tag={item.category.name}
                             ratingPosition="bottom"
                         />
                     ))}

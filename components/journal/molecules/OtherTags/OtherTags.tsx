@@ -4,6 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { getBlogCategories } from '@/utils/api/blogs/blog-categories/blog-categories'
 import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 import React, { FC } from 'react'
 
 import { OtherTagsProps } from './OtherTags.types'
@@ -31,7 +32,11 @@ export const OtherTags: FC<OtherTagsProps> = (props) => {
                 <div className="flex flex-col gap-16">
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                         {categoriesData?.data.map((cd) => (
-                            <button key={cd.id} type="button" className="cursor-pointer">
+                            <Link
+                                href={`/journal?blog_category_id=${cd.name}`}
+                                key={cd.id}
+                                className="cursor-pointer"
+                            >
                                 <div className="flex items-center justify-center gap-x-2">
                                     <h4 className="text-white font-bold text-2xl">
                                         <span className="underline">{cd.name}</span>
@@ -39,7 +44,7 @@ export const OtherTags: FC<OtherTagsProps> = (props) => {
                                     </h4>
                                     <ArrowRightIcon size={18} color="#9A9C9D" />
                                 </div>
-                            </button>
+                            </Link>
                         ))}
                     </div>
                 </div>

@@ -11,7 +11,7 @@ export const AllProjectsButton: FC<AllProjectsButtonProps> = (props) => {
     const { title = 'Все проекты', link = '/cases' } = props
     const isMobile = useIsMobile()
     return (
-        <section data-dark="false">
+        <section data-dark="false" className="px-3">
             <Link
                 href={link}
                 className="flex justify-center items-center gap-10 border-2 py-9 rounded-4xl border-black lg:gap-4 lg:border lg:py-12 lg:rounded-2xl"

@@ -1,11 +1,7 @@
 'use client'
 
-import firstBlog from '@/public/assets/images/blog/firstBlog.png'
-import lastBlog from '@/public/assets/images/blog/lastBlog.png'
-import secondBlog from '@/public/assets/images/blog/secondBlog.png'
 import { FC } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { v4 as uuidv4 } from 'uuid'
 
 import ArticleCard from '../../../../shared/global/ArticleCard'
 import { ArticleCardsProps } from './ArticleCards.types'
@@ -14,30 +10,10 @@ import 'swiper/css'
 
 import { Skeleton } from '@/components/ui/skeleton'
 import GradientButton from '@/shared/custom/GradientButton'
-import { getTopRatedCasesItem } from '@/utils/api/top-rated-cases/top-rated-cases.api'
+import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
+import { getJournalBlogs } from '@/utils/api/journal-blogs/journal-blogs'
 import { useQuery } from '@tanstack/react-query'
 import { Pagination } from 'swiper/modules'
-
-const mockDataCards = [
-    {
-        id: uuidv4(),
-        title: 'Как создать уникальное приложение всего за 4 месяца?',
-        date: new Date().toISOString().split('T')[0],
-        imgCover: firstBlog,
-    },
-    {
-        id: uuidv4(),
-        title: 'Wordpress - это быстро? Но что если мы расскажем вам о новых.',
-        date: new Date().toISOString().split('T')[0],
-        imgCover: secondBlog,
-    },
-    {
-        id: uuidv4(),
-        title: 'Как понять что вы именно тот клиент с которым не хотят работать?',
-        date: new Date().toISOString().split('T')[0],
-        imgCover: lastBlog,
-    },
-]
 
 export const ArticleCards: FC<ArticleCardsProps> = (props) => {
     const {} = props
@@ -47,10 +23,10 @@ export const ArticleCards: FC<ArticleCardsProps> = (props) => {
         isLoading: isTopRelatedDataLoading,
         isError: isTopRelatedDataError,
     } = useQuery({
-        queryKey: ['top-related-case'],
+        queryKey: ['journal-blog'],
         queryFn: async () => {
             const randomOffset = Math.floor(Math.random() * 7)
-            return await getTopRatedCasesItem({
+            return await getJournalBlogs({
                 limit: 3,
                 offset: randomOffset,
             })
@@ -76,31 +52,26 @@ export const ArticleCards: FC<ArticleCardsProps> = (props) => {
     if (isTopRelatedDataError) {
         return <div>Error of the get journal data. Check the devtools</div>
     }
-    console.log(topRelatedData)
+
     return (
         <>
             <div className="flex w-full flex-col gap-8 lg:hidden">
-                <Swiper
-                    spaceBetween={16}
-                    slidesPerView={1.5}
-                    pagination={{
-                        el: '.custom-pagination',
-                        clickable: true,
-                    }}
-                    modules={[Pagination]}
-                    className="w-full h-full"
-                >
-                    {mockDataCards.map((blog, idx) => (
+                <SwiperRowLayout>
+                    {topRelatedData?.data.slice(0, 3).map((blog, idx) => (
                         <SwiperSlide key={idx}>
                             <ArticleCard
                                 key={`${idx}-${blog.title}`}
-                                {...blog}
+                                imgCover={blog.image}
+                                title={blog.title}
+                                date={new Date(blog.created_at).toISOString().split('T')[0]}
+                                rating={blog.average_rating}
+                                href={`/articles/${blog.id}`}
+                                views={blog.views}
                                 classNames="max-w-xs"
                             />
                         </SwiperSlide>
                     ))}
-                </Swiper>
-                <div className="custom-pagination  flex justify-center gap-x-2 mt-2" />
+                </SwiperRowLayout>
                 <div className="block lg:hidden">
                     <GradientButton
                         hasIsRoute
@@ -113,8 +84,17 @@ export const ArticleCards: FC<ArticleCardsProps> = (props) => {
             </div>
 
             <div className="hidden lg:flex lg:items-center lg:gap-4">
-                {mockDataCards.map((blog, indx) => (
-                    <ArticleCard key={`${indx}-${blog.title}`} {...blog} classNames="max-w-xs" />
+                {topRelatedData?.data.slice(0, 3).map((blog, indx) => (
+                    <ArticleCard
+                        key={`${indx}-${blog.title}`}
+                        imgCover={blog.image}
+                        title={blog.title}
+                        date={new Date(blog.created_at).toISOString().split('T')[0]}
+                        rating={blog.average_rating}
+                        href={`/articles/${blog.id}`}
+                        views={blog.views}
+                        classNames="max-w-xs"
+                    />
                 ))}
             </div>
         </>

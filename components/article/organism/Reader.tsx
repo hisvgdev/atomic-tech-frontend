@@ -19,6 +19,7 @@ export const Reader: FC<ReaderProps> = (props) => {
         views,
         average_rating,
         ratings_count,
+        category,
         related_blogs,
     } = blog.data
 
@@ -29,6 +30,7 @@ export const Reader: FC<ReaderProps> = (props) => {
                 views={views}
                 description={description}
                 updatedAt={updated_at}
+                category={category.name}
             />
             <hr />
             <ReaderGrid

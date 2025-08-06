@@ -14,6 +14,13 @@ export interface BlogsDataProps {
   case_items: string[]
   created_at: string
   updated_at: string
+  average_rating: number
+  ratings_count: number;
+  views: number;
+  category: {
+    id: number;
+    name: string;
+  }
 }
 
 export const getJournalBlogs = async (query?: BaseQueryApiParamsProps): Promise<JournalBlogsResponse | undefined> => {

@@ -99,11 +99,19 @@ export const Footer = () => {
                                         alt="tg-icon"
                                         className="w-4 h-4"
                                     />
-                                    <Link href="#" className="text-white font-bold text-lg">
+                                    <Link
+                                        href="https://t.me/TeIega_Ultra_Settings_bot"
+                                        target="_blank"
+                                        className="text-white font-bold text-lg"
+                                    >
                                         Telegram Bot
                                     </Link>
                                 </div>
-                                <Link href="#" className="font-bol text-lg text-white underline">
+                                <Link
+                                    href="https://docs.google.com/document/d/1tbEb8LefW1YbiRjXpKpBOGDM2PH6bNdsfTG_uJPeSCQ/edit?usp=sharing"
+                                    target="_blank"
+                                    className="font-bol text-lg text-white underline"
+                                >
                                     Заполнить бриф
                                 </Link>
                             </div>
@@ -112,6 +120,8 @@ export const Footer = () => {
                                     isWhite
                                     title="Связать с менеджером"
                                     classNames="rounded-full py-8"
+                                    routePath="https://t.me/Atomic_Code"
+                                    hasIsRoute
                                 />
                                 <div className="flex items-center gap-x-2 lg:hidden">
                                     <span className="text-white font-bold text-xs">Наверх</span>

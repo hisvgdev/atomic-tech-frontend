@@ -12,7 +12,7 @@ export const SwiperRowLayout: FC<SwiperRowLayoutProps> = (props) => {
         <div className="flex flex-col gap-8 lg:hidden">
             <Swiper
                 spaceBetween={16}
-                slidesPerView={1.3}
+                slidesPerView={1.5}
                 grid={{
                     fill: 'row',
                     rows: 1,
