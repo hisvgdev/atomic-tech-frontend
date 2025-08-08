@@ -1,1 +1,5 @@
-export interface BlockchainSectionProps { }
+import { BlogsDataProps } from "@/utils/api/journal-blogs/journal-blogs";
+
+export interface BlockchainSectionProps {
+  blockchainData: BlogsDataProps[]
+}

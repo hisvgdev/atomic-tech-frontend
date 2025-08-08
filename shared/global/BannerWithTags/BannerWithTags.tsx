@@ -5,11 +5,11 @@ import React, { FC } from 'react'
 import { BannerWithTagsProps } from './BannerWithTags.types'
 
 export const BannerWithTags: FC<BannerWithTagsProps> = (props) => {
-    const { bannerTitle = 'Журнал' } = props
-    return (
-        <>
-            <Banner title={bannerTitle} />
-            <Tags />
-        </>
-    )
+     const { bannerTitle = 'Журнал' } = props
+     return (
+          <div className="flex flex-col gap-8 lg:px-7">
+               <Banner title={bannerTitle} />
+               <Tags />
+          </div>
+     )
 }

@@ -5,14 +5,14 @@ import { CustomSolutionsFeedback } from './CustomSolutionsFeedback/CustomSolutio
 import CustomSolutionsHeader from './CustomSolutionsHeader'
 
 export const CustomSolutions: FC<CustomSolutionsProps> = (props) => {
-    const {} = props
+     const {} = props
 
-    return (
-        <section data-dark="false" className="flex flex-col gap-16">
-            <Suspense>
-                <CustomSolutionsHeader />
-            </Suspense>
-            <CustomSolutionsFeedback />
-        </section>
-    )
+     return (
+          <section data-dark="false" className="flex flex-col gap-16 px-4 lg:px-0">
+               <Suspense>
+                    <CustomSolutionsHeader />
+               </Suspense>
+               <CustomSolutionsFeedback />
+          </section>
+     )
 }

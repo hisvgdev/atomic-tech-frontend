@@ -1,68 +1,91 @@
 import coverImage from '@/public/assets/images/projects/secondProject.png'
+import ArticleCard from '@/shared/global/ArticleCard'
+import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC } from 'react'
+import { SwiperSlide } from 'swiper/react'
 
 import ReaderRating from '../ReaderRating'
 import { ReaderContentProps } from './ReaderContent.types'
+import ReaderContentLeft from './ReaderContentLeft'
 
 export const ReaderContent: FC<ReaderContentProps> = (props) => {
-    const { caseItems, content, image, id, ratingsCount, relatedBlogs } = props
+     const { content, image, id, ratingsCount, relatedBlogs, caseItems } = props
 
-    return (
-        <div className="flex justify-center w-full">
-            <div className="flex flex-col w-full gap-6 lg:px-4 lg:flex-row lg:justify-between">
-                <div className="w-full flex flex-col gap-y-4 lg:w-1/5">
-                    <h4 className="font-semibold text-base">Содержание:</h4>
-                    {[
-                        'Как устроена Tilda и что здесь можно сделать',
-                        'Какие тарифы есть на Tilda',
-                        'Как создать сайт на Tilda: пошаговая инструкция',
-                        'Что ещё умеет Tilda',
-                        'Коротко о главном',
-                    ].map((item, indx) => (
-                        <span
-                            key={`${indx}-${item}`}
-                            className="font-normal text-[#737373] cursor-pointer hover:underline transition-all"
-                        >
-                            {item}
-                        </span>
-                    ))}
-                </div>
-
-                <div className="w-full flex flex-col gap-y-4 items-center lg:w-3/6">
-                    <Image
-                        src={image || coverImage}
-                        alt="cover-image"
-                        width={480}
-                        height={480}
-                        className="w-full rounded-[1.875rem] object-cover"
-                    />
-                    <span
-                        className="font-medium text-base text-start"
-                        dangerouslySetInnerHTML={{ __html: content as string }}
-                    />
-                    <ReaderRating id={id} ratingsCount={ratingsCount || 0} />
-                </div>
-                {relatedBlogs.length > 0 ? (
-                    <div className="hidden lg:flex max-w-1/6 flex-col gap-y-2 ">
-                        <h4 className="font-semibold text-base">Также по теме:</h4>
-                        <ul className="text-base text-[#737373] list-none pl-0.5 flex flex-col gap-y-4">
-                            {relatedBlogs.map((itemBlogs, idx) => {
-                                return (
-                                    <Link
-                                        key={`${idx}-${itemBlogs}`}
-                                        className="text-[#737373] hover:underline transition-all"
-                                        href={`/articles/${itemBlogs.id}`}
-                                    >
-                                        {itemBlogs.title}
-                                    </Link>
-                                )
-                            })}
-                        </ul>
+     return (
+          <div className="flex w-full justify-center">
+               <div
+                    className={`flex w-full flex-col gap-6 lg:flex-row lg:${relatedBlogs.length > 0 ? 'justify-between' : 'w-full lg:gap-44'} lg:px-4`}
+               >
+                    <ReaderContentLeft content={content as string} />
+                    <div className="flex w-full flex-col items-center gap-y-4 lg:w-full">
+                         <Image
+                              src={image || coverImage}
+                              alt="cover-image"
+                              width={480}
+                              height={480}
+                              className="w-full rounded-[1.875rem] object-cover"
+                         />
+                         <span
+                              className="max-w-96 text-start text-base font-medium lg:max-w-full"
+                              dangerouslySetInnerHTML={{ __html: content as string }}
+                         />
+                         {Array.isArray(caseItems) && caseItems.length > 0 ? (
+                              <div className="flex w-full flex-col gap-4 lg:gap-8">
+                                   <h2 className="text-xl font-bold lg:text-3xl">Пример нашей реализации:</h2>
+                                   <div className="hidden w-full items-center gap-x-3 lg:flex lg:flex-col lg:gap-6">
+                                        {caseItems.map((c, i) => (
+                                             <ArticleCard
+                                                  key={i}
+                                                  imgCover={coverImage}
+                                                  title={c.title}
+                                                  href={`/cases/${c.id}`}
+                                                  withTag
+                                                  tag="Бизнес"
+                                                  classNames="w-full"
+                                             />
+                                        ))}
+                                   </div>
+                                   <div className="flex flex-col gap-8 lg:hidden">
+                                        <SwiperRowLayout>
+                                             {[...caseItems, ...caseItems, ...caseItems].map((c, i) => (
+                                                  <SwiperSlide key={`${c.id}-${i}`}>
+                                                       <ArticleCard
+                                                            imgCover={coverImage}
+                                                            title={c.title}
+                                                            href={`/cases/${c.id}`}
+                                                            withTag
+                                                            tag="Бизнес"
+                                                            classNames="w-full"
+                                                       />
+                                                  </SwiperSlide>
+                                             ))}
+                                        </SwiperRowLayout>
+                                   </div>
+                              </div>
+                         ) : null}
+                         <ReaderRating id={id} ratingsCount={ratingsCount || 0} />
                     </div>
-                ) : null}
-            </div>
-        </div>
-    )
+                    {relatedBlogs.length > 0 ? (
+                         <div className="hidden max-w-1/6 flex-col gap-y-2 lg:flex">
+                              <h4 className="text-base font-semibold">Также по теме:</h4>
+                              <ul className="flex list-none flex-col gap-y-4 pl-0.5 text-base text-[#737373]">
+                                   {relatedBlogs.map((itemBlogs, idx) => {
+                                        return (
+                                             <Link
+                                                  key={`${idx}-${itemBlogs}`}
+                                                  className="text-[#737373] transition-all hover:underline"
+                                                  href={`/articles/${itemBlogs.id}`}
+                                             >
+                                                  {itemBlogs.title}
+                                             </Link>
+                                        )
+                                   })}
+                              </ul>
+                         </div>
+                    ) : null}
+               </div>
+          </div>
+     )
 }

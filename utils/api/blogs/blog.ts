@@ -9,8 +9,9 @@ export const getBlog = async (id: string): Promise<BlogResponse | undefined> => 
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/blogs/${id}`, {
       method: "GET",
+      cache: 'force-cache',
       next: {
-        revalidate: 10,
+        revalidate: 3,
       }
     });
     if (!res.ok) {

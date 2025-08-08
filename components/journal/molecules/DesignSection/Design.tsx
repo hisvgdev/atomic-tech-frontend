@@ -11,16 +11,16 @@ import Heading from '../Heading'
 import { DesignSectionProps } from './Design.types'
 
 export const DesignSection: FC<DesignSectionProps> = (props) => {
-    const {} = props
-    return (
-        <section data-dark="false" className="w-full flex flex-col gap-y-2.5">
-            <Heading
-                title="Дизайн"
-                desc="Руководства и сервисы, в том числе для недизайнеров"
-                path="/"
-            />
-            <div className="hidden lg:flex flex-col justify-center items-center gap-y-2.5">
-                <div className="flex items-center gap-x-3 w-full">
+     const { designProjectData } = props
+     return (
+          <section data-dark="false" className="flex w-full flex-col gap-y-2.5 lg:px-7">
+               <Heading
+                    title="Дизайн"
+                    desc="Руководства и сервисы, в том числе для недизайнеров"
+                    path="/journal?blog_category_id=Дизайн"
+               />
+               <div className="hidden lg:block">
+                    {/* <div className="flex items-center gap-x-3 w-full">
                     <ArticleCard
                         title="Как создать уникальное приложение всего за 4 месяца ?"
                         date="29.04.2025"
@@ -33,35 +33,41 @@ export const DesignSection: FC<DesignSectionProps> = (props) => {
                         imgCover={lastBlog}
                         classNames="w-full"
                     />
-                </div>
-                <div className="flex items-center gap-x-3">
-                    {Array.from({ length: 4 }).map((_, indx) => (
-                        <ArticleCard
-                            key={indx}
-                            title="Как создать уникальное приложение всего за 4 месяца ?"
-                            date="29.04.2025"
-                            imgCover={firstBlog}
-                            classNames="w-full lg:max-w-md"
-                        />
-                    ))}
-                </div>
-            </div>
-            <div className="flex flex-col gap-8 lg:hidden">
-                <SwiperRowLayout>
-                    {Array.from({ length: 6 }).map((_, indx) => {
-                        return (
-                            <SwiperSlide key={indx}>
-                                <ArticleCard
-                                    title="Как создать уникальное приложение всего за 4 месяца ?"
-                                    date="29.04.2025"
-                                    imgCover={firstBlog}
-                                    classNames="w-full lg:max-w-md"
-                                />
-                            </SwiperSlide>
-                        )
-                    })}
-                </SwiperRowLayout>
-            </div>
-        </section>
-    )
+                </div> */}
+                    <div className="grid grid-cols-4 items-center gap-2.5">
+                         {designProjectData.length > 0 &&
+                              designProjectData.map((bd, indx) => (
+                                   <ArticleCard
+                                        key={`${bd.id}-${indx}`}
+                                        title={bd.title}
+                                        views={bd.views}
+                                        imgCover={bd.image}
+                                        date={new Date(bd.created_at).toISOString().split('T')[0]}
+                                        rating={bd.average_rating}
+                                        href={`/articles/${bd.id}`}
+                                        classNames="w-full lg:max-w-md"
+                                   />
+                              ))}
+                    </div>
+               </div>
+               <div className="flex flex-col gap-8 lg:hidden">
+                    <SwiperRowLayout>
+                         {designProjectData.length > 0 &&
+                              designProjectData.map((bd, indx) => (
+                                   <SwiperSlide key={`${bd.id}-${indx}`}>
+                                        <ArticleCard
+                                             title={bd.title}
+                                             views={bd.views}
+                                             imgCover={bd.image}
+                                             date={new Date(bd.created_at).toISOString().split('T')[0]}
+                                             rating={bd.average_rating}
+                                             href={`/articles/${bd.id}`}
+                                             classNames="w-full lg:max-w-md"
+                                        />
+                                   </SwiperSlide>
+                              ))}
+                    </SwiperRowLayout>
+               </div>
+          </section>
+     )
 }
