@@ -28,6 +28,7 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
      const [currentPage, setCurrentPage] = useState(1)
      const [sortByRating, setSortByRating] = useState<'asc' | 'desc'>('desc')
      const [sortWithDate, setSortWithDate] = useState<'created_at' | 'updated_at'>('created_at')
+     const [sortByViews, setSortByViews] = useState<'min_views' | 'max_views'>('max_views')
 
      const searchParams = useSearchParams()
      const blogCategoryId = searchParams.get('blog_category_id') ?? ''
@@ -46,7 +47,7 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
           isLoading: isBlogsLoading,
           isError: isBlogsError,
      } = useQuery({
-          queryKey: ['blogs', sortByRating, blogCategoryId, sortWithDate, currentPage],
+          queryKey: ['blogs', sortByRating, blogCategoryId, sortWithDate, sortByViews, currentPage],
           enabled: !blogCategoryId || !!blogCategoriesData,
           queryFn: async () => {
                const params: Record<string, any> = {
@@ -54,6 +55,7 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
                     offset: (currentPage - 1) * BLOGS_LIMITS,
                     sort_by: sortWithDate,
                     sort_direction: sortByRating,
+                    views: sortByViews,
                }
 
                if (blogCategoryId && blogCategoriesData?.data[0]?.id) {
@@ -97,7 +99,11 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
                               {Array.isArray(blogsData?.data) && blogsData.data.length < 2 ? 'статья' : 'статей'}
                          </p>
                     </div>
-                    <ArticlesFilters setSortByRating={setSortByRating} setSortWithDate={setSortWithDate} />
+                    <ArticlesFilters
+                         setSortByRating={setSortByRating}
+                         setSortWithDate={setSortWithDate}
+                         setSortByViews={setSortByViews}
+                    />
                </div>
                {isBlogCategoriesDataLoading || isBlogsLoading ? (
                     <div className="grid w-full grid-cols-3 items-center justify-center gap-9">

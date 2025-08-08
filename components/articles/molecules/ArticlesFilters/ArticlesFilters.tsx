@@ -5,11 +5,11 @@ import React, { FC, useEffect, useRef, useState } from 'react'
 
 import { ArticlesFiltersProps } from './ArticlesFilters.types'
 
-export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, setSortWithDate }) => {
+export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, setSortWithDate, setSortByViews }) => {
      const [openFilter, setOpenFilter] = useState<null | 'watches' | 'rating' | 'withDate'>(null)
      const [activeSort, setActiveSort] = useState<null | {
           type: 'watches' | 'rating' | 'withDate'
-          direction: 'asc' | 'desc' | 'created_at' | 'updated_at'
+          direction: 'asc' | 'desc' | 'created_at' | 'updated_at' | 'max_views' | 'min_views'
      }>(null)
 
      const dropdownRef = useRef<HTMLDivElement | null>(null)
@@ -39,7 +39,7 @@ export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, set
 
      const isActiveOption = (
           type: 'watches' | 'rating' | 'withDate',
-          direction: 'asc' | 'desc' | 'created_at' | 'updated_at',
+          direction: 'asc' | 'desc' | 'created_at' | 'updated_at' | 'min_views' | 'max_views',
      ) => activeSort?.type === type && activeSort?.direction === direction
 
      return (
@@ -70,22 +70,23 @@ export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, set
                          <div className="max-w-80 rounded-2xl border border-[#E6E6E6] bg-white p-2 shadow-lg backdrop-blur-2xl">
                               <div className="flex flex-col gap-y-1.5">
                                    {[
-                                        { label: 'Меньше просмотров', dir: 'asc' },
-                                        { label: 'Больше просмотров', dir: 'desc' },
+                                        { label: 'Меньше просмотров', dir: 'min_views' },
+                                        { label: 'Больше просмотров', dir: 'max_views' },
                                    ].map(({ label, dir }) => (
                                         <button
                                              key={label}
                                              type="button"
                                              className={`w-full cursor-pointer rounded-2xl p-4 text-xs font-medium transition-all hover:bg-black hover:text-white ${
-                                                  isActiveOption('watches', dir as 'asc' | 'desc')
+                                                  isActiveOption('watches', dir as 'min_views' | 'max_views')
                                                        ? 'bg-black text-white'
                                                        : ''
                                              }`}
                                              onClick={() => {
                                                   setActiveSort({
                                                        type: 'watches',
-                                                       direction: dir as 'asc' | 'desc',
+                                                       direction: dir as 'min_views' | 'max_views',
                                                   })
+                                                  setSortByViews(dir as 'min_views' | 'max_views')
                                                   setOpenFilter(null)
                                              }}
                                         >

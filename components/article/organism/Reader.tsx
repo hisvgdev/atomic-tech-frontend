@@ -22,7 +22,7 @@ export const Reader: FC<ReaderProps> = (props) => {
           category,
           related_blogs,
      } = blog.data
-
+     console.log(blog.data)
      return (
           <div className="flex flex-col gap-y-8 overflow-y-auto">
                <ReaderHeading

@@ -13,6 +13,7 @@ export interface BaseQueryApiParamsProps {
   technology_id?: string;
   usluga_id?: string;
   year?: string;
+  views?: 'min_views' | 'max_views';
   rating?: string;
   title?: string;
   name?: string;
