@@ -51,7 +51,9 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                               <h1 className="text-4xl font-bold -tracking-[0.23rem] lg:text-7xl">
                                    {title.toUpperCase()}
                               </h1>
-                              <p className="text-primary-300 text-base lg:max-w-2xl lg:text-2xl">{description}</p>
+                              {description && (
+                                   <p className="text-primary-300 text-base lg:max-w-2xl lg:text-2xl">{description}</p>
+                              )}
                          </div>
                          <div className="flex items-center gap-x-2">
                               {formatedWebsiteLink && (
