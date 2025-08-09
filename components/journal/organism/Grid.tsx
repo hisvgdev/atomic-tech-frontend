@@ -61,14 +61,16 @@ export const Grid = () => {
      const isLoading = isBlogCategoriesLoading || isJournalLoading
 
      const now = useMemo(() => new Date(), [])
-     const sevenDaysAgo = useMemo(() => new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000), [now])
+     const sevenDaysAgo = useMemo(() => new Date(now.getTime() - 4 * 24 * 60 * 60 * 1000), [now])
 
      const newPosts = useMemo(
           () =>
-               journalData?.data?.filter((post) => {
-                    const createdAt = new Date(post.created_at)
-                    return createdAt >= sevenDaysAgo && createdAt <= now
-               }) ?? [],
+               journalData?.data
+                    ?.sort(() => Math.random() - 0.5)
+                    .filter((post) => {
+                         const createdAt = new Date(post.created_at)
+                         return createdAt >= sevenDaysAgo && createdAt <= now
+                    }) ?? [],
           [journalData, sevenDaysAgo, now],
      )
 
