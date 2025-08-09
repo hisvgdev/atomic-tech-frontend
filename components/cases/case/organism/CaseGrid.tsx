@@ -63,10 +63,12 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                         <ArrowRight />
                                    </Button>
                               )}
-                              <Button className="cursor-pointer rounded-full border border-black bg-transparent py-6 text-black hover:bg-transparent lg:py-4">
-                                   <Calendar size={22} />
-                                   <span className="text-base font-medium"> {getYear} год</span>
-                              </Button>
+                              {getYear && (
+                                   <Button className="cursor-pointer rounded-full border border-black bg-transparent py-6 text-black hover:bg-transparent lg:py-4">
+                                        <Calendar size={22} />
+                                        <span className="text-base font-medium"> {getYear} год</span>
+                                   </Button>
+                              )}
                          </div>
                     </header>
 
