@@ -1,7 +1,5 @@
 'use client'
 
-import firstBlog from '@/public/assets/images/blog/firstBlog.png'
-import lastBlog from '@/public/assets/images/blog/lastBlog.png'
 import ArticleCard from '@/shared/global/ArticleCard'
 import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
@@ -41,7 +39,7 @@ export const DesignSection: FC<DesignSectionProps> = (props) => {
                                         key={`${bd.id}-${indx}`}
                                         title={bd.title}
                                         views={bd.views}
-                                        imgCover={bd.image}
+                                        imgCover={bd.image || null}
                                         date={new Date(bd.created_at).toISOString().split('T')[0]}
                                         rating={bd.average_rating}
                                         href={`/articles/${bd.id}`}
@@ -58,7 +56,7 @@ export const DesignSection: FC<DesignSectionProps> = (props) => {
                                         <ArticleCard
                                              title={bd.title}
                                              views={bd.views}
-                                             imgCover={bd.image}
+                                             imgCover={bd.image || null}
                                              date={new Date(bd.created_at).toISOString().split('T')[0]}
                                              rating={bd.average_rating}
                                              href={`/articles/${bd.id}`}

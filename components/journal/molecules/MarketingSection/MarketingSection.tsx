@@ -25,7 +25,7 @@ export const MarketingSection: FC<MarketingSectionProps> = (props) => {
                                    <ArticleCard
                                         key={`${bd.id}-${indx}`}
                                         title={bd.title}
-                                        imgCover={bd.image}
+                                        imgCover={bd.image || null}
                                         views={bd.views}
                                         date={new Date(bd.created_at).toISOString().split('T')[0]}
                                         rating={bd.average_rating}
@@ -42,7 +42,7 @@ export const MarketingSection: FC<MarketingSectionProps> = (props) => {
                                              <ArticleCard
                                                   key={`${bd.id}-${indx}`}
                                                   title={bd.title}
-                                                  imgCover={bd.image}
+                                                  imgCover={bd.image || null}
                                                   views={bd.views}
                                                   date={new Date(bd.created_at).toISOString().split('T')[0]}
                                                   rating={bd.average_rating}

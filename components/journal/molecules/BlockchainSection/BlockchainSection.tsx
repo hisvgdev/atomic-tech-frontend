@@ -35,7 +35,7 @@ export const BlockchainSection: FC<BlockchainSectionProps> = (props) => {
                                              key={`${bd.id}-${indx}`}
                                              title={bd.title}
                                              views={bd.views}
-                                             imgCover={bd.image}
+                                             imgCover={bd.image || null}
                                              date={new Date(bd.created_at).toISOString().split('T')[0]}
                                              rating={bd.average_rating}
                                              href={`/articles/${bd.id}`}
@@ -72,7 +72,7 @@ export const BlockchainSection: FC<BlockchainSectionProps> = (props) => {
                                                        key={`${bd.id}-${indx}`}
                                                        title={bd.title}
                                                        views={bd.views}
-                                                       imgCover={bd.image}
+                                                       imgCover={bd.image || null}
                                                        date={new Date(bd.created_at).toISOString().split('T')[0]}
                                                        rating={bd.average_rating}
                                                        href={`/articles/${bd.id}`}

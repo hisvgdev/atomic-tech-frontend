@@ -7,7 +7,7 @@ export interface ArticleCardProps {
   views?: number;
   // Optional media & meta
   date?: string
-  imgCover?: StaticImageData | string;
+  imgCover?: StaticImageData | string | null;
 
   // Appearance
   classNames?: string

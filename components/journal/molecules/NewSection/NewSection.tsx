@@ -16,7 +16,7 @@ export const NewSection: FC<NewSectionProps> = (props) => {
                                    key={d.id}
                                    title={d.title}
                                    date={new Date(d.created_at).toISOString().split('T')[0]}
-                                   imgCover={d.image || ''}
+                                   imgCover={d.image || null}
                                    href={`/articles/${d.id}`}
                                    classNames="w-full h-full"
                                    ratingPosition="bottom"
