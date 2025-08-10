@@ -28,7 +28,7 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                               className="w-full rounded-[1.875rem] object-cover"
                          />
                          <span
-                              className="max-w-96 text-start text-base font-medium lg:max-w-full"
+                              className="max-w-xl text-start text-base font-medium lg:max-w-full"
                               dangerouslySetInnerHTML={{ __html: content as string }}
                          />
                          {Array.isArray(caseItems) && caseItems.length > 0 ? (

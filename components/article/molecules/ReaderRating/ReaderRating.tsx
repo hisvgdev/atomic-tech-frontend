@@ -33,10 +33,10 @@ export const ReaderRating: FC<ReaderRatingProps> = (props) => {
           await handleRating(id, index + 1)
      }
      return (
-          <div className="rounded-4xl border border-[#E6E6E6] p-8 lg:p-20">
+          <div className="w-full rounded-4xl border border-[#E6E6E6] p-8 lg:p-20">
                <div className="flex flex-col items-center justify-center gap-y-9">
                     <h3 className="text-2xl font-bold lg:text-5xl">Оцените нашу статью</h3>
-                    <div className="flex w-full items-center gap-4 lg:justify-between lg:gap-0">
+                    <div className="flex w-full items-center justify-center gap-4 lg:justify-between lg:gap-0">
                          {['ужасно', 'неинтересно', 'не очень', 'хорошо', 'интересно'].map((item, indx) => {
                               const isFilled =
                                    hoverIndex !== null
