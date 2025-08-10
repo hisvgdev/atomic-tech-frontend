@@ -49,7 +49,7 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                                    </div>
                                    <div className="flex flex-col gap-8 lg:hidden">
                                         <SwiperRowLayout>
-                                             {[...caseItems, ...caseItems, ...caseItems].map((c, i) => (
+                                             {caseItems.map((c, i) => (
                                                   <SwiperSlide key={`${c.id}-${i}`}>
                                                        <ArticleCard
                                                             imgCover={coverImage}
@@ -65,6 +65,7 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                                    </div>
                               </div>
                          ) : null}
+
                          <ReaderRating id={id} ratingsCount={ratingsCount || 0} />
                     </div>
                     {relatedBlogs.length > 0 ? (
