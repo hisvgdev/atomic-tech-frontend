@@ -27,8 +27,15 @@ export const ReaderHeading: FC<ReaderHeadingProps> = (props) => {
                </button>
                {/* Additional info */}
                <div className="flex items-center gap-x-5">
-                    <span className="leading-5 font-normal text-[#737373]">Обновлено: {updatedAt || '05.06.2025'}</span>
-                    <div className="flex items-center">
+                    <span className="leading-5 font-normal text-[#737373]">
+                         Обновлено:{' '}
+                         {new Date(updatedAt || '').toLocaleDateString('ru-RU', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: '2-digit',
+                         }) || ''}
+                    </span>
+                    <div className="flex items-center gap-1">
                          <EyeIcon color="#737373" />
                          <span className="text-base font-normal text-[#737373]">{views || 0}</span>
                     </div>
@@ -37,7 +44,7 @@ export const ReaderHeading: FC<ReaderHeadingProps> = (props) => {
                     </div>
                </div>
                {/* Header */}
-               <div className="flex max-w-xs flex-col gap-y-2.5 lg:max-w-5xl">
+               <div className="flex max-w-lg flex-col gap-y-2.5 lg:max-w-5xl">
                     <h1 className="text-4xl font-bold lg:text-5xl">
                          {title || 'Как создать сайт на Tilda: гайд для новичков'}
                     </h1>
