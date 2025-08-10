@@ -49,7 +49,9 @@ export const Grid = () => {
           queryKey: ['journal-blogs', blogCategoryQuery],
           enabled: !blogCategoryQuery || !!blogCategoriesData,
           queryFn: async () => {
-               const params: Record<string, any> = {}
+               const params: Record<string, any> = {
+                    per_page: 100,
+               }
                if (blogCategoryQuery && blogCategoriesData?.data?.[0]?.id) {
                     params.blog_category_id = String(blogCategoriesData.data[0].id)
                }
