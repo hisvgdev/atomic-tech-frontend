@@ -19,6 +19,7 @@ import { CaseGridProps } from './CaseGrid.types'
 
 import 'swiper/css'
 
+import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react'
 import { A11y, Navigation, Pagination } from 'swiper/modules'
 
@@ -43,7 +44,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
 
      const formatedWebsiteLink = website_link ? website_link.split('/')[2] : ''
      const getYear = new Date(updated_at).getFullYear()
-     console.log(services)
+
      return (
           <main className="h-full w-full overflow-y-auto px-3.5 lg:px-6">
                <article className="flex flex-col gap-y-16">
@@ -79,46 +80,65 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                          {photos.length < 1 ? (
                               <Image src={photos[0]} alt={title} className="w-full" width={630} height={430} />
                          ) : (
-                              <figure className="relative">
-                                   <>
-                                        <Swiper
-                                             modules={[Pagination, Navigation, A11y]}
-                                             spaceBetween={50}
-                                             slidesPerView={1}
-                                             navigation={{
-                                                  nextEl: '.swiper-button-next',
-                                                  prevEl: '.swiper-button-prev',
-                                             }}
-                                             pagination={{
-                                                  el: '.custom-pagination',
-                                                  clickable: true,
-                                             }}
-                                             scrollbar={{ draggable: true }}
-                                        >
-                                             {photos.map((p, i) => (
-                                                  <SwiperSlide key={i}>
-                                                       <Image
-                                                            src={p}
-                                                            alt={title}
-                                                            className="w-full"
-                                                            width={630}
-                                                            height={430}
-                                                       />
-                                                  </SwiperSlide>
-                                             ))}
-                                        </Swiper>
+                              <>
+                                   <figure className="relative hidden lg:block">
+                                        <>
+                                             <Swiper
+                                                  modules={[Pagination, Navigation, A11y]}
+                                                  spaceBetween={50}
+                                                  slidesPerView={1}
+                                                  navigation={{
+                                                       nextEl: '.swiper-button-next',
+                                                       prevEl: '.swiper-button-prev',
+                                                  }}
+                                                  pagination={{
+                                                       el: '.custom-pagination',
+                                                       clickable: true,
+                                                  }}
+                                                  scrollbar={{ draggable: true }}
+                                             >
+                                                  {photos.map((p, i) => (
+                                                       <SwiperSlide key={i}>
+                                                            <Image
+                                                                 src={p}
+                                                                 alt={title}
+                                                                 className="w-full"
+                                                                 width={630}
+                                                                 height={430}
+                                                            />
+                                                       </SwiperSlide>
+                                                  ))}
+                                             </Swiper>
 
-                                        {/* Стрелки по центру */}
-                                        <div className="swiper-button-prev absolute top-1/2 left-4 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-2">
-                                             <CaretLeftIcon size={18} weight="bold" />
-                                        </div>
-                                        <div className="swiper-button-next absolute top-1/2 right-4 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-2 text-black hover:text-gray-600">
-                                             <CaretRightIcon size={18} weight="bold" />
-                                        </div>
+                                             {/* Стрелки по центру */}
+                                             <div className="swiper-button-prev absolute top-1/2 left-4 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-2">
+                                                  <CaretLeftIcon size={18} weight="bold" />
+                                             </div>
+                                             <div className="swiper-button-next absolute top-1/2 right-4 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-2 text-black hover:text-gray-600">
+                                                  <CaretRightIcon size={18} weight="bold" />
+                                             </div>
 
-                                        <div className="custom-pagination mt-2 flex justify-center gap-x-2" />
-                                   </>
-                              </figure>
+                                             <div className="custom-pagination mt-2 flex justify-center gap-x-2" />
+                                        </>
+                                   </figure>
+                                   <figure className="relative block lg:hidden">
+                                        <>
+                                             <SwiperRowLayout slidesPerViews={1.1}>
+                                                  {photos.map((p, i) => (
+                                                       <SwiperSlide key={i}>
+                                                            <Image
+                                                                 src={p}
+                                                                 alt={title}
+                                                                 className="w-full"
+                                                                 width={630}
+                                                                 height={430}
+                                                            />
+                                                       </SwiperSlide>
+                                                  ))}
+                                             </SwiperRowLayout>
+                                        </>
+                                   </figure>
+                              </>
                          )}
                     </figure>
 
