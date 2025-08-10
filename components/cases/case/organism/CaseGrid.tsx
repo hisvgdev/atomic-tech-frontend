@@ -38,11 +38,12 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
           title,
           updated_at,
           project_history,
+          services,
      } = findedCase
 
      const formatedWebsiteLink = website_link ? website_link.split('/')[2] : ''
      const getYear = new Date(updated_at).getFullYear()
-
+     console.log(services)
      return (
           <main className="h-full w-full overflow-y-auto px-3.5 lg:px-6">
                <article className="flex flex-col gap-y-16">
@@ -128,7 +129,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                          })}
                     >
                          {technologies.length > 0 && <CaseTechnologySection technologies={technologies} />}
-                         {subcategories.length > 0 && <CaseServiceSection subcategories={subcategories} />}
+                         {services.length > 0 && <CaseServiceSection services={services} />}
                          {categories.length > 0 && <CaseCategorySection categories={categories} />}
                     </section>
 

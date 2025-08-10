@@ -1,3 +1,6 @@
 export interface CaseServiceSectionProps {
-  subcategories: string[]
+  services: {
+    image: string | null;
+    name: string;
+  }[]
 }
