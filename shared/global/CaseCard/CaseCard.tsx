@@ -19,7 +19,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                               <Image
                                    src={photos[0]}
                                    alt={title}
-                                   className="h-full w-full rounded-[1.875rem] object-cover"
+                                   className="aspect-3/2 h-full w-full rounded-[1.875rem] object-cover"
                                    width={620}
                                    height={420}
                               />
