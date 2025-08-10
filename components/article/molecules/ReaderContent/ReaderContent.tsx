@@ -48,7 +48,7 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                                         ))}
                                    </div>
                                    <div className="flex flex-col gap-8 lg:hidden">
-                                        <SwiperRowLayout>
+                                        <SwiperRowLayout slidesPerViews={caseItems.length > 1 ? 1.5 : 1}>
                                              {caseItems.map((c, i) => (
                                                   <SwiperSlide key={`${c.id}-${i}`}>
                                                        <ArticleCard
