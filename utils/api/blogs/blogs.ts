@@ -1,5 +1,6 @@
 import type { BaseQueryApiParamsProps, BaseResponseApiProps } from "@/types/Api.types";
 import { buildQueryString } from "@/utils/buildQueryString/buildQueryString";
+import { CaseItemsData } from "../case-items/case-items";
 
 interface BlogsResponse extends BaseResponseApiProps {
   data: BlogsDataProps[]
@@ -14,7 +15,7 @@ export interface BlogsDataProps {
   views: number;
   average_rating: number;
   ratings_count: number;
-  case_items: string[]
+  case_items: CaseItemsData[]
   created_at: string
   updated_at: string
   related_blogs: {

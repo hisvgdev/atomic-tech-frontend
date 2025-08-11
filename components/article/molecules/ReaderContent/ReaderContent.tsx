@@ -12,7 +12,7 @@ import ReaderContentLeft from './ReaderContentLeft'
 
 export const ReaderContent: FC<ReaderContentProps> = (props) => {
      const { content, image, id, ratingsCount, relatedBlogs, caseItems } = props
-
+     console.log(relatedBlogs)
      return (
           <div className="flex w-full justify-center">
                <div
@@ -38,11 +38,13 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                                         {caseItems.map((c, i) => (
                                              <ArticleCard
                                                   key={i}
-                                                  imgCover={coverImage}
+                                                  imgCover={c.photos[0]}
                                                   title={c.title}
                                                   href={`/cases/${c.id}`}
                                                   withTag
-                                                  tag="Бизнес"
+                                                  tag={c.categories[0]}
+                                                  views={c.views || 0}
+                                                  date={c.created_at}
                                                   classNames="w-full"
                                              />
                                         ))}

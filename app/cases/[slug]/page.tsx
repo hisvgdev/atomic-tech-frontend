@@ -63,6 +63,6 @@ export default async function Case({ params }: Props) {
      const relatedCaseItem = await getRelatedCaseItem(Number(slug))
 
      if (!findedCase || !relatedCaseItem) return redirect('/not-found')
-
+     console.log(findedCase)
      return <CaseGrid findedCase={findedCase?.data} relatedCase={relatedCaseItem} />
 }

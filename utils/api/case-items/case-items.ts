@@ -14,6 +14,7 @@ export interface CaseItemsData {
   project_history: ProjectHistoryData
   categories: string[]
   subcategories: string[]
+  views?: number;
   technologies: TechnologyData[]
   services: any[]
   destinations: DestinationData[]

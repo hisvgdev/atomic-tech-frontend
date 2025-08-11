@@ -5,8 +5,8 @@ import coverImage from '@/public/assets/images/projects/secondProject.png'
 import ArticleCard from '@/shared/global/ArticleCard'
 import LeaveRequest from '@/shared/global/LeaveRequest'
 import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
+import { CaseItemsData } from '@/utils/api/case-items/case-items'
 import React, { FC } from 'react'
-import { SwiperSlide } from 'swiper/react'
 
 import ReaderContent from '../../molecules/ReaderContent'
 import { ReaderGridProps } from './ReaderGrid.types'
@@ -18,7 +18,7 @@ export const ReaderGrid: FC<ReaderGridProps> = (props) => {
           <>
                <div className="flex flex-col gap-20 px-3 lg:px-7">
                     <ReaderContent
-                         caseItems={caseItems as any[]}
+                         caseItems={caseItems as CaseItemsData[]}
                          content={content}
                          ratingsCount={ratingsCount}
                          image={image}
