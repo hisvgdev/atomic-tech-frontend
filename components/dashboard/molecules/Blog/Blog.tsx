@@ -12,7 +12,7 @@ export const Blog: FC<BlogProps> = () => {
                     <ArticleCards />
                     <BlogHeading />
                </div>
-               <hr className="" />
+               <hr />
                <BlogTechnology />
           </section>
      )

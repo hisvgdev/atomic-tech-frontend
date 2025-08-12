@@ -8,7 +8,7 @@ export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
      return (
           <div className="flex min-h-screen flex-col">
                <Header />
-               <div className="flex flex-col gap-14 lg:hidden">
+               <div className="flex flex-col lg:hidden lg:gap-14">
                     <main className="themed-scrollbar flex-1 overflow-auto overscroll-none scroll-smooth px-0">
                          {children}
                     </main>

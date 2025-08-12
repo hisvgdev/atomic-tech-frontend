@@ -25,12 +25,12 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                               />
                          )}
                          {/* benefits badge */}
-                         <div className="absolute bottom-4 left-4 flex items-center gap-4">
+                         <div className="absolute bottom-4 left-0 flex items-center gap-4 lg:left-4">
                               {destinations &&
                                    destinations.map(({ name, description }, indxBdg) => (
                                         <div
                                              key={`${indxBdg}-${name}`}
-                                             className="w-auto rounded-full bg-[#1C274C] px-3 py-2.5"
+                                             className="w-auto overflow-hidden rounded-full bg-[#1C274C] px-3 py-2.5"
                                         >
                                              <div className="flex items-center gap-3">
                                                   <div className="flex items-center justify-center rounded-full bg-white p-1">
@@ -38,7 +38,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                                                   </div>
                                                   <div className="flex flex-col">
                                                        <h4 className="text-xs font-bold text-white">{name}:</h4>
-                                                       <p className="max-w-80 truncate text-xs font-normal text-white">
+                                                       <p className="line-clamp-2 text-xs font-normal text-white lg:max-w-80 lg:truncate">
                                                             {description}
                                                        </p>
                                                   </div>

@@ -50,7 +50,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                <article className="flex flex-col gap-y-16">
                     <header className="flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-0">
                          <div className="flex max-w-72 flex-col items-start gap-4 lg:max-w-full lg:flex-row lg:items-center lg:gap-10">
-                              <h1 className="text-4xl font-bold -tracking-[0.23rem] lg:text-7xl">
+                              <h1 className="text-4xl font-bold -tracking-[0.1rem] lg:text-7xl lg:-tracking-[0.23rem]">
                                    {title.toUpperCase()}
                               </h1>
                               {description && (
@@ -77,9 +77,9 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                     </header>
 
                     <figure>
-                         {photos.length < 1 ? (
+                         {photos.length === 1 ? (
                               <Image src={photos[0]} alt={title} className="w-full" width={630} height={430} />
-                         ) : (
+                         ) : photos.length > 1 ? (
                               <>
                                    <figure className="relative hidden lg:block">
                                         <>
@@ -139,7 +139,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                         </>
                                    </figure>
                               </>
-                         )}
+                         ) : null}
                     </figure>
 
                     <section
@@ -181,16 +181,25 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
 
                     <CaseHistory projectHistory={project_history} />
 
-                    <section data-dark="false" aria-labelledby="more-cases-heading" className="flex flex-col gap-y-6">
-                         <h2 id="more-cases-heading" className="text-5xl font-bold -tracking-[0.23rem] lg:text-7xl">
-                              Больше кейсов
-                         </h2>
-                         <div className="flex items-center gap-x-4">
-                              {relatedCase.data.map((project, indx) => (
-                                   <CaseCard key={`${project.id}-${indx + 1}`} {...project} />
-                              ))}
-                         </div>
-                    </section>
+                    {relatedCase.data.length > 1 && (
+                         <section
+                              data-dark="false"
+                              aria-labelledby="more-cases-heading"
+                              className="flex flex-col gap-y-6"
+                         >
+                              <h2
+                                   id="more-cases-heading"
+                                   className="text-5xl font-bold -tracking-[0.23rem] lg:text-7xl"
+                              >
+                                   Больше кейсов
+                              </h2>
+                              <div className="grid grid-cols-1 items-center gap-x-4 lg:grid-cols-2">
+                                   {relatedCase.data.map((project, indx) => (
+                                        <CaseCard key={`${project.id}-${indx + 1}`} {...project} />
+                                   ))}
+                              </div>
+                         </section>
+                    )}
                     <AllProjectsButton link="/cases" title="Все проекты" />
                     <div className="block lg:hidden">
                          <LeaveRequest />

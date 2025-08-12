@@ -22,7 +22,7 @@ export const Grid = () => {
                     <CustomSolutions />
                     <Amenities />
                     <Blog />
-                    <div className="px-1.5 lg:px-7">
+                    <div className="px-1 lg:px-7">
                          <LeaveRequest />
                     </div>
                </div>

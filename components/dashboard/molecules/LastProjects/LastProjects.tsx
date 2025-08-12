@@ -16,8 +16,8 @@ export const LastProjects: FC<LastProjectsProps> = async (props) => {
      return (
           <section data-dark="false">
                <div className="flex flex-col gap-6 px-3.5 lg:px-7">
-                    <div className="flex w-full items-center justify-between">
-                         <h1 className="text-3xl leading-6 font-bold -tracking-[0.2rem] md:text-7xl md:leading-relaxed">
+                    <div className="flex w-full items-center justify-between gap-20 lg:gap-0">
+                         <h1 className="text-3xl leading-6 font-bold -tracking-[0.1rem] md:text-7xl md:leading-relaxed lg:-tracking-[0.2rem]">
                               Последние проекты
                          </h1>
                          <Chip number="1" title="Кейсы" />

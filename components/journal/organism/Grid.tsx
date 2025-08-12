@@ -63,7 +63,7 @@ export const Grid = () => {
      const isLoading = isBlogCategoriesLoading || isJournalLoading
 
      const now = useMemo(() => new Date(), [])
-     const sevenDaysAgo = useMemo(() => new Date(now.getTime() - 4 * 24 * 60 * 60 * 1000), [now])
+     const sevenDaysAgo = useMemo(() => new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000), [now])
 
      const newPosts = useMemo(
           () =>
@@ -132,16 +132,16 @@ export const Grid = () => {
                     </section>
                ) : (
                     <>
-                         <NewSection newJournalData={newPosts.slice(newPosts.length - 6)} />
-                         <NeuralNetworksArticle neuralPosts={neuralPosts} />
+                         {newPosts.length > 0 && <NewSection newJournalData={newPosts.slice(newPosts.length - 6)} />}
+                         {neuralPosts.length > 0 && <NeuralNetworksArticle neuralPosts={neuralPosts} />}
                          <OtherTags />
-                         <BlockchainSection blockchainData={blockchainPosts} />
+                         {blockchainPosts.length > 0 && <BlockchainSection blockchainData={blockchainPosts} />}
                          <MailingSection />
-                         <LifestyleSection lifestyleData={lifestylePosts} />
-                         <SpecialProjectSection specialProjects={specialProjects} />
-                         <DesignSection designProjectData={designPosts} />
-                         <MarketingSection marketingPosts={marketingPosts} />
-                         <BusinessSection businessProjectData={businessPosts} />
+                         {lifestylePosts.length > 0 && <LifestyleSection lifestyleData={lifestylePosts} />}
+                         {specialProjects.length > 0 && <SpecialProjectSection specialProjects={specialProjects} />}
+                         {designPosts.length > 0 && <DesignSection designProjectData={designPosts} />}
+                         {marketingPosts.length > 0 && <MarketingSection marketingPosts={marketingPosts} />}
+                         {businessPosts.length > 0 && <BusinessSection businessProjectData={businessPosts} />}
                     </>
                )}
                <AllProjectsButton link="/articles" title="Все статьи" />
