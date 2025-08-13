@@ -38,7 +38,7 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                                         {caseItems.map((c, i) => (
                                              <ArticleCard
                                                   key={i}
-                                                  imgCover={c.photos[0]}
+                                                  imgCover={c.photos[0] || null}
                                                   title={c.title}
                                                   href={`/cases/${c.id}`}
                                                   withTag

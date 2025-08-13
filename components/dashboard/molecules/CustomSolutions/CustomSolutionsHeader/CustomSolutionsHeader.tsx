@@ -76,10 +76,10 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                onChange: customSolutionReview,
           },
           defaultValues: {
-               name: 'Константин Зубровски',
-               company: 'Солвит',
+               name: '',
+               company: '',
                rating: 5,
-               review_text: 'Отличный сервис! Все было сделано качественно и в срок.',
+               review_text: '',
                agreement_accepted: true,
           } as CustomSolutionReviewValidate,
           onSubmit: (data) => {
@@ -128,6 +128,7 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                                    </DialogTrigger>
                                    <DialogContent className="sm:max-w-md">
                                         <form
+                                             className="flex flex-col gap-4"
                                              onSubmit={(e) => {
                                                   e.preventDefault()
                                                   form.handleSubmit()
@@ -149,6 +150,7 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                                                                  <>
                                                                       <Input
                                                                            id="name"
+                                                                           placeholder="Константин"
                                                                            name={field.name}
                                                                            value={field.state.value}
                                                                            onChange={(e) =>
@@ -171,6 +173,7 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                                                                  <>
                                                                       <Input
                                                                            id="company"
+                                                                           placeholder="Солвит"
                                                                            name={field.name}
                                                                            value={field.state.value}
                                                                            onChange={(e) =>
@@ -224,6 +227,7 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                                                                            minLength={20}
                                                                            value={field.state.value}
                                                                            name={field.name}
+                                                                           placeholder="Отличный сервис! Все было сделано качественно и в срок."
                                                                            onChange={(e) =>
                                                                                 field.handleChange(e.target.value)
                                                                            }
@@ -322,6 +326,7 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
                               </DialogTrigger>
                               <DialogContent className="sm:max-w-md">
                                    <form
+                                        className="flex flex-col gap-4"
                                         onSubmit={(e) => {
                                              e.preventDefault()
                                              form.handleSubmit()

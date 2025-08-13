@@ -13,7 +13,6 @@ import { ReaderGridProps } from './ReaderGrid.types'
 
 export const ReaderGrid: FC<ReaderGridProps> = (props) => {
      const { caseItems, content, image, id, ratingsCount, relatedBlogs } = props
-
      return (
           <>
                <div className="flex flex-col gap-20 px-3 lg:px-7">
