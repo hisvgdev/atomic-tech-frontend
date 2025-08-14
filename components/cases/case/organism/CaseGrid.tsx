@@ -193,7 +193,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                               >
                                    Больше кейсов
                               </h2>
-                              <div className="grid grid-cols-1 items-center gap-x-4 lg:grid-cols-2">
+                              <div className="grid grid-cols-1 items-center gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
                                    {relatedCase.data.map((project, indx) => (
                                         <CaseCard key={`${project.id}-${indx + 1}`} {...project} />
                                    ))}

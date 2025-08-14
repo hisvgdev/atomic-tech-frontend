@@ -11,7 +11,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
           props
 
      return (
-          <Card className="h-full w-full border-none shadow-none">
+          <Card className="h-full max-w-3xl border-none shadow-none">
                <CardContent className="flex h-full w-full flex-col px-4">
                     {/* cover image */}
                     <div className="ring-primary-200 relative h-full w-full overflow-hidden rounded-[1.875rem] ring">

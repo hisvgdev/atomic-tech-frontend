@@ -27,8 +27,8 @@ export const ReaderGrid: FC<ReaderGridProps> = (props) => {
                     {Array.isArray(relatedBlogs) && relatedBlogs.length > 0 ? (
                          <div className="flex flex-col gap-y-8">
                               <h2 className="text-4xl font-bold lg:text-5xl">Следующие темы</h2>
-                              <div className="hidden w-full items-center gap-x-3 lg:flex">
-                                   {relatedBlogs.map((c, i) => (
+                              <div className="hidden grid-cols-1 items-center gap-4 md:grid lg:grid-cols-2 xl:grid-cols-3">
+                                   {[...relatedBlogs, ...relatedBlogs, ...relatedBlogs].map((c, i) => (
                                         <ArticleCard
                                              key={i}
                                              imgCover={coverImage}

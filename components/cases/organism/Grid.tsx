@@ -37,8 +37,8 @@ export const Grid = () => {
                     category_id: category,
                     usluga_id: usluga,
                     technology_id: technology,
-                    limit: 2,
-                    offset: (currentPage - 1) * 2,
+                    limit: 6,
+                    offset: (currentPage - 1) * 6,
                }),
           staleTime: 10000,
      })
