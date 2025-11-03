@@ -63,7 +63,7 @@ export const BenefitsLeftSide: FC<BenefitsLeftSideProps> = () => {
                                         animate={{ opacity: isHovered ? 1 : 0 }}
                                         transition={{ duration: 0.3 }}
                                         style={{
-                                             background: `radial-gradient(${gradientAngle}, #00080A 74.04%, #0085A6 89.42%, #A4EDFF 100%)`,
+                                             background: `radial-gradient(${gradientAngle}, #00080A 74.04%, #006A74 89.42%, #C2FFF9 100%)`,
                                         }}
                                    />
 

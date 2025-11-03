@@ -1,33 +1,33 @@
 @utility themed-scrollbar {
-    &::-webkit-scrollbar {
-        width: auto;
-        height: auto;
-    }
+     &::-webkit-scrollbar {
+          width: auto;
+          height: auto;
+     }
 
-    &::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
+     &::-webkit-scrollbar-track {
+          background-color: transparent;
+     }
 
-    &::-webkit-scrollbar-thumb {
-        border-radius: 9999px;
-        /* background-color: hsl(226 12% 28% / 0.04); */
-        background-color: unset;
-        background-clip: padding-box;
-        border: 0.32rem solid transparent;
-    }
+     &::-webkit-scrollbar-thumb {
+          border-radius: 9999px;
+          /* background-color: hsl(226 12% 28% / 0.04); */
+          background-color: unset;
+          background-clip: padding-box;
+          border: 0.32rem solid transparent;
+     }
 
-    &:hover {
-        &::-webkit-scrollbar-thumb {
-            background-color: oklch(38% 0 270 / 0.2);
-        }
-    }
+     &:hover {
+          &::-webkit-scrollbar-thumb {
+               background-color: oklch(38% 0 270 / 0.2);
+          }
+     }
 }
 
 @layer utilities {
-    .bg-gradient-main {
-        background: linear-gradient(104.62deg, #00636f 0%, #000809 47.79%);
-    }
-    .bg-gradient-amenties {
-        background: linear-gradient(158.77deg, #00636f 0%, #000809 51.26%);
-    }
+     .bg-gradient-main {
+          background: linear-gradient(104.62deg, #00636f 0%, #000809 47.79%);
+     }
+     .bg-gradient-amenties {
+          background: linear-gradient(158.77deg, #00636f 0%, #000809 51.26%);
+     }
 }

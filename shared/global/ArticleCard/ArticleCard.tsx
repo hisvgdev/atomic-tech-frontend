@@ -1,7 +1,7 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { EyeIcon, StarIcon } from '@phosphor-icons/react/dist/ssr'
+import { Card } from '@/components/ui/card'
+import { StarIcon } from '@phosphor-icons/react/dist/ssr'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC } from 'react'
@@ -14,83 +14,53 @@ import { ArticleCardProps } from './ArticleCard.types'
 const RatingStars: FC<{ value?: number }> = ({ value = 0 }) => (
      <div className="flex items-center gap-2">
           {Array.from({ length: 5 }).map((_, i) => (
-               <StarIcon key={i} size={16} fill={i < value ? '#51535B' : '#D6D6D6'} weight="fill" />
+               <StarIcon key={i} size={16} fill={i < value ? '#E9E9E9' : '#767676'} weight="fill" />
           ))}
      </div>
 )
 
 export const ArticleCard: FC<ArticleCardProps> = (props) => {
-     const {
-          title,
-          date,
-          imgCover,
-          classNames,
-          hasRating = true,
-          ratingPosition = 'top',
-          rating,
-          tag,
-          withTag = false,
-          views,
-          href,
-     } = props
-     const showTopRating = hasRating && ratingPosition === 'top'
+     const { title, imgCover, classNames, hasRating = true, ratingPosition = 'bottom', rating, href } = props
+
      const showBottomRating = hasRating && ratingPosition === 'bottom'
 
      return (
-          <Card className={cn(articleCardVariants({ withTag }), classNames)}>
-               <CardHeader>
-                    {imgCover && (
-                         <CardTitle>
-                              <Image
-                                   src={imgCover}
-                                   alt={title}
-                                   className="aspect-[16/9] w-full rounded-3xl object-cover"
-                                   width={320}
-                                   height={240}
-                              />
-                         </CardTitle>
-                    )}
+          <Card
+               className={cn(
+                    'group relative h-80 cursor-pointer overflow-hidden rounded-4xl',
+                    articleCardVariants({ withTag: false }),
+                    classNames,
+               )}
+          >
+               {imgCover && (
+                    <Image
+                         src={imgCover}
+                         alt={title}
+                         fill
+                         className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+               )}
 
-                    <CardDescription>
-                         <div className="flex flex-wrap items-center gap-x-2">
-                              {tag && (
-                                   <div className="rounded-full border border-[#E6E6E6] px-5 py-2">
-                                        <span className="text-xs font-bold text-[#000809]">{tag}</span>
-                                   </div>
-                              )}
+               <div className="absolute inset-0 bg-black/40 transition-colors duration-300 group-hover:bg-black/50" />
 
-                              <span className="text-sm font-light">
-                                   {new Date(date || '').toLocaleDateString('ru-RU', {
-                                        year: 'numeric',
-                                        month: 'long',
-                                        day: '2-digit',
-                                   }) || '-'}
-                              </span>
-
-                              <div className="flex items-center">
-                                   <EyeIcon size={18} color="#7D7D7D" />
-                                   <span className="text-sm text-[#737373]">{views}</span>
-                              </div>
-
-                              {!withTag && showTopRating && <RatingStars value={rating} />}
+               <div className="relative z-10 flex h-full flex-col justify-between p-4 text-white">
+                    <div className="flex justify-between">
+                         <div className="rounded-full bg-[#252A2B] p-2 px-3 text-xs font-semibold backdrop-blur-sm">
+                              Бизнес
                          </div>
-                    </CardDescription>
-               </CardHeader>
+                         {showBottomRating && <RatingStars value={rating} />}
+                    </div>
 
-               <CardContent className="flex flex-1 flex-col gap-y-3">
-                    {href ? (
-                         <Link
-                              href={href}
-                              className="line-clamp-1 text-lg font-semibold text-black transition-all hover:underline"
-                         >
-                              {title}
-                         </Link>
-                    ) : (
-                         <h4 className="line-clamp-1 text-lg font-semibold text-black">{title}</h4>
-                    )}
-
-                    {showBottomRating && <RatingStars value={rating} />}
-               </CardContent>
+                    <div className="flex flex-col items-start gap-3">
+                         {href ? (
+                              <Link href={href} className="text-lg leading-tight font-semibold hover:underline">
+                                   {title}
+                              </Link>
+                         ) : (
+                              <h4 className="text-lg leading-tight font-semibold">{title}</h4>
+                         )}
+                    </div>
+               </div>
           </Card>
      )
 }

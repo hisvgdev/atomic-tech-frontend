@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { clientRequest } from '@/utils/api/actions/client-request/client-request'
+import { clientRequest } from '@/utils/api/actions/client-request'
 import { useForm } from '@tanstack/react-form'
 import React, { FC } from 'react'
 import toast from 'react-hot-toast'
@@ -25,29 +25,29 @@ export const LeaveRequest: FC<LeaveRequestProps> = (props) => {
                nickname: '',
                terms: true,
           } as LeaveRequestPayload,
-          onSubmit: async (data) => {
-               const { email, phone, nickname } = data.value
-               const cleanedPhone = phone.replace(/[^\d+]/g, '')
+          // onSubmit: async (data) => {
+          //      const { email, phone, nickname } = data.value
+          //      const cleanedPhone = phone.replace(/[^\d+]/g, '')
 
-               const formData = new FormData()
-               formData.set('email', email)
-               formData.set('tel', cleanedPhone)
-               formData.set('nickname', nickname as string)
+          //      const formData = new FormData()
+          //      formData.set('email', email)
+          //      formData.set('tel', cleanedPhone)
+          //      formData.set('nickname', nickname as string)
 
-               const promise = clientRequest(formData)
+          //      const promise = clientRequest(formData)
 
-               toast.promise(promise, {
-                    loading: 'Пожалуйста подождите мы записываем вашу заявку',
-                    success: 'Вы успешно оставили заявку, мы обязательно ее обработаем и дадим вам обратную связь!',
-                    error: 'Произошла ошибка, пожалуйста обратитесь в тех.поддержку!',
-               })
+          //      toast.promise(promise, {
+          //           loading: 'Пожалуйста подождите мы записываем вашу заявку',
+          //           success: 'Вы успешно оставили заявку, мы обязательно ее обработаем и дадим вам обратную связь!',
+          //           error: 'Произошла ошибка, пожалуйста обратитесь в тех.поддержку!',
+          //      })
 
-               try {
-                    await promise
-               } catch (err) {
-                    console.error(err)
-               }
-          },
+          //      try {
+          //           await promise
+          //      } catch (err) {
+          //           console.error(err)
+          //      }
+          // },
      })
 
      return (

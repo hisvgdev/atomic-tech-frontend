@@ -12,7 +12,10 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { technologies as techIcons } from '@/constants/tech.constants'
 import { getCaseItems } from '@/utils/api/case-items/case-items'
 import { getCategories } from '@/utils/api/categories/categories'
+import { getPosts } from '@/utils/api/posts/posts'
 import { getServices } from '@/utils/api/services/services'
+import { getTaxonomyType } from '@/utils/api/taxonomies/taxonomy-types/taxonomy-type/taxonomy-type'
+import { getTaxonomyTypes } from '@/utils/api/taxonomies/taxonomy-types/taxonomy-types'
 import { getTechnologies } from '@/utils/api/technologies/technologies'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
@@ -30,42 +33,27 @@ export const Grid = () => {
      const technology = searchParams.get('technology_id') || ''
      const [currentPage, setCurrentPage] = useState(1)
 
-     const { data: caseItems, isPending: isCasesPending } = useQuery({
-          queryKey: ['caseItems', category, usluga, technology, currentPage],
-          queryFn: () =>
-               getCaseItems({
-                    category_id: category,
-                    usluga_id: usluga,
-                    technology_id: technology,
-                    limit: 6,
-                    offset: (currentPage - 1) * 6,
-               }),
-          staleTime: 10000,
+     // const { data: caseItems, isPending: isCasesPending } = useQuery({
+     //      queryKey: ['caseItems', category, usluga, technology, currentPage],
+     //      queryFn: () =>
+     //           getCaseItems({
+     //                offset: (currentPage - 1) * 6,
+     //           }),
+     //      staleTime: 10000,
+     // })
+
+     const { data: taxonomyTypesData, isLoading: taxonomyTypesLoading } = useQuery({
+          queryKey: ['taxonomy-types'],
+          queryFn: () => getTaxonomyTypes(),
+     })
+     const { data: caseItemsData, isLoading: isCaseItemsDataLoading } = useQuery({
+          queryKey: ['case-items'],
+          queryFn: () => getPosts({ filter: { status: 'published' } }),
      })
 
-     const { data: servicesData, isPending: isServicesPending } = useQuery({
-          queryKey: ['services'],
-          queryFn: getServices,
-          staleTime: Infinity,
-     })
-
-     const { data: technologiesData, isPending: isTechnologiesPending } = useQuery({
-          queryKey: ['technologies'],
-          queryFn: async () => getTechnologies(),
-          staleTime: Infinity,
-     })
-
-     const { data: categoriesData, isPending: isCategoriesPending } = useQuery({
-          queryKey: ['categories'],
-          queryFn: async () => getCategories(),
-          staleTime: Infinity,
-     })
-
-     const isLoading = isCasesPending || isServicesPending || isTechnologiesPending || isCategoriesPending
-
-     if (isLoading || !technologiesData || !categoriesData || !servicesData) {
+     if (isCaseItemsDataLoading || taxonomyTypesLoading) {
           return (
-               <div className="flex w-full flex-wrap items-center gap-8">
+               <div className="flex w-full flex-wrap items-center justify-center gap-8">
                     {Array.from({ length: CASE_LIMITS }).map((_, idx) => (
                          <div key={idx} className="flex flex-col space-y-3">
                               <Skeleton className="h-96 min-w-3xl rounded-xl" />
@@ -79,27 +67,24 @@ export const Grid = () => {
           )
      }
 
-     const matchedTechnologies = technologiesData.data.map((technology) => {
-          const matchedTech = techIcons.find((tech) => tech.name.toLowerCase() === technology.name.toLowerCase())
-          return {
-               id: technology.id,
-               name: technology.name,
-               icon: matchedTech?.icon,
-          }
-     })
+     // const matchedTechnologies = technologiesData.data.map((technology) => {
+     //      const matchedTech = techIcons.find((tech) => tech.name.toLowerCase() === technology.name.toLowerCase())
+     //      return {
+     //           id: technology.id,
+     //           name: technology.name,
+     //           icon: matchedTech?.icon,
+     //      }
+     // })
 
-     const allCases = caseItems?.data.flatMap((page) => page ?? []) || []
+     // const allCases = caseItems?.data.flatMap((page) => page ?? []) || []
 
      return (
           <div className="flex flex-col px-4 lg:gap-y-20 lg:px-6 lg:py-20">
-               <CaseHeading
-                    matchedTechnologies={matchedTechnologies}
-                    categoriesData={categoriesData.data}
-                    servicesData={servicesData.data}
-                    lengthOfCases={allCases.length}
-               />
-               <Cases cases={allCases} />
-               {allCases.length > 0 && (
+               {/* <CaseHeading
+                    lengthOfCases={0}
+               /> */}
+               {/* <Cases cases={allCases} /> */}
+               {/* {allCases.length > 0 && (
                     <Pagination>
                          <PaginationContent>
                               <PaginationItem>
@@ -130,7 +115,7 @@ export const Grid = () => {
                               </PaginationItem>
                          </PaginationContent>
                     </Pagination>
-               )}
+               )} */}
           </div>
      )
 }

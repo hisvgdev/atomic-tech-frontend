@@ -14,8 +14,10 @@ export const Grid = () => {
      return (
           <div className="h-full w-full overflow-y-auto">
                <div className="flex flex-col gap-4 lg:gap-16">
-                    <Hero />
-                    <Benefits />
+                    <div>
+                         <Hero />
+                         <Benefits />
+                    </div>
                     <LastProjects />
                     <AllProjectsButton link="/cases" />
                     <Showreel />

@@ -60,7 +60,7 @@ export const CustomSolutionsFeedback = () => {
 
      if (isReviewsLoading || !reviewsData?.data) {
           return (
-               <div className="flex h-96 w-full flex-col gap-8">
+               <div className="flex h-full w-full flex-col gap-8">
                     <div>
                          <Swiper
                               slidesPerView="auto"
@@ -81,28 +81,26 @@ export const CustomSolutionsFeedback = () => {
                               ))}
                          </Swiper>
                     </div>
-                    <div>
-                         <Swiper
-                              slidesPerView="auto"
-                              spaceBetween={12}
-                              loop={true}
-                              speed={3000}
-                              autoplay={{
-                                   delay: 1,
-                                   disableOnInteraction: false,
-                                   reverseDirection: true,
-                              }}
-                              direction="horizontal"
-                              modules={[Autoplay]}
-                              className="w-full"
-                         >
-                              {Array.from({ length: 12 }).map((_, index) => (
-                                   <SwiperSlide key={`slide-${index}`} style={{ width: 'auto' }}>
-                                        <Skeleton className="h-48 w-64 rounded-xl bg-gray-200" />
-                                   </SwiperSlide>
-                              ))}
-                         </Swiper>
-                    </div>
+                    <Swiper
+                         slidesPerView="auto"
+                         spaceBetween={12}
+                         loop={true}
+                         speed={3000}
+                         autoplay={{
+                              delay: 1,
+                              disableOnInteraction: false,
+                              reverseDirection: true,
+                         }}
+                         direction="horizontal"
+                         modules={[Autoplay]}
+                         className="w-full"
+                    >
+                         {Array.from({ length: 12 }).map((_, index) => (
+                              <SwiperSlide key={`slide-${index}`} style={{ width: 'auto' }}>
+                                   <Skeleton className="h-48 w-64 rounded-xl bg-gray-200" />
+                              </SwiperSlide>
+                         ))}
+                    </Swiper>
                </div>
           )
      }

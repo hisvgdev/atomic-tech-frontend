@@ -1,6 +1,6 @@
 'use client'
 
-import { blogRating } from '@/utils/actions/blog-rating.action'
+import { blogRating } from '@/utils/api/actions/blog-rating.action'
 import { StarIcon } from '@phosphor-icons/react/dist/ssr'
 import React, { FC, useState } from 'react'
 import toast from 'react-hot-toast'

@@ -7,11 +7,11 @@ export interface TopRatedCasesItemResponse extends BaseResponseApiProps {
   data: CaseItemsData[];
 }
 
-type TopRatedQueryParams = Pick<BaseQueryApiParamsProps, 'limit' | 'offset'>
+// type TopRatedQueryParams = Pick<BaseQueryApiParamsProps, 'limit' | 'offset'>
 
 
 export const getTopRatedCasesItem = async (
-  query?: TopRatedQueryParams
+  query?: BaseQueryApiParamsProps
 ): Promise<TopRatedCasesItemResponse | undefined> => {
   try {
     const queryString = buildQueryString(query);

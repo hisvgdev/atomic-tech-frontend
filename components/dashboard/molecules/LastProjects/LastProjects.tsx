@@ -1,3 +1,4 @@
+import project from '@/public/assets/images/projects/secondProject.png'
 import CaseCard from '@/shared/global/CaseCard'
 import Chip from '@/shared/global/Chip'
 import { getCaseItems } from '@/utils/api/case-items/case-items'
@@ -7,11 +8,11 @@ import { LastProjectsProps } from './LastProjects.types'
 
 export const LastProjects: FC<LastProjectsProps> = async (props) => {
      const {} = props
-     const lastProject = await getCaseItems({ limit: 4, offset: 0 })
+     const lastProject = await getCaseItems() // await getCaseItems({ limit: 4, offset: 0 })
 
-     if (!lastProject?.data) return null
+     // if (!lastProject?.data) return null
 
-     const { data } = lastProject
+     // const { data } = lastProject
 
      return (
           <section data-dark="false">
@@ -23,8 +24,34 @@ export const LastProjects: FC<LastProjectsProps> = async (props) => {
                          <Chip number="1" title="Кейсы" />
                     </div>
                     <div className="grid w-full grid-cols-1 items-center justify-center gap-4 lg:min-w-sm lg:grid-cols-2">
-                         {data.map((project, indx) => {
+                         {/* {data.map((project, indx) => {
                               return <CaseCard key={`${project.id}-${indx + 1}`} {...project} />
+                         })} */}
+                         {Array.from({ length: 4 }).map((_, indx) => {
+                              return (
+                                   <CaseCard
+                                        key={`${indx + 1}`}
+                                        website_link="/"
+                                        categories={['Категория']}
+                                        description="Здесь максимум 80 знаков писать"
+                                        title="В заголовке максимум 40 знаков писать."
+                                        subcategories={['Подкатегория']}
+                                        photos={[project.src]}
+                                        id={indx}
+                                        destinations={[
+                                             {
+                                                  name: 'Увеличение продаж',
+                                                  description: '+260% в первый квартал после запуска',
+                                             },
+                                        ]}
+                                        technologies={[
+                                             {
+                                                  name: 'c++',
+                                                  image: null,
+                                             },
+                                        ]}
+                                   />
+                              )
                          })}
                     </div>
                </div>

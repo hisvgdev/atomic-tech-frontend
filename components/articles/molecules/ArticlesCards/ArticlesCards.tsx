@@ -36,9 +36,10 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
      const { data: blogCategoriesData, isLoading: isBlogCategoriesDataLoading } = useQuery({
           queryKey: ['blog-categories', blogCategoryId],
           queryFn: async () =>
-               await getBlogCategories({
-                    search: blogCategoryId,
-               }),
+               // await getBlogCategories({
+               //      search: blogCategoryId,
+               // }),
+               await getBlogCategories(),
           staleTime: 3000,
      })
 
@@ -136,7 +137,7 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
                               ))}
                     </div>
                )}
-               {Array.isArray(blogsData?.data) && blogsData?.data.length > 0 && (
+               {/* {Array.isArray(blogsData?.data) && blogsData?.data.length > 0 && (
                     <Pagination>
                          <PaginationContent>
                               <PaginationItem>
@@ -167,7 +168,7 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
                               </PaginationItem>
                          </PaginationContent>
                     </Pagination>
-               )}
+               )} */}
           </div>
      )
 }

@@ -30,7 +30,7 @@ export const BenefitsRightSide: FC<BenefitsRightSideProps> = (props) => {
                     </p>
                </div>
                <MotionButton
-                    className="relative flex w-full cursor-pointer items-center overflow-hidden rounded-full py-8"
+                    className="relative flex h-fit w-full cursor-pointer items-center overflow-hidden rounded-full py-6"
                     style={{
                          transition: 'border-color 0.3s ease',
                          background:
@@ -49,13 +49,19 @@ export const BenefitsRightSide: FC<BenefitsRightSideProps> = (props) => {
                          className="pointer-events-none absolute inset-0 rounded-full"
                          animate={{ opacity: isHover ? 1 : 0 }}
                          transition={{ duration: 0.3 }}
-                         style={{ backgroundColor: '#000' }}
+                         style={{ backgroundColor: 'black' }}
                     />
 
                     <span className="relative text-lg font-medium text-white" style={{ zIndex: 10 }}>
                          Обсудить проект
                     </span>
-                    <ArrowRightIcon size={32} color="white" className="relative z-10" />
+                    <ArrowRightIcon
+                         size={32}
+                         color="white"
+                         className="relative z-10 shrink-0"
+                         style={{ width: 28, height: 28 }}
+                         weight="regular"
+                    />
                </MotionButton>
           </div>
      )

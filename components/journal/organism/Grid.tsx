@@ -37,7 +37,9 @@ export const Grid = () => {
 
      const { data: blogCategoriesData, isLoading: isBlogCategoriesLoading } = useQuery({
           queryKey: ['blog-categories', blogCategoryQuery],
-          queryFn: () => getBlogCategories({ search: blogCategoryQuery }),
+          // queryFn: () => getBlogCategories({ search: blogCategoryQuery }),
+          queryFn: () => getBlogCategories(),
+
           staleTime: 3000,
      })
 

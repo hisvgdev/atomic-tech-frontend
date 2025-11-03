@@ -13,9 +13,9 @@ export interface TechnologiesDataProps {
   updated_at: string;
 }
 
-type TechnologiesQueryParams = Pick<BaseQueryApiParamsProps, 'limit' | 'offset'>
+// type TechnologiesQueryParams = Pick<BaseQueryApiParamsProps, 'limit' | 'offset'>
 
-export const getTechnologies = async (query?: TechnologiesQueryParams): Promise<TechnologiesResponse | undefined> => {
+export const getTechnologies = async (query?: BaseQueryApiParamsProps): Promise<TechnologiesResponse | undefined> => {
   try {
     const queryString = buildQueryString(query);
 

@@ -12,9 +12,8 @@ export interface BlogCategoriesDataProps {
   updated_at: string
 }
 
-type CategoriesQueryParams = Pick<BaseQueryApiParamsProps, 'search' | 'page'>
 
-export const getBlogCategories = async (query?: CategoriesQueryParams): Promise<BlogCategoriesResponse | undefined> => {
+export const getBlogCategories = async (query?: BaseQueryApiParamsProps): Promise<BlogCategoriesResponse | undefined> => {
   try {
     const queryString = buildQueryString(query);
 

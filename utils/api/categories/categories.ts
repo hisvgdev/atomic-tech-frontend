@@ -13,9 +13,9 @@ export interface CategoriesDataProps {
   updated_at: string
 }
 
-type CategoriesQueryParams = Pick<BaseQueryApiParamsProps, 'limit' | 'offset' | 'name' | 'sort_by' | 'sort_direction'>
+// type CategoriesQueryParams = Pick<BaseQueryApiParamsProps, 'limit' | 'offset' | 'name' | 'sort_by' | 'sort_direction'>
 
-export const getCategories = async (query?: CategoriesQueryParams): Promise<CategoriesResponse | undefined> => {
+export const getCategories = async (query?: BaseQueryApiParamsProps): Promise<CategoriesResponse | undefined> => {
   try {
     const queryString = buildQueryString(query);
 

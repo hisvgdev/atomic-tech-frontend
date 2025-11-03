@@ -19,53 +19,64 @@ export const useBlogCategories = () => {
 }
 
 export const Tags: FC<TagsProps> = () => {
-     const { data, isLoading, isError } = useBlogCategories()
      const pathname = usePathname()
      const searchParams = useSearchParams()
      const getActiveItem = searchParams.get('blog_category_id') || ''
      const [showAll, setShowAll] = useState(false)
 
-     if (isLoading || isError || !data?.data) {
-          return (
-               <div className="grid grid-cols-3 gap-2.5 pt-20 lg:flex lg:items-center lg:justify-center lg:gap-x-20 lg:pt-0">
-                    {Array.from({ length: 8 }).map((_, indx) => (
-                         <Skeleton key={`${indx}`} className="h-10 w-full rounded-full" />
-                    ))}
-               </div>
-          )
-     }
+     // if (isLoading || isError || !data?.data) {
+     //      return (
+     //           <div className="grid grid-cols-3 gap-2.5 pt-20 lg:flex lg:items-center lg:justify-center lg:gap-x-20 lg:pt-0">
+     //                {Array.from({ length: 8 }).map((_, indx) => (
+     //                     <Skeleton key={`${indx}`} className="h-10 w-full rounded-full" />
+     //                ))}
+     //           </div>
+     //      )
+     // }
 
-     const dataCategories = data.data
+     const dataCategories = [
+          'Нейросети',
+          'Email',
+          'SMM',
+          'Дизайн',
+          'Лайфстайл',
+          'Контент',
+          'Брендинг',
+          'Развитие',
+          'Бизнес',
+          'Реферальный трафик',
+          'Разработка',
+          'Маркетинг',
+     ]
      const visibleCategories = showAll ? dataCategories : dataCategories.slice(0, 6)
 
      return (
-          <div className="grid grid-cols-3 gap-4 px-4 pt-20 lg:mx-auto lg:flex lg:max-w-7xl lg:flex-wrap lg:items-center lg:justify-center lg:gap-x-12 lg:gap-y-6 lg:pt-0">
-               {visibleCategories.map(({ id, name }, indx) => {
-                    const isActive = getActiveItem === name
-                    const baseClasses = 'transition-all cursor-pointer'
-                    const activeClasses = isActive ? 'text-black font-semibold' : 'hover:text-black/50'
+          <div className="grid grid-cols-3 gap-4 px-4 pt-20 lg:mx-auto lg:flex lg:max-w-full lg:flex-wrap lg:items-center lg:justify-center lg:gap-x-5 lg:gap-y-6 lg:pt-0">
+               {visibleCategories.map((t, indx) => {
+                    // const isActive = getActiveItem === name
+                    // const activeClasses = isActive ? 'text-black font-semibold' : 'hover:text-black/50'
 
                     return (
-                         <React.Fragment key={`${name}-${indx}-${id}`}>
+                         <React.Fragment key={`${t}-${indx}-${indx}`}>
                               <Link
                                    href={
                                         pathname === '/articles'
-                                             ? `/articles?blog_category_id=${name}`
-                                             : `/journal?blog_category_id=${name}`
+                                             ? `/articles?blog_category_id=${t}`
+                                             : `/journal?blog_category_id=${t}`
                                    }
-                                   className={`hidden lg:block ${baseClasses} ${activeClasses}`}
+                                   className={`hidden cursor-pointer font-medium transition-all hover:bg-black hover:text-white lg:block lg:rounded-full lg:border lg:border-[#20202033] lg:px-5 lg:py-2.5`}
                               >
-                                   {name}
+                                   {t}
                               </Link>
                               <Link
                                    href={
                                         pathname === '/articles'
-                                             ? `/articles?category_id=${name}`
-                                             : `/journal?blog_category_id=${name}`
+                                             ? `/articles?category_id=${t}`
+                                             : `/journal?blog_category_id=${t}`
                                    }
-                                   className={`flex items-center justify-center rounded-full bg-[#EBEBEB] py-2.5 text-center text-sm lg:hidden ${isActive ? 'ring-2 ring-black' : ''}`}
+                                   className={`flex items-center justify-center rounded-full border border-[#20202033] px-5 py-2.5 text-center text-sm transition-all hover:bg-black hover:text-white lg:hidden`} // ${isActive ? 'ring-2 ring-black' : ''}
                               >
-                                   {name}
+                                   {t}
                               </Link>
                          </React.Fragment>
                     )

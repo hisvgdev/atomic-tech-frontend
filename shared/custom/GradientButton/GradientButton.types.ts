@@ -10,4 +10,5 @@ export interface GradientButtonProps {
   classNames?: HTMLProps<HTMLElement>["className"];
   isWhite?: boolean;
   secondClassnames?: HTMLProps<HTMLElement>['className']
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
