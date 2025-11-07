@@ -111,6 +111,7 @@ export const Footer = () => {
                                         <GradientButton
                                              isWhite
                                              title="Связать с менеджером"
+                                             titleSize="text-md"
                                              classNames="rounded-full py-8"
                                              routePath="https://t.me/Atomic_Code"
                                              hasIsRoute

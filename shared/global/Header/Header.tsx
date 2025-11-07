@@ -24,6 +24,8 @@ export const Header = () => {
      const triggerRef = useRef<HTMLDivElement | null>(null)
      const isMobile = useIsMobile()
 
+     const isSpecialPage = ['/cases', '/journal']
+
      const handleMenuClick = () => {
           if (menuClick) {
                setMenuClick(false)
@@ -75,15 +77,24 @@ export const Header = () => {
      }, [pathname])
 
      useEffect(() => {
-          setIsOnDark(false)
           setMenuClick(false)
+
+          const firstDarkSection = document.querySelector('section[data-dark="true"]')
+
+          if (firstDarkSection) {
+               setIsOnDark(true)
+          } else {
+               setIsOnDark(false)
+          }
      }, [pathname])
 
      return (
           <>
                <div ref={triggerRef} className="absolute top-0 h-8 w-full" />
 
-               <div className="fixed top-0 z-50 flex w-full items-center justify-center pt-5 pb-10 lg:pb-0">
+               <div
+                    className={`top-0 z-50 flex w-full items-center justify-center pt-5 pb-10 lg:pb-0 ${isSpecialPage.includes(pathname) ? 'sticky' : 'fixed'}`}
+               >
                     <motion.div
                          className={cn(
                               'min-w-96 rounded-full p-3.5 backdrop-blur-lg',
@@ -155,7 +166,7 @@ export const Header = () => {
                                                                            <Link
                                                                                 href={link.href}
                                                                                 className={cn(
-                                                                                     'relative z-10 rounded-full px-4 py-2 font-bold transition-colors duration-300 hover:text-white',
+                                                                                     'relative z-10 rounded-full px-4 py-2 font-bold transition-colors duration-300',
                                                                                      {
                                                                                           'text-white':
                                                                                                (activeLink &&

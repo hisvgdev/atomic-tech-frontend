@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import GradientButton from '@/shared/custom/GradientButton'
 import { StarIcon } from '@phosphor-icons/react/dist/ssr'
 import Image from 'next/image'
@@ -15,7 +15,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
 
      return (
           <Card
-               className="h-full max-w-full cursor-pointer border-none bg-[#EEEFF5] p-0 shadow-none"
+               className="h-full w-full cursor-pointer border-none bg-[#EEEFF5] p-0 shadow-none"
                onClick={() => router.push(`/cases/${id}`)}
           >
                <CardHeader className="relative">
@@ -23,7 +23,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                          <Image
                               src={photos[0]}
                               alt={title}
-                              className="aspect-3/2 h-full w-full rounded-[1.875rem] object-cover"
+                              className="aspect-[16/9] h-full w-full rounded-3xl object-cover"
                               width={620}
                               height={420}
                          />
@@ -31,28 +31,34 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                     <div className="absolute top-4 left-4">
                          {categories &&
                               categories.map((tag, indxTag) => (
-                                   <div key={`${indxTag}-${tag}`} className="rounded-full bg-[#F6F7FBCC] px-4 py-3">
+                                   <div
+                                        key={`${indxTag}-${tag}`}
+                                        className="rounded-full bg-[#F6F7FBCC] px-2 py-1 lg:px-4 lg:py-3"
+                                   >
                                         <div className="flex items-center gap-3">
-                                             {/* <Image src={tag.icon} alt={tag} /> */}
-                                             <span className="text-xs font-bold text-[#0F0F0F]">{tag}</span>
+                                             <span className="text-[0.5rem] font-bold text-[#0F0F0F] lg:text-xs">
+                                                  {tag}
+                                             </span>
                                         </div>
                                    </div>
                               ))}
                     </div>
-                    <div className="absolute bottom-4 left-0 flex items-center gap-4 lg:left-4">
+                    <div className="absolute bottom-4 left-0 flex items-center gap-4 xl:left-4">
                          {destinations &&
-                              destinations.map(({ name, description }, indxBdg) => (
+                              [...destinations, ...destinations].map(({ name, description }, indxBdg) => (
                                    <div
                                         key={`${indxBdg}-${name}`}
-                                        className="w-auto overflow-hidden rounded-full bg-[#000809CC] px-3 py-2.5"
+                                        className="mx-3 w-full overflow-hidden rounded-2xl bg-[#000809CC] px-3 py-2.5 xl:mx-0"
                                    >
                                         <div className="flex items-center gap-3">
                                              <div className="flex items-center justify-center rounded-full bg-white p-1">
                                                   <StarIcon color="#000809CC" size={12} weight="fill" />
                                              </div>
                                              <div className="flex flex-col">
-                                                  <h4 className="text-xs font-bold text-white">{name}:</h4>
-                                                  <p className="line-clamp-2 text-xs font-normal text-white lg:max-w-80 lg:truncate">
+                                                  <h4 className="text-[0.5rem] font-bold text-white lg:text-xs">
+                                                       {name}:
+                                                  </h4>
+                                                  <p className="line-clamp-2 text-[0.5rem] font-normal text-white lg:text-xs xl:max-w-80 xl:truncate">
                                                        {description}
                                                   </p>
                                              </div>
@@ -63,8 +69,8 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                </CardHeader>
                <CardContent className="flex h-full w-full flex-col px-4 py-6">
                     <div className="flex w-full items-start justify-between">
-                         <div className="flex flex-col">
-                              <CardTitle className="line-clamp-1 text-lg font-extrabold -tracking-[0.075rem] lg:text-3xl">
+                         <div className="flex flex-col gap-1">
+                              <CardTitle className="line-clamp-2 text-lg leading-5 font-extrabold -tracking-[0.075rem] lg:text-3xl lg:leading-6">
                                    {title}
                               </CardTitle>
                               <CardDescription className="line-clamp-2 text-xs font-medium text-black lg:text-sm">

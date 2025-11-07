@@ -53,15 +53,16 @@ export const LeaveRequest: FC<LeaveRequestProps> = (props) => {
      return (
           <section
                data-dark="true"
-               className="bg-gradient-main w-full rounded-4xl p-8 lg:rounded-[3.125rem] lg:px-24 lg:py-14"
+               className="bg-gradient-main w-full rounded-4xl p-8 lg:rounded-3xl lg:px-24 lg:py-14"
           >
                <div className="flex flex-col gap-y-4">
-                    <div className="flex max-w-xl flex-col gap-y-3">
-                         <h1 className="max-w-72 text-4xl font-bold -tracking-[0.1rem] text-white lg:max-w-full lg:text-5xl lg:-tracking-[0.2rem]">
+                    <div className="flex max-w-5xl flex-col gap-y-3">
+                         <h1 className="w-full text-4xl font-bold -tracking-[0.1rem] text-white lg:text-5xl lg:-tracking-[0.2rem]">
                               Начните разработку проекта вместе с нами
                          </h1>
                          <p className="text-lg font-normal text-white">
-                              Оставьте заявку и мы свяжемся с вами в ближайший час
+                              Оставьте свои контактные данные и мы свяжемся с вами в ближайший час, чтобы провести аудит
+                              готового продукта или предложить варианты реализации вашей идеи.
                          </p>
                     </div>
                     <form
@@ -155,10 +156,7 @@ export const LeaveRequest: FC<LeaveRequestProps> = (props) => {
                                                   onCheckedChange={(checked) => handleChange(!!checked)}
                                              />
                                              <div className="flex flex-col">
-                                                  <Label
-                                                       htmlFor="terms"
-                                                       className="max-w-xs cursor-pointer text-white/50"
-                                                  >
+                                                  <Label htmlFor="terms" className="cursor-pointer text-white/50">
                                                        Нажимая кнопку, вы даете согласие на обработку персональных
                                                        данных
                                                   </Label>

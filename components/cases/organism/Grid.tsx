@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/pagination'
 import { Skeleton } from '@/components/ui/skeleton'
 import { technologies as techIcons } from '@/constants/tech.constants'
+import projectImage from '@/public/assets/images/projects/secondProject.png'
 import { getCaseItems } from '@/utils/api/case-items/case-items'
 import { getCategories } from '@/utils/api/categories/categories'
 import { getPosts } from '@/utils/api/posts/posts'
@@ -51,21 +52,21 @@ export const Grid = () => {
           queryFn: () => getPosts({ filter: { status: 'published' } }),
      })
 
-     if (isCaseItemsDataLoading || taxonomyTypesLoading) {
-          return (
-               <div className="flex w-full flex-wrap items-center justify-center gap-8">
-                    {Array.from({ length: CASE_LIMITS }).map((_, idx) => (
-                         <div key={idx} className="flex flex-col space-y-3">
-                              <Skeleton className="h-96 min-w-3xl rounded-xl" />
-                              <div className="space-y-2">
-                                   <Skeleton className="h-4 w-72" />
-                                   <Skeleton className="h-4 w-64" />
-                              </div>
-                         </div>
-                    ))}
-               </div>
-          )
-     }
+     // if (isCaseItemsDataLoading || taxonomyTypesLoading) {
+     //      return (
+     //           <div className="flex w-full flex-wrap items-center justify-center gap-8">
+     //                {Array.from({ length: CASE_LIMITS }).map((_, idx) => (
+     //                     <div key={idx} className="flex flex-col space-y-3">
+     //                          <Skeleton className="h-96 min-w-3xl rounded-xl" />
+     //                          <div className="space-y-2">
+     //                               <Skeleton className="h-4 w-72" />
+     //                               <Skeleton className="h-4 w-64" />
+     //                          </div>
+     //                     </div>
+     //                ))}
+     //           </div>
+     //      )
+     // }
 
      // const matchedTechnologies = technologiesData.data.map((technology) => {
      //      const matchedTech = techIcons.find((tech) => tech.name.toLowerCase() === technology.name.toLowerCase())
@@ -79,11 +80,36 @@ export const Grid = () => {
      // const allCases = caseItems?.data.flatMap((page) => page ?? []) || []
 
      return (
-          <div className="flex flex-col px-4 lg:gap-y-20 lg:px-6 lg:py-20">
+          <div className="flex flex-col px-4 lg:gap-20 lg:px-6 lg:py-20">
                {/* <CaseHeading
                     lengthOfCases={0}
                /> */}
-               {/* <Cases cases={allCases} /> */}
+               <Cases
+                    cases={[
+                         {
+                              categories: ['Категория'],
+                              created_at: '04.11.2025',
+                              description: 'Здесь максимум 80 знаков писать',
+                              destinations: [
+                                   {
+                                        description: 'Описание',
+                                        name: 'Заголовок',
+                                   },
+                              ],
+                              id: 1,
+                              photos: [projectImage.src],
+                              project_history: { content: ['история'], related_project_history_items: [] },
+                              technologies: [{ image: '', name: 'c++' }],
+                              services: ['dsa'],
+                              subcategories: ['dsadasda'],
+                              title: 'В заголовке максимум 40 знаков писать.',
+                              website_link: '/',
+                              updated_at: '04.11.2025',
+                              year: 2025,
+                              views: 10000,
+                         },
+                    ]}
+               />
                {/* {allCases.length > 0 && (
                     <Pagination>
                          <PaginationContent>

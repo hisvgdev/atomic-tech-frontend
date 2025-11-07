@@ -20,9 +20,9 @@ export const Grid = () => {
                     </div>
                     <LastProjects />
                     <AllProjectsButton link="/cases" />
+                    <Amenities />
                     <Showreel />
                     <CustomSolutions />
-                    <Amenities />
                     <Blog />
                     <div className="px-1 lg:px-7">
                          <LeaveRequest />

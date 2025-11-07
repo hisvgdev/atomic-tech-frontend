@@ -52,10 +52,10 @@ export const ArticleCards: FC<ArticleCardsProps> = (props) => {
      //  }
 
      return (
-          <div className="w-fit">
+          <div className="w-full">
                <div className="flex w-full flex-col gap-8 lg:hidden">
                     <SwiperRowLayout>
-                         {topRelatedData?.data.slice(0, 3).map((blog, idx) => (
+                         {/* {topRelatedData?.data.slice(0, 3).map((blog, idx) => (
                               <SwiperSlide key={idx}>
                                    <ArticleCard
                                         key={`${idx}-${blog.title}`}
@@ -68,9 +68,24 @@ export const ArticleCards: FC<ArticleCardsProps> = (props) => {
                                         classNames="max-w-xs"
                                    />
                               </SwiperSlide>
+                         ))} */}
+                         {Array.from({ length: 12 }).map((_, idx) => (
+                              <SwiperSlide key={idx}>
+                                   <ArticleCard
+                                        key={`${idx}`}
+                                        imgCover={project.src}
+                                        title={
+                                             '«Ты ему нужен»: как рассылки помогли увеличить рекуррентные пожертвования'
+                                        }
+                                        rating={4}
+                                        href={`/articles/`}
+                                        views={10000}
+                                        classNames="max-w-xs"
+                                   />
+                              </SwiperSlide>
                          ))}
                     </SwiperRowLayout>
-                    <div className="block lg:hidden">
+                    {/* <div className="block lg:hidden">
                          <GradientButton
                               hasIsRoute
                               routePath="/cases"
@@ -78,7 +93,7 @@ export const ArticleCards: FC<ArticleCardsProps> = (props) => {
                               classNames="py-8 rounded-full text-white w-full"
                               secondClassnames="w-full lg:w-auto"
                          />
-                    </div>
+                    </div> */}
                </div>
 
                <div className="hidden items-center gap-4 lg:flex">
