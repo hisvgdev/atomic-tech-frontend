@@ -20,11 +20,17 @@ export const BenefitsRightSide: FC<BenefitsRightSideProps> = (props) => {
      }
 
      return (
-          <div className="flex w-full max-w-xl flex-col items-center justify-center gap-8 pb-4 lg:gap-14 lg:pb-0">
-               <h3 className="text-[2.625rem] leading-12 font-bold -tracking-[0.1rem] text-white lg:text-5xl lg:-tracking-[0.2rem]">
-                    <span className="text-[#A6F7FF]">Бесплатно</span> проведём аудит готового продукта или предложим
-                    варианты реализации вашей идеи
-               </h3>
+          <div className="flex w-full flex-col items-center justify-center lg:gap-14 lg:pb-0">
+               <div className="flex flex-col gap-4">
+                    <h3 className="text-4xl leading-12 font-bold -tracking-[0.1rem] text-white lg:text-5xl lg:-tracking-[0.2rem]">
+                         {/* <span className="text-[#A6F7FF]">Бесплатно</span> проведём аудит готового продукта или
+                         предложим варианты реализации вашей идеи */}
+                         Бесплатно <br /> проведём аудит готового продукта
+                    </h3>
+                    <p className="text-lg font-normal text-white/50 lg:text-2xl">
+                         или предложим варианты реализации <br /> вашей идеи
+                    </p>
+               </div>
                <MotionButton
                     className="relative flex h-fit w-full cursor-pointer items-center overflow-hidden rounded-full py-6"
                     style={{

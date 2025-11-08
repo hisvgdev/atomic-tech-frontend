@@ -17,7 +17,7 @@ export const AllProjectsButton: FC<AllProjectsButtonProps> = (props) => {
           <section data-dark="false" className="px-3">
                <MotionLink
                     href={link}
-                    className="relative flex cursor-pointer items-center justify-center overflow-hidden rounded-4xl border-2 border-black py-9 transition-all lg:rounded-2xl lg:border lg:py-12"
+                    className="relative flex cursor-pointer items-center justify-center overflow-hidden rounded-4xl border-2 border-black py-9 transition-all lg:mx-5 lg:rounded-2xl lg:border lg:py-12"
                     style={{ backgroundColor: isHover ? '#000' : 'transparent' }}
                     animate={{
                          gap: isHover ? '2.5rem' : '1.5rem',

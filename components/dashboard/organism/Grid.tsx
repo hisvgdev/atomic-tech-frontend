@@ -1,6 +1,7 @@
 import React from 'react'
 
 import LeaveRequest from '../../../shared/global/LeaveRequest'
+import AboutUs from '../molecules/AboutUs'
 import AllProjectsButton from '../molecules/AllProjectsButton'
 import Amenities from '../molecules/Amenities'
 import Benefits from '../molecules/Benefits'
@@ -21,6 +22,7 @@ export const Grid = () => {
                     <LastProjects />
                     <AllProjectsButton link="/cases" />
                     <Amenities />
+                    <AboutUs />
                     <Showreel />
                     <CustomSolutions />
                     <Blog />

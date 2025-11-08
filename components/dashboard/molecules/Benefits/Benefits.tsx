@@ -17,21 +17,21 @@ export const Benefits = () => {
                />
                <div className="flex flex-col gap-12 lg:gap-24">
                     <div className="flex flex-col gap-4">
-                         <h1 className="z-30 hidden text-center text-7xl font-bold -tracking-[0.2rem] text-white md:block">
-                              Дизайн и разработка <br /> цифровых продуктов под ключ
+                         <h1 className="z-30 hidden text-center text-6xl font-bold -tracking-[0.2rem] text-white md:block">
+                              Дизайн и разработка цифровых <br /> продуктов под ключ
                          </h1>
                          <h1 className="z-30 block text-center text-4xl font-bold -tracking-[0.1rem] text-white md:hidden">
                               Дизайн и разработка <br /> цифровых продуктов под ключ
                          </h1>
-                         <p className="font-manrope text-center text-base font-normal text-gray-300 md:text-3xl">
+                         <p className="font-manrope text-center text-base font-normal text-gray-300 md:text-2xl">
                               От сайтов, интернет-магазинов и приложений до блокчейн-решений и нейросетей
                          </p>
                     </div>
 
                     <div className="w-full px-4 lg:p-4">
-                         <div className="grid grid-cols-1 gap-14 lg:flex lg:items-center lg:justify-evenly">
-                              <BenefitsLeftSide />
+                         <div className="grid grid-cols-1 gap-14 lg:mx-auto lg:flex lg:max-w-5xl">
                               <BenefitsRightSide />
+                              <BenefitsLeftSide />
                          </div>
                     </div>
                </div>
