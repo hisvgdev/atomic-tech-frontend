@@ -1,34 +1,30 @@
-# Этап сборки
-FROM node:20-slim AS builder
+  FROM node:20-slim AS builder
+  WORKDIR /app
+  
+  COPY package*.json ./
+  
+  RUN npm ci --legacy-peer-deps
+  
+  COPY . .
+  
+  ENV NODE_OPTIONS="--max-old-space-size=4096"
+  
+  RUN npm run build -- --no-lint
+  
 
-WORKDIR /app
-
-# Копируем зависимости
-COPY package*.json ./
-
-# Устанавливаем зависимости
-RUN npm install --legacy-peer-deps
-
-# Копируем исходные файлы проекта, включая .env
-COPY . .
-
-# Запускаем build
-ENV NODE_OPTIONS="--max-old-space-size=8192"
-RUN npm run build
-
-# Этап production
-FROM node:20-alpine AS production
-
-WORKDIR /app
-
-# Копируем все файлы из builder
-COPY --from=builder /app ./
-
-# Устанавливаем только прод-зависимости
-RUN npm install --legacy-peer-deps --only=production
-
-# Указываем порт
-EXPOSE 3000
-
-# Запуск
-CMD ["npm", "start"]
+  FROM node:20-alpine AS runner
+  WORKDIR /app
+  
+  COPY --from=builder /app/.next .next
+  COPY --from=builder /app/public ./public
+  COPY --from=builder /app/package*.json ./
+  COPY --from=builder /app/next.config.js ./
+  COPY --from=builder /app/.env ./
+  
+  RUN npm ci --omit=dev --legacy-peer-deps
+  
+  EXPOSE 3000
+  
+  ENV NODE_ENV=production
+  CMD ["npm", "start"]
+  
