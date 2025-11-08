@@ -26,7 +26,7 @@ export const LastProjects: FC<LastProjectsProps> = async (props) => {
                          </div>
 
                          <div className="ml-auto flex flex-col items-end gap-14">
-                              <Chip number="1" title="Кейсы" maxW="max-w-32" />
+                              <Chip number="1" title="Кейсы" maxW="max-w-42" />
                               <div className="hidden w-fit grid-cols-[200px_minmax(100px,_1fr)_60px] items-end gap-4 text-start md:grid">
                                    <span className="text-sm font-bold">
                                         Индивидуальные решения <sup>13</sup>

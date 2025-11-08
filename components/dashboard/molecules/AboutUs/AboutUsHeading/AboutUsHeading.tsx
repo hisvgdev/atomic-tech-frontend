@@ -14,7 +14,7 @@ export const AboutUsHeading: FC<AboutUsHeadingProps> = (props) => {
                          гордиться.
                     </p>
                </div>
-               <Chip number="4" title="О нас" maxW="w-full lg:max-w-42" />
+               <Chip number="3" title="О нас" maxW="max-w-42" />
           </div>
      )
 }

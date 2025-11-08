@@ -74,7 +74,7 @@ export const Amenities: FC<AmenitiesProps> = () => {
                                    построении эффективной коммуникации
                               </p>
                          </div>
-                         <Chip number="3" title="Компетенции" maxW="w-full lg:max-w-64" isDark />
+                         <Chip number="3" title="Компетенции" maxW="max-w-42" isDark />
                     </div>
                     <div className="hidden w-full grid-cols-3 items-center gap-6 lg:grid">
                          {mockAmenitiesData.map((amenties, indx) => {

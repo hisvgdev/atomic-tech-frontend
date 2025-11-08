@@ -52,7 +52,6 @@ const handleSubmitReview = (requestBody: CreateReviewInput) => {
 
 export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => {
      const {} = props
-     const isMobile = useIsMobile()
      const searchParams = useSearchParams()
 
      const { data: categoriesData, isPending: isCategoriesPending } = useQuery({
@@ -89,7 +88,7 @@ export const CustomSolutionsHeader: FC<CustomSolutionsHeaderProps> = (props) => 
 
      return (
           <div className="flex w-full items-center justify-between lg:px-8">
-               <Chip number="2" title="Отзывы" maxW={isMobile ? 'max-w-44' : 'max-w-fit'} />
+               <Chip number="4" title="Отзывы" maxW="max-w-42" />
                <h4 className="text-right leading-tight -tracking-[0.1rem] lg:-tracking-[0.2rem]">
                     <span className="text-3xl font-bold text-black md:text-6xl">
                          Что говорят наши <span className="text-[#0085A6]">клиенты</span>
