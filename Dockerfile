@@ -13,6 +13,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Запускаем build
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN npm run build
 
 # Этап production
