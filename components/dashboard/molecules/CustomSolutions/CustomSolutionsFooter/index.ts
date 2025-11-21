@@ -1,0 +1,1 @@
+export { CustomSolutionsFooter as default } from './CustomSolutionsFooter';

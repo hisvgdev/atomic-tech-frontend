@@ -1,7 +1,6 @@
 'use client'
 
 import { Skeleton } from '@/components/ui/skeleton'
-import { getBlogCategories } from '@/utils/api/blogs/blog-categories/blog-categories'
 import { DotsThreeOutlineIcon, XIcon } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { ChevronDown, ChevronUp } from 'lucide-react'
@@ -11,12 +10,12 @@ import React, { FC, useState } from 'react'
 
 import { TagsProps } from './Tags.types'
 
-export const useBlogCategories = () => {
-     return useQuery({
-          queryKey: ['blog-categories'],
-          queryFn: async () => getBlogCategories(),
-     })
-}
+// export const useBlogCategories = () => {
+//      return useQuery({
+//           queryKey: ['blog-categories'],
+//           queryFn: async () => getBlogCategories(),
+//      })
+// }
 
 export const Tags: FC<TagsProps> = () => {
      const pathname = usePathname()
@@ -51,7 +50,7 @@ export const Tags: FC<TagsProps> = () => {
      const visibleCategories = showAll ? dataCategories : dataCategories.slice(0, 6)
 
      return (
-          <div className="grid grid-cols-3 gap-4 px-4 pt-20 lg:mx-auto lg:flex lg:max-w-full lg:flex-wrap lg:items-center lg:justify-center lg:gap-x-5 lg:gap-y-6 lg:pt-0">
+          <div className="grid grid-cols-3 gap-4 px-4 lg:mx-auto lg:flex lg:max-w-full lg:flex-wrap lg:items-center lg:justify-center lg:gap-5 lg:pt-0">
                {visibleCategories.map((t, indx) => {
                     // const isActive = getActiveItem === name
                     // const activeClasses = isActive ? 'text-black font-semibold' : 'hover:text-black/50'

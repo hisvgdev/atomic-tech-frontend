@@ -20,8 +20,8 @@ const RatingStars: FC<{ value?: number }> = ({ value = 0 }) => (
 )
 
 export const ArticleCard: FC<ArticleCardProps> = (props) => {
-     const { title, imgCover, classNames, hasRating = true, ratingPosition = 'bottom', rating, href } = props
-
+     const { article, classNames, hasRating = true, ratingPosition = 'bottom' } = props
+     const { title, cover, slug, rating = 5 } = article
      const showBottomRating = hasRating && ratingPosition === 'bottom'
 
      return (
@@ -32,10 +32,10 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
                     classNames,
                )}
           >
-               {imgCover && (
+               {cover && (
                     <Image
-                         src={imgCover}
-                         alt={title}
+                         src={cover.url}
+                         alt={cover.filename || title || ''}
                          fill
                          className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -52,8 +52,11 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
                     </div>
 
                     <div className="flex flex-col items-start gap-3">
-                         {href ? (
-                              <Link href={href} className="text-lg leading-tight font-semibold hover:underline">
+                         {slug ? (
+                              <Link
+                                   href={`/articles/${slug}`}
+                                   className="text-lg leading-tight font-semibold hover:underline"
+                              >
                                    {title}
                               </Link>
                          ) : (

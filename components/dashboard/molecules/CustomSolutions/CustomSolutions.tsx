@@ -2,6 +2,7 @@ import React, { FC, Suspense } from 'react'
 
 import { CustomSolutionsProps } from './CustomSolutions.types'
 import { CustomSolutionsFeedback } from './CustomSolutionsFeedback/CustomSolutionsFeedback'
+import CustomSolutionsFooter from './CustomSolutionsFooter'
 import CustomSolutionsHeader from './CustomSolutionsHeader'
 
 export const CustomSolutions: FC<CustomSolutionsProps> = (props) => {
@@ -13,6 +14,9 @@ export const CustomSolutions: FC<CustomSolutionsProps> = (props) => {
                     <CustomSolutionsHeader />
                </Suspense>
                <CustomSolutionsFeedback />
+               <Suspense>
+                    <CustomSolutionsFooter />
+               </Suspense>
           </section>
      )
 }

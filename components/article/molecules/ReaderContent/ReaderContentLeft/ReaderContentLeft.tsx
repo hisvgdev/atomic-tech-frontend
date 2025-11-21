@@ -19,7 +19,7 @@ export const ReaderContentLeft: FC<ReaderContentLeftProps> = (props) => {
      }, [content])
 
      return (
-          <div className="flex w-full flex-col gap-y-4 lg:w-1/5">
+          <div className="flex w-fit flex-col gap-4">
                <h4 className="text-base font-semibold">Содержание:</h4>
                {headings.map((item, indx) => (
                     <span key={`${indx}-${item}`} className="font-normal text-[#737373] transition-all">

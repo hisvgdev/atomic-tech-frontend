@@ -1,24 +1,12 @@
+import { Post } from "@/utils/shared/atomic-client/types";
 import { StaticImageData } from 'next/image'
 
 export type RatingPosition = 'top' | 'bottom'
 
 export interface ArticleCardProps {
-  title: string
-  views?: number;
-  // Optional media & meta
-  date?: string
-  imgCover?: StaticImageData | string | null;
-
-  // Appearance
+  article: Post
   classNames?: string
-
-  // Behavior & features
-  tag?: string
   withTag?: boolean;
   hasRating?: boolean
-  rating?: number
   ratingPosition?: RatingPosition
-
-  // link
-  href?: string;
 }

@@ -19,7 +19,7 @@ export const MarketingSection: FC<MarketingSectionProps> = (props) => {
                          desc="Про привлечение клиентов, узнаваемость бренда и SMM"
                          path="/journal?blog_category_id=Маркетинг"
                     />
-                    <div className="hidden grid-cols-4 items-center gap-2.5 lg:grid">
+                    {/* <div className="hidden grid-cols-4 items-center gap-2.5 lg:grid">
                          {marketingPosts.length > 0 &&
                               marketingPosts.map((bd, indx) => (
                                    <ArticleCard
@@ -33,8 +33,8 @@ export const MarketingSection: FC<MarketingSectionProps> = (props) => {
                                         classNames="w-full lg:max-w-md"
                                    />
                               ))}
-                    </div>
-                    <div className="flex flex-col gap-8 lg:hidden">
+                    </div> */}
+                    {/* <div className="flex flex-col gap-8 lg:hidden">
                          <SwiperGridLayout>
                               {marketingPosts.length > 0 &&
                                    marketingPosts.map((bd, indx) => (
@@ -52,7 +52,7 @@ export const MarketingSection: FC<MarketingSectionProps> = (props) => {
                                         </SwiperSlide>
                                    ))}
                          </SwiperGridLayout>
-                    </div>
+                    </div> */}
                </div>
           </section>
      )

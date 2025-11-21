@@ -1,6 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
+import { useIsMobile } from '@/hooks/useMediaQuery'
 import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import { SwiperRowLayoutRef } from '@/shared/global/SwiperRowLayout/SwiperRowLayout'
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
@@ -11,33 +12,40 @@ import { AboutUsContentTeamMembersProps } from './AboutUsContentTeamMembers.type
 
 export const AboutUsContentTeamMembers: FC<AboutUsContentTeamMembersProps> = () => {
      const swiperRef = useRef<SwiperRowLayoutRef>(null)
+     const isMobile = useIsMobile()
+
      return (
           <div className="flex w-full max-w-xl flex-col gap-5">
                <div className="flex w-full items-center justify-between">
-                    <span className="text-2xl font-bold text-black">
-                         Команда:<sup className="text-lg font-bold text-[#B3B3B3]">+17</sup>
+                    <span className="text-xl font-bold text-black lg:text-2xl">
+                         Команда:<sup className="text-md font-bold text-[#B3B3B3] lg:text-lg">+17</sup>
                     </span>
 
                     <div className="flex items-center gap-2">
                          <button
                               type="button"
-                              className="w-36 cursor-pointer rounded-full bg-black px-5 py-4 hover:bg-black/70"
+                              className="w-24 cursor-pointer rounded-full bg-black px-5 py-4 hover:bg-black/70 lg:w-36"
                               onClick={() => swiperRef.current?.slidePrev()}
                          >
                               <ArrowLeftIcon className="text-white" />
                          </button>
                          <button
                               type="button"
-                              className="flex w-36 cursor-pointer items-end justify-end rounded-full bg-black px-5 py-4 hover:bg-black/70"
+                              className="flex w-24 cursor-pointer items-end justify-end rounded-full bg-black px-5 py-4 hover:bg-black/70 lg:w-36"
                               onClick={() => swiperRef.current?.slideNext()}
                          >
                               <ArrowRightIcon className="text-white" />
                          </button>
                     </div>
                </div>
-               <SwiperRowLayout slidesPerViews={1.63} ref={swiperRef} className="lg:block" hiddenPagination>
+               <SwiperRowLayout
+                    slidesPerViews={isMobile ? 1.2 : 1.65}
+                    ref={swiperRef}
+                    className="lg:block"
+                    hiddenPagination
+               >
                     {Array.from({ length: 4 }).map((_, indx) => (
-                         <SwiperSlide key={indx} className="shrink-0 basis-[60%]">
+                         <SwiperSlide key={indx} className="shrink-0 lg:basis-[80%]">
                               <Card className="mx-1 my-4 flex h-96 flex-col justify-between p-6 ring ring-[#20202033]">
                                    <div className="flex flex-col gap-4">
                                         <CardHeader>
@@ -46,16 +54,18 @@ export const AboutUsContentTeamMembers: FC<AboutUsContentTeamMembersProps> = () 
 
                                         <CardContent className="px-0">
                                              <div className="flex flex-col gap-1">
-                                                  <h4 className="text-2xl font-semibold text-black/80">
+                                                  <h4 className="text-lg font-semibold text-black/80 lg:text-2xl">
                                                        Умный человек в очках
                                                   </h4>
-                                                  <p className="text-lg font-medium text-black/80">СЕО Atomic Studio</p>
+                                                  <p className="text-base font-medium text-black/80 lg:text-lg">
+                                                       СЕО Atomic Studio
+                                                  </p>
                                              </div>
                                         </CardContent>
                                    </div>
 
                                    <CardFooter className="px-0">
-                                        <span className="text-lg font-normal text-black/80">
+                                        <span className="text-base font-normal text-black/80 lg:text-lg">
                                              Быстро зарекомендовал себя как талантливый бездельник и стратег
                                         </span>
                                    </CardFooter>

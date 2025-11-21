@@ -20,7 +20,9 @@ export const Grid = () => {
                          <Benefits />
                     </div>
                     <LastProjects />
-                    <AllProjectsButton link="/cases" />
+                    <div className="px-4 lg:px-7">
+                         <AllProjectsButton link="/cases" />
+                    </div>
                     <Amenities />
                     <AboutUs />
                     <Showreel />

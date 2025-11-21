@@ -9,37 +9,39 @@ export const Reader: FC<ReaderProps> = (props) => {
 
      const {
           title,
-          case_items,
-          content,
-          description,
-          image,
-          updated_at,
+          blocks,
           created_at,
           id,
-          views,
-          average_rating,
-          ratings_count,
-          category,
-          related_blogs,
-     } = blog.data
+          slug,
+          status,
+          taxonomies,
+          type_id,
+          updated_at,
+          view_count,
+          author_id,
+          cover,
+          custom_fields,
+          excerpt,
+          published_at,
+          reading_time_min,
+     } = blog
 
      return (
-          <div className="flex flex-col gap-y-8 overflow-y-auto">
+          <div className="flex flex-col items-center justify-center gap-8 px-4">
                <ReaderHeading
                     title={title}
-                    views={views}
-                    description={description}
+                    views={view_count}
+                    description={excerpt}
                     updatedAt={updated_at}
-                    category={category.name}
+                    category={'тестовая категория'}
                />
-               <hr />
                <ReaderGrid
-                    caseItems={case_items}
-                    content={content}
-                    ratingsCount={average_rating - 1}
-                    image={image}
-                    relatedBlogs={related_blogs}
-                    id={id}
+                    caseItems={[]}
+                    content={''}
+                    ratingsCount={4 - 1}
+                    image={''}
+                    relatedBlogs={[]}
+                    id={id || ''}
                />
           </div>
      )

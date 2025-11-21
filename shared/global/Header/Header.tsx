@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -24,7 +24,10 @@ export const Header = () => {
      const triggerRef = useRef<HTMLDivElement | null>(null)
      const isMobile = useIsMobile()
 
-     const isSpecialPage = ['/cases', '/journal']
+     const isSpecialPage = ['/cases']
+     const isSpecialSlugPage =
+          (isSpecialPage.some((p) => pathname.startsWith(`${p}/`)) && !isSpecialPage.includes(pathname)) ||
+          isSpecialPage.includes(pathname)
 
      const handleMenuClick = () => {
           if (menuClick) {
@@ -93,7 +96,9 @@ export const Header = () => {
                <div ref={triggerRef} className="absolute top-0 h-8 w-full" />
 
                <div
-                    className={`top-0 z-50 flex w-full items-center justify-center pt-5 pb-10 lg:pb-0 ${isSpecialPage.includes(pathname) ? 'sticky' : 'fixed'}`}
+                    className={`top-0 z-50 flex w-full items-center justify-center pt-5 pb-10 lg:pb-0 ${
+                         isSpecialSlugPage ? 'sticky' : 'fixed'
+                    }`}
                >
                     <motion.div
                          className={cn(

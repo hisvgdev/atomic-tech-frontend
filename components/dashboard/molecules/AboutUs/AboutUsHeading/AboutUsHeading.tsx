@@ -6,10 +6,10 @@ import { AboutUsHeadingProps } from './AboutUsHeading.types'
 export const AboutUsHeading: FC<AboutUsHeadingProps> = (props) => {
      const {} = props
      return (
-          <div className="flex w-full items-center justify-between">
-               <div className="flex max-w-5xl items-center">
-                    <h1 className="w-full text-8xl font-bold tracking-tighter text-black">Кто мы?</h1>
-                    <p className="text-2xl font-normal text-black/70">
+          <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-0">
+               <div className="flex flex-col items-center gap-2 lg:max-w-5xl lg:flex-row lg:gap-0">
+                    <h1 className="w-full text-6xl font-bold tracking-tighter text-black lg:text-8xl">Кто мы?</h1>
+                    <p className="text-md font-normal text-black/70 lg:text-2xl">
                          Команда креативных разработчиков, ориентированных на создание проектов, которыми хочется
                          гордиться.
                     </p>

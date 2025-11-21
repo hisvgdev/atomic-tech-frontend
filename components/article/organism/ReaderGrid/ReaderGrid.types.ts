@@ -2,7 +2,7 @@ export interface ReaderGridProps {
   caseItems?: any[];
   content?: string;
   image?: string;
-  id: number;
+  id: string;
   ratingsCount?: number;
   relatedBlogs: {
     id: number;

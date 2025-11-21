@@ -19,7 +19,7 @@ export const BusinessSection: FC<BusinessSectionProps> = (props) => {
                     path="/journal?blog_category_id=Бизнес"
                />
                <div className="hidden grid-cols-4 items-center gap-2.5 lg:grid">
-                    {businessProjectData.length > 0 &&
+                    {/* {businessProjectData.length > 0 &&
                          businessProjectData.map((bd, indx) => (
                               <ArticleCard
                                    key={`${bd.id}-${indx}`}
@@ -31,9 +31,9 @@ export const BusinessSection: FC<BusinessSectionProps> = (props) => {
                                    href={`/articles/${bd.id}`}
                                    classNames="w-full lg:max-w-md"
                               />
-                         ))}
+                         ))} */}
                </div>
-               <div className="flex flex-col gap-8 lg:hidden">
+               {/* <div className="flex flex-col gap-8 lg:hidden">
                     <SwiperRowLayout>
                          {businessProjectData.length > 0 &&
                               businessProjectData.map((bd, indx) => (
@@ -50,7 +50,7 @@ export const BusinessSection: FC<BusinessSectionProps> = (props) => {
                                    </SwiperSlide>
                               ))}
                     </SwiperRowLayout>
-               </div>
+               </div> */}
           </div>
      )
 }

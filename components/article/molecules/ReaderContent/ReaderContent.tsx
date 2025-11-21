@@ -12,39 +12,31 @@ import ReaderContentLeft from './ReaderContentLeft'
 
 export const ReaderContent: FC<ReaderContentProps> = (props) => {
      const { content, image, id, ratingsCount, relatedBlogs, caseItems } = props
-     console.log(relatedBlogs)
+
      return (
           <div className="flex w-full justify-center">
-               <div
-                    className={`flex w-full flex-col gap-6 lg:flex-row lg:${relatedBlogs.length > 0 ? 'justify-between' : 'w-full lg:gap-44'} lg:px-4`}
-               >
+               <div className="flex w-full flex-col gap-6 lg:flex-row">
                     <ReaderContentLeft content={content as string} />
-                    <div className="flex w-full flex-col items-center gap-y-4 lg:w-full">
+                    <div className="flex w-full flex-col items-center gap-4 lg:w-10/12 lg:gap-8">
                          <Image
                               src={image || coverImage}
                               alt="cover-image"
                               width={480}
                               height={480}
-                              className="w-full rounded-[1.875rem] object-cover"
+                              className="aspect-[16/9] rounded-[1.875rem] object-cover lg:w-1/2"
                          />
                          <span
                               className="max-w-xl text-start text-base font-medium lg:max-w-full"
                               dangerouslySetInnerHTML={{ __html: content as string }}
                          />
-                         {Array.isArray(caseItems) && caseItems.length > 0 ? (
+                         {/* {Array.isArray(caseItems) && caseItems.length > 0 ? (
                               <div className="flex w-full flex-col gap-4 lg:gap-8">
                                    <h2 className="text-xl font-bold lg:text-3xl">Пример нашей реализации:</h2>
                                    <div className="hidden w-full items-center gap-x-3 lg:flex lg:flex-col lg:gap-6">
                                         {caseItems.map((c, i) => (
                                              <ArticleCard
                                                   key={i}
-                                                  imgCover={c.photos[0] || null}
-                                                  title={c.title}
-                                                  href={`/cases/${c.id}`}
                                                   withTag
-                                                  tag={c.categories[0]}
-                                                  views={c.views || 0}
-                                                  date={c.created_at}
                                                   classNames="w-full"
                                              />
                                         ))}
@@ -69,7 +61,7 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                                         </SwiperRowLayout>
                                    </div>
                               </div>
-                         ) : null}
+                         ) : null} */}
 
                          <ReaderRating id={id} ratingsCount={ratingsCount || 0} />
                     </div>

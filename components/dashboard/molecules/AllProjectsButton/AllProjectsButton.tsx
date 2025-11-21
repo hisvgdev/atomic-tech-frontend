@@ -14,10 +14,10 @@ export const AllProjectsButton: FC<AllProjectsButtonProps> = (props) => {
      const [isHover, setIsHover] = useState(false)
 
      return (
-          <section data-dark="false" className="px-3">
+          <section data-dark="false">
                <MotionLink
                     href={link}
-                    className="relative flex cursor-pointer items-center justify-center overflow-hidden rounded-4xl border-2 border-black py-9 transition-all lg:mx-5 lg:rounded-2xl lg:border lg:py-12"
+                    className="relative flex cursor-pointer items-center justify-center overflow-hidden rounded-4xl border-2 border-black py-9 transition-all lg:rounded-2xl lg:border lg:py-12"
                     style={{ backgroundColor: isHover ? '#000' : 'transparent' }}
                     animate={{
                          gap: isHover ? '2.5rem' : '1.5rem',
@@ -28,7 +28,7 @@ export const AllProjectsButton: FC<AllProjectsButtonProps> = (props) => {
                     onMouseLeave={() => setIsHover(false)}
                >
                     <span
-                         className="text-2xl font-bold -tracking-[0.1rem] transition-colors lg:text-5xl lg:-tracking-[0.2rem]"
+                         className="text-2xl font-bold tracking-tight transition-colors lg:text-5xl"
                          style={{ color: isHover ? '#fff' : '#000' }}
                     >
                          {title}

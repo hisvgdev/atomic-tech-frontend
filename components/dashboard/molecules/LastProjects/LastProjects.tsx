@@ -1,25 +1,28 @@
+'use client'
+
+import { BLOGS_LIMITS } from '@/components/articles/molecules/ArticlesCards/ArticlesCards'
+import { Skeleton } from '@/components/ui/skeleton'
+import { usePostsQuery } from '@/hooks/query/usePostsQuery'
 import project from '@/public/assets/images/projects/secondProject.png'
 import CaseCard from '@/shared/global/CaseCard'
 import Chip from '@/shared/global/Chip'
-import { getCaseItems } from '@/utils/api/case-items/case-items'
-import React, { FC } from 'react'
+import { PostStatus } from '@/utils/shared/atomic-client/types'
+
+import type { FC } from 'react'
 
 import { LastProjectsProps } from './LastProjects.types'
 
-export const LastProjects: FC<LastProjectsProps> = async (props) => {
-     const {} = props
-     const lastProject = await getCaseItems() // await getCaseItems({ limit: 4, offset: 0 })
+export const LastProjects: FC<LastProjectsProps> = (props) => {
+     const { data: postsData, isLoading: isPostsDataLoading, isError: isPostsDataError } = usePostsQuery('posts')
 
-     // if (!lastProject?.data) return null
-
-     // const { data } = lastProject
+     const publishedPostsData = Array.isArray(postsData) ? postsData.filter((t) => t.status !== PostStatus.DRAFT) : []
 
      return (
           <section data-dark="false">
                <div className="flex flex-col gap-6 px-3.5 lg:gap-18 lg:px-7">
                     <div className="flex w-full items-center gap-20 lg:gap-0">
                          <div className="w-full md:max-w-3xl">
-                              <h1 className="text-2xl leading-6 font-bold -tracking-[0.1rem] md:text-7xl md:leading-14 lg:-tracking-[0.2rem]">
+                              <h1 className="text-3xl leading-6 font-bold tracking-tight md:text-7xl md:leading-15">
                                    Мы накопили большой опыт в разработке{' '}
                                    <span className="text-[#0085A6]">кастомных решений</span>
                               </h1>
@@ -49,38 +52,26 @@ export const LastProjects: FC<LastProjectsProps> = async (props) => {
                               </div>
                          </div>
                     </div>
-
-                    <div className="grid w-full grid-cols-1 items-center justify-center gap-4 lg:min-w-sm lg:grid-cols-2">
-                         {/* {data.map((project, indx) => {
-                              return <CaseCard key={`${project.id}-${indx + 1}`} {...project} />
-                         })} */}
-                         {Array.from({ length: 4 }).map((_, indx) => {
-                              return (
-                                   <CaseCard
-                                        key={`${indx + 1}`}
-                                        website_link="/"
-                                        categories={['Категория']}
-                                        description="Сайт интеграционного оператора железнодорожных транзитных сервисов между Китаем и Европой"
-                                        title="В заголовке максимум 40 знаков писать."
-                                        subcategories={['Подкатегория']}
-                                        photos={[project.src]}
-                                        id={indx}
-                                        destinations={[
-                                             {
-                                                  name: 'Максимум писать 23 знака.',
-                                                  description: 'Максимум поместится 45 знаков, учитывайте это!',
-                                             },
-                                        ]}
-                                        technologies={[
-                                             {
-                                                  name: 'c++',
-                                                  image: null,
-                                             },
-                                        ]}
-                                   />
-                              )
-                         })}
-                    </div>
+                    {isPostsDataError || isPostsDataLoading ? (
+                         <div className="grid w-full grid-cols-1 items-center justify-center gap-9 px-4 md:grid-cols-2">
+                              {Array.from({ length: 4 }).map((_, idx) => (
+                                   <div key={idx} className="flex flex-col space-y-3">
+                                        <Skeleton className="h-72 min-w-md rounded-xl" />
+                                        <div className="space-y-2">
+                                             <Skeleton className="h-4 w-72" />
+                                             <Skeleton className="h-4 w-64" />
+                                        </div>
+                                   </div>
+                              ))}
+                         </div>
+                    ) : (
+                         <div className="grid w-full grid-cols-1 items-center justify-center gap-4 lg:min-w-sm lg:grid-cols-2">
+                              {Array.isArray(postsData) &&
+                                   postsData.map((post, indx) => {
+                                        return <CaseCard key={`${post.id}-${indx + 1}`} post={post} />
+                                   })}
+                         </div>
+                    )}
                </div>
           </section>
      )

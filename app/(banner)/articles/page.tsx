@@ -1,6 +1,5 @@
 import { Grid } from '@/components/articles/organism/Grid'
 import { Metadata } from 'next'
-import { Suspense } from 'react'
 
 export const dynamic = 'force-dynamic'
 
@@ -38,9 +37,5 @@ export const metadata: Metadata = {
      category: 'Статьи',
 }
 export default function Articles() {
-     return (
-          <Suspense>
-               <Grid />
-          </Suspense>
-     )
+     return <Grid />
 }

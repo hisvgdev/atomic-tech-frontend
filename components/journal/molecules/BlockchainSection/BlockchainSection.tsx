@@ -29,7 +29,7 @@ export const BlockchainSection: FC<BlockchainSectionProps> = (props) => {
                     </div> */}
 
                          <div className="grid grid-cols-4 items-center gap-2.5">
-                              {blockchainData.length > 0 &&
+                              {/* {blockchainData.length > 0 &&
                                    blockchainData.map((bd, indx) => (
                                         <ArticleCard
                                              key={`${bd.id}-${indx}`}
@@ -41,7 +41,7 @@ export const BlockchainSection: FC<BlockchainSectionProps> = (props) => {
                                              href={`/articles/${bd.id}`}
                                              classNames="w-full lg:max-w-md"
                                         />
-                                   ))}
+                                   ))} */}
                          </div>
                          {/* <div className="flex flex-col gap-y-2.5">
                               <ArticleCard
@@ -62,7 +62,7 @@ export const BlockchainSection: FC<BlockchainSectionProps> = (props) => {
                               />
                          </div> */}
                     </div>
-                    <div className="flex flex-col gap-8 lg:hidden">
+                    {/* <div className="flex flex-col gap-8 lg:hidden">
                          <SwiperRowLayout>
                               {blockchainData.length > 0 &&
                                    blockchainData.map((bd, indx) => {
@@ -82,7 +82,7 @@ export const BlockchainSection: FC<BlockchainSectionProps> = (props) => {
                                         )
                                    })}
                          </SwiperRowLayout>
-                    </div>
+                    </div> */}
                </div>
           </section>
      )

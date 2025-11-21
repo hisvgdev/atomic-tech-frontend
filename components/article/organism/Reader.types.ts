@@ -1,5 +1,4 @@
-import { BlogResponse } from "@/utils/api/blogs/blog";
-
+import { Post } from "@/utils/shared/atomic-client/types";
 export interface ReaderProps {
-  blog: BlogResponse
+  blog: Post
 }

@@ -19,7 +19,7 @@ export const NeuralNetworksArticle: FC<NeuralNetworksArticleProps> = (props) => 
                          desc="Подборки инструментов, разборы и гайды по ИИ в маркетинге и бизнесе"
                          path="/journal?blog_category_id=Нейросеть"
                     />
-                    <div className="hidden grid-cols-4 items-center gap-2.5 lg:grid">
+                    {/* <div className="hidden grid-cols-4 items-center gap-2.5 lg:grid">
                          {neuralPosts.length > 0 &&
                               neuralPosts.map((bd, indx) => (
                                    <ArticleCard
@@ -33,8 +33,8 @@ export const NeuralNetworksArticle: FC<NeuralNetworksArticleProps> = (props) => 
                                         classNames="w-full lg:max-w-md"
                                    />
                               ))}
-                    </div>
-                    <div className="flex flex-col gap-8 lg:hidden">
+                    </div> */}
+                    {/* <div className="flex flex-col gap-8 lg:hidden">
                          <SwiperRowLayout>
                               {neuralPosts.length > 0 &&
                                    neuralPosts.map((bd, indx) => (
@@ -51,7 +51,7 @@ export const NeuralNetworksArticle: FC<NeuralNetworksArticleProps> = (props) => 
                                         </SwiperSlide>
                                    ))}
                          </SwiperRowLayout>
-                    </div>
+                    </div> */}
                </div>
           </section>
      )

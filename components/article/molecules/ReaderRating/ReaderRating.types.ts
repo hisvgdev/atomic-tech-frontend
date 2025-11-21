@@ -1,4 +1,4 @@
 export interface ReaderRatingProps {
-  id: number;
+  id: string;
   ratingsCount: number;
 }

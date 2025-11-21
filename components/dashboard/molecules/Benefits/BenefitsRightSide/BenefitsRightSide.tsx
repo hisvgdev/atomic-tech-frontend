@@ -20,11 +20,9 @@ export const BenefitsRightSide: FC<BenefitsRightSideProps> = (props) => {
      }
 
      return (
-          <div className="flex w-full flex-col items-center justify-center lg:gap-14 lg:pb-0">
+          <div className="flex w-full flex-col items-center justify-center gap-6 lg:gap-14 lg:pb-0">
                <div className="flex flex-col gap-4">
-                    <h3 className="text-4xl leading-12 font-bold -tracking-[0.1rem] text-white lg:text-5xl lg:-tracking-[0.2rem]">
-                         {/* <span className="text-[#A6F7FF]">Бесплатно</span> проведём аудит готового продукта или
-                         предложим варианты реализации вашей идеи */}
+                    <h3 className="text-4xl font-bold tracking-tighter text-white lg:text-5xl lg:leading-12">
                          Бесплатно <br /> проведём аудит готового продукта
                     </h3>
                     <p className="text-lg font-normal text-white/50 lg:text-2xl">

@@ -9,6 +9,7 @@ import { CaseHistoryProps } from './CaseHistory.types'
 
 export const CaseHistory: FC<CaseHistoryProps> = (props) => {
      const { projectHistory } = props
+
      const randomizeRelatedCaseItems = [...projectHistory.related_project_history_items].sort(() => 0.5 - Math.random())
      return (
           <section data-dark="true" className="h-full w-full rounded-[3.125rem] bg-black p-10">

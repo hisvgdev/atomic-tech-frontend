@@ -1,64 +1,19 @@
 'use client'
 
-import React from 'react'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
 
 import { Skeleton } from '@/components/ui/skeleton'
-import { getReviews } from '@/utils/api/reviews/reviews.api'
-import { StarIcon } from '@phosphor-icons/react'
-import { useQuery } from '@tanstack/react-query'
+import { useReviewsQuery } from '@/hooks/query/useReviewsQuery'
 
-const FeedbackCard = ({
-     name,
-     company,
-     review_text,
-     rating,
-     created_at,
-     updated_at,
-}: {
-     name: string
-     company: string
-     review_text: string
-     rating: number
-     created_at: string
-     updated_at: string
-}) => (
-     <div className="flex h-48 max-w-md flex-col justify-between rounded-xl bg-[#F6F7FB] p-6">
-          <div>
-               <div className="mb-1 flex items-center justify-between">
-                    <h4 className="text-lg font-bold text-[#51535B]">{name}</h4>
-                    <div className="flex items-center gap-2">
-                         {Array.from({ length: 5 }).map((_, indx) => (
-                              <StarIcon
-                                   key={indx}
-                                   size={24}
-                                   fill={indx < rating ? '#51535B' : '#D6D6D6'}
-                                   weight="fill"
-                              />
-                         ))}
-                    </div>
-               </div>
-               <p className="text-sm text-gray-400">{company}</p>
-          </div>
-          <p className="line-clamp-4 text-sm text-gray-700">{review_text}</p>
-     </div>
-)
+import FeedbackCard from './FeedbackCard'
 
 export const CustomSolutionsFeedback = () => {
-     const {
-          data: reviewsData,
-          isLoading: isReviewsLoading,
-          isError: isReviewsError,
-     } = useQuery({
-          queryKey: ['reviews'],
-          queryFn: () => getReviews(),
-          staleTime: 4000,
-     })
+     const { data: reviewsData, isLoading: isReviewsDataLoading, isError: isReviewsDataError } = useReviewsQuery()
 
-     if (isReviewsLoading || !reviewsData?.data) {
+     if (isReviewsDataLoading || isReviewsDataError) {
           return (
                <div className="flex h-full w-full flex-col gap-8">
                     <div>
@@ -105,9 +60,9 @@ export const CustomSolutionsFeedback = () => {
           )
      }
 
-     const uniqueReviews =
-          reviewsData?.data.filter((item, index, self) => index === self.findIndex((other) => other.id === item.id)) ??
-          []
+     const uniqueReviews = Array.isArray(reviewsData)
+          ? (reviewsData.filter((item, index, self) => index === self.findIndex((other) => other.id === item.id)) ?? [])
+          : []
 
      const mid = Math.ceil(uniqueReviews.length / 2)
      const firstColumn = uniqueReviews.slice(0, mid)
@@ -116,7 +71,6 @@ export const CustomSolutionsFeedback = () => {
      return (
           <div className="w-full py-12">
                <div className="flex flex-col gap-4">
-                    {/* First column — вправо */}
                     <div>
                          <Swiper
                               slidesPerView="auto"
@@ -130,15 +84,14 @@ export const CustomSolutionsFeedback = () => {
                               modules={[Autoplay]}
                               className="w-full"
                          >
-                              {firstColumn.map((item, index) => (
-                                   <SwiperSlide key={`${item.id}-${index}`} style={{ width: 'auto' }}>
-                                        <FeedbackCard {...item} />
+                              {firstColumn.map((review, index) => (
+                                   <SwiperSlide key={`${review.id}-${index}`} style={{ width: 'auto' }}>
+                                        <FeedbackCard review={review} />
                                    </SwiperSlide>
                               ))}
                          </Swiper>
                     </div>
 
-                    {/* Second column — влево */}
                     <div className="rtl">
                          <Swiper
                               slidesPerView="auto"
@@ -154,10 +107,10 @@ export const CustomSolutionsFeedback = () => {
                               modules={[Autoplay]}
                               className="w-full"
                          >
-                              {secondColumn.map((item, index) => (
-                                   <SwiperSlide key={`${item.id}-${index}`} style={{ width: 'auto' }}>
+                              {secondColumn.map((review, index) => (
+                                   <SwiperSlide key={`${review.id}-${index}`} style={{ width: 'auto' }}>
                                         <div className="ltr">
-                                             <FeedbackCard {...item} />
+                                             <FeedbackCard review={review} />
                                         </div>
                                    </SwiperSlide>
                               ))}

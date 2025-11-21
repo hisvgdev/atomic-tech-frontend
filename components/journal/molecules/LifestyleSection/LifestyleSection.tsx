@@ -20,7 +20,7 @@ export const LifestyleSection: FC<LifestyleSectionProps> = (props) => {
                     path="//journal?blog_category_id=Лайфстайл"
                />
                <div className="hidden lg:block">
-                    <div className="grid grid-cols-4 items-center gap-2.5">
+                    {/* <div className="grid grid-cols-4 items-center gap-2.5">
                          {lifestyleData.length > 0 &&
                               lifestyleData.map((bd, indx) => (
                                    <ArticleCard
@@ -34,7 +34,7 @@ export const LifestyleSection: FC<LifestyleSectionProps> = (props) => {
                                         classNames="w-full lg:max-w-md"
                                    />
                               ))}
-                    </div>
+                    </div> */}
                     {/* <div className="flex flex-col gap-y-4">
                          {Array.from({ length: 2 }).map((_, indx) => (
                               <ArticleCard
@@ -62,7 +62,7 @@ export const LifestyleSection: FC<LifestyleSectionProps> = (props) => {
                          ))}
                     </div> */}
                </div>
-               <div className="flex flex-col gap-8 lg:hidden">
+               {/* <div className="flex flex-col gap-8 lg:hidden">
                     <SwiperRowLayout>
                          {lifestyleData.length > 0 &&
                               lifestyleData.map((bd, indx) => {
@@ -82,7 +82,7 @@ export const LifestyleSection: FC<LifestyleSectionProps> = (props) => {
                                    )
                               })}
                     </SwiperRowLayout>
-               </div>
+               </div> */}
           </section>
      )
 }

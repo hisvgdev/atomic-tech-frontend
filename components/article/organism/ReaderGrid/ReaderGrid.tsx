@@ -5,7 +5,6 @@ import coverImage from '@/public/assets/images/projects/secondProject.png'
 import ArticleCard from '@/shared/global/ArticleCard'
 import LeaveRequest from '@/shared/global/LeaveRequest'
 import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
-import { CaseItemsData } from '@/utils/api/case-items/case-items'
 import React, { FC } from 'react'
 
 import ReaderContent from '../../molecules/ReaderContent'
@@ -15,51 +14,46 @@ export const ReaderGrid: FC<ReaderGridProps> = (props) => {
      const { caseItems, content, image, id, ratingsCount, relatedBlogs } = props
      return (
           <>
-               <div className="flex flex-col gap-20 px-3 lg:px-7">
-                    <ReaderContent
-                         caseItems={caseItems as CaseItemsData[]}
-                         content={content}
-                         ratingsCount={ratingsCount}
-                         image={image}
-                         id={id}
-                         relatedBlogs={relatedBlogs}
-                    />
-                    {Array.isArray(relatedBlogs) && relatedBlogs.length > 0 ? (
-                         <div className="flex flex-col gap-y-8">
-                              <h2 className="text-4xl font-bold lg:text-5xl">Следующие темы</h2>
-                              <div className="hidden grid-cols-1 items-center gap-4 md:grid lg:grid-cols-2 xl:grid-cols-3">
-                                   {[...relatedBlogs, ...relatedBlogs, ...relatedBlogs].map((c, i) => (
+               <div className="grid w-full max-w-[120rem] grid-cols-1 gap-20 px-4">
+                    <div>
+                         <ReaderContent
+                              caseItems={caseItems as any[]}
+                              content={content}
+                              ratingsCount={ratingsCount}
+                              image={image}
+                              id={id}
+                              relatedBlogs={relatedBlogs}
+                         />
+                    </div>
+
+                    {Array.isArray(relatedBlogs) && relatedBlogs.length > 0 && (
+                         <div className="mx-auto flex w-full max-w-[40rem] flex-col gap-y-8">
+                              <h2 className="text-center text-4xl font-bold lg:text-5xl">Следующие темы</h2>
+
+                              <div className="hidden w-full grid-cols-1 gap-6 md:grid lg:grid-cols-1">
+                                   {/* {relatedBlogs.map((c, i) => (
                                         <ArticleCard
                                              key={i}
-                                             imgCover={coverImage}
-                                             title={c.title}
-                                             href={`/articles/${c.id}`}
                                              withTag
-                                             tag="Бизнес"
                                              classNames="w-full"
                                         />
-                                   ))}
+                                   ))} */}
                               </div>
-                              <div className="flex flex-col gap-8 lg:hidden">
+
+                              {/* <div className="flex flex-col gap-8 md:hidden">
                                    <SwiperRowLayout>
                                         {relatedBlogs.map((c, i) => (
-                                             <ArticleCard
-                                                  key={i}
-                                                  imgCover={coverImage}
-                                                  title={c.title}
-                                                  href={`/articles/${c.id}`}
-                                                  withTag
-                                                  tag="Бизнес"
-                                                  classNames="w-full"
-                                             />
+                                             <ArticleCard key={i} withTag classNames="w-full" />
                                         ))}
                                    </SwiperRowLayout>
-                              </div>
+                              </div> */}
+
                               <AllProjectsButton link="/articles" title="Все статьи" />
                          </div>
-                    ) : null}
+                    )}
                </div>
-               <div className="px-4 lg:px-7">
+
+               <div className="mt-20 w-full lg:px-7">
                     <LeaveRequest />
                </div>
           </>

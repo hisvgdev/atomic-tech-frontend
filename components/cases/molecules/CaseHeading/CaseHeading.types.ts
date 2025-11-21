@@ -1,5 +1,4 @@
-import { CategoriesDataProps } from "@/utils/api/categories/categories";
-import { ServicesDataProps } from "@/utils/api/services/services";
+
 
 export interface CaseHeadingProps {
   lengthOfCases: number;
@@ -8,6 +7,6 @@ export interface CaseHeadingProps {
     name: string;
     icon?: string;
   }[]
-  categoriesData: CategoriesDataProps[]
-  servicesData: ServicesDataProps[]
+  categoriesData: any[]
+  servicesData: any[]
 }

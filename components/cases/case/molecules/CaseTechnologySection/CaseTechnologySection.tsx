@@ -1,19 +1,21 @@
 import React, { FC } from 'react'
 
-import CaseTechButton from '../../atoms/CaseTechButton'
+import CaseIconButton from '../../atoms/CaseIconButton'
 import { CaseTechnologySectionProps } from './CaseTechnologySection.types'
 
 export const CaseTechnologySection: FC<CaseTechnologySectionProps> = (props) => {
-    const { technologies } = props
-    return (
-        <section aria-labelledby="tech-heading" className="flex flex-col gap-y-4">
-            <h3 id="tech-heading">Технологии</h3>
-            <div className="flex items-center gap-x-1.5">
-                {Array.isArray(technologies) &&
-                    technologies.map(({ image, name }, indx) => (
-                        <CaseTechButton key={`${indx}-${name}`} icon={image} label={name} />
-                    ))}
-            </div>
-        </section>
-    )
+     const { technologies } = props
+     return (
+          <section aria-labelledby="tech-heading" className="flex flex-col gap-2">
+               <h3 id="tech-heading" className="text-base font-bold tracking-tight text-black/60">
+                    Технологии
+               </h3>
+               <div className="flex items-center gap-x-1.5">
+                    {Array.isArray(technologies) &&
+                         technologies.map(({ image, name }, indx) => (
+                              <CaseIconButton key={`${indx}-${name}`} icon={''} label={name} />
+                         ))}
+               </div>
+          </section>
+     )
 }

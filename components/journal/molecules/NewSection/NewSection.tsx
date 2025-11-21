@@ -10,7 +10,7 @@ export const NewSection: FC<NewSectionProps> = (props) => {
           <section data-dark="false" className="flex flex-col gap-y-4 lg:px-7">
                <Heading title="Новое" desc="Самые свежие статьи в Proger" path="/" />
                <div className="flex min-h-full w-full flex-col gap-5 lg:flex-row lg:items-center lg:justify-center">
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {/* <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                          {newJournalData.map((d) => (
                               <ArticleCard
                                    key={d.id}
@@ -26,7 +26,7 @@ export const NewSection: FC<NewSectionProps> = (props) => {
                                    withTag
                               />
                          ))}
-                    </div>
+                    </div> */}
                     {/* <div className="flex flex-col gap-y-2.5">
                     <ArticleCard
                         title="Что подарить клиентам и партнёрам: 35 идей для вдохновения"

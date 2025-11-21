@@ -32,7 +32,7 @@ export const DesignSection: FC<DesignSectionProps> = (props) => {
                         classNames="w-full"
                     />
                 </div> */}
-                    <div className="grid grid-cols-4 items-center gap-2.5">
+                    {/* <div className="grid grid-cols-4 items-center gap-2.5">
                          {designProjectData.length > 0 &&
                               designProjectData.map((bd, indx) => (
                                    <ArticleCard
@@ -46,9 +46,9 @@ export const DesignSection: FC<DesignSectionProps> = (props) => {
                                         classNames="w-full lg:max-w-md"
                                    />
                               ))}
-                    </div>
+                    </div> */}
                </div>
-               <div className="flex flex-col gap-8 lg:hidden">
+               {/* <div className="flex flex-col gap-8 lg:hidden">
                     <SwiperRowLayout>
                          {designProjectData.length > 0 &&
                               designProjectData.map((bd, indx) => (
@@ -65,7 +65,7 @@ export const DesignSection: FC<DesignSectionProps> = (props) => {
                                    </SwiperSlide>
                               ))}
                     </SwiperRowLayout>
-               </div>
+               </div> */}
           </section>
      )
 }

@@ -1,18 +1,22 @@
+'use client'
+
 import { technologies } from '@/constants/tech.constants'
-import { getTechnologies } from '@/utils/api/technologies/technologies'
+import { useTaxonomies } from '@/hooks/query/useTaxonimies'
 import Image from 'next/image'
-import React, { FC } from 'react'
+
+import type { FC } from 'react'
 
 import { BlogTechnologyProps } from './BlogTechnology.types'
 
-export const BlogTechnology: FC<BlogTechnologyProps> = async () => {
-     const data = await getTechnologies()
-     if (!data?.success) return null
+export const BlogTechnology: FC<BlogTechnologyProps> = () => {
+     const { data, isLoading, isError } = useTaxonomies()
 
-     const matchedTechnologies = data.data.map((technology) => {
-          const matchedTech = technologies.find((tech) => tech.name.toLowerCase() === technology.name.toLowerCase())
+     if (!data) return null
+
+     const matchedTechnologies = data.map((technology) => {
+          const matchedTech = technologies.find((tech) => tech.name.toLowerCase() === technology.title.toLowerCase())
           return {
-               name: technology.name,
+               name: technology.title,
                icon: matchedTech?.icon,
           }
      })
@@ -20,16 +24,16 @@ export const BlogTechnology: FC<BlogTechnologyProps> = async () => {
      if (matchedTechnologies.length <= 0) return null
 
      return (
-          <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-16">
+          <div className="flex flex-col items-start gap-4 lg:flex-row lg:gap-16">
                <h4 className="max-w-64 text-sm font-medium text-gray-600 lg:max-w-32">
                     Технологии, применяемые в разработке
                </h4>
-               <div className="grid grid-cols-3 gap-x-2 gap-y-1 lg:grid-cols-5 lg:gap-x-16 lg:gap-y-4">
+               <div className="grid grid-cols-3 gap-2 lg:grid-cols-5 lg:gap-4 lg:gap-x-16 xl:grid-cols-7 2xl:grid-cols-9">
                     {Array.isArray(matchedTechnologies)
                          ? matchedTechnologies.map((tech, idx) => (
                                 <div
                                      key={`${tech?.name}-${idx}`}
-                                     className="flex w-auto items-center gap-x-2 overflow-hidden rounded-full border border-[#E6E6E6] p-3.5"
+                                     className="flex max-w-32 items-center gap-2 overflow-hidden rounded-full border border-[#E6E6E6] p-3.5"
                                 >
                                      {tech?.icon && (
                                           <Image
@@ -40,7 +44,11 @@ export const BlogTechnology: FC<BlogTechnologyProps> = async () => {
                                                className="h-5 w-5"
                                           />
                                      )}
-                                     <span className="text-xs font-extrabold">{tech?.name}</span>
+                                     <span
+                                          className={` ${tech.icon ? null : 'w-full text-center'} text-xs font-extrabold`}
+                                     >
+                                          {tech?.name}
+                                     </span>
                                 </div>
                            ))
                          : technologies.map((tech, idx) => (

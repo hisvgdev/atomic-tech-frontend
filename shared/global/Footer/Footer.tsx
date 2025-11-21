@@ -8,7 +8,6 @@ import GradientButton from '@/shared/custom/GradientButton'
 import { ChevronUp } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 const mockSocietyData = [

@@ -67,14 +67,14 @@ export const Amenities: FC<AmenitiesProps> = () => {
           <section data-dark="true" className="bg-gradient-amenties w-full p-6 lg:px-7 lg:py-24">
                <div className="flex flex-col gap-10 lg:gap-20">
                     <div className="flex flex-col items-start gap-8 lg:items-center lg:justify-between xl:flex-row xl:gap-0">
-                         <div className="flex flex-col items-start gap-10 lg:flex-row lg:items-center">
-                              <h1 className="text-7xl font-bold -tracking-[0.375rem] text-white lg:text-9xl">Услуги</h1>
+                         <div className="flex h-full flex-col items-start gap-10 lg:flex-row lg:items-center">
+                              <h1 className="text-7xl font-bold tracking-tighter text-white lg:text-8xl">Услуги</h1>
                               <p className="max-w-md text-base font-normal text-white">
                                    Наш подход к работе лежит в плоскости аналитики, ярких дизайн решений и, как итог,
                                    построении эффективной коммуникации
                               </p>
                          </div>
-                         <Chip number="3" title="Компетенции" maxW="max-w-42" isDark />
+                         <Chip number="3" title="Компетенции" maxW="max-w-44" isDark />
                     </div>
                     <div className="hidden w-full grid-cols-3 items-center gap-6 lg:grid">
                          {mockAmenitiesData.map((amenties, indx) => {

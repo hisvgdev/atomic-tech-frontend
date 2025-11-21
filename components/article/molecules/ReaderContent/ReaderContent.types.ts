@@ -1,11 +1,11 @@
-import { CaseItemsData } from "@/utils/api/case-items/case-items";
+
 
 export interface ReaderContentProps {
-  caseItems: CaseItemsData[];
+  caseItems: any[];
   content?: string;
   image?: string;
   ratingsCount?: number;
-  id: number;
+  id: string;
   relatedBlogs: {
     id: number;
     title: string;

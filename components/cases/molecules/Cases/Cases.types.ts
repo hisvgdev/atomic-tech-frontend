@@ -1,5 +1,6 @@
-import { CaseItemsData } from "@/utils/api/case-items/case-items";
+import { Post } from "@/utils/shared/atomic-client/types";
+
 
 export interface CasesProps {
-  cases: CaseItemsData[];
+  cases: Post[];
 }

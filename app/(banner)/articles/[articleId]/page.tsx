@@ -1,5 +1,5 @@
 import Reader from '@/components/article/organism'
-import { getBlog } from '@/utils/api/blogs/blog'
+import { AtomicClient } from '@/utils/shared/atomic-client/atomic-client'
 import { Metadata, ResolvingMetadata } from 'next'
 
 type Props = {
@@ -10,29 +10,41 @@ type Props = {
 export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
      const { articleId } = await params
 
-     const blog = await getBlog(articleId)
+     const atomicClient = new AtomicClient({
+          baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
+          keycloak: {
+               serverUrl: process.env.NEXT_PUBLIC_KEYCLOAK_SERVER_URL!,
+               realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM!,
+               clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID!,
+               clientSecret: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET!,
+          },
+     })
 
-     const { title, description, image } = blog?.data ?? {}
+     await atomicClient.ready
+
+     const findedArticle = await atomicClient.posts.get(articleId)
+
+     const { cover, title, excerpt } = findedArticle
 
      return {
           title: title,
-          description: description,
+          description: excerpt,
           openGraph: {
                type: 'website',
                locale: 'ru_RU',
                url: `https://atomic-tech.ru/articles/${articleId}`,
                title: 'Atomic Tech - Твоя страница со статьями',
                siteName: 'Atomic Tech',
-               description: `Atomic Tech - Твоя страница со статьей - ${title}-${description}`,
+               description: `Atomic Tech - Твоя страница со статьей - ${title}-${excerpt}`,
                images: [
                     {
-                         url: image || '',
+                         url: cover?.url || '',
                          type: 'image/svg+xml',
                          width: 1200,
                          height: 630,
                     },
                     {
-                         url: image || '',
+                         url: cover?.url || '',
                          type: 'image/png',
                          width: 256,
                          height: 256,
@@ -42,12 +54,12 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
           twitter: {
                card: 'summary_large_image',
                title: 'Atomic Tech - Твоя страница со статьями',
-               description: `Atomic Tech - Твоя страница со статьей - ${title}-${description}`,
+               description: `Atomic Tech - Твоя страница со статьей - ${title}-${excerpt}`,
                site: '@atomictech',
-               images: [image || ''],
+               images: [cover?.url || ''],
           },
           icons: {
-               icon: [image || '', '/icons/icon-192x192.png', '/icons/icon-512x512.png'],
+               icon: [cover?.url || '', '/icons/icon-192x192.png', '/icons/icon-512x512.png'],
                apple: '/icons/apple-touch-icon.png',
           },
      }
@@ -55,9 +67,20 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 
 export default async function Article({ params }: Props) {
      const { articleId } = await params
-     const blog = await getBlog(articleId)
 
-     if (!blog) return null
+     const atomicClient = new AtomicClient({
+          baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
+          keycloak: {
+               serverUrl: process.env.NEXT_PUBLIC_KEYCLOAK_SERVER_URL!,
+               realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM!,
+               clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID!,
+               clientSecret: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET!,
+          },
+     })
 
-     return <Reader blog={blog} />
+     await atomicClient.ready
+
+     const findedArticle = await atomicClient.posts.get(articleId)
+
+     return <Reader blog={findedArticle} />
 }

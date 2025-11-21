@@ -2,34 +2,33 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import GradientButton from '@/shared/custom/GradientButton'
-import { StarIcon } from '@phosphor-icons/react/dist/ssr'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import React, { FC } from 'react'
+import Link from 'next/link'
+
+import type { FC } from 'react'
 
 import { CaseCardProps } from './CaseCard.types'
 
 export const CaseCard: FC<CaseCardProps> = (props) => {
-     const { categories, description, destinations, id, photos, title, website_link } = props
-     const router = useRouter()
+     const { post } = props
+     const { slug, title, cover, excerpt } = post
 
      return (
-          <Card
-               className="h-full w-full cursor-pointer border-none bg-[#EEEFF5] p-0 shadow-none"
-               onClick={() => router.push(`/cases/${id}`)}
-          >
-               <CardHeader className="relative">
-                    {photos && (
-                         <Image
-                              src={photos[0]}
-                              alt={title}
-                              className="aspect-[16/9] h-full w-full rounded-3xl object-cover"
-                              width={620}
-                              height={420}
-                         />
-                    )}
-                    <div className="absolute top-4 left-4">
-                         {categories &&
+          <Link href={`/cases/${slug}`} className="h-full cursor-pointer">
+               <Card className="h-full w-full cursor-pointer border-none bg-[#EEEFF5] p-0 shadow-none">
+                    <CardHeader className="relative">
+                         {cover && (
+                              <Image
+                                   src={cover.url}
+                                   alt={cover.filename || title || ''}
+                                   className="aspect-[4/3] h-96 w-full rounded-3xl object-cover"
+                                   width={620}
+                                   height={420}
+                                   loading="lazy"
+                              />
+                         )}
+                         <div className="absolute top-4 left-4">
+                              {/* {categories &&
                               categories.map((tag, indxTag) => (
                                    <div
                                         key={`${indxTag}-${tag}`}
@@ -41,10 +40,10 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                                              </span>
                                         </div>
                                    </div>
-                              ))}
-                    </div>
-                    <div className="absolute bottom-4 left-0 flex items-center gap-4 xl:left-4">
-                         {destinations &&
+                              ))} */}
+                         </div>
+                         <div className="absolute bottom-4 left-0 flex items-center gap-4 xl:left-4">
+                              {/* {destinations &&
                               [...destinations, ...destinations].map(({ name, description }, indxBdg) => (
                                    <div
                                         key={`${indxBdg}-${name}`}
@@ -64,30 +63,31 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                                              </div>
                                         </div>
                                    </div>
-                              ))}
-                    </div>
-               </CardHeader>
-               <CardContent className="flex h-full w-full flex-col px-4 py-6">
-                    <div className="flex w-full items-start justify-between">
-                         <div className="flex flex-col gap-1">
-                              <CardTitle className="line-clamp-2 text-lg leading-5 font-extrabold -tracking-[0.075rem] lg:text-3xl lg:leading-6">
-                                   {title}
-                              </CardTitle>
-                              <CardDescription className="line-clamp-2 text-xs font-medium text-black lg:text-sm">
-                                   {description}
-                              </CardDescription>
+                              ))} */}
                          </div>
-                         <GradientButton
-                              hasIsRoute
-                              title="Сайт"
-                              classNames="rounded-full lg:py-6"
-                              onClick={(e) => {
-                                   e.stopPropagation()
-                                   window.open(website_link, '_blank')
-                              }}
-                         />
-                    </div>
-               </CardContent>
-          </Card>
+                    </CardHeader>
+                    <CardContent className="flex h-full w-full flex-col px-4 py-6">
+                         <div className="flex w-full items-start justify-between">
+                              <div className="flex flex-col gap-1">
+                                   <CardTitle className="line-clamp-2 text-lg leading-5 font-extrabold tracking-tight lg:text-3xl lg:leading-9">
+                                        {title}
+                                   </CardTitle>
+                                   <CardDescription className="line-clamp-2 text-xs font-medium text-black lg:text-sm">
+                                        {excerpt}
+                                   </CardDescription>
+                              </div>
+                              <GradientButton
+                                   hasIsRoute
+                                   title="Сайт"
+                                   classNames="rounded-full lg:py-6"
+                                   onClick={(e) => {
+                                        e.stopPropagation()
+                                        window.open(slug, '_blank')
+                                   }}
+                              />
+                         </div>
+                    </CardContent>
+               </Card>
+          </Link>
      )
 }

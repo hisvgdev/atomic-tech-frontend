@@ -3,9 +3,8 @@ import React from 'react'
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
      return (
-          <div className="flex flex-col gap-10">
+          <div className="flex h-full flex-col gap-8 overflow-hidden lg:gap-16">
                <BannerWithTags />
-               <hr />
                {children}
           </div>
      )

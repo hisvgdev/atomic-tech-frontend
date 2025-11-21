@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import mailingImage from '@/public/assets/images/mailingImage.png'
 import { useForm } from '@tanstack/react-form'
+import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC } from 'react'
 
@@ -27,9 +29,9 @@ export const MailingSection: FC<MailingSectionProps> = (props) => {
           },
      })
      return (
-          <section data-dark="true" className="lg:px-7">
-               <div className="bg-gradient-main mt-14 w-full rounded-[1.875rem] p-8 lg:p-16">
-                    <div className="flex items-center gap-8 lg:flex-row lg:items-center lg:justify-center lg:gap-0">
+          <section data-dark="true">
+               <div className="bg-gradient-main w-full rounded-[1.875rem] p-8 lg:p-16">
+                    <div className="flex items-center gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-0">
                          <div className="flex w-full flex-col gap-9 lg:max-w-3xl">
                               <h1 className="text-4xl font-bold lg:text-5xl">
                                    <span className="text-white/80">«PRO</span>
@@ -97,7 +99,7 @@ export const MailingSection: FC<MailingSectionProps> = (props) => {
                                                                       </span>
                                                                       <Link
                                                                            href="/policy"
-                                                                           className="w-full text-sm font-normal text-white underline lg:w-auto lg:text-base"
+                                                                           className="w-full text-sm font-normal text-white underline lg:w-fit"
                                                                       >
                                                                            Политику конфиденциальности
                                                                       </Link>
@@ -115,7 +117,7 @@ export const MailingSection: FC<MailingSectionProps> = (props) => {
                                    </div>
                               </form>
                          </div>
-                         {/* <div className="bg-white w-full h-80 rounded-3xl lg:w-1/4" /> */}
+                         <Image src={mailingImage} alt="mailingImage" />
                     </div>
                </div>
           </section>

@@ -8,8 +8,8 @@ export const Cases: FC<CasesProps> = (props) => {
      return (
           <div className="grid min-w-sm grid-cols-1 items-center justify-center gap-4 xl:grid-cols-2">
                {Array.isArray(cases) &&
-                    cases.map((project, indx) => {
-                         return <CaseCard key={`${project.id}-${indx + 1}`} {...project} />
+                    cases.map((post, indx) => {
+                         return <CaseCard key={`${post.id}-${indx}`} post={post} />
                     })}
           </div>
      )

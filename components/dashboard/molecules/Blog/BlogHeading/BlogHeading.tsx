@@ -8,7 +8,7 @@ export const BlogHeading: FC<BlogHeadingProps> = (props) => {
      return (
           <div className="flex h-full w-full flex-col lg:w-auto lg:gap-24">
                <div className="flex flex-col gap-2">
-                    <h1 className="text-3xl font-bold -tracking-[0.15rem] lg:text-4xl">
+                    <h1 className="text-3xl font-bold tracking-tighter lg:text-4xl">
                          Все об «атомах» цифровых экосистем
                     </h1>
                     <span className="text-xl font-normal text-[#3C3C3C]">Читайте в нашем блоге.</span>
