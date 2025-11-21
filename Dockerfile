@@ -9,7 +9,7 @@
   
   ENV NODE_OPTIONS="--max-old-space-size=4096"
   
-  RUN npm run build -- --no-lint
+  RUN npm run build
   
 
   FROM node:20-alpine AS runner
