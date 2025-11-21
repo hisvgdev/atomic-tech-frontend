@@ -1,10 +1,11 @@
+
   FROM node:20-slim AS builder
   WORKDIR /app
   
   COPY package*.json ./
   
   RUN npm ci --legacy-peer-deps
-
+  
   RUN npm i -D typescript
   
   COPY . .
@@ -13,7 +14,6 @@
   
   RUN npm run build
   
-
   FROM node:20-alpine AS runner
   WORKDIR /app
   
@@ -25,8 +25,10 @@
   
   RUN npm ci --omit=dev --legacy-peer-deps
   
+  RUN npm i typescript --no-audit --no-fund
+
   EXPOSE 3000
-  
   ENV NODE_ENV=production
+  
   CMD ["npm", "start"]
   
