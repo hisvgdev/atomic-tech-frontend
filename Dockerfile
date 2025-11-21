@@ -4,6 +4,8 @@
   COPY package*.json ./
   
   RUN npm ci --legacy-peer-deps
+
+  RUN npm i -D typescript
   
   COPY . .
   
