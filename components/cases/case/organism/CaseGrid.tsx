@@ -50,7 +50,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
           reading_time_min,
      } = findedCase
 
-     console.log(taxonomies)
+     console.log(findedCase)
 
      // const formatedWebsiteLink = website_link ? website_link.split('/')[2] : ''
      const getYear = new Date(updated_at || '').getFullYear()
@@ -253,7 +253,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                          </div>
                     </section>
 
-                    {/* <CaseHistory projectHistory={blocks} /> */}
+                    {blocks && <CaseHistory blocks={blocks} projectHistory={[]} />}
 
                     <section data-dark="false" aria-labelledby="more-cases-heading" className="flex flex-col gap-6">
                          <h2 id="more-cases-heading" className="text-4xl font-bold tracking-tight lg:text-6xl">

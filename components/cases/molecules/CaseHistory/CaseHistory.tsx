@@ -8,18 +8,21 @@ import React, { FC } from 'react'
 import { CaseHistoryProps } from './CaseHistory.types'
 
 export const CaseHistory: FC<CaseHistoryProps> = (props) => {
-     const { projectHistory } = props
+     const { projectHistory, blocks } = props
 
-     const randomizeRelatedCaseItems = [...projectHistory.related_project_history_items].sort(() => 0.5 - Math.random())
+     // const randomizeRelatedCaseItems = [...projectHistory.related_project_history_items].sort(() => 0.5 - Math.random())
      return (
           <section data-dark="true" className="h-full w-full rounded-[3.125rem] bg-black p-10">
                <div className="flex w-full flex-col items-center justify-center gap-24 lg:flex-row lg:items-start lg:justify-between">
                     <div className="flex max-w-4xl flex-col gap-y-9">
                          <h2 className="text-5xl font-bold -tracking-[0.23rem] text-white">История проекта</h2>
-                         <div
-                              className="flex flex-col gap-y-12 text-base font-medium text-white/70"
-                              dangerouslySetInnerHTML={{ __html: projectHistory.content }}
-                         />
+                         {blocks.map((b) => (
+                              <div
+                                   key={b.id}
+                                   className="flex flex-col gap-y-12 text-base font-medium text-white/70"
+                                   dangerouslySetInnerHTML={{ __html: b.content.html }}
+                              />
+                         ))}
                     </div>
 
                     <aside data-dark="true" className="flex max-w-sm grow flex-col gap-y-6">
@@ -34,7 +37,7 @@ export const CaseHistory: FC<CaseHistoryProps> = (props) => {
                               <ArrowRight />
                          </button>
 
-                         {randomizeRelatedCaseItems.slice(0, 2).map((c, i) => (
+                         {/* {randomizeRelatedCaseItems.slice(0, 2).map((c, i) => (
                               <Card
                                    key={i}
                                    className="flex h-96 flex-col justify-between rounded-4xl border-none bg-[#1D1D1D] shadow-none"
@@ -68,7 +71,7 @@ export const CaseHistory: FC<CaseHistoryProps> = (props) => {
                                         </time>
                                    </CardFooter>
                               </Card>
-                         ))}
+                         ))} */}
                     </aside>
                </div>
           </section>
