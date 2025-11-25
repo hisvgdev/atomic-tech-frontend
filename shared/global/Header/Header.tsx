@@ -169,7 +169,7 @@ export const Header = () => {
                                                                       )}
                                                                       {link.href ? (
                                                                            <Link
-                                                                                href={link.href}
+                                                                                href={link.href as any}
                                                                                 className={cn(
                                                                                      'relative z-10 rounded-full px-4 py-2 font-bold transition-colors duration-300',
                                                                                      {

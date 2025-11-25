@@ -5,6 +5,8 @@ import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
 import { SwiperSlide } from 'swiper/react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import Heading from '../Heading'
 import { SpecialProjectSectionProps } from './SpecialProjectSection.types'
 
@@ -17,7 +19,8 @@ export const SpecialProjectSection: FC<SpecialProjectSectionProps> = (props) => 
                          <Heading
                               title="Спецпроекты"
                               desc="Исследования, обзоры, нестандартный контент"
-                              path="/journal?blog_category_id=Спецпроект"
+                              path={RoutesEnum.journal}
+                              query="blog_category_id=Спецпроект"
                          />
                          {/* <div className="hidden grid-cols-4 items-center gap-2.5 lg:grid">
                               {specialProjects.length > 0 &&

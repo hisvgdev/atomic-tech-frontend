@@ -5,6 +5,8 @@ import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
 import { SwiperSlide } from 'swiper/react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import Heading from '../Heading'
 import { DesignSectionProps } from './Design.types'
 
@@ -15,7 +17,8 @@ export const DesignSection: FC<DesignSectionProps> = (props) => {
                <Heading
                     title="Дизайн"
                     desc="Руководства и сервисы, в том числе для недизайнеров"
-                    path="/journal?blog_category_id=Дизайн"
+                    path={RoutesEnum.journal}
+                    query="blog_category_id=Дизайн"
                />
                <div className="hidden lg:block">
                     {/* <div className="flex items-center gap-x-3 w-full">

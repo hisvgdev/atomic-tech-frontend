@@ -1,14 +1,9 @@
 import Reader from '@/components/article/organism'
 import { AtomicClient } from '@/utils/shared/atomic-client/atomic-client'
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
 
-type Props = {
-     params: Promise<{ articleId: string }>
-     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
-
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-     const { articleId } = await params
+export async function generateMetadata(props: PageProps<'/articles/[articleId]'>): Promise<Metadata> {
+     const { articleId } = await props.params
 
      const atomicClient = new AtomicClient({
           baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
@@ -65,8 +60,8 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
      }
 }
 
-export default async function Article({ params }: Props) {
-     const { articleId } = await params
+export default async function Article(props: PageProps<'/articles/[articleId]'>) {
+     const { articleId } = await props.params
 
      const atomicClient = new AtomicClient({
           baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,

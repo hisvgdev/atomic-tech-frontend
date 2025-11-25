@@ -1,8 +1,9 @@
+import { RoutesEnum } from "@/types/Routes.types";
 import React, { HTMLProps } from "react";
 
 export interface GradientButtonProps {
   hasIsRoute?: boolean;
-  routePath?: string;
+  routePath?: RoutesEnum | string;
   children?: React.ReactNode;
   title?: string;
   titleSize?: string;

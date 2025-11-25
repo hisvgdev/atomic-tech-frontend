@@ -27,6 +27,8 @@ import { A11y, Navigation, Pagination } from 'swiper/modules'
 
 import { cn } from '@/lib/utils'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 export const CaseGrid: FC<CaseGridProps> = (props) => {
      const { findedCase, relatedCase } = props
      const {
@@ -47,6 +49,8 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
           published_at,
           reading_time_min,
      } = findedCase
+
+     console.log(taxonomies)
 
      // const formatedWebsiteLink = website_link ? website_link.split('/')[2] : ''
      const getYear = new Date(updated_at || '').getFullYear()
@@ -270,7 +274,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                               ))}
                          </div>
                     </section>
-                    <AllProjectsButton link="/cases" title="Все проекты" />
+                    <AllProjectsButton link={RoutesEnum.cases} title="Все проекты" />
                     <div className="block lg:hidden">
                          <LeaveRequest />
                     </div>

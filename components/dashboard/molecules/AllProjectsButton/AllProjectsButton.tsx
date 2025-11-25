@@ -6,10 +6,12 @@ import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 import { motion } from 'framer-motion'
 import React, { FC, useState } from 'react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import { AllProjectsButtonProps } from './AllProjectsButton.types'
 
 export const AllProjectsButton: FC<AllProjectsButtonProps> = (props) => {
-     const { title = 'Все проекты', link = '/cases' } = props
+     const { title = 'Все проекты', link = RoutesEnum.cases } = props
      const isMobile = useIsMobile()
      const [isHover, setIsHover] = useState(false)
 

@@ -6,6 +6,8 @@ import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
 import { SwiperSlide } from 'swiper/react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import Heading from '../Heading'
 import { BusinessSectionProps } from './BusinessSection.types'
 
@@ -16,7 +18,8 @@ export const BusinessSection: FC<BusinessSectionProps> = (props) => {
                <Heading
                     title="Бизнес"
                     desc="Как зарабатывать больше, а работать меньше"
-                    path="/journal?blog_category_id=Бизнес"
+                    path={RoutesEnum.journal}
+                    query="blog_category_id=Бизнес"
                />
                <div className="hidden grid-cols-4 items-center gap-2.5 lg:grid">
                     {/* {businessProjectData.length > 0 &&

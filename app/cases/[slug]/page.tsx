@@ -1,15 +1,10 @@
 import CaseGrid from '@/components/cases/case/organism'
 import { AtomicClient } from '@/utils/shared/atomic-client/atomic-client'
-import { Metadata, ResolvingMetadata } from 'next'
-import { redirect } from 'next/navigation'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
-type Props = {
-     params: Promise<{ slug: string }>
-     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
-
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-     const { slug } = await params
+export async function generateMetadata(props: PageProps<'/cases/[slug]'>): Promise<Metadata> {
+     const { slug } = await props.params
 
      const atomicClient = new AtomicClient({
           baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
@@ -66,8 +61,8 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
      }
 }
 
-export default async function Case({ params }: Props) {
-     const { slug } = await params
+export default async function Case(props: PageProps<'/cases/[slug]'>) {
+     const { slug } = await props.params
 
      const atomicClient = new AtomicClient({
           baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
@@ -85,7 +80,7 @@ export default async function Case({ params }: Props) {
 
      // const relatedCaseItem = await getRelatedCaseItem(Number(slug))
 
-     if (!findedCase) return redirect('/not-found')
+     if (!findedCase) return notFound()
 
      return <CaseGrid findedCase={findedCase} relatedCase={{}} />
 }

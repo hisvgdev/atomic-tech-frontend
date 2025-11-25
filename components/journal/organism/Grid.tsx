@@ -7,6 +7,8 @@ import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import BlockchainSection from '../molecules/BlockchainSection'
 import BusinessSection from '../molecules/BusinessSection'
 import DesignSection from '../molecules/DesignSection'
@@ -147,7 +149,7 @@ export const Grid = () => {
                <MailingSection />
 
                <div className="mt-auto">
-                    <AllProjectsButton link="/articles" title="Все статьи" />
+                    <AllProjectsButton link={RoutesEnum.articles} title="Все статьи" />
                </div>
           </div>
      )

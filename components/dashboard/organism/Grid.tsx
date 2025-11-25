@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import LeaveRequest from '../../../shared/global/LeaveRequest'
 import AboutUs from '../molecules/AboutUs'
 import AllProjectsButton from '../molecules/AllProjectsButton'
@@ -21,7 +23,7 @@ export const Grid = () => {
                     </div>
                     <LastProjects />
                     <div className="px-4 lg:px-7">
-                         <AllProjectsButton link="/cases" />
+                         <AllProjectsButton link={RoutesEnum.cases} />
                     </div>
                     <Amenities />
                     <AboutUs />

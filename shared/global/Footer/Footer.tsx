@@ -63,7 +63,7 @@ export const Footer = () => {
                                                        className="object-contain"
                                                   />
                                                   <Link
-                                                       href={society.href}
+                                                       href={society.href as any}
                                                        target="_blank"
                                                        className="pl-2 text-sm font-bold text-white"
                                                   >

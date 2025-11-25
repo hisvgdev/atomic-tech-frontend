@@ -1,6 +1,8 @@
 import ArticleCard from '@/shared/global/ArticleCard'
 import React, { FC } from 'react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import Heading from '../Heading'
 import { NewSectionProps } from './NewSection.types'
 
@@ -8,7 +10,7 @@ export const NewSection: FC<NewSectionProps> = (props) => {
      const { newJournalData } = props
      return (
           <section data-dark="false" className="flex flex-col gap-y-4 lg:px-7">
-               <Heading title="Новое" desc="Самые свежие статьи в Proger" path="/" />
+               <Heading title="Новое" desc="Самые свежие статьи в Proger" path={RoutesEnum.home} />
                <div className="flex min-h-full w-full flex-col gap-5 lg:flex-row lg:items-center lg:justify-center">
                     {/* <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                          {newJournalData.map((d) => (

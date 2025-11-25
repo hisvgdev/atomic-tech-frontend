@@ -5,6 +5,8 @@ import SwiperGridLayout from '@/shared/global/SwiperGridLayout'
 import React, { FC } from 'react'
 import { SwiperSlide } from 'swiper/react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import Heading from '../Heading'
 import { MarketingSectionProps } from './MarketingSection.types'
 
@@ -17,7 +19,8 @@ export const MarketingSection: FC<MarketingSectionProps> = (props) => {
                     <Heading
                          title="Маркетинг"
                          desc="Про привлечение клиентов, узнаваемость бренда и SMM"
-                         path="/journal?blog_category_id=Маркетинг"
+                         path={RoutesEnum.journal}
+                         query="blog_category_id=Маркетинг"
                     />
                     {/* <div className="hidden grid-cols-4 items-center gap-2.5 lg:grid">
                          {marketingPosts.length > 0 &&

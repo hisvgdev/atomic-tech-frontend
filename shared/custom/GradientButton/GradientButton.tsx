@@ -30,7 +30,7 @@ export const GradientButton: FC<GradientButtonProps> = (props) => {
 
      const handleRoute = () => {
           if (!hasIsRoute && !routePath) return
-          router.push(routePath ? routePath : '')
+          router.push(routePath ? routePath : ('/' as any))
      }
 
      return (

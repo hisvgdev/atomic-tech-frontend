@@ -7,6 +7,8 @@ import LeaveRequest from '@/shared/global/LeaveRequest'
 import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import ReaderContent from '../../molecules/ReaderContent'
 import { ReaderGridProps } from './ReaderGrid.types'
 
@@ -48,7 +50,7 @@ export const ReaderGrid: FC<ReaderGridProps> = (props) => {
                                    </SwiperRowLayout>
                               </div> */}
 
-                              <AllProjectsButton link="/articles" title="Все статьи" />
+                              <AllProjectsButton link={RoutesEnum.articles} title="Все статьи" />
                          </div>
                     )}
                </div>

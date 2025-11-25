@@ -7,6 +7,8 @@ import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
 import { SwiperSlide } from 'swiper/react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import Heading from '../Heading'
 import { LifestyleSectionProps } from './LifestyleSection.types'
 
@@ -17,7 +19,8 @@ export const LifestyleSection: FC<LifestyleSectionProps> = (props) => {
                <Heading
                     title="Лайфстайл"
                     desc="Подборки инструментов, разборы и гайды по ИИ в маркетинге и бизнесе"
-                    path="//journal?blog_category_id=Лайфстайл"
+                    path={RoutesEnum.journal}
+                    query="blog_category_id=Лайфстайл"
                />
                <div className="hidden lg:block">
                     {/* <div className="grid grid-cols-4 items-center gap-2.5">

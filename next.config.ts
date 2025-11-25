@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   turbopack: {},
+  typedRoutes: true,
   experimental: {
     optimizePackageImports: ["@phosphor-icons/react"],
   },

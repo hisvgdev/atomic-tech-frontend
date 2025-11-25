@@ -5,6 +5,8 @@ import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
 import { SwiperSlide } from 'swiper/react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import Heading from '../Heading'
 import { BlockchainSectionProps } from './BlockchainSection.types'
 
@@ -16,7 +18,8 @@ export const BlockchainSection: FC<BlockchainSectionProps> = (props) => {
                     <Heading
                          title="Blockchain"
                          desc="Изучаем с нуля: как работает блокчейн, зачем он нужен и как на нём можно заработать."
-                         path="/journal?blog_category_id=Blockchain"
+                         path={RoutesEnum.journal}
+                         query="blog_category_id=Blockchai"
                     />
                     <div className="hidden items-center gap-x-5 lg:block">
                          {/* <div className="flex-1 h-[44rem]">

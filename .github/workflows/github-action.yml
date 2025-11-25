@@ -1,0 +1,42 @@
+name: Atomic Code Deploy
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Building project
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+      - run: npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to production
+    steps:
+      - name: Get SSH key and setup permissions
+        run: |
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_ADDRESS}}
+          mkdir -p ~/.ssh
+          echo "${{secrets.SSH_PRIVATE_KEY}}" >> ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+
+      - name: Fetching commits from git
+        run: |
+          cd /var/www/atomic-tech-frontend
+          docker stop atomic-tech-frontend
+          docker rm atomic-tech-frontend
+          git pull origin dev
+
+      - name: Running the project
+        run: |
+          docker build -t atomic-tech-frontend .
+          docker run -d -p 3000:3000 --name atomic-tech-frontend atomic-tech-frontend

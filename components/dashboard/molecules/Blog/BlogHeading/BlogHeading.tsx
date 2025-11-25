@@ -1,6 +1,8 @@
 import GradientButton from '@/shared/custom/GradientButton'
 import React, { FC } from 'react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import { BlogHeadingProps } from './BlogHeading.types'
 
 export const BlogHeading: FC<BlogHeadingProps> = (props) => {
@@ -17,7 +19,7 @@ export const BlogHeading: FC<BlogHeadingProps> = (props) => {
                <div className="mt-auto hidden lg:block">
                     <GradientButton
                          hasIsRoute
-                         routePath="/journal"
+                         routePath={RoutesEnum.journal}
                          title="Перейти в журнал"
                          classNames="py-8 rounded-full text-white w-full"
                          secondClassnames="w-full lg:w-auto"

@@ -6,6 +6,8 @@ import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import React, { FC } from 'react'
 import { SwiperSlide } from 'swiper/react'
 
+import { RoutesEnum } from '@/types/Routes.types'
+
 import Heading from '../Heading'
 import { NeuralNetworksArticleProps } from './NeuralNetworksArticle.types'
 
@@ -17,7 +19,8 @@ export const NeuralNetworksArticle: FC<NeuralNetworksArticleProps> = (props) => 
                     <Heading
                          title="Нейросети"
                          desc="Подборки инструментов, разборы и гайды по ИИ в маркетинге и бизнесе"
-                         path="/journal?blog_category_id=Нейросеть"
+                         path={RoutesEnum.journal}
+                         query="blog_category_id=Нейросеть"
                     />
                     {/* <div className="hidden grid-cols-4 items-center gap-2.5 lg:grid">
                          {neuralPosts.length > 0 &&
