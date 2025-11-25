@@ -22,6 +22,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    environment: deploy
     name: Deploy to production
     steps:
       - name: Get SSH key and setup permissions
@@ -36,6 +37,17 @@ jobs:
           docker stop atomic-tech-frontend
           docker rm atomic-tech-frontend
           git pull origin dev
+
+      - name: Create .env file on server
+        run: |
+          cd /var/www/atomic-tech-frontend
+          echo "NEXT_PUBLIC_BASE_URL=${{secrets.NEXT_PUBLIC_BASE_URL}}" >> .env
+          echo "NEXT_PUBLIC_API_BASE_URL=${{secrets.NEXT_PUBLIC_API_BASE_URL}}" >> .env
+          echo "NEXT_PUBLIC_GRAFANA_FARO_API_KEY=${{secrets.NEXT_PUBLIC_GRAFANA_FARO_API_KEY}}" >> .env
+          echo "NEXT_PUBLIC_KEYCLOAK_SERVER_URL=${{secrets.NEXT_PUBLIC_KEYCLOAK_SERVER_URL}}" >> .env
+          echo "NEXT_PUBLIC_KEYCLOAK_REALM=${{secrets.NEXT_PUBLIC_KEYCLOAK_REALM}}" >> .env
+          echo "NEXT_PUBLIC_KEYCLOAK_CLIENT_ID=${{secrets.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID}}" >> .env
+          echo "NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET=${{secrets.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET}}" >> .env
 
       - name: Running the project
         run: |
