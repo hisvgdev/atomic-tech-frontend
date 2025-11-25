@@ -25,11 +25,12 @@ jobs:
     environment: deploy
     name: Deploy to production
     steps:
-      - name: Get SSH key and setup permissions
+      - name: Setup SSH key
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_ADDRESS}}
           mkdir -p ~/.ssh
-          echo "${{secrets.SSH_PRIVATE_KEY}}" >> ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{secrets.SSH_ADDRESS}} >> ~/.ssh/known_hosts
 
       - name: Fetching commits from git
         run: |
