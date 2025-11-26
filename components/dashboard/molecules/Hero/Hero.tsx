@@ -11,7 +11,7 @@ export const Hero = () => {
                     muted
                     loop
                     playsInline
-                    className="h-[30rem] w-full object-cover lg:h-[50rem]"
+                    className="h-[30rem] w-full object-cover lg:h-[45rem]"
                />
           </section>
      )

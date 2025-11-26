@@ -7,6 +7,7 @@ import project from '@/public/assets/images/projects/secondProject.png'
 import CaseCard from '@/shared/global/CaseCard'
 import Chip from '@/shared/global/Chip'
 import { PostStatus } from '@/utils/shared/atomic-client/types'
+import Link from 'next/link'
 
 import type { FC } from 'react'
 
@@ -31,24 +32,24 @@ export const LastProjects: FC<LastProjectsProps> = (props) => {
                          <div className="ml-auto flex flex-col items-end gap-14">
                               <Chip number="1" title="Кейсы" maxW="max-w-42" />
                               <div className="hidden w-fit grid-cols-[200px_minmax(100px,_1fr)_60px] items-end gap-4 text-start md:grid">
-                                   <span className="text-sm font-bold">
+                                   <Link href="/" className="text-sm font-bold transition-all hover:underline">
                                         Индивидуальные решения <sup>13</sup>
-                                   </span>
-                                   <span className="text-sm font-bold">
+                                   </Link>
+                                   <Link href="/" className="text-sm font-bold transition-all hover:underline">
                                         Интернет магазины <sup>10</sup>
-                                   </span>
-                                   <span className="text-sm font-bold">
+                                   </Link>
+                                   <Link href="/" className="text-sm font-bold transition-all hover:underline">
                                         Retail <sup>15</sup>
-                                   </span>
-                                   <span className="text-sm font-bold">
+                                   </Link>
+                                   <Link href="/" className="text-sm font-bold transition-all hover:underline">
                                         Web3 <sup>2</sup>
-                                   </span>
-                                   <span className="text-sm font-bold">
+                                   </Link>
+                                   <Link href="/" className="text-sm font-bold transition-all hover:underline">
                                         Web-сайты <sup>1</sup>
-                                   </span>
-                                   <span className="text-sm font-bold">
+                                   </Link>
+                                   <Link href="/" className="text-sm font-bold transition-all hover:underline">
                                         FMCG <sup>8</sup>
-                                   </span>
+                                   </Link>
                               </div>
                          </div>
                     </div>

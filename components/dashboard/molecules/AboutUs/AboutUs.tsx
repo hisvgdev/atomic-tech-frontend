@@ -6,7 +6,7 @@ import AboutUsHeading from './AboutUsHeading'
 
 export const AboutUs: FC<AboutUsProps> = () => {
      return (
-          <div className="flex flex-col gap-8 px-7 lg:gap-16">
+          <div className="flex flex-col gap-6 px-7 lg:gap-0">
                <AboutUsHeading />
                <AboutUsContent />
           </div>

@@ -15,7 +15,7 @@ export const AboutUsContentTeamMembers: FC<AboutUsContentTeamMembersProps> = () 
      const isMobile = useIsMobile()
 
      return (
-          <div className="flex w-full max-w-xl flex-col gap-5">
+          <div className="flex w-full flex-col gap-5 lg:max-w-2xl">
                <div className="flex w-full items-center justify-between">
                     <span className="text-xl font-bold text-black lg:text-2xl">
                          Команда:<sup className="text-md font-bold text-[#B3B3B3] lg:text-lg">+17</sup>
@@ -45,7 +45,7 @@ export const AboutUsContentTeamMembers: FC<AboutUsContentTeamMembersProps> = () 
                     hiddenPagination
                >
                     {Array.from({ length: 4 }).map((_, indx) => (
-                         <SwiperSlide key={indx} className="shrink-0 lg:basis-[80%]">
+                         <SwiperSlide key={indx} className="shrink-0 lg:basis-[60%]">
                               <Card className="mx-1 my-4 flex h-96 flex-col justify-between p-6 ring ring-[#20202033]">
                                    <div className="flex flex-col gap-4">
                                         <CardHeader>

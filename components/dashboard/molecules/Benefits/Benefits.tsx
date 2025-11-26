@@ -15,7 +15,7 @@ export const Benefits = () => {
                          background: 'linear-gradient(180deg, rgba(0, 8, 9, 0) 0%, #000809 60%)',
                     }}
                />
-               <div className="flex flex-col gap-12 lg:gap-24">
+               <div className="flex flex-col gap-12 lg:gap-32">
                     <div className="flex flex-col gap-4">
                          <h1 className="z-30 hidden text-center text-6xl font-bold -tracking-[0.2rem] text-white md:block">
                               Дизайн и разработка цифровых <br /> продуктов под ключ
@@ -30,8 +30,8 @@ export const Benefits = () => {
 
                     <div className="w-full px-4 lg:p-4">
                          <div className="grid grid-cols-1 gap-14 lg:mx-auto lg:flex lg:max-w-5xl">
-                              <BenefitsRightSide />
                               <BenefitsLeftSide />
+                              <BenefitsRightSide />
                          </div>
                     </div>
                </div>
