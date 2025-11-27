@@ -66,11 +66,10 @@ export const LastProjects: FC<LastProjectsProps> = (props) => {
                               ))}
                          </div>
                     ) : (
-                         <div className="grid w-full grid-cols-1 items-center justify-center gap-4 lg:min-w-sm lg:grid-cols-2">
-                              {Array.isArray(postsData) &&
-                                   postsData.map((post, indx) => {
-                                        return <CaseCard key={`${post.id}-${indx + 1}`} post={post} />
-                                   })}
+                         <div className="grid w-full grid-cols-1 items-center justify-center gap-4 lg:max-w-fit lg:grid-cols-3">
+                              {publishedPostsData.map((post, indx) => {
+                                   return <CaseCard key={`${post.id}-${indx + 1}`} post={post} />
+                              })}
                          </div>
                     )}
                </div>

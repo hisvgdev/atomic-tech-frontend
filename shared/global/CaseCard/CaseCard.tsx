@@ -79,7 +79,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                               <GradientButton
                                    hasIsRoute
                                    title="Сайт"
-                                   classNames="rounded-full lg:py-6"
+                                   classNames="rounded-full lg:py-4"
                                    onClick={(e) => {
                                         e.stopPropagation()
                                         window.open(slug, '_blank')
