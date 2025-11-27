@@ -6,7 +6,7 @@ export const Showreel = () => {
      return (
           <section data-dark="true">
                <div className="px-6">
-                    <div className="flex h-full w-full items-center justify-center rounded-3xl bg-black py-12 lg:py-32">
+                    <div className="flex h-full w-full items-center justify-center rounded-3xl bg-black py-12">
                          <Image src={videoInDevelopmentIcon} alt="video-in-dev" />
                     </div>
                </div>

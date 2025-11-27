@@ -1,3 +1,5 @@
+import signatureIcon from '@/public/assets/icons/about-us/signatureIcon.svg'
+import Image from 'next/image'
 import React, { FC } from 'react'
 
 import { AboutUsContentProps } from './AboutUsContent.types'
@@ -7,7 +9,7 @@ import AboutUsContentTeamMembers from './AboutUsContentTeamMembers'
 export const AboutUsContent: FC<AboutUsContentProps> = (props) => {
      const {} = props
      return (
-          <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="relative z-10 flex w-full flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                <AboutUsContentTeamLeader />
                <div className="flex items-center justify-center">
                     <div className="mx-auto flex flex-col gap-5 lg:gap-12">
@@ -27,6 +29,10 @@ export const AboutUsContent: FC<AboutUsContentProps> = (props) => {
                          </span>
                     </div>
                </div>
+               <div className="absolute right-0 -bottom-8 z-0 hidden -translate-x-[280%] xl:flex">
+                    <Image src={signatureIcon} alt="signatureIcon" />
+               </div>
+
                <AboutUsContentTeamMembers />
           </div>
      )
