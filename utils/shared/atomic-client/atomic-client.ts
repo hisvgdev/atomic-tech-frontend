@@ -53,22 +53,16 @@ export class AtomicClient {
             this.resolveReady = resolve;
         });
 
-        if (config.authToken) {
-            this.setAuthToken(config.authToken);
-            this.resolveReady();
-        } else if (config.keycloak) {
-            this.fetchServiceToken(config.keycloak)
-                .then((token) => {
-                    this.setAuthToken(token);
-                    this.resolveReady();
-                })
-                .catch((e) => {
-                    console.error("Failed to fetch service token:", e);
-                    this.resolveReady();
-                });
-        } else {
-            this.resolveReady();
-        }
+        this.fetchProxyToken()
+            .then((token) => {
+                this.setAuthToken(token);
+                this.resolveReady();
+            })
+            .catch((e) => {
+                console.error("Failed to get service token via proxy:", e);
+                this.resolveReady();
+            });
+
 
         this.taxonomyTypes = new TaxonomyTypesService(this.apiClient);
         this.taxonomies = new TaxonomiesService(this.apiClient);
@@ -80,24 +74,14 @@ export class AtomicClient {
         this.customFields = new CustomFieldsService(this.apiClient);
     }
 
-    private async fetchServiceToken(params: {
-        serverUrl: string;
-        realm: string;
-        clientId: string;
-        clientSecret: string;
-    }): Promise<string> {
-        const url = `${params.serverUrl}/realms/${params.realm}/protocol/openid-connect/token`;
+    private async fetchProxyToken(): Promise<string> {
+        const { data } = await axios.get("/api/auth/service-token");
 
-        const body = new URLSearchParams();
-        body.append("grant_type", "client_credentials");
-        body.append("client_id", params.clientId);
-        body.append("client_secret", params.clientSecret);
+        if (!data) {
+            throw new Error("Invalid token format from proxy");
+        }
 
-        const { data } = await axios.post(url, body, {
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        });
-
-        return data.access_token;
+        return data;
     }
 
     setAuthToken(token: string): void {
