@@ -3,7 +3,8 @@
   WORKDIR /app
   
   COPY package*.json ./
-  
+
+  RUN npm cache clean --force
   RUN npm ci --legacy-peer-deps
   
   RUN npm i -D typescript
