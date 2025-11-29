@@ -43,16 +43,17 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
           updated_at,
           view_count,
           author_id,
-          cover,
+          covers,
           custom_fields,
           excerpt,
           published_at,
           reading_time_min,
      } = findedCase
 
-     console.log(findedCase)
+     const safeCustomFields = findedCase.custom_fields ?? {}
+     const linkToCase = safeCustomFields.link_to_case ?? ''
+     const formattedWebsiteLink = linkToCase ? linkToCase.split('/')[2] : ''
 
-     // const formatedWebsiteLink = website_link ? website_link.split('/')[2] : ''
      const getYear = new Date(updated_at || '').getFullYear()
 
      return (
@@ -68,8 +69,8 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                          <div className="flex items-center gap-x-2">
                               <Button className="cursor-pointer rounded-full border border-black bg-transparent py-6 text-black hover:bg-transparent lg:py-4">
                                    <Globe size={22} />
-                                   <Link href={'/'} target="_blank" className="text-base font-medium">
-                                        {'/'}
+                                   <Link href={linkToCase} target="_blank" className="text-base font-medium">
+                                        {formattedWebsiteLink}
                                    </Link>
                                    <ArrowRight />
                               </Button>
@@ -82,86 +83,47 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                          </div>
                     </header>
 
-                    {cover ? (
+                    {covers && covers.length > 0 ? (
                          <figure>
-                              {/* {photos.length === 1 ? (
-                              <Image src={photos[0]} alt={title} className="w-full" width={630} height={430} />
-                         ) : photos.length > 1 ? (
-                              <>
-                                   <figure className="relative hidden lg:block">
-                                        <>
-                                             <Swiper
-                                                  modules={[Pagination, Navigation, A11y]}
-                                                  spaceBetween={50}
-                                                  slidesPerView={1}
-                                                  navigation={{
-                                                       nextEl: '.swiper-button-next',
-                                                       prevEl: '.swiper-button-prev',
-                                                  }}
-                                                  pagination={{
-                                                       el: '.custom-pagination',
-                                                       clickable: true,
-                                                  }}
-                                                  scrollbar={{ draggable: true }}
-                                             >
-                                                  {photos.map((p, i) => (
-                                                       <SwiperSlide key={i}>
+                              <div className="relative flex h-[40rem] gap-4">
+                                   <Swiper
+                                        modules={[Navigation, A11y]}
+                                        navigation={{
+                                             nextEl: '.swiper-button-next',
+                                             prevEl: '.swiper-button-prev',
+                                        }}
+                                        slidesPerView={1}
+                                        spaceBetween={20}
+                                        className="w-full flex-1"
+                                   >
+                                        {covers.map((c, i) => (
+                                             <SwiperSlide key={i}>
+                                                  <div className="flex gap-4">
+                                                       <div className="flex-1">
                                                             <Image
-                                                                 src={p}
-                                                                 alt={title}
-                                                                 className="w-full"
+                                                                 src={c.url}
+                                                                 alt={c.filename || `cover-${i}`}
                                                                  width={630}
                                                                  height={430}
+                                                                 className="h-full w-full rounded-3xl object-cover"
                                                             />
-                                                       </SwiperSlide>
-                                                  ))}
-                                             </Swiper>
+                                                       </div>
 
-                                             <div className="swiper-button-prev absolute top-1/2 left-4 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-2">
-                                                  <CaretLeftIcon size={18} weight="bold" />
-                                             </div>
-                                             <div className="swiper-button-next absolute top-1/2 right-4 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-2 text-black hover:text-gray-600">
-                                                  <CaretRightIcon size={18} weight="bold" />
-                                             </div>
-
-                                             <div className="custom-pagination mt-2 flex justify-center gap-x-2" />
-                                        </>
-                                   </figure>
-                                   <figure className="relative block lg:hidden">
-                                        <>
-                                             <SwiperRowLayout slidesPerViews={1.1}>
-                                                  {photos.map((p, i) => (
-                                                       <SwiperSlide key={i}>
-                                                            <Image
-                                                                 src={p}
-                                                                 alt={title}
-                                                                 className="w-full"
-                                                                 width={630}
-                                                                 height={430}
-                                                            />
-                                                       </SwiperSlide>
-                                                  ))}
-                                             </SwiperRowLayout>
-                                        </>
-                                   </figure>
-                              </>
-                         ) : null} */}
-                              <div className="relative flex gap-4">
-                                   <Image
-                                        src={blogImage}
-                                        alt={title || ''}
-                                        className="aspect-[16/9] w-full grow rounded-3xl object-cover"
-                                        width={630}
-                                        height={430}
-                                   />
-
-                                   <Image
-                                        src={blogImage}
-                                        alt={title || ''}
-                                        className="hidden aspect-[16/9] max-w-1/3 rounded-3xl object-cover lg:block"
-                                        width={630}
-                                        height={430}
-                                   />
+                                                       {covers[i + 1] && (
+                                                            <div className="hidden w-1/3 lg:block">
+                                                                 <Image
+                                                                      src={covers[i + 1].url}
+                                                                      alt={covers[i + 1].filename || `cover-${i + 1}`}
+                                                                      width={210}
+                                                                      height={430}
+                                                                      className="h-full w-full rounded-3xl object-cover"
+                                                                 />
+                                                            </div>
+                                                       )}
+                                                  </div>
+                                             </SwiperSlide>
+                                        ))}
+                                   </Swiper>
 
                                    <div className="swiper-button-prev absolute top-1/2 left-4 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-3">
                                         <CaretLeftIcon size={18} weight="bold" />
@@ -169,7 +131,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                    <div className="swiper-button-next absolute top-1/2 right-4 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-3 text-black hover:text-gray-600">
                                         <CaretRightIcon size={18} weight="bold" />
                                    </div>
-                                   <div className="absolute right-12 -bottom-3 hidden lg:block">
+                                   <div className="absolute right-12 -bottom-3 z-20 hidden lg:block">
                                         <button
                                              type="button"
                                              style={{
@@ -267,7 +229,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                              id: '',
                                              slug: '/',
                                              title: 'Test',
-                                             cover: { url: blogImage.src },
+                                             covers: { url: blogImage.src },
                                              excerpt: '/',
                                         }}
                                    />

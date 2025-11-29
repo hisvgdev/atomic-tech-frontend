@@ -34,13 +34,13 @@ export async function generateMetadata(props: PageProps<'/cases/[slug]'>): Promi
                description: `Atomic Tech - Твоя страница с кейсам - ${title}-${excerpt}`,
                images: [
                     {
-                         url: cover?.url || '',
+                         url: cover?.[0]?.url || '',
                          type: 'image/svg+xml',
                          width: 1200,
                          height: 630,
                     },
                     {
-                         url: cover?.url || '',
+                         url: cover?.[0]?.url || '',
                          type: 'image/png',
                          width: 256,
                          height: 256,
@@ -52,10 +52,10 @@ export async function generateMetadata(props: PageProps<'/cases/[slug]'>): Promi
                title: 'Atomic Tech - Твоя страница с кейсами',
                description: `Atomic Tech - Твоя страница с кейсом - ${title}-${excerpt}`,
                site: '@atomictech',
-               images: [cover?.url || ''],
+               images: [cover?.[0]?.url || ''],
           },
           icons: {
-               icon: [cover?.url || '', '/icons/icon-192x192.png', '/icons/icon-512x512.png'],
+               icon: [cover?.[0]?.url || '', '/icons/icon-192x192.png', '/icons/icon-512x512.png'],
                apple: '/icons/apple-touch-icon.png',
           },
      }

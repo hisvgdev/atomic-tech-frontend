@@ -107,17 +107,17 @@ export interface BlockUpdate {
 
 // Posts
 export interface Post {
-    id?: UUID;
-    title?: string;
-    slug?: string;
+    id: UUID;
+    title: string;
+    slug: string;
     type_id?: UUID;
     author_id?: UUID;
     rating?: number;
     status?: PostStatus;
     published_at?: string;
-    created_at?: string;
+    created_at: string;
     updated_at?: string;
-    cover?: CoverImage;
+    covers: CoverImage[];
     excerpt?: string;
     reading_time_min?: number;
     view_count?: number;
