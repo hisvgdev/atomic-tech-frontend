@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
     BlocksService,
     CustomFieldsService,
@@ -75,14 +74,17 @@ export class AtomicClient {
     }
 
     private async fetchProxyToken(): Promise<string> {
-        const { data } = await axios.get("/api/auth/service-token");
 
-        if (!data) {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/service-token`);
+        const token = await response.json();
+
+        if (!token) {
             throw new Error("Invalid token format from proxy");
         }
 
-        return data;
+        return token;
     }
+
 
     setAuthToken(token: string): void {
         this.apiClient.setAuthToken(token);
