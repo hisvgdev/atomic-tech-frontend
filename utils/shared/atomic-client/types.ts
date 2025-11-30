@@ -121,9 +121,16 @@ export interface Post {
     excerpt?: string;
     reading_time_min?: number;
     view_count?: number;
-    custom_fields?: Record<string, any>;
+    custom_fields?: Partial<CustomFieldsProps>;
     taxonomies?: UUID[];
     blocks?: Block[];
+}
+
+export interface CustomFieldsProps {
+    shot_at_home: boolean;
+    result_name: string;
+    result_description: string;
+    link_to_case: string;
 }
 
 export interface PostCreate {

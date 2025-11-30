@@ -7,19 +7,13 @@ export async function generateMetadata(props: PageProps<'/articles/[articleId]'>
 
      const atomicClient = new AtomicClient({
           baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
-          keycloak: {
-               serverUrl: process.env.NEXT_PUBLIC_KEYCLOAK_SERVER_URL!,
-               realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM!,
-               clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID!,
-               clientSecret: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET!,
-          },
      })
 
      await atomicClient.ready
 
      const findedArticle = await atomicClient.posts.get(articleId)
 
-     const { cover, title, excerpt } = findedArticle
+     const { covers, title, excerpt } = findedArticle
 
      return {
           title: title,
@@ -33,13 +27,13 @@ export async function generateMetadata(props: PageProps<'/articles/[articleId]'>
                description: `Atomic Tech - Твоя страница со статьей - ${title}-${excerpt}`,
                images: [
                     {
-                         url: cover?.url || '',
+                         url: covers?.[0]?.url,
                          type: 'image/svg+xml',
                          width: 1200,
                          height: 630,
                     },
                     {
-                         url: cover?.url || '',
+                         url: covers?.[0]?.url,
                          type: 'image/png',
                          width: 256,
                          height: 256,
@@ -51,10 +45,10 @@ export async function generateMetadata(props: PageProps<'/articles/[articleId]'>
                title: 'Atomic Tech - Твоя страница со статьями',
                description: `Atomic Tech - Твоя страница со статьей - ${title}-${excerpt}`,
                site: '@atomictech',
-               images: [cover?.url || ''],
+               images: [covers?.[0]?.url],
           },
           icons: {
-               icon: [cover?.url || '', '/icons/icon-192x192.png', '/icons/icon-512x512.png'],
+               icon: [covers?.[0]?.url, '/icons/icon-192x192.png', '/icons/icon-512x512.png'],
                apple: '/icons/apple-touch-icon.png',
           },
      }
@@ -65,17 +59,11 @@ export default async function Article(props: PageProps<'/articles/[articleId]'>)
 
      const atomicClient = new AtomicClient({
           baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
-          keycloak: {
-               serverUrl: process.env.NEXT_PUBLIC_KEYCLOAK_SERVER_URL!,
-               realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM!,
-               clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID!,
-               clientSecret: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET!,
-          },
      })
 
      await atomicClient.ready
 
      const findedArticle = await atomicClient.posts.get(articleId)
 
-     return <Reader blog={findedArticle} />
+     return <Reader findedArticle={findedArticle} />
 }

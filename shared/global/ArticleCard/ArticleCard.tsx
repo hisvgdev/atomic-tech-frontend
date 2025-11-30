@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card'
 import { StarIcon } from '@phosphor-icons/react/dist/ssr'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React, { FC } from 'react'
 
 import { articleCardVariants } from '@/lib/cva/article-card-variants'
@@ -21,7 +22,7 @@ const RatingStars: FC<{ value?: number }> = ({ value = 0 }) => (
 
 export const ArticleCard: FC<ArticleCardProps> = (props) => {
      const { article, classNames, hasRating = true, ratingPosition = 'bottom' } = props
-     const { title, cover, slug, rating = 5 } = article
+     const { title, covers, slug, rating = 5 } = article
      const showBottomRating = hasRating && ratingPosition === 'bottom'
 
      return (
@@ -32,10 +33,10 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
                     classNames,
                )}
           >
-               {cover && (
+               {covers.length > 0 && (
                     <Image
-                         src={cover.url}
-                         alt={cover.filename || title || ''}
+                         src={covers?.[0].url}
+                         alt={covers?.[0].filename || title || ''}
                          fill
                          className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -52,7 +53,7 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
                     </div>
 
                     <div className="flex flex-col items-start gap-3">
-                         {slug ? (
+                         {typeof slug === 'string' && slug.trim() !== '' ? (
                               <Link
                                    href={`/articles/${slug}`}
                                    className="text-lg leading-tight font-semibold hover:underline"

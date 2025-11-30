@@ -16,12 +16,6 @@ export interface AtomicClientConfig {
     apiPrefix?: string;
     timeout?: number;
     authToken?: string;
-    keycloak?: {
-        serverUrl: string;
-        realm: string;
-        clientId: string;
-        clientSecret: string;
-    };
 }
 
 export class AtomicClient {
@@ -75,7 +69,7 @@ export class AtomicClient {
 
     private async fetchProxyToken(): Promise<string> {
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/service-token`);
+        const response = await fetch(`http://localhost:3000/api/auth/service-token`);
         const token = await response.json();
 
         if (!token) {

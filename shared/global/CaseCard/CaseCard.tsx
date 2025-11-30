@@ -11,16 +11,16 @@ import { CaseCardProps } from './CaseCard.types'
 
 export const CaseCard: FC<CaseCardProps> = (props) => {
      const { post } = props
-     const { slug, title, cover, excerpt } = post
+     const { slug, title, covers, excerpt, custom_fields } = post
 
      return (
           <Link href={`/cases/${slug}`} className="h-full cursor-pointer">
                <Card className="h-full w-full cursor-pointer border-none bg-[#EEEFF5] p-0 shadow-none">
                     <CardHeader className="relative">
-                         {cover && (
+                         {covers.length > 0 && (
                               <Image
-                                   src={cover.url}
-                                   alt={cover.filename || title || ''}
+                                   src={covers?.[0].url}
+                                   alt={covers?.[0].filename || title || ''}
                                    className="aspect-[4/3] h-96 w-full rounded-3xl object-cover"
                                    width={620}
                                    height={420}
@@ -82,7 +82,7 @@ export const CaseCard: FC<CaseCardProps> = (props) => {
                                    classNames="rounded-full lg:py-4"
                                    onClick={(e) => {
                                         e.stopPropagation()
-                                        window.open(slug, '_blank')
+                                        window.open(custom_fields?.link_to_case, '_blank')
                                    }}
                               />
                          </div>

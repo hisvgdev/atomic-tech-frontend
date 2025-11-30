@@ -8,19 +8,13 @@ export async function generateMetadata(props: PageProps<'/cases/[slug]'>): Promi
 
      const atomicClient = new AtomicClient({
           baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
-          keycloak: {
-               serverUrl: process.env.NEXT_PUBLIC_KEYCLOAK_SERVER_URL!,
-               realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM!,
-               clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID!,
-               clientSecret: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET!,
-          },
      })
 
      await atomicClient.ready
 
      const findedCase = await atomicClient.posts.get(slug)
 
-     const { cover, title, excerpt } = findedCase
+     const { covers, title, excerpt } = findedCase
 
      return {
           title: title,
@@ -34,13 +28,13 @@ export async function generateMetadata(props: PageProps<'/cases/[slug]'>): Promi
                description: `Atomic Tech - Твоя страница с кейсам - ${title}-${excerpt}`,
                images: [
                     {
-                         url: cover?.[0]?.url || '',
+                         url: covers?.[0]?.url,
                          type: 'image/svg+xml',
                          width: 1200,
                          height: 630,
                     },
                     {
-                         url: cover?.[0]?.url || '',
+                         url: covers?.[0]?.url,
                          type: 'image/png',
                          width: 256,
                          height: 256,
@@ -52,10 +46,10 @@ export async function generateMetadata(props: PageProps<'/cases/[slug]'>): Promi
                title: 'Atomic Tech - Твоя страница с кейсами',
                description: `Atomic Tech - Твоя страница с кейсом - ${title}-${excerpt}`,
                site: '@atomictech',
-               images: [cover?.[0]?.url || ''],
+               images: [covers?.[0]?.url],
           },
           icons: {
-               icon: [cover?.[0]?.url || '', '/icons/icon-192x192.png', '/icons/icon-512x512.png'],
+               icon: [covers?.[0]?.url, '/icons/icon-192x192.png', '/icons/icon-512x512.png'],
                apple: '/icons/apple-touch-icon.png',
           },
      }
@@ -72,9 +66,7 @@ export default async function Case(props: PageProps<'/cases/[slug]'>) {
 
      const findedCase = await atomicClient.posts.get(slug)
 
-     // const relatedCaseItem = await getRelatedCaseItem(Number(slug))
-
      if (!findedCase) return notFound()
 
-     return <CaseGrid findedCase={findedCase} relatedCase={{}} />
+     return <CaseGrid findedCase={findedCase} />
 }

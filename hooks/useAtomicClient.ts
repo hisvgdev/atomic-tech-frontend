@@ -7,12 +7,6 @@ export const useAtomicClient = () => {
   useEffect(() => {
     const client = new AtomicClient({
       baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
-      keycloak: {
-        serverUrl: process.env.NEXT_PUBLIC_KEYCLOAK_SERVER_URL!,
-        realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM!,
-        clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID!,
-        clientSecret: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET!,
-      },
     })
     setAtomicClient(client)
   }, [])

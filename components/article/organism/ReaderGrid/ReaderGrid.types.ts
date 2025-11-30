@@ -1,7 +1,9 @@
+import { CoverImage } from "@/utils/shared/atomic-client/types";
+
 export interface ReaderGridProps {
   caseItems?: any[];
   content?: string;
-  image?: string;
+  covers: CoverImage[];
   id: string;
   ratingsCount?: number;
   relatedBlogs: {

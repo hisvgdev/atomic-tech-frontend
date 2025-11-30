@@ -30,7 +30,7 @@ import { cn } from '@/lib/utils'
 import { RoutesEnum } from '@/types/Routes.types'
 
 export const CaseGrid: FC<CaseGridProps> = (props) => {
-     const { findedCase, relatedCase } = props
+     const { findedCase } = props
      const {
           blocks,
           created_at,
@@ -55,7 +55,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
      const formattedWebsiteLink = linkToCase ? linkToCase.split('/')[2] : ''
 
      const getYear = new Date(updated_at || '').getFullYear()
-
+     console.log(findedCase)
      return (
           <main className="h-full w-full overflow-y-auto px-3.5 lg:px-6 lg:pt-12">
                <article className="flex flex-col gap-y-16">
@@ -67,15 +67,21 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                               <p className="text-primary-300 text-base lg:text-xl">{excerpt}</p>
                          </div>
                          <div className="flex items-center gap-x-2">
-                              <Button className="cursor-pointer rounded-full border border-black bg-transparent py-6 text-black hover:bg-transparent lg:py-4">
+                              <Button
+                                   variant="ghost"
+                                   className="cursor-pointer rounded-full bg-transparent py-6 text-black ring ring-black hover:ring-0 lg:py-4"
+                              >
                                    <Globe size={22} />
-                                   <Link href={linkToCase} target="_blank" className="text-base font-medium">
+                                   <Link href={linkToCase as any} target="_blank" className="text-base font-medium">
                                         {formattedWebsiteLink}
                                    </Link>
                                    <ArrowRight />
                               </Button>
                               {getYear && (
-                                   <Button className="cursor-pointer rounded-full border border-black bg-transparent py-6 text-black hover:bg-transparent lg:py-4">
+                                   <Button
+                                        variant="ghost"
+                                        className="cursor-pointer rounded-full bg-transparent py-6 text-black ring ring-black hover:ring-0 lg:py-4"
+                                   >
                                         <Calendar size={22} />
                                         <span className="text-base font-medium"> {getYear} год</span>
                                    </Button>
@@ -132,17 +138,21 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                         <CaretRightIcon size={18} weight="bold" />
                                    </div>
                                    <div className="absolute right-12 -bottom-3 z-20 hidden lg:block">
-                                        <button
-                                             type="button"
-                                             style={{
-                                                  background:
-                                                       'radial-gradient(329.7% 3126.53% at 324.79% -211.84%, #00080A 74.04%, #006A74 89.42%, #C2FFF9 100%)',
-                                             }}
-                                             className="flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-[2.25rem] px-12 py-6"
-                                        >
-                                             <EnvelopeIcon />
-                                             <span className="text-sm font-medium text-white">Оставить заявку</span>
-                                        </button>
+                                        <Link href="/#bottom">
+                                             <button
+                                                  type="button"
+                                                  style={{
+                                                       background:
+                                                            'radial-gradient(329.7% 3126.53% at 324.79% -211.84%, #00080A 74.04%, #006A74 89.42%, #C2FFF9 100%)',
+                                                  }}
+                                                  className="flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-[2.25rem] px-12 py-6"
+                                             >
+                                                  <EnvelopeIcon />
+                                                  <span className="text-sm font-medium text-white">
+                                                       Оставить заявку
+                                                  </span>
+                                             </button>
+                                        </Link>
                                    </div>
                               </div>
                          </figure>
@@ -222,7 +232,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                               Больше кейсов
                          </h2>
                          <div className="grid grid-cols-1 items-center gap-4 lg:grid-cols-2">
-                              {Array.from({ length: 2 }).map((project, indx) => (
+                              {/* {Array.from({ length: 2 }).map((project, indx) => (
                                    <CaseCard
                                         key={`${indx}`}
                                         post={{
@@ -233,7 +243,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                              excerpt: '/',
                                         }}
                                    />
-                              ))}
+                              ))} */}
                          </div>
                     </section>
                     <AllProjectsButton link={RoutesEnum.cases} title="Все проекты" />

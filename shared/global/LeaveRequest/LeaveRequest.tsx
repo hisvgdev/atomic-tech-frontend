@@ -5,7 +5,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useForm } from '@tanstack/react-form'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import toast from 'react-hot-toast'
 
 import { LeaveRequestPayload, leaveRequestSchema } from '@/lib/schema/leave-request-schema'
@@ -48,6 +48,14 @@ export const LeaveRequest: FC<LeaveRequestProps> = (props) => {
           //      }
           // },
      })
+
+     useEffect(() => {
+          if (window.location.hash === '#bottom') {
+               window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+
+               history.replaceState(null, '', window.location.pathname)
+          }
+     }, [])
 
      return (
           <section

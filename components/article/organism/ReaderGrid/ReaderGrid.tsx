@@ -13,7 +13,7 @@ import ReaderContent from '../../molecules/ReaderContent'
 import { ReaderGridProps } from './ReaderGrid.types'
 
 export const ReaderGrid: FC<ReaderGridProps> = (props) => {
-     const { caseItems, content, image, id, ratingsCount, relatedBlogs } = props
+     const { caseItems, content, covers, id, ratingsCount, relatedBlogs } = props
      return (
           <>
                <div className="grid w-full max-w-[120rem] grid-cols-1 gap-20 px-4">
@@ -22,7 +22,7 @@ export const ReaderGrid: FC<ReaderGridProps> = (props) => {
                               caseItems={caseItems as any[]}
                               content={content}
                               ratingsCount={ratingsCount}
-                              image={image}
+                              image={covers?.[0]?.url}
                               id={id}
                               relatedBlogs={relatedBlogs}
                          />

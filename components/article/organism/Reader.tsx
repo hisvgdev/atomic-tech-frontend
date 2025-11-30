@@ -5,7 +5,7 @@ import { ReaderProps } from './Reader.types'
 import ReaderGrid from './ReaderGrid'
 
 export const Reader: FC<ReaderProps> = (props) => {
-     const { blog } = props
+     const { findedArticle } = props
 
      const {
           title,
@@ -19,13 +19,15 @@ export const Reader: FC<ReaderProps> = (props) => {
           updated_at,
           view_count,
           author_id,
-          cover,
+          covers,
           custom_fields,
           excerpt,
           published_at,
           reading_time_min,
-     } = blog
+     } = findedArticle
 
+     const content = blocks?.map((b) => b.content?.html ?? '') ?? []
+     console.log(findedArticle)
      return (
           <div className="flex flex-col items-center justify-center gap-8 px-4">
                <ReaderHeading
@@ -35,14 +37,16 @@ export const Reader: FC<ReaderProps> = (props) => {
                     updatedAt={updated_at}
                     category={'тестовая категория'}
                />
-               <ReaderGrid
-                    caseItems={[]}
-                    content={''}
-                    ratingsCount={4 - 1}
-                    image={''}
-                    relatedBlogs={[]}
-                    id={id || ''}
-               />
+               {content && (
+                    <ReaderGrid
+                         caseItems={[]}
+                         content={content[0]}
+                         ratingsCount={4 - 1}
+                         covers={covers}
+                         relatedBlogs={[]}
+                         id={id || ''}
+                    />
+               )}
           </div>
      )
 }
