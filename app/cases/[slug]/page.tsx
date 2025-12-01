@@ -28,13 +28,13 @@ export async function generateMetadata(props: PageProps<'/cases/[slug]'>): Promi
                description: `Atomic Tech - Твоя страница с кейсам - ${title}-${excerpt}`,
                images: [
                     {
-                         url: covers?.[0]?.url,
+                         url: covers?.[0]?.url ?? '/assets/images/metadata/root-atomic-code-image.png',
                          type: 'image/svg+xml',
                          width: 1200,
                          height: 630,
                     },
                     {
-                         url: covers?.[0]?.url,
+                         url: covers?.[0]?.url ?? '/assets/images/metadata/root-atomic-code-image.png',
                          type: 'image/png',
                          width: 256,
                          height: 256,
@@ -46,10 +46,14 @@ export async function generateMetadata(props: PageProps<'/cases/[slug]'>): Promi
                title: 'Atomic Tech - Твоя страница с кейсами',
                description: `Atomic Tech - Твоя страница с кейсом - ${title}-${excerpt}`,
                site: '@atomictech',
-               images: [covers?.[0]?.url],
+               images: [covers?.[0]?.url ?? '/assets/images/metadata/root-atomic-code-image.png'],
           },
           icons: {
-               icon: [covers?.[0]?.url, '/icons/icon-192x192.png', '/icons/icon-512x512.png'],
+               icon: [
+                    covers?.[0]?.url ?? '/assets/images/metadata/root-atomic-code-image.png',
+                    '/icons/icon-192x192.png',
+                    '/icons/icon-512x512.png',
+               ],
                apple: '/icons/apple-touch-icon.png',
           },
      }
