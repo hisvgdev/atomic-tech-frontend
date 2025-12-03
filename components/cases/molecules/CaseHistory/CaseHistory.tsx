@@ -5,24 +5,27 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC } from 'react'
 
+import { transformTextToHtml } from '../../../../utils/shared/transformTextToHtml'
 import { CaseHistoryProps } from './CaseHistory.types'
 
 export const CaseHistory: FC<CaseHistoryProps> = (props) => {
      const { projectHistory, blocks } = props
-
+     console.log(blocks)
      // const randomizeRelatedCaseItems = [...projectHistory.related_project_history_items].sort(() => 0.5 - Math.random())
      return (
           <section data-dark="true" className="h-full w-full rounded-[3.125rem] bg-black p-10">
                <div className="flex w-full flex-col items-center justify-center gap-24 lg:flex-row lg:items-start lg:justify-between">
                     <div className="flex max-w-4xl flex-col gap-y-9">
                          <h2 className="text-5xl font-bold -tracking-[0.23rem] text-white">История проекта</h2>
-                         {blocks.map((b) => (
-                              <div
-                                   key={b.id}
-                                   className="flex flex-col gap-y-12 text-base font-medium text-white/70"
-                                   dangerouslySetInnerHTML={{ __html: b.content.html }}
-                              />
-                         ))}
+                         {blocks.map((b) => {
+                              return (
+                                   <div
+                                        key={b.id}
+                                        className="flex flex-col gap-y-12 text-base font-medium text-white/70"
+                                        dangerouslySetInnerHTML={{ __html: transformTextToHtml(b.content.html) }}
+                                   />
+                              )
+                         })}
                     </div>
 
                     <aside data-dark="true" className="flex max-w-sm grow flex-col gap-y-6">

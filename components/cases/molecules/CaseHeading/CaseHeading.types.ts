@@ -1,12 +1,9 @@
+import { TaxonomiesProps } from "@/utils/shared/atomic-client/types";
 
 
 export interface CaseHeadingProps {
   lengthOfCases: number;
-  matchedTechnologies: {
-    id: number;
-    name: string;
-    icon?: string;
-  }[]
-  categoriesData: any[]
-  servicesData: any[]
+  matchedTechnologies: TaxonomiesProps[]
+  categoriesData: TaxonomiesProps[]
+  servicesData: TaxonomiesProps[]
 }
