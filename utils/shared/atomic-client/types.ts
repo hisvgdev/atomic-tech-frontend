@@ -122,8 +122,31 @@ export interface Post {
     reading_time_min?: number;
     view_count?: number;
     custom_fields?: Partial<CustomFieldsProps>;
-    taxonomies?: UUID[];
+    taxonomies?: TaxonomiesProps[];
     blocks?: Block[];
+}
+
+export interface TaxonomiesProps {
+    id: UUID;
+    type_id: UUID;
+    children_count: number;
+    created_at: Date;
+    updated_at: string;
+    description?: string;
+    parent_id?: string;
+    path?: any[];
+    slug: string;
+    title: string;
+    type: TypeTaxonomiesProps
+}
+
+export interface TypeTaxonomiesProps {
+    title: string
+    slug: string
+    description: any
+    id: string
+    created_at: string
+    updated_at: string
 }
 
 export interface CustomFieldsProps {
@@ -131,6 +154,7 @@ export interface CustomFieldsProps {
     result_name: string;
     result_description: string;
     link_to_case: string;
+    results: JSON
 }
 
 export interface PostCreate {

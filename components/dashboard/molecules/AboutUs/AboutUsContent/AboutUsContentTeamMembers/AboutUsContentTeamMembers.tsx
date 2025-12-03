@@ -1,10 +1,12 @@
 'use client'
 
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
+import { usePostsQuery } from '@/hooks/query/usePostsQuery'
 import { useIsMobile } from '@/hooks/useMediaQuery'
 import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import { SwiperRowLayoutRef } from '@/shared/global/SwiperRowLayout/SwiperRowLayout'
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
+import Image from 'next/image'
 import React, { FC, useRef } from 'react'
 import { SwiperSlide } from 'swiper/react'
 
@@ -13,6 +15,16 @@ import { AboutUsContentTeamMembersProps } from './AboutUsContentTeamMembers.type
 export const AboutUsContentTeamMembers: FC<AboutUsContentTeamMembersProps> = () => {
      const swiperRef = useRef<SwiperRowLayoutRef>(null)
      const isMobile = useIsMobile()
+
+     const {
+          data: employeeData,
+          isLoading: isEmployeeData,
+          isError: isEmployeeError,
+     } = usePostsQuery('employee', 'employee')
+
+     const publishedEmployee = employeeData?.filter((t) => t.status === 'published')
+
+     if ((publishedEmployee && publishedEmployee?.length < 1) || isEmployeeError) return null
 
      return (
           <div className="flex w-full flex-col gap-5 lg:max-w-2xl">
@@ -44,34 +56,43 @@ export const AboutUsContentTeamMembers: FC<AboutUsContentTeamMembersProps> = () 
                     className="lg:block"
                     hiddenPagination
                >
-                    {Array.from({ length: 4 }).map((_, indx) => (
-                         <SwiperSlide key={indx} className="shrink-0 lg:basis-[60%]">
-                              <Card className="mx-1 my-4 flex h-96 flex-col justify-between p-6 ring ring-[#20202033]">
-                                   <div className="flex flex-col gap-4">
-                                        <CardHeader>
-                                             <div className="h-24 w-24 rounded-full bg-gray-400" />
-                                        </CardHeader>
+                    {publishedEmployee
+                         ? publishedEmployee.map((e, indx) => (
+                                <SwiperSlide key={indx} className="shrink-0 lg:basis-[60%]">
+                                     <Card className="mx-1 my-4 flex h-96 flex-col justify-between p-6 ring ring-[#20202033]">
+                                          <div className="flex flex-col gap-4">
+                                               <CardHeader>
+                                                    {e.covers.length > 0 ? (
+                                                         <Image
+                                                              src={e.covers[0].url}
+                                                              alt={e.covers[0].filename || 'cover-member'}
+                                                         />
+                                                    ) : (
+                                                         <div className="h-24 w-24 rounded-full bg-gray-400" />
+                                                    )}
+                                               </CardHeader>
 
-                                        <CardContent className="px-0">
-                                             <div className="flex flex-col gap-1">
-                                                  <h4 className="text-lg font-semibold text-black/80 lg:text-2xl">
-                                                       Умный человек в очках
-                                                  </h4>
-                                                  <p className="text-base font-medium text-black/80 lg:text-lg">
-                                                       СЕО Atomic Studio
-                                                  </p>
-                                             </div>
-                                        </CardContent>
-                                   </div>
+                                               <CardContent className="px-0">
+                                                    <div className="flex flex-col gap-1">
+                                                         <h4 className="text-lg font-semibold text-black/80 lg:text-2xl">
+                                                              {e.title}
+                                                         </h4>
+                                                         <p className="text-base font-medium text-black/80 lg:text-lg">
+                                                              {/* {e.} */}
+                                                         </p>
+                                                    </div>
+                                               </CardContent>
+                                          </div>
 
-                                   <CardFooter className="px-0">
-                                        <span className="text-base font-normal text-black/80 lg:text-lg">
-                                             Быстро зарекомендовал себя как талантливый бездельник и стратег
-                                        </span>
-                                   </CardFooter>
-                              </Card>
-                         </SwiperSlide>
-                    ))}
+                                          <CardFooter className="px-0">
+                                               <span className="text-base font-normal text-black/80 lg:text-lg">
+                                                    {e.excerpt}
+                                               </span>
+                                          </CardFooter>
+                                     </Card>
+                                </SwiperSlide>
+                           ))
+                         : null}
                </SwiperRowLayout>
           </div>
      )

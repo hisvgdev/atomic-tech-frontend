@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAtomicClient } from "../useAtomicClient"
 import { Post } from "@/utils/shared/atomic-client/types";
 
-export const usePostsQuery = (queryKey: string, filterType: 'cases' | 'articles' = 'cases') => {
+export const usePostsQuery = (queryKey: string, filterType: 'cases' | 'articles' | 'employee' = 'cases') => {
   const { atomicClient } = useAtomicClient();
 
   return useQuery<Post[]>({

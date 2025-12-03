@@ -11,7 +11,7 @@ export const CaseCategorySection: FC<CaseCategorySectionProps> = (props) => {
                     Категория
                </h3>
                <div className="flex items-center gap-x-1.5">
-                    {categories && categories.map((label, indx) => <CaseIconButton key={indx} label={label} />)}
+                    {categories && categories.map(({ title }, indx) => <CaseIconButton key={indx} label={title} />)}
                </div>
           </section>
      )

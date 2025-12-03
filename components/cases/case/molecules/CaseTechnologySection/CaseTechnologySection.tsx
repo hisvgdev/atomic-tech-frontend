@@ -12,8 +12,8 @@ export const CaseTechnologySection: FC<CaseTechnologySectionProps> = (props) => 
                </h3>
                <div className="flex items-center gap-x-1.5">
                     {Array.isArray(technologies) &&
-                         technologies.map(({ image, name }, indx) => (
-                              <CaseIconButton key={`${indx}-${name}`} icon={''} label={name} />
+                         technologies.map(({ title }, indx) => (
+                              <CaseIconButton key={`${indx}-${title}`} icon={''} label={title} />
                          ))}
                </div>
           </section>

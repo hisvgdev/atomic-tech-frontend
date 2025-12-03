@@ -1,6 +1,5 @@
+import { TaxonomiesProps } from "@/utils/shared/atomic-client/types";
+
 export interface CaseTechnologySectionProps {
-  technologies: {
-    name: string;
-    image: string | null;
-  }[]
+  technologies: TaxonomiesProps[]
 }

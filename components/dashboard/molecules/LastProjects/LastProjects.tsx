@@ -23,7 +23,7 @@ export const LastProjects: FC<LastProjectsProps> = (props) => {
                <div className="flex flex-col gap-6 px-3.5 lg:gap-18 lg:px-7">
                     <div className="flex w-full items-center gap-20 lg:gap-0">
                          <div className="w-full md:max-w-3xl">
-                              <h1 className="text-3xl leading-6 font-bold tracking-tight md:text-7xl md:leading-15">
+                              <h1 className="text-3xl leading-6 font-bold tracking-tight md:text-6xl md:leading-11">
                                    Мы накопили большой опыт в разработке{' '}
                                    <span className="text-[#0085A6]">кастомных решений</span>
                               </h1>

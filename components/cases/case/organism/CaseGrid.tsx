@@ -55,7 +55,13 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
      const formattedWebsiteLink = linkToCase ? linkToCase.split('/')[2] : ''
 
      const getYear = new Date(updated_at || '').getFullYear()
-     console.log(findedCase)
+
+     const technologies = taxonomies ? taxonomies?.filter((t) => t.type.title === 'Стек') : []
+     const categories = taxonomies ? taxonomies?.filter((t) => t.type.title === 'Категории') : []
+
+     const rawFindedCase = findedCase?.custom_fields?.results
+     const destinations = typeof rawFindedCase === 'string' ? JSON.parse(rawFindedCase) : []
+
      return (
           <main className="h-full w-full overflow-y-auto px-3.5 lg:px-6 lg:pt-12">
                <article className="flex flex-col gap-y-16">
@@ -158,35 +164,30 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                          </figure>
                     ) : null}
 
-                    {/* <section
+                    <section
                          className={cn('flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between', {
-                              'lg:justify-start':
-                                   technologies.length < 1 || subcategories.length < 1 || categories.length < 1,
+                              'lg:justify-start': technologies.length < 1,
                          })}
                     >
                          {technologies.length > 0 && <CaseTechnologySection technologies={technologies} />}
-                         {services.length > 0 && <CaseServiceSection services={services} />}
+                         {/* {services.length > 0 && <CaseServiceSection services={services} />} */}
                          {categories.length > 0 && <CaseCategorySection categories={categories} />}
-                    </section> */}
+                    </section>
 
                     <section
                          className={cn(
                               'flex flex-col gap-4 lg:max-w-5xl lg:flex-row lg:items-start lg:justify-between',
                          )}
-                    >
-                         <CaseTechnologySection technologies={[{ name: 'dsadas', image: null }]} />
-                         <CaseServiceSection services={[{ name: 'dsadas', image: null }]} />
-                         <CaseCategorySection categories={['dsadas']} />
-                    </section>
+                    ></section>
 
                     <section data-dark="false" aria-labelledby="benefits-heading" className="flex flex-col gap-y-5">
                          <h2 id="benefits-heading" className="text-4xl font-bold tracking-tight lg:text-6xl">
                               Мы достигли
                          </h2>
-                         {/* <div className="flex flex-wrap gap-2.5">
-                              {destinations.map(({ description, name }, indx) => (
+                         <div className="flex flex-wrap gap-2.5">
+                              {destinations.map((d: { title: string; content: string }, indx: number) => (
                                    <div
-                                        key={`${indx}-${name}`}
+                                        key={`${indx}-${d.title}`}
                                         className="min-w-96 rounded-full bg-[#F6F7FB] px-3 py-2.5"
                                    >
                                         <div className="flex items-center gap-3">
@@ -194,29 +195,9 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                                   <StarIcon color="#F6F7FB" size={12} weight="fill" />
                                              </div>
                                              <div className="flex flex-col">
-                                                  <h4 className="text-sm font-bold text-black">{name}:</h4>
+                                                  <h4 className="text-sm font-bold text-black">{d.title}:</h4>
                                                   <p className="max-w-80 truncate text-sm font-normal text-black">
-                                                       {description}
-                                                  </p>
-                                             </div>
-                                        </div>
-                                   </div>
-                              ))}
-                         </div> */}
-                         <div className="flex flex-wrap gap-2.5">
-                              {Array.from({ length: 8 }).map((_, indx) => (
-                                   <div
-                                        key={`${indx}`}
-                                        className="w-full max-w-xs rounded-full bg-[#F6F7FB] px-3 py-2.5"
-                                   >
-                                        <div className="flex items-center gap-3">
-                                             <div className="flex items-center justify-center rounded-full bg-[#51535B] p-1">
-                                                  <StarIcon color="#F6F7FB" size={12} weight="fill" />
-                                             </div>
-                                             <div className="flex flex-col">
-                                                  <h4 className="text-sm font-bold text-black">{'test'}:</h4>
-                                                  <p className="max-w-80 truncate text-sm font-normal text-black">
-                                                       {'df'}
+                                                       {d.content}
                                                   </p>
                                              </div>
                                         </div>
