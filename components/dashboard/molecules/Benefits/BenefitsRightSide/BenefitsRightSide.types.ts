@@ -1,1 +1,1 @@
-export interface BenefitsRightSideProps { }
+export interface BenefitsRightSideProps {}

@@ -1,5 +1,3 @@
-
-
 export interface SpecialProjectSectionProps {
-  specialProjects: any[];
+     specialProjects: any[]
 }

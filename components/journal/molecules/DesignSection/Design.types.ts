@@ -1,5 +1,3 @@
-
-
 export interface DesignSectionProps {
-  designProjectData: any[]
+     designProjectData: any[]
 }

@@ -1,1 +1,1 @@
-export interface ArticlesCardsProps { }
+export interface ArticlesCardsProps {}

@@ -1,1 +1,1 @@
-export interface AboutUsHeadingProps { }
+export interface AboutUsHeadingProps {}

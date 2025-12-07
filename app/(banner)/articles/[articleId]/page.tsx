@@ -1,17 +1,31 @@
 import Reader from '@/components/article/organism'
 import { AtomicClient } from '@/utils/shared/atomic-client/atomic-client'
+import { AxiosError } from 'axios'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+
+const getPosts = async (slug: string) => {
+     try {
+          const atomicClient = new AtomicClient({
+               baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
+          })
+          await atomicClient.ready
+          return await atomicClient.posts.get(slug)
+     } catch (error) {
+          if (error instanceof AxiosError) {
+               console.error('Axios Error', error.response)
+          } else {
+               console.error('Default Error:', error)
+          }
+     }
+}
 
 export async function generateMetadata(props: PageProps<'/articles/[articleId]'>): Promise<Metadata> {
      const { articleId } = await props.params
 
-     const atomicClient = new AtomicClient({
-          baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
-     })
+     const findedArticle = await getPosts(articleId)
 
-     await atomicClient.ready
-
-     const findedArticle = await atomicClient.posts.get(articleId)
+     if (!findedArticle) return {}
 
      const { covers, title, excerpt } = findedArticle
 
@@ -61,13 +75,11 @@ export async function generateMetadata(props: PageProps<'/articles/[articleId]'>
 export default async function Article(props: PageProps<'/articles/[articleId]'>) {
      const { articleId } = await props.params
 
-     const atomicClient = new AtomicClient({
-          baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
-     })
+     const findedArticle = await getPosts(articleId)
 
-     await atomicClient.ready
-
-     const findedArticle = await atomicClient.posts.get(articleId)
-
-     return <Reader findedArticle={findedArticle} />
+     if (findedArticle) {
+          return <Reader findedArticle={findedArticle} />
+     } else {
+          return notFound()
+     }
 }

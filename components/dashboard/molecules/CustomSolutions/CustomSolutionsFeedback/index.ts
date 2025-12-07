@@ -1,1 +1,1 @@
-export type { CustomSolutionsFeedbackProps } from './CustomSolutionsFeedback.types';
+export type { CustomSolutionsFeedbackProps } from './CustomSolutionsFeedback.types'

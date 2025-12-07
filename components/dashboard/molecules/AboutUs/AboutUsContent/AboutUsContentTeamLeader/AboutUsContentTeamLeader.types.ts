@@ -1,1 +1,1 @@
-export interface AboutUsContentTeamLeaderProps { }
+export interface AboutUsContentTeamLeaderProps {}

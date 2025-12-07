@@ -1,1 +1,1 @@
-export interface MailingSectionProps { }
+export interface MailingSectionProps {}

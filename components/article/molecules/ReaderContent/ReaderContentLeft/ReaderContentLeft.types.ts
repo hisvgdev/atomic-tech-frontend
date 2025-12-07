@@ -1,3 +1,3 @@
 export interface ReaderContentLeftProps {
-  content: string;
+     content: string
 }

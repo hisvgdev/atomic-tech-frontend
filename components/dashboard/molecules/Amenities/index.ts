@@ -1,2 +1,2 @@
-export { Amenities as default } from './Amenities';
-export type { AmenitiesProps } from './Amenities.types';
+export { Amenities as default } from './Amenities'
+export type { AmenitiesProps } from './Amenities.types'

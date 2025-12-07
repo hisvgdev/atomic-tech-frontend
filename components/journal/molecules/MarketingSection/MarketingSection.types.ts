@@ -1,6 +1,3 @@
-
-
-
 export interface MarketingSectionProps {
-  marketingPosts: any[];
+     marketingPosts: any[]
 }

@@ -1,5 +1,3 @@
-
-
 export interface LifestyleSectionProps {
-  lifestyleData: any[]
+     lifestyleData: any[]
 }

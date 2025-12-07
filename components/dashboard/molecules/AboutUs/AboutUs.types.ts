@@ -1,1 +1,1 @@
-export interface AboutUsProps { }
+export interface AboutUsProps {}

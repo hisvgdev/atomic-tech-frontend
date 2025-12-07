@@ -1,5 +1,3 @@
-
-
 export interface NewSectionProps {
-  newJournalData: any[]
+     newJournalData: any[]
 }

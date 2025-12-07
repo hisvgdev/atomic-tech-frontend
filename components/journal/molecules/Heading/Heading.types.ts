@@ -1,8 +1,8 @@
-import { RoutesEnum } from "@/types/Routes.types";
+import { RoutesEnum } from '@/types/Routes.types'
 
 export interface HeadingProps {
-  title: string;
-  desc: string;
-  path?: RoutesEnum;
-  query?: string;
+     title: string
+     desc: string
+     path?: RoutesEnum
+     query?: string
 }

@@ -1,3 +1,3 @@
 export interface BannerProps {
-  title?: string
+     title?: string
 }

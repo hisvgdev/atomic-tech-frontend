@@ -1,2 +1,2 @@
-export { ReaderRating as default } from './ReaderRating';
-export type { ReaderRatingProps } from './ReaderRating.types';
+export { ReaderRating as default } from './ReaderRating'
+export type { ReaderRatingProps } from './ReaderRating.types'

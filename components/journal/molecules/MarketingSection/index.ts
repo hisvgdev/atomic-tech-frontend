@@ -1,2 +1,2 @@
-export type { MarketingSectionProps } from './MarketingSection.types';
-export { MarketingSection as default } from './MarketingSection';
+export type { MarketingSectionProps } from './MarketingSection.types'
+export { MarketingSection as default } from './MarketingSection'

@@ -1,1 +1,1 @@
-export { BenefitsLeftSide as default } from './BenefitsLeftSide';
+export { BenefitsLeftSide as default } from './BenefitsLeftSide'

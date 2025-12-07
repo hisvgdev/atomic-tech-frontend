@@ -1,5 +1,5 @@
-import { Review } from "@/utils/shared/atomic-client/types";
+import { Review } from '@/utils/shared/atomic-client/types'
 
 export interface FeedbackCardProps {
-  review: Review
+     review: Review
 }

@@ -1,1 +1,1 @@
-export interface OtherTagsProps { }
+export interface OtherTagsProps {}

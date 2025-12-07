@@ -50,22 +50,26 @@ export const Footer = () => {
           <footer className="mt-auto">
                <div className="max-w-8xl mt-4 rounded-t-[3.125rem] bg-black px-8 py-6 lg:mx-4 lg:mt-16 lg:mb-6 lg:rounded-[3.125rem]">
                     <div className="flex w-full flex-col lg:flex-row lg:justify-between">
-                         <div className="flex flex-col gap-y-20">
-                              <div className="grid grid-cols-2 gap-x-8 gap-y-6 pb-24 lg:pb-0">
+                         <div className="flex flex-col gap-20">
+                              <div className="grid grid-cols-2 gap-8 pb-24 lg:pb-0">
                                    {mockSocietyData.map((society, indx) => {
+                                        const isSpecial = indx === 1 || indx === 3
                                         return (
-                                             <div key={`${indx}-${society.id}`} className="flex items-center">
+                                             <div
+                                                  key={`${indx}-${society.id}`}
+                                                  className={`flex items-center gap-4 ${isSpecial ? 'justify-end' : ''}`}
+                                             >
                                                   <Image
                                                        src={society.icon}
                                                        alt={society.title}
                                                        width={36}
                                                        height={36}
-                                                       className="object-contain"
+                                                       className="h-9 w-9 object-contain"
                                                   />
                                                   <Link
                                                        href={society.href as any}
                                                        target="_blank"
-                                                       className="pl-2 text-sm font-bold text-white"
+                                                       className="text-sm font-bold text-white transition-all hover:underline"
                                                   >
                                                        {society.title}
                                                   </Link>
@@ -93,7 +97,7 @@ export const Footer = () => {
                                              <Link
                                                   href="https://t.me/TeIega_Ultra_Settings_bot"
                                                   target="_blank"
-                                                  className="text-lg font-bold text-white"
+                                                  className="transtion-all text-lg font-bold text-white hover:underline"
                                              >
                                                   Telegram Bot
                                              </Link>
@@ -115,16 +119,16 @@ export const Footer = () => {
                                              routePath="https://t.me/Atomic_Code"
                                              hasIsRoute
                                         />
-                                        <div className="flex items-center gap-x-2 lg:hidden">
+                                        <button
+                                             type="button"
+                                             className="flex cursor-pointer items-center gap-x-2 lg:hidden"
+                                             onClick={scrollToTop}
+                                        >
                                              <span className="text-xs font-bold text-white">Наверх</span>
-                                             <button
-                                                  type="button"
-                                                  className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white"
-                                                  onClick={scrollToTop}
-                                             >
+                                             <div className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white">
                                                   <ChevronUp />
-                                             </button>
-                                        </div>
+                                             </div>
+                                        </button>
                                    </div>
                               </div>
                               <hr className="w-full bg-white/70" />
@@ -141,16 +145,16 @@ export const Footer = () => {
                                              Политика конфиденциальности
                                         </Link>
                                    </div>
-                                   <div className="hidden lg:flex lg:items-center lg:gap-x-2">
+                                   <button
+                                        type="button"
+                                        className="hidden cursor-pointer items-center gap-2 lg:flex"
+                                        onClick={scrollToTop}
+                                   >
                                         <span className="text-xs font-bold text-white">Наверх</span>
-                                        <button
-                                             type="button"
-                                             className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white"
-                                             onClick={scrollToTop}
-                                        >
+                                        <div className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white">
                                              <ChevronUp />
-                                        </button>
-                                   </div>
+                                        </div>
+                                   </button>
                               </div>
                          </div>
                     </div>

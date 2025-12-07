@@ -1,1 +1,1 @@
-export interface BlogTechnologyProps { }
+export interface BlogTechnologyProps {}

@@ -1,1 +1,1 @@
-export interface BlogHeadingProps { }
+export interface BlogHeadingProps {}

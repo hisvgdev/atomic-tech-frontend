@@ -1,2 +1,2 @@
 export type { BlockchainSectionProps } from './BlockchainSection.types'
-export { BlockchainSection as default } from './BlockchainSection';
+export { BlockchainSection as default } from './BlockchainSection'

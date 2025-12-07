@@ -1,6 +1,6 @@
-import { RoutesEnum } from "@/types/Routes.types"
+import { RoutesEnum } from '@/types/Routes.types'
 
 export interface AllProjectsButtonProps {
-  title?: string
-  link?: RoutesEnum
+     title?: string
+     link?: RoutesEnum
 }

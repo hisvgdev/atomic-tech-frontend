@@ -1,1 +1,1 @@
-export interface AmenitiesProps { }
+export interface AmenitiesProps {}

@@ -9,8 +9,6 @@ import { TanstackQueryProvider } from '@/shared/global/TanstackQueryProvider/Tan
 import { YandexMetrika } from '@/shared/global/YandexMetrika/YandexMetrika'
 import { Suspense } from 'react'
 
-import { FaroProvider } from '@/lib/providers/FaroProvider'
-
 const manrope = Manrope({
      variable: '--font-manrope',
      subsets: ['latin'],
@@ -77,11 +75,9 @@ export default function RootLayout(props: LayoutProps<'/'>) {
                     <Suspense>
                          <YandexMetrika />
                     </Suspense>
-                    <FaroProvider>
-                         <TanstackQueryProvider>
-                              <AppLayout>{children}</AppLayout>
-                         </TanstackQueryProvider>
-                    </FaroProvider>
+                    <TanstackQueryProvider>
+                         <AppLayout>{children}</AppLayout>
+                    </TanstackQueryProvider>
                </body>
           </html>
      )

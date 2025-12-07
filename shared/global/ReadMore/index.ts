@@ -1,1 +1,1 @@
-export { ReadMore as default } from './ReadMore';
+export { ReadMore as default } from './ReadMore'

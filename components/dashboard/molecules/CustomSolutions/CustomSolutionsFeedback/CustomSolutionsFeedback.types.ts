@@ -1,1 +1,1 @@
-export interface CustomSolutionsFeedbackProps { }
+export interface CustomSolutionsFeedbackProps {}

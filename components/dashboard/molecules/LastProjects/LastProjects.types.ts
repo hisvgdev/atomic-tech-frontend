@@ -1,1 +1,1 @@
-export interface LastProjectsProps { }
+export interface LastProjectsProps {}

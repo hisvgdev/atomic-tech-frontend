@@ -1,7 +1,7 @@
 export enum RoutesEnum {
-  home = '/',
-  articles = '/articles',
-  cases = '/cases',
-  journal = '/journal',
-  policy = '/policy',
+     home = '/',
+     articles = '/articles',
+     cases = '/cases',
+     journal = '/journal',
+     policy = '/policy',
 }

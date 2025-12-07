@@ -1,5 +1,5 @@
-import { TaxonomiesProps } from "@/utils/shared/atomic-client/types";
+import { TaxonomiesProps } from '@/utils/shared/atomic-client/types'
 
 export interface CaseTechnologySectionProps {
-  technologies: TaxonomiesProps[]
+     technologies: TaxonomiesProps[]
 }

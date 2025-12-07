@@ -1,18 +1,31 @@
 import CaseGrid from '@/components/cases/case/organism'
 import { AtomicClient } from '@/utils/shared/atomic-client/atomic-client'
+import { AxiosError } from 'axios'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+
+const getPosts = async (slug: string) => {
+     try {
+          const atomicClient = new AtomicClient({
+               baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
+          })
+          await atomicClient.ready
+          return await atomicClient.posts.get(slug)
+     } catch (error) {
+          if (error instanceof AxiosError) {
+               console.error('Axios Error', error.response)
+          } else {
+               console.error('Default Error:', error)
+          }
+     }
+}
 
 export async function generateMetadata(props: PageProps<'/cases/[slug]'>): Promise<Metadata> {
      const { slug } = await props.params
 
-     const atomicClient = new AtomicClient({
-          baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
-     })
+     const findedCase = await getPosts(slug)
 
-     await atomicClient.ready
-
-     const findedCase = await atomicClient.posts.get(slug)
+     if (!findedCase) return {}
 
      const { covers, title, excerpt } = findedCase
 
@@ -62,13 +75,7 @@ export async function generateMetadata(props: PageProps<'/cases/[slug]'>): Promi
 export default async function Case(props: PageProps<'/cases/[slug]'>) {
      const { slug } = await props.params
 
-     const atomicClient = new AtomicClient({
-          baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
-     })
-
-     await atomicClient.ready
-
-     const findedCase = await atomicClient.posts.get(slug)
+     const findedCase = await getPosts(slug)
 
      if (!findedCase) return notFound()
 

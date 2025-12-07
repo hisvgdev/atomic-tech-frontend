@@ -1,3 +1,3 @@
 export interface BannerWithTagsProps {
-  bannerTitle?: string;
+     bannerTitle?: string
 }

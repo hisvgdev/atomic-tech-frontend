@@ -1,1 +1,1 @@
-export interface CustomSolutionsAddingFeedbackDialogProps { }
+export interface CustomSolutionsAddingFeedbackDialogProps {}

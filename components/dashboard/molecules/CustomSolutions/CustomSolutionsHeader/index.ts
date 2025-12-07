@@ -1,2 +1,2 @@
-export { CustomSolutionsHeader as default } from './CustomSolutionsHeader';
-export type { CustomSolutionsHeaderProps } from './CustomSolutionsHeader.types';
+export { CustomSolutionsHeader as default } from './CustomSolutionsHeader'
+export type { CustomSolutionsHeaderProps } from './CustomSolutionsHeader.types'

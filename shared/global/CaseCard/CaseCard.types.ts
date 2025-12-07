@@ -1,5 +1,5 @@
-import { Post } from "@/utils/shared/atomic-client/types";
+import { Post } from '@/utils/shared/atomic-client/types'
 
 export interface CaseCardProps {
-  post: Post
+     post: Post
 }

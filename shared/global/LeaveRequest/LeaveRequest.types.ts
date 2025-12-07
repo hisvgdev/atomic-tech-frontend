@@ -1,1 +1,1 @@
-export interface LeaveRequestProps { }
+export interface LeaveRequestProps {}

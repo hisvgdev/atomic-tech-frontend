@@ -1,1 +1,1 @@
-export interface CustomSolutionsHeaderProps { }
+export interface CustomSolutionsHeaderProps {}

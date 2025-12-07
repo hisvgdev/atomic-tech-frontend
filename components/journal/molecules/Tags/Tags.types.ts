@@ -1,1 +1,1 @@
-export interface TagsProps { }
+export interface TagsProps {}

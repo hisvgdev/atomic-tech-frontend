@@ -1,1 +1,1 @@
-export interface GridProps { }
+export interface GridProps {}

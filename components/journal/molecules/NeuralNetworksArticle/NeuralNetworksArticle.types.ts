@@ -1,5 +1,3 @@
-
-
 export interface NeuralNetworksArticleProps {
-  neuralPosts: any[];
+     neuralPosts: any[]
 }

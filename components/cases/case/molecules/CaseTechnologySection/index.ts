@@ -1,2 +1,2 @@
 export type { CaseTechnologySectionProps } from './CaseTechnologySection.types'
-export { CaseTechnologySection as default } from './CaseTechnologySection';
+export { CaseTechnologySection as default } from './CaseTechnologySection'

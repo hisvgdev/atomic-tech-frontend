@@ -1,5 +1,3 @@
-
-
 export interface BlockchainSectionProps {
-  blockchainData: any[]
+     blockchainData: any[]
 }

@@ -1,2 +1,2 @@
-export type { MailingSectionProps } from './MailingSection.types';
-export { MailingSection as default } from './MailingSection';
+export type { MailingSectionProps } from './MailingSection.types'
+export { MailingSection as default } from './MailingSection'

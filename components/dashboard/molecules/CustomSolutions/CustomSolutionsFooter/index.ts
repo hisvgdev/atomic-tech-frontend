@@ -1,1 +1,1 @@
-export { CustomSolutionsFooter as default } from './CustomSolutionsFooter';
+export { CustomSolutionsFooter as default } from './CustomSolutionsFooter'
