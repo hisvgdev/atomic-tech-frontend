@@ -4,7 +4,6 @@ import { Card } from '@/components/ui/card'
 import { StarIcon } from '@phosphor-icons/react/dist/ssr'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import React, { FC } from 'react'
 
 import { articleCardVariants } from '@/lib/cva/article-card-variants'
@@ -22,9 +21,9 @@ const RatingStars: FC<{ value?: number }> = ({ value = 0 }) => (
 
 export const ArticleCard: FC<ArticleCardProps> = (props) => {
      const { article, classNames, hasRating = true, ratingPosition = 'bottom' } = props
-     const { title, covers, slug, rating = 5 } = article
+     const { title, covers, slug, rating = 5, taxonomies } = article
      const showBottomRating = hasRating && ratingPosition === 'bottom'
-
+     const tags = taxonomies?.map((t) => t.title)
      return (
           <Card
                className={cn(
@@ -46,7 +45,7 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
 
                <div className="relative z-10 flex h-full flex-col justify-between p-4 text-white">
                     <div className="flex justify-between">
-                         <div className="rounded-full bg-[#252A2B] p-2 px-3 text-xs font-semibold backdrop-blur-sm">
+                         <div className="rounded-full bg-[#252A2B] px-4 py-2 text-xs font-semibold backdrop-blur-sm">
                               Бизнес
                          </div>
                          {showBottomRating && <RatingStars value={rating} />}

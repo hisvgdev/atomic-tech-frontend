@@ -7,6 +7,7 @@ import project from '@/public/assets/images/projects/secondProject.png'
 import CaseCard from '@/shared/global/CaseCard'
 import Chip from '@/shared/global/Chip'
 import { PostStatus } from '@/utils/shared/atomic-client/types'
+import { shuffleArray } from '@/utils/shared/shuffleArray'
 import Link from 'next/link'
 
 import type { FC } from 'react'
@@ -14,9 +15,16 @@ import type { FC } from 'react'
 import { LastProjectsProps } from './LastProjects.types'
 
 export const LastProjects: FC<LastProjectsProps> = (props) => {
-     const { data: postsData, isLoading: isPostsDataLoading, isError: isPostsDataError } = usePostsQuery('posts')
+     const {
+          data: postsData,
+          isLoading: isPostsDataLoading,
+          isError: isPostsDataError,
+     } = usePostsQuery({
+          type: 'cases',
+     })
 
      const publishedPostsData = Array.isArray(postsData) ? postsData.filter((t) => t.status !== PostStatus.DRAFT) : []
+     const randomizePostData = shuffleArray(publishedPostsData.slice(0, 6))
 
      return (
           <section data-dark="false">
@@ -54,12 +62,12 @@ export const LastProjects: FC<LastProjectsProps> = (props) => {
                          </div>
                     </div>
                     {isPostsDataError || isPostsDataLoading ? (
-                         <div className="grid w-full grid-cols-1 items-center justify-center gap-9 px-4 md:grid-cols-2">
-                              {Array.from({ length: 4 }).map((_, idx) => (
+                         <div className="grid w-full grid-cols-1 items-center justify-center gap-4 lg:max-w-full lg:grid-cols-3">
+                              {Array.from({ length: 6 }).map((_, idx) => (
                                    <div key={idx} className="flex flex-col space-y-3">
-                                        <Skeleton className="h-72 min-w-md rounded-xl" />
+                                        <Skeleton className="h-72 min-w-full rounded-xl" />
                                         <div className="space-y-2">
-                                             <Skeleton className="h-4 w-72" />
+                                             <Skeleton className="h-4 w-full" />
                                              <Skeleton className="h-4 w-64" />
                                         </div>
                                    </div>
@@ -67,7 +75,7 @@ export const LastProjects: FC<LastProjectsProps> = (props) => {
                          </div>
                     ) : (
                          <div className="grid w-full grid-cols-1 items-center justify-center gap-4 lg:max-w-fit lg:grid-cols-3">
-                              {publishedPostsData.map((post, indx) => {
+                              {randomizePostData.map((post, indx) => {
                                    return <CaseCard key={`${post.id}-${indx + 1}`} post={post} />
                               })}
                          </div>

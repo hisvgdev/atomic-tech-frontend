@@ -20,7 +20,9 @@ export const AboutUsContentTeamMembers: FC<AboutUsContentTeamMembersProps> = () 
           data: employeeData,
           isLoading: isEmployeeData,
           isError: isEmployeeError,
-     } = usePostsQuery('employee', 'employee')
+     } = usePostsQuery({
+          type: 'employee',
+     })
 
      const publishedEmployee = employeeData?.filter((t) => t.status === 'published')
 

@@ -4,6 +4,7 @@
 
 // Common types
 export type UUID = string
+export type Email = `${string}@${string}`;
 
 export enum PostStatus {
      DRAFT = 'draft',
@@ -169,7 +170,22 @@ export interface PostCreate {
      taxonomies?: UUID[]
      blocks?: Array<Omit<BlockCreate, 'post_id'>>
 }
-
+export interface CreateLeadInput {
+     phone: string;
+     email: string;
+     telegram_username?: string;
+}
+export interface LeadProps {
+     phone: string;
+     email: Email;
+     telegram_username: string;
+     name: string;
+     message: string;
+     id: UUID,
+     status: string;
+     created_at: Date;
+     updated_at: Date;
+}
 export interface PostUpdate {
      title?: string
      slug?: string

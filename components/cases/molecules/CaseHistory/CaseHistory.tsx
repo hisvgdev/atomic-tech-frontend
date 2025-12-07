@@ -1,4 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { useGetMultiplePostsQuery } from '@/hooks/query/useGetMultiplePostsQuery'
+import { usePostsQuery } from '@/hooks/query/usePostsQuery'
+import { EyeIcon } from '@phosphor-icons/react'
 import { BookOpenIcon } from '@phosphor-icons/react/dist/ssr'
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
@@ -9,15 +12,26 @@ import { transformTextToHtml } from '../../../../utils/shared/transformTextToHtm
 import { CaseHistoryProps } from './CaseHistory.types'
 
 export const CaseHistory: FC<CaseHistoryProps> = (props) => {
-     const { projectHistory, blocks } = props
-     console.log(blocks)
-     // const randomizeRelatedCaseItems = [...projectHistory.related_project_history_items].sort(() => 0.5 - Math.random())
+     const { blocks } = props
+     const text = blocks.filter((t) => t.type === 'text')
+     const relatedPost = blocks.filter((t) => t.type === 'related_post')
+     const slugs = relatedPost.map((r) => r.post_id)
+
+     const {
+          data: relatedPostData,
+          isLoading: isRelatedPostDataLoading,
+          isError: isRelatedPostDataError,
+     } = useGetMultiplePostsQuery({
+          type: 'articles',
+          slugs,
+     })
+
      return (
           <section data-dark="true" className="h-full w-full rounded-[3.125rem] bg-black p-10">
                <div className="flex w-full flex-col items-center justify-center gap-24 lg:flex-row lg:items-start lg:justify-between">
                     <div className="flex max-w-4xl flex-col gap-y-9">
                          <h2 className="text-5xl font-bold -tracking-[0.23rem] text-white">История проекта</h2>
-                         {blocks.map((b) => {
+                         {text.map((b) => {
                               return (
                                    <div
                                         key={b.id}
@@ -39,42 +53,45 @@ export const CaseHistory: FC<CaseHistoryProps> = (props) => {
                               </div>
                               <ArrowRight />
                          </button>
-
-                         {/* {randomizeRelatedCaseItems.slice(0, 2).map((c, i) => (
+                         {relatedPostData?.map((post) => (
                               <Card
-                                   key={i}
-                                   className="flex h-96 flex-col justify-between rounded-4xl border-none bg-[#1D1D1D] shadow-none"
+                                   key={post.id}
+                                   className={'group relative h-80 cursor-pointer overflow-hidden rounded-4xl bg-white'}
                               >
-                                   <CardHeader>
-                                        <CardTitle>
-                                             {c.photos.length > 0 ? (
-                                                  <Image
-                                                       src={c.photos[0]}
-                                                       alt={`${c.title}-image`}
-                                                       className="h-48 w-full rounded-2xl object-cover"
-                                                       width={320}
-                                                       height={180}
-                                                  />
+                                   {post.covers?.[0] && (
+                                        <Image
+                                             src={post.covers[0].url}
+                                             alt={post.covers[0].filename || post.title}
+                                             fill
+                                             className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                   )}
+
+                                   <div className="absolute inset-0 bg-black/40 transition-colors duration-300 group-hover:bg-black/50" />
+
+                                   <div className="relative z-10 flex h-full flex-col justify-between p-4 text-white">
+                                        <div className="flex justify-between">
+                                             <div className="flex items-center gap-0.5 rounded-full bg-[#252A2B] px-4 py-2">
+                                                  <EyeIcon />
+                                                  <span className="text-xs font-semibold backdrop-blur-sm">16K</span>
+                                             </div>
+                                        </div>
+
+                                        <div className="flex flex-col items-start gap-3">
+                                             {post.slug ? (
+                                                  <Link
+                                                       href={`/articles/${post.slug}`}
+                                                       className="text-lg leading-tight font-semibold hover:underline"
+                                                  >
+                                                       {post.title}
+                                                  </Link>
                                              ) : (
-                                                  <div className="h-48 w-full rounded-2xl bg-black" />
+                                                  <h4 className="text-lg leading-tight font-semibold">{post?.title}</h4>
                                              )}
-                                        </CardTitle>
-                                   </CardHeader>
-                                   <CardContent>
-                                        <Link
-                                             href={`/cases/${c.id}`}
-                                             className="line-clamp-2 font-semibold text-white hover:underline"
-                                        >
-                                             {c.description}
-                                        </Link>
-                                   </CardContent>
-                                   <CardFooter>
-                                        <time className="text-sm leading-6 font-light text-gray-300">
-                                             {String(c.year)}
-                                        </time>
-                                   </CardFooter>
+                                        </div>
+                                   </div>
                               </Card>
-                         ))} */}
+                         ))}
                     </aside>
                </div>
           </section>

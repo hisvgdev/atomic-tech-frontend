@@ -12,7 +12,7 @@ export const CaseServiceSection: FC<CaseServiceSectionProps> = (props) => {
                </h3>
                <div className="flex items-center gap-x-1.5">
                     <div className="flex max-w-md flex-wrap items-center gap-3">
-                         {services && services.map(({ name }, indx) => <CaseIconButton key={indx} label={name} />)}
+                         {services && services.map((s, indx) => <CaseIconButton key={indx} label={s.title} />)}
                     </div>
                </div>
           </section>

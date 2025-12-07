@@ -3,23 +3,36 @@ import { useQuery } from '@tanstack/react-query'
 
 import { useAtomicClient } from '../useAtomicClient'
 
-export const usePostsQuery = (queryKey: string, filterType: 'cases' | 'articles' | 'employee' = 'cases') => {
+export const usePostsQuery = ({
+     page = 1,
+     limit = 6,
+     type = 'cases',
+     filters = {},
+}: {
+     page?: number
+     limit?: number
+     type?: 'cases' | 'articles' | 'employee'
+     filters?: Record<string, string | number>
+}) => {
      const { atomicClient } = useAtomicClient()
 
      return useQuery<Post[]>({
-          queryKey: [queryKey],
+          queryKey: ['posts', type, page, limit, filters],
           queryFn: async () => {
                if (!atomicClient) throw new Error('AtomicClient not initialized')
-
                await atomicClient.ready
 
                return atomicClient.posts.list({
-                    'filter[type]': filterType,
+                    'filter[type]': type,
+
+                    ...Object.fromEntries(
+                         Object.entries(filters).map(([k, v]) => [
+                              `filter${k}`, v
+                         ])
+                    ),
                })
           },
           enabled: !!atomicClient,
-          staleTime: 1000 * 60,
-          retry: 3,
-          refetchIntervalInBackground: true,
+          staleTime: 60_000,
      })
 }

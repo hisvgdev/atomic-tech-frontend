@@ -27,7 +27,9 @@ export const Tags: FC<TagsProps> = () => {
           data: articlesData,
           isLoading: isArticlesDataLoading,
           isError: isArticlesDataError,
-     } = usePostsQuery('articles', 'articles')
+     } = usePostsQuery({
+          type: 'articles',
+     })
      const getActiveItem = searchParams.get('blog_category_id') || ''
      const uniqueTaxonomies = useFilteredTaxonomies(articlesData ?? [])
 

@@ -1,6 +1,5 @@
+import { TaxonomiesProps } from "@/utils/shared/atomic-client/types";
+
 export interface CaseServiceSectionProps {
-     services: {
-          image: string | null
-          name: string
-     }[]
+     services: TaxonomiesProps[]
 }

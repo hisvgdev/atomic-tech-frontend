@@ -11,6 +11,7 @@ import {
 
 import { ApiClient, ApiClientConfig } from './client'
 import { HealthResponse } from './types'
+import { LeadsService } from "@/utils/api/services/leads"
 
 export interface AtomicClientConfig {
      baseURL: string
@@ -32,6 +33,7 @@ export class AtomicClient {
      public readonly users: UsersService
      public readonly reviews: ReviewsService
      public readonly customFields: CustomFieldsService
+     public readonly leads: LeadsService
 
      constructor(config: AtomicClientConfig) {
           const clientConfig: ApiClientConfig = {
@@ -64,10 +66,11 @@ export class AtomicClient {
           this.users = new UsersService(this.apiClient)
           this.reviews = new ReviewsService(this.apiClient)
           this.customFields = new CustomFieldsService(this.apiClient)
+          this.leads = new LeadsService(this.apiClient)
      }
 
      private async fetchProxyToken(): Promise<string> {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/auth/service-token`)
+          const response = await fetch(`http://localhost:3000/api/auth/service-token`)
           const token = await response.json()
 
           if (!token) {

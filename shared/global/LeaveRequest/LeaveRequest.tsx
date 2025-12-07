@@ -4,13 +4,32 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { AtomicClient } from '@/utils/shared/atomic-client/atomic-client'
+import { CreateLeadInput } from '@/utils/shared/atomic-client/types'
 import { useForm } from '@tanstack/react-form'
+import { AxiosError } from 'axios'
 import React, { FC, useEffect } from 'react'
 import toast from 'react-hot-toast'
 
 import { LeaveRequestPayload, leaveRequestSchema } from '@/lib/schema/leave-request-schema'
 
 import { LeaveRequestProps } from './LeaveRequest.types'
+
+const handleCreateLead = async (body: CreateLeadInput) => {
+     try {
+          const atomicClient = new AtomicClient({
+               baseURL: process.env.NEXT_PUBLIC_API_BASE_URL!,
+          })
+          await atomicClient.ready
+          return await atomicClient.leads.create(body)
+     } catch (error) {
+          if (error instanceof AxiosError) {
+               console.error('Axios Error', error.response)
+          } else {
+               console.error('Default Error:', error)
+          }
+     }
+}
 
 export const LeaveRequest: FC<LeaveRequestProps> = (props) => {
      const {} = props
@@ -24,29 +43,34 @@ export const LeaveRequest: FC<LeaveRequestProps> = (props) => {
                nickname: '',
                terms: true,
           } as LeaveRequestPayload,
-          // onSubmit: async (data) => {
-          //      const { email, phone, nickname } = data.value
-          //      const cleanedPhone = phone.replace(/[^\d+]/g, '')
+          onSubmit: async (data) => {
+               const { email, phone, nickname } = data.value
 
-          //      const formData = new FormData()
-          //      formData.set('email', email)
-          //      formData.set('tel', cleanedPhone)
-          //      formData.set('nickname', nickname as string)
+               const requestBody = nickname
+                    ? {
+                           email,
+                           phone,
+                           telegram_username: nickname,
+                      }
+                    : {
+                           email,
+                           phone,
+                      }
 
-          //      const promise = clientRequest(formData)
+               const promise = handleCreateLead(requestBody)
 
-          //      toast.promise(promise, {
-          //           loading: 'Пожалуйста подождите мы записываем вашу заявку',
-          //           success: 'Вы успешно оставили заявку, мы обязательно ее обработаем и дадим вам обратную связь!',
-          //           error: 'Произошла ошибка, пожалуйста обратитесь в тех.поддержку!',
-          //      })
+               toast.promise(promise, {
+                    loading: 'Пожалуйста подождите мы записываем вашу заявку',
+                    success: 'Вы успешно оставили заявку, мы обязательно ее обработаем и дадим вам обратную связь!',
+                    error: 'Произошла ошибка, пожалуйста обратитесь в тех.поддержку!',
+               })
 
-          //      try {
-          //           await promise
-          //      } catch (err) {
-          //           console.error(err)
-          //      }
-          // },
+               try {
+                    await promise
+               } catch (err) {
+                    console.error(err)
+               }
+          },
      })
 
      useEffect(() => {

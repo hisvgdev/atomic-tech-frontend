@@ -21,56 +21,35 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { CaseHeading } from '../molecules/CaseHeading/CaseHeading'
 import Cases from '../molecules/Cases'
 
-export const CASE_LIMITS = 4
+export const CASE_LIMITS = 6
 
 export const Grid = () => {
      const searchParams = useSearchParams()
+     const [currentPage, setCurrentPage] = useState(1)
 
      const {
           data: casesData,
           isLoading: isCasesDataLoading,
           isError: isCasesDataError,
-     } = usePostsQuery('cases', 'cases')
+     } = usePostsQuery({
+          type: 'cases',
+     })
 
      const uniqueTaxonomies = useFilteredTaxonomies(casesData ?? [])
 
      const usluga = searchParams.get('usluga_id') || ''
      const category = searchParams.get('category_id') || ''
      const technology = searchParams.get('technology_id') || ''
-     const [currentPage, setCurrentPage] = useState(1)
 
      const technologies = uniqueTaxonomies?.filter((t) => t.type.title === 'Стек') || []
 
      const categories = uniqueTaxonomies?.filter((t) => t.type.title === 'Категории') || []
 
-     // const { data: caseItems, isPending: isCasesPending } = useQuery({
-     //      queryKey: ['caseItems', category, usluga, technology, currentPage],
-     //      queryFn: () =>
-     //           getCaseItems({
-     //                offset: (currentPage - 1) * 6,
-     //           }),
-     //      staleTime: 10000,
-     // })
+     const totalItems = casesData?.length || 0
+     const totalPages = Math.ceil(totalItems / CASE_LIMITS)
 
-     // const { data: taxonomyTypesData, isLoading: taxonomyTypesLoading } = useQuery({
-     //      queryKey: ['taxonomy-types'],
-     //      queryFn: () => getTaxonomyTypes(),
-     // })
-     // const { data: caseItemsData, isLoading: isCaseItemsDataLoading } = useQuery({
-     //      queryKey: ['case-items'],
-     //      queryFn: () => getPosts({ filter: { status: 'published' } }),
-     // })
-
-     // const matchedTechnologies = technologiesData.data.map((technology) => {
-     //      const matchedTech = techIcons.find((tech) => tech.name.toLowerCase() === technology.name.toLowerCase())
-     //      return {
-     //           id: technology.id,
-     //           name: technology.name,
-     //           icon: matchedTech?.icon,
-     //      }
-     // })
-
-     // const allCases = caseItems?.data.flatMap((page) => page ?? []) || []
+     const paginatedCases =
+          totalItems > 0 ? casesData?.slice((currentPage - 1) * CASE_LIMITS, currentPage * CASE_LIMITS) : []
 
      return (
           <div className="flex flex-col gap-8 px-4 lg:px-6 lg:py-20">
@@ -80,10 +59,10 @@ export const Grid = () => {
                     matchedTechnologies={technologies}
                     servicesData={[]}
                />
-               {Array.isArray(casesData) && casesData.length > 0 ? (
-                    <Cases cases={casesData} />
+               {Array.isArray(paginatedCases) && paginatedCases.length > 0 ? (
+                    <Cases cases={paginatedCases} />
                ) : (
-                    <div className="grid w-full grid-cols-2 items-center gap-8">
+                    <div className="grid w-full grid-cols-3 items-center gap-8">
                          {Array.from({ length: CASE_LIMITS }).map((_, idx) => (
                               <div key={idx} className="flex flex-col space-y-3">
                                    <Skeleton className="h-96 w-auto rounded-xl" />
@@ -96,7 +75,7 @@ export const Grid = () => {
                     </div>
                )}
 
-               {/* {Array.isArray(casesData) && casesData?.length > 0 && (
+               {totalPages > 1 && (
                     <Pagination>
                          <PaginationContent>
                               <PaginationItem>
@@ -105,7 +84,7 @@ export const Grid = () => {
                                    />
                               </PaginationItem>
 
-                              {[...Array(caseItems?.pagination?.total_pages || 1)].map((_, index) => (
+                              {Array.from({ length: totalPages }).map((_, index) => (
                                    <PaginationItem key={index}>
                                         <PaginationLink
                                              isActive={currentPage === index + 1}
@@ -118,16 +97,12 @@ export const Grid = () => {
 
                               <PaginationItem>
                                    <PaginationNext
-                                        onClick={() =>
-                                             setCurrentPage((prev) =>
-                                                  Math.min(prev + 1, caseItems?.pagination?.total_pages || prev),
-                                             )
-                                        }
+                                        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                                    />
                               </PaginationItem>
                          </PaginationContent>
                     </Pagination>
-               )} */}
+               )}
           </div>
      )
 }

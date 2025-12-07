@@ -18,7 +18,9 @@ export const ArticleCards: FC<ArticleCardsProps> = (props) => {
           data: articlesData,
           isLoading: isArticlesDataLoading,
           isError: isArticlesDataError,
-     } = usePostsQuery('articles', 'articles')
+     } = usePostsQuery({
+          type: 'articles',
+     })
 
      // const {
      //      data: topRelatedData,
@@ -54,7 +56,7 @@ export const ArticleCards: FC<ArticleCardsProps> = (props) => {
      return (
           <div className="w-full">
                <div className="flex w-full flex-col gap-8 lg:hidden">
-                    <SwiperRowLayout hiddenPagination slidesPerViews={1.2}>
+                    <SwiperRowLayout hiddenPagination slidesPerViews={1.8}>
                          {articlesData?.slice(0, 3).map((article, idx) => (
                               <SwiperSlide key={idx}>
                                    <ArticleCard
@@ -78,7 +80,7 @@ export const ArticleCards: FC<ArticleCardsProps> = (props) => {
 
                <div className="hidden items-center gap-4 lg:flex">
                     {articlesData?.slice(0, 3).map((article, idx) => (
-                         <ArticleCard key={`${idx}-${article.title}`} article={article} classNames="max-w-xs" />
+                         <ArticleCard key={`${idx}-${article.title}`} article={article} classNames="max-w-full" />
                     ))}
                </div>
           </div>

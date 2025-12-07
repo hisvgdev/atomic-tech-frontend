@@ -27,7 +27,9 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
           data: articlesData,
           isLoading: isArticlesDataLoading,
           isError: isArticlesDataError,
-     } = usePostsQuery('articles', 'articles')
+     } = usePostsQuery({
+          type: 'articles',
+     })
 
      const [currentPage, setCurrentPage] = useState(1)
      const [sortWithDate, setSortWithDate] = useState<'created_at' | 'updated_at'>('created_at')

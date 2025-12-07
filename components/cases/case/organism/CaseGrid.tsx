@@ -9,7 +9,7 @@ import { StarIcon } from '@phosphor-icons/react/dist/ssr'
 import { ArrowRight, Calendar, Globe } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { FC } from 'react'
+import React, { FC, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import CaseCategorySection from '../molecules/CaseCategorySection'
@@ -57,7 +57,8 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
      const getYear = new Date(updated_at || '').getFullYear()
 
      const technologies = taxonomies ? taxonomies?.filter((t) => t.type.title === 'Стек') : []
-     const categories = taxonomies ? taxonomies?.filter((t) => t.type.title === 'Категории') : []
+     const categories = taxonomies ? taxonomies?.filter((t) => t.type.title === 'Категории кейсов') : []
+     const services = taxonomies ? taxonomies.filter((t) => (t.type.title = 'Услуги')) : []
 
      const rawFindedCase = findedCase?.custom_fields?.results
      const destinations = typeof rawFindedCase === 'string' ? JSON.parse(rawFindedCase) : []
@@ -94,15 +95,18 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                               )}
                          </div>
                     </header>
-
                     {covers && covers.length > 0 ? (
-                         <figure>
-                              <div className="relative flex h-[40rem] gap-4">
+                         <figure className="flex flex-col gap-4">
+                              <div className="relative flex h-full gap-4">
                                    <Swiper
-                                        modules={[Navigation, A11y]}
+                                        modules={[Navigation, A11y, Pagination]}
                                         navigation={{
                                              nextEl: '.swiper-button-next',
                                              prevEl: '.swiper-button-prev',
+                                        }}
+                                        pagination={{
+                                             el: '.custom-pagination',
+                                             clickable: true,
                                         }}
                                         slidesPerView={1}
                                         spaceBetween={20}
@@ -117,7 +121,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                                                  alt={c.filename || `cover-${i}`}
                                                                  width={630}
                                                                  height={430}
-                                                                 className="h-full w-full rounded-3xl object-cover"
+                                                                 className="h-[40rem] w-full rounded-3xl object-cover"
                                                             />
                                                        </div>
 
@@ -128,7 +132,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                                                       alt={covers[i + 1].filename || `cover-${i + 1}`}
                                                                       width={210}
                                                                       height={430}
-                                                                      className="h-full w-full rounded-3xl object-cover"
+                                                                      className="h-[40rem] w-full rounded-3xl object-cover"
                                                                  />
                                                             </div>
                                                        )}
@@ -136,11 +140,12 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                              </SwiperSlide>
                                         ))}
                                    </Swiper>
+                                   <div className="custom-pagination mt-2 flex justify-center gap-x-2" />
 
                                    <div className="swiper-button-prev absolute top-1/2 left-4 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-3">
                                         <CaretLeftIcon size={18} weight="bold" />
                                    </div>
-                                   <div className="swiper-button-next absolute top-1/2 right-4 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-3 text-black hover:text-gray-600">
+                                   <div className="swiper-button-next absolute top-1/2 right-8 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-[#EAEAEA] bg-white p-3 text-black hover:text-gray-600">
                                         <CaretRightIcon size={18} weight="bold" />
                                    </div>
                                    <div className="absolute right-12 -bottom-3 z-20 hidden lg:block">
@@ -161,6 +166,18 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                                         </Link>
                                    </div>
                               </div>
+                              <div className="flex items-center gap-2">
+                                   {covers.map((c, i) => (
+                                        <Image
+                                             key={i}
+                                             src={c.url}
+                                             alt={c.filename || `cover-${i}`}
+                                             width={225}
+                                             height={115}
+                                             className="w-full max-w-40 rounded-3xl object-cover"
+                                        />
+                                   ))}
+                              </div>
                          </figure>
                     ) : null}
 
@@ -170,16 +187,14 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                          })}
                     >
                          {technologies.length > 0 && <CaseTechnologySection technologies={technologies} />}
-                         {/* {services.length > 0 && <CaseServiceSection services={services} />} */}
+                         {services.length > 0 && <CaseServiceSection services={services} />}
                          {categories.length > 0 && <CaseCategorySection categories={categories} />}
                     </section>
-
                     <section
                          className={cn(
                               'flex flex-col gap-4 lg:max-w-5xl lg:flex-row lg:items-start lg:justify-between',
                          )}
                     ></section>
-
                     <section data-dark="false" aria-labelledby="benefits-heading" className="flex flex-col gap-y-5">
                          <h2 id="benefits-heading" className="text-4xl font-bold tracking-tight lg:text-6xl">
                               Мы достигли
@@ -205,26 +220,24 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                               ))}
                          </div>
                     </section>
-
-                    {blocks && <CaseHistory blocks={blocks} projectHistory={[]} />}
-
+                    {blocks && <CaseHistory blocks={blocks} />}
                     <section data-dark="false" aria-labelledby="more-cases-heading" className="flex flex-col gap-6">
                          <h2 id="more-cases-heading" className="text-4xl font-bold tracking-tight lg:text-6xl">
                               Больше кейсов
                          </h2>
                          <div className="grid grid-cols-1 items-center gap-4 lg:grid-cols-2">
                               {/* {Array.from({ length: 2 }).map((project, indx) => (
-                                   <CaseCard
-                                        key={`${indx}`}
-                                        post={{
-                                             id: '',
-                                             slug: '/',
-                                             title: 'Test',
-                                             covers: { url: blogImage.src },
-                                             excerpt: '/',
-                                        }}
-                                   />
-                              ))} */}
+                                        <CaseCard
+                                             key={`${indx}`}
+                                             post={{
+                                                  id: '',
+                                                  slug: '/',
+                                                  title: 'Test',
+                                                  covers: { url: blogImage.src },
+                                                  excerpt: '/',
+                                             }}
+                                        />
+                                   ))} */}
                          </div>
                     </section>
                     <AllProjectsButton link={RoutesEnum.cases} title="Все проекты" />
