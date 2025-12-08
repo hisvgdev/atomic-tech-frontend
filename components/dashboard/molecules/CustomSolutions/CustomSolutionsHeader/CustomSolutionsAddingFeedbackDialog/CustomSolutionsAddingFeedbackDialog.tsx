@@ -51,7 +51,7 @@ export const CustomSolutionsAddingFeedbackDialog = () => {
           onSubmit: (data) => {
                if (!atomicClient) return
 
-               handleSubmitReview(data.value, atomicClient)
+               // handleSubmitReview(data.value, atomicClient)
           },
      })
      return (

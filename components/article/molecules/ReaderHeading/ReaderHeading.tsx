@@ -38,9 +38,11 @@ export const ReaderHeading: FC<ReaderHeadingProps> = (props) => {
                          <EyeIcon color="#737373" />
                          <span className="text-base font-normal text-[#737373]">{views || 0}</span>
                     </div>
-                    <div className="rounded-full border border-[#E6E6E6] px-5 py-2 text-black">
-                         <span className="text-sm font-medium">{category}</span>
-                    </div>
+                    {category.map((c, i) => (
+                         <div key={`${c}-${i}`} className="rounded-full border border-[#E6E6E6] px-5 py-2 text-black">
+                              <span className="text-sm font-medium">{c}</span>
+                         </div>
+                    ))}
                </div>
                {/* Header */}
                <div className="flex max-w-lg flex-col gap-y-2.5 lg:max-w-5xl">

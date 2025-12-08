@@ -55,9 +55,11 @@ export const Footer = () => {
                                    {mockSocietyData.map((society, indx) => {
                                         const isSpecial = indx === 1 || indx === 3
                                         return (
-                                             <div
+                                             <Link
                                                   key={`${indx}-${society.id}`}
                                                   className={`flex items-center gap-4 ${isSpecial ? 'justify-end' : ''}`}
+                                                  href={society.href as any}
+                                                  target="_blank"
                                              >
                                                   <Image
                                                        src={society.icon}
@@ -66,14 +68,10 @@ export const Footer = () => {
                                                        height={36}
                                                        className="h-9 w-9 object-contain"
                                                   />
-                                                  <Link
-                                                       href={society.href as any}
-                                                       target="_blank"
-                                                       className="text-sm font-bold text-white transition-all hover:underline"
-                                                  >
+                                                  <span className="text-sm font-bold text-white transition-all hover:underline">
                                                        {society.title}
-                                                  </Link>
-                                             </div>
+                                                  </span>
+                                             </Link>
                                         )
                                    })}
                               </div>

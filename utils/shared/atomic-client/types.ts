@@ -246,11 +246,16 @@ export interface ReviewWithUser extends Review {
 }
 
 export interface ReviewCreate {
-     name: string
-     company: string
-     rating: number
-     review_text: string
-     agreement_accepted: boolean
+     // name: string
+     // company: string
+     // rating: number
+     // review_text: string
+     // agreement_accepted: boolean
+     rating: number;
+     title: string;
+     content: string;
+     post_id: UUID;
+     user_id: UUID
 }
 
 export interface ReviewUpdate {

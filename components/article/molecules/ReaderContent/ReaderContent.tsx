@@ -63,7 +63,7 @@ export const ReaderContent: FC<ReaderContentProps> = (props) => {
                               </div>
                          ) : null} */}
 
-                         <ReaderRating id={id} ratingsCount={ratingsCount || 0} />
+                         <ReaderRating content={content || ''} id={id} ratingsCount={ratingsCount || 0} />
                     </div>
                     {relatedBlogs.length > 0 ? (
                          <div className="hidden max-w-1/6 flex-col gap-y-2 lg:flex">

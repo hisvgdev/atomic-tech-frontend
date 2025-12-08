@@ -24,6 +24,7 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
      const { title, covers, slug, rating = 5, taxonomies } = article
      const showBottomRating = hasRating && ratingPosition === 'bottom'
      const tags = taxonomies?.map((t) => t.title)
+
      return (
           <Card
                className={cn(

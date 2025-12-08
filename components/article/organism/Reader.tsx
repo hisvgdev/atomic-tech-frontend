@@ -27,7 +27,7 @@ export const Reader: FC<ReaderProps> = (props) => {
      } = findedArticle
 
      const content = blocks?.map((b) => b.content?.html ?? '') ?? []
-     console.log(findedArticle)
+     const category = taxonomies?.map((t) => t.title)
      return (
           <div className="flex flex-col items-center justify-center gap-8 px-4">
                <ReaderHeading
@@ -35,7 +35,7 @@ export const Reader: FC<ReaderProps> = (props) => {
                     views={view_count}
                     description={excerpt}
                     updatedAt={updated_at}
-                    category={'тестовая категория'}
+                    category={category || []}
                />
                {content && (
                     <ReaderGrid
