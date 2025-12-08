@@ -28,7 +28,7 @@ export const Grid = () => {
                     <Amenities />
                     <AboutUs />
                     {/* <Showreel /> */}
-                    <CustomSolutions />
+                    {/* <CustomSolutions /> */}
                     <Blog />
                     <div className="px-1 lg:px-7">
                          <LeaveRequest />

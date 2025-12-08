@@ -5,6 +5,7 @@ import { CaseServiceSectionProps } from './CaseServiceSection.types'
 
 export const CaseServiceSection: FC<CaseServiceSectionProps> = (props) => {
      const { services } = props
+     console.log(services)
      return (
           <section aria-labelledby="services-heading" className="flex flex-col gap-2">
                <h3 id="services-heading" className="text-base font-bold tracking-tight text-black/60">

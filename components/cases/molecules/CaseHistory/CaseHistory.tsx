@@ -15,7 +15,7 @@ export const CaseHistory: FC<CaseHistoryProps> = (props) => {
      const { blocks } = props
      const text = blocks.filter((t) => t.type === 'text')
      const relatedPost = blocks.filter((t) => t.type === 'related_post')
-     const slugs = relatedPost.map((r) => r.post_id)
+     const slugs = relatedPost.map((r) => r.content.post_id)
 
      const {
           data: relatedPostData,
@@ -28,7 +28,7 @@ export const CaseHistory: FC<CaseHistoryProps> = (props) => {
 
      return (
           <section data-dark="true" className="h-full w-full rounded-[3.125rem] bg-black p-10">
-               <div className="flex w-full flex-col items-center justify-center gap-24 lg:flex-row lg:items-start lg:justify-between">
+               <div className="flex w-full flex-col items-center justify-center gap-8 lg:flex-row lg:items-start lg:justify-between">
                     <div className="flex max-w-4xl flex-col gap-y-9">
                          <h2 className="text-5xl font-bold -tracking-[0.23rem] text-white">История проекта</h2>
                          {text.map((b) => {
@@ -73,14 +73,14 @@ export const CaseHistory: FC<CaseHistoryProps> = (props) => {
                                         <div className="flex justify-between">
                                              <div className="flex items-center gap-0.5 rounded-full bg-[#252A2B] px-4 py-2">
                                                   <EyeIcon />
-                                                  <span className="text-xs font-semibold backdrop-blur-sm">16K</span>
+                                                  <span className="text-xs font-semibold backdrop-blur-sm">0</span>
                                              </div>
                                         </div>
 
                                         <div className="flex flex-col items-start gap-3">
                                              {post.slug ? (
                                                   <Link
-                                                       href={`/articles/${post.slug}`}
+                                                       href={`/cases/${post.slug}`}
                                                        className="text-lg leading-tight font-semibold hover:underline"
                                                   >
                                                        {post.title}

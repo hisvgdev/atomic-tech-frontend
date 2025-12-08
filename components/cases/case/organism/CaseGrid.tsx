@@ -3,14 +3,14 @@
 import CaseHistory from '@/components/cases/molecules/CaseHistory'
 import AllProjectsButton from '@/components/dashboard/molecules/AllProjectsButton'
 import { Button } from '@/components/ui/button'
-import CaseCard from '@/shared/global/CaseCard'
 import LeaveRequest from '@/shared/global/LeaveRequest'
 import { StarIcon } from '@phosphor-icons/react/dist/ssr'
 import { ArrowRight, Calendar, Globe } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { FC, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+
+import type { FC } from 'react'
 
 import CaseCategorySection from '../molecules/CaseCategorySection'
 import CaseServiceSection from '../molecules/CaseServiceSection'
@@ -18,16 +18,17 @@ import CaseTechnologySection from '../molecules/CaseTechnologySection'
 import { CaseGridProps } from './CaseGrid.types'
 
 import 'swiper/css'
+import 'swiper/css/pagination'
 
-import blogImage from '@/public/assets/images/blog/firstBlog.png'
-import SwiperRowLayout from '@/shared/global/SwiperRowLayout'
 import { EnvelopeIcon } from '@/shared/icons/EnvelopeIcon/EnvelopeIcon'
+import { filterTagsByType } from '@/utils/filterTagsByType/filterTagsByType'
 import { CaretLeftIcon, CaretRightIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react'
 import { A11y, Navigation, Pagination } from 'swiper/modules'
 
 import { cn } from '@/lib/utils'
 
 import { RoutesEnum } from '@/types/Routes.types'
+import { TaxonomiesType } from '@/types/Taxonomies.types'
 
 export const CaseGrid: FC<CaseGridProps> = (props) => {
      const { findedCase } = props
@@ -56,10 +57,9 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
 
      const getYear = new Date(updated_at || '').getFullYear()
 
-     const technologies = taxonomies ? taxonomies?.filter((t) => t.type.title === 'Стек') : []
-     const categories = taxonomies ? taxonomies?.filter((t) => t.type.title === 'Категории кейсов') : []
-     const services = taxonomies ? taxonomies.filter((t) => (t.type.title = 'Услуги')) : []
-
+     const categories = filterTagsByType(taxonomies || [], [TaxonomiesType.case_categories])
+     const services = filterTagsByType(taxonomies || [], [TaxonomiesType.services, TaxonomiesType.case_categories])
+     const technologies = filterTagsByType(taxonomies || [], [TaxonomiesType.stack])
      const rawFindedCase = findedCase?.custom_fields?.results
      const destinations = typeof rawFindedCase === 'string' ? JSON.parse(rawFindedCase) : []
 
