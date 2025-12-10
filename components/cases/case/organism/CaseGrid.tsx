@@ -30,6 +30,8 @@ import { cn } from '@/lib/utils'
 import { RoutesEnum } from '@/types/Routes.types'
 import { TaxonomiesType } from '@/types/Taxonomies.types'
 
+import MoreCases from '../molecules/MoreCases'
+
 export const CaseGrid: FC<CaseGridProps> = (props) => {
      const { findedCase } = props
      const {
@@ -221,25 +223,7 @@ export const CaseGrid: FC<CaseGridProps> = (props) => {
                          </div>
                     </section>
                     {blocks && <CaseHistory blocks={blocks} />}
-                    <section data-dark="false" aria-labelledby="more-cases-heading" className="flex flex-col gap-6">
-                         <h2 id="more-cases-heading" className="text-4xl font-bold tracking-tight lg:text-6xl">
-                              Больше кейсов
-                         </h2>
-                         <div className="grid grid-cols-1 items-center gap-4 lg:grid-cols-2">
-                              {/* {Array.from({ length: 2 }).map((project, indx) => (
-                                        <CaseCard
-                                             key={`${indx}`}
-                                             post={{
-                                                  id: '',
-                                                  slug: '/',
-                                                  title: 'Test',
-                                                  covers: { url: blogImage.src },
-                                                  excerpt: '/',
-                                             }}
-                                        />
-                                   ))} */}
-                         </div>
-                    </section>
+                    <MoreCases />
                     <AllProjectsButton link={RoutesEnum.cases} title="Все проекты" />
                     <div className="block lg:hidden">
                          <LeaveRequest />

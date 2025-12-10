@@ -5,7 +5,8 @@ import React, { FC, useEffect, useRef, useState } from 'react'
 
 import { ArticlesFiltersProps } from './ArticlesFilters.types'
 
-export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, setSortWithDate, setSortByViews }) => {
+export const ArticlesFilters: FC<ArticlesFiltersProps> = (props) => {
+     const { setSortByRating, setSortWithDate, setSortByViews } = props
      const [openFilter, setOpenFilter] = useState<null | 'watches' | 'rating' | 'withDate'>(null)
      const [activeSort, setActiveSort] = useState<null | {
           type: 'watches' | 'rating' | 'withDate'
@@ -43,7 +44,7 @@ export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, set
      ) => activeSort?.type === type && activeSort?.direction === direction
 
      return (
-          <div className="relative" ref={dropdownRef}>
+          <div className="relative z-40" ref={dropdownRef}>
                <div className="flex items-center gap-x-1.5">
                     {filters.map((label, indx) => {
                          const type = filterKeys[indx]
@@ -67,7 +68,7 @@ export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, set
                {/* Просмотры */}
                {openFilter === 'watches' && (
                     <div className="absolute top-12 z-10">
-                         <div className="max-w-80 rounded-2xl border border-[#E6E6E6] bg-white p-2 shadow-lg backdrop-blur-2xl">
+                         <div className="max-w-80 rounded-2xl bg-white p-2 shadow-lg ring ring-[#E6E6E6] backdrop-blur-2xl">
                               <div className="flex flex-col gap-y-1.5">
                                    {[
                                         { label: 'Меньше просмотров', dir: 'min_views' },
@@ -76,7 +77,7 @@ export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, set
                                         <button
                                              key={label}
                                              type="button"
-                                             className={`w-full cursor-pointer rounded-2xl p-4 text-xs font-medium transition-all hover:bg-black hover:text-white ${
+                                             className={`relative w-full cursor-pointer rounded-2xl p-4 text-xs font-medium transition-all hover:bg-black hover:text-white ${
                                                   isActiveOption('watches', dir as 'min_views' | 'max_views')
                                                        ? 'bg-black text-white'
                                                        : ''
@@ -100,8 +101,8 @@ export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, set
 
                {/* Оценки */}
                {openFilter === 'rating' && (
-                    <div className="absolute top-12 left-38 z-10">
-                         <div className="max-w-80 rounded-2xl border border-[#E6E6E6] bg-white p-2 shadow-lg backdrop-blur-2xl">
+                    <div className="absolute top-12 left-38">
+                         <div className="max-w-80 rounded-2xl bg-white p-2 shadow-lg ring ring-[#E6E6E6] backdrop-blur-2xl">
                               <div className="flex flex-col gap-y-1.5">
                                    {[
                                         { label: 'Меньше оценок', dir: 'asc' },
@@ -135,7 +136,7 @@ export const ArticlesFilters: FC<ArticlesFiltersProps> = ({ setSortByRating, set
                {/* По дате */}
                {openFilter === 'withDate' && (
                     <div className="absolute top-12 left-72 z-10">
-                         <div className="max-w-80 rounded-2xl border border-[#E6E6E6] bg-white p-2 shadow-lg backdrop-blur-2xl">
+                         <div className="max-w-80 rounded-2xl bg-white p-2 shadow-lg ring ring-[#E6E6E6] backdrop-blur-2xl">
                               <div className="flex flex-col gap-y-1.5">
                                    {[
                                         { label: 'Сначала старые', dir: 'created_at' },

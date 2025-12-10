@@ -1,5 +1,6 @@
 'use client'
 
+import { CASE_LIMITS } from '@/components/cases/organism/Grid'
 import {
      Pagination,
      PaginationContent,
@@ -23,58 +24,31 @@ export const BLOGS_LIMITS = 12
 export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
      const {} = props
 
+     const [currentPage, setCurrentPage] = useState(1)
+     const [sortWithDate, setSortWithDate] = useState<'created_at' | 'updated_at'>('created_at')
+     const [sortByViews, setSortByViews] = useState<'min_views' | 'max_views'>('max_views')
+     const [sortByRating, setSortByRating] = useState<'asc' | 'desc'>('asc')
+
      const {
           data: articlesData,
           isLoading: isArticlesDataLoading,
           isError: isArticlesDataError,
      } = usePostsQuery({
           type: 'articles',
+          sort_dir: sortByRating,
      })
-
-     const [currentPage, setCurrentPage] = useState(1)
-     const [sortWithDate, setSortWithDate] = useState<'created_at' | 'updated_at'>('created_at')
-     const [sortByViews, setSortByViews] = useState<'min_views' | 'max_views'>('max_views')
 
      const searchParams = useSearchParams()
      const blogCategoryId = searchParams.get('blog_category_id') ?? ''
-     const safedArticlesData = Array.isArray(articlesData) ? articlesData : []
 
-     // const { data: blogCategoriesData, isLoading: isBlogCategoriesDataLoading } = useQuery({
-     //      queryKey: ['blog-categories', blogCategoryId],
-     //      queryFn: async () =>
-     //           // await getBlogCategories({
-     //           //      search: blogCategoryId,
-     //           // }),
-     //           await getBlogCategories(),
-     //      staleTime: 3000,
-     // })
+     const totalItems = articlesData?.length || 0
+     const totalPages = Math.ceil(totalItems / CASE_LIMITS)
 
-     // const {
-     //      data: blogsData,
-     //      isLoading: isBlogsLoading,
-     //      isError: isBlogsError,
-     // } = useQuery({
-     //      queryKey: ['blogs', sortByRating, blogCategoryId, sortWithDate, sortByViews, currentPage],
-     //      enabled: !blogCategoryId || !!blogCategoriesData,
-     //      queryFn: async () => {
-     //           const params: Record<string, any> = {
-     //                limit: BLOGS_LIMITS,
-     //                offset: (currentPage - 1) * BLOGS_LIMITS,
-     //                sort_by: sortWithDate,
-     //                sort_direction: sortByRating,
-     //                views: sortByViews,
-     //           }
+     const paginatedCases =
+          totalItems > 0 ? articlesData?.slice((currentPage - 1) * CASE_LIMITS, currentPage * CASE_LIMITS) : []
+     const safedPaginatedCases = Array.isArray(paginatedCases) ? paginatedCases : []
 
-     //           if (blogCategoryId && blogCategoriesData?.data[0]?.id) {
-     //                params.blog_category_id = String(blogCategoriesData.data[0].id)
-     //           }
-
-     //           return await getBlogs(params)
-     //      },
-     //      staleTime: 3000,
-     // })
-
-     if (isArticlesDataError || isArticlesDataLoading)
+     if (isArticlesDataError || isArticlesDataLoading) {
           return (
                <div className="grid w-full grid-cols-3 items-center justify-center gap-9">
                     {Array.from({ length: BLOGS_LIMITS }).map((_, idx) => (
@@ -88,6 +62,7 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
                     ))}
                </div>
           )
+     }
 
      return (
           <div className="flex flex-col gap-4 lg:gap-6">
@@ -97,22 +72,27 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
                               {blogCategoryId ? blogCategoryId : 'Все статьи'}
                          </h1>
                          <p className="text-5xl font-bold text-[#C4C4C4]">
-                              {safedArticlesData.length || 0}{' '}
-                              {safedArticlesData.length < 2
+                              {safedPaginatedCases.length || 0}{' '}
+                              {safedPaginatedCases.length < 2
                                    ? 'статья'
-                                   : safedArticlesData.length > 2 && safedArticlesData.length < 4
+                                   : safedPaginatedCases.length > 2 && safedPaginatedCases.length < 4
                                      ? 'cтатьи'
                                      : 'статей'}
                          </p>
                     </div>
+                    <ArticlesFilters
+                         setSortByRating={setSortByRating}
+                         setSortByViews={setSortByViews}
+                         setSortWithDate={setSortWithDate}
+                    />
                </div>
                <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {safedArticlesData.length > 0 &&
-                         safedArticlesData.map((article, indx) => (
+                    {safedPaginatedCases.length > 0 &&
+                         safedPaginatedCases.map((article, indx) => (
                               <ArticleCard withTag key={indx} article={article} ratingPosition="bottom" />
                          ))}
                </div>
-               {/* {Array.isArray(blogsData?.data) && blogsData?.data.length > 0 && (
+               {totalPages > 1 && (
                     <Pagination>
                          <PaginationContent>
                               <PaginationItem>
@@ -121,7 +101,7 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
                                    />
                               </PaginationItem>
 
-                              {[...Array(blogsData?.pagination?.total_pages || 1)].map((_, index) => (
+                              {Array.from({ length: totalPages }).map((_, index) => (
                                    <PaginationItem key={index}>
                                         <PaginationLink
                                              isActive={currentPage === index + 1}
@@ -134,16 +114,12 @@ export const ArticlesCards: FC<ArticlesCardsProps> = (props) => {
 
                               <PaginationItem>
                                    <PaginationNext
-                                        onClick={() =>
-                                             setCurrentPage((prev) =>
-                                                  Math.min(prev + 1, blogsData?.pagination?.total_pages || prev),
-                                             )
-                                        }
+                                        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                                    />
                               </PaginationItem>
                          </PaginationContent>
                     </Pagination>
-               )} */}
+               )}
           </div>
      )
 }

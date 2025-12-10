@@ -318,6 +318,7 @@ export interface PostFilters {
      'filter[status]'?: PostStatus
      'filter[type]'?: string
      'filter[q]'?: string
+     sort_dir?: 'asc' | 'desc'
      // Custom field filters with operators
      [key: `filter[custom_field.${string}.eq]`]: string | number | boolean
      [key: `filter[custom_field.${string}.neq]`]: string | number | boolean
