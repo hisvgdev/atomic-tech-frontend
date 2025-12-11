@@ -38,7 +38,7 @@ export const TechFilter: FC<TechFilterProps> = (props) => {
                <h4 className="text-base font-bold">{title}</h4>
                <div className="flex flex-wrap items-center gap-1.5">
                     {techList.map(({ title, id }, idx) => {
-                         const isActive = activeValues.includes(title)
+                         const isActive = activeValues.includes(id)
                          return (
                               <button
                                    key={`${title}-${idx}`}

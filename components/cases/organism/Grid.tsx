@@ -18,6 +18,8 @@ import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 import React, { useCallback, useEffect, useState } from 'react'
 
+import { TaxonomiesType } from '@/types/Taxonomies.types'
+
 import { CaseHeading } from '../molecules/CaseHeading/CaseHeading'
 import Cases from '../molecules/Cases'
 
@@ -35,21 +37,34 @@ export const Grid = () => {
           type: 'cases',
      })
 
-     const uniqueTaxonomies = useFilteredTaxonomies(casesData ?? [])
+     const memoCases = React.useMemo(() => casesData ?? [], [casesData])
+
+     const uniqueTaxonomies = useFilteredTaxonomies(memoCases ?? [])
 
      const usluga = searchParams.get('usluga_id') || ''
      const category = searchParams.get('category_id') || ''
      const technology = searchParams.get('technology_id') || ''
 
-     const technologies = uniqueTaxonomies?.filter((t) => t.type.title === 'Стек') || []
+     const technologyArray = technology
+          .split(',')
+          .map((t) => t.trim())
+          .filter(Boolean)
 
+     const technologies = uniqueTaxonomies?.filter((t) => t.type.title === TaxonomiesType.stack) || []
      const categories = uniqueTaxonomies?.filter((t) => t.type.title === 'Категории') || []
+     const services = uniqueTaxonomies?.filter((t) => t.type.title === TaxonomiesType.services) || []
 
-     const totalItems = casesData?.length || 0
+     const filteredCases = React.useMemo(() => {
+          if (technologyArray.length === 0) return memoCases
+          return memoCases.filter((p) => p.taxonomies?.some((tax) => technologyArray.includes(tax.id)))
+     }, [memoCases, technologyArray])
+
+     const totalItems = filteredCases.length
      const totalPages = Math.ceil(totalItems / CASE_LIMITS)
 
-     const paginatedCases =
-          totalItems > 0 ? casesData?.slice((currentPage - 1) * CASE_LIMITS, currentPage * CASE_LIMITS) : []
+     const paginatedCases = React.useMemo(() => {
+          return filteredCases.slice((currentPage - 1) * CASE_LIMITS, currentPage * CASE_LIMITS)
+     }, [filteredCases, currentPage])
 
      return (
           <div className="flex flex-col gap-8 px-4 lg:px-6 lg:py-20">

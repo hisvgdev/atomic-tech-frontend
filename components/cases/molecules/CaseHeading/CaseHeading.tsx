@@ -2,7 +2,6 @@
 
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { SlidersHorizontalIcon, XIcon } from '@phosphor-icons/react'
 import React, { FC, Suspense, useRef, useState } from 'react'
 
@@ -16,12 +15,7 @@ export const CaseHeading: FC<CaseHeadingProps> = (props) => {
 
      const [isFilterOpen, setIsFilterOpen] = useState(false)
 
-     const handleSwitchFilter = () => setIsFilterOpen(!isFilterOpen)
-     const filterRef = useRef<HTMLDivElement>(null)
      const sectionRef = useRef<HTMLElement>(null)
-
-     // @ts-ignore
-     useOutsideClick([sectionRef, filterRef], () => setIsFilterOpen(false))
 
      return (
           <section data-dark="false" className={`relative h-full w-full`} ref={sectionRef}>
